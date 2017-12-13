@@ -70,24 +70,30 @@
         android:orientation="horizontal" >
 
         <TextView
+            android:id="@+id/indexID"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
+            android:background="#ADDBE6"
             android:text="首页" />
 
         <TextView
+            android:id="@+id/moreID"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
+            android:background="#ADDBE6"
             android:text="发现" />
 
         <TextView
+            android:id="@+id/dynamicID"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
+            android:background="#ADDBE6"
             android:text="动态" />
     </LinearLayout>
 
