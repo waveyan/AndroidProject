@@ -2,10 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" 
-    android:background="#4A4A4A">
-    
-   
+    android:background="#4A4A4A"
+    android:orientation="vertical" >
+
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="30dp" >
@@ -14,12 +13,11 @@
             android:id="@+id/back1ID"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
-            android:src="@drawable/a005"
-            />
-    </RelativeLayout> 
-    
+            android:layout_alignParentTop="true"
+            android:src="@drawable/a005" />
+    </RelativeLayout>
+
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -27,73 +25,63 @@
         android:gravity="center"
         android:text="TraBal"
         android:textColor="@color/white"
-        android:textSize="60sp" 
-        android:textStyle="bold"/>
-     
-     <EditText 
+        android:textSize="60sp"
+        android:textStyle="bold" />
+
+    <EditText
         android:id="@+id/yonghu1ID"
         android:layout_width="fill_parent"
         android:layout_height="40dp"
-        android:background="@color/a1"
-        android:padding="5dp"
         android:layout_margin="20dp"
-        android:textColorHint="@color/a2"
-        android:textSize="15dp"
-        android:hint="用户名/邮箱"
-       
-         />
-     
-      <EditText 
+        android:background="@color/a1"
+        android:hint="用户名/邮箱" />
+
+    <EditText
         android:id="@+id/password1ID"
         android:layout_width="fill_parent"
         android:layout_height="40dp"
+        android:layout_margin="20dp"
         android:background="@color/a1"
-        android:padding="5dp"
-        android:layout_margin="20dp"
-        android:textColorHint="@color/a2"
-        android:textSize="15dp"
         android:hint="密码  ..."
-       
-         />
-
-   <RelativeLayout
-       android:layout_width="fill_parent"
-       android:layout_height="wrap_content" >
-        
-      <EditText 
-        android:layout_width="140dp"
-        android:layout_height="30dp"
-        android:background="@color/a3"
-        android:gravity="center"
         android:padding="5dp"
-        android:layout_margin="20dp"
-        android:id="@+id/validate1ID"
-        android:textColorHint="@color/a1"
-        android:textSize="15dp"
-        android:hint="输入验证码..."
-       />
-      
-      <ImageView 
-        android:layout_width="120dp"
-        android:layout_height="30dp"
-        android:gravity="center"
-        android:layout_toRightOf="@+id/validate1ID"
-        android:layout_alignBottom="@+id/validate1ID"
-          />
-      
-       </RelativeLayout>
-       
-      <Button 
+        android:textColorHint="@color/a2"
+        android:textSize="15dp" />
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+
+        <EditText
+            android:id="@+id/validate1ID"
+            android:layout_width="140dp"
+            android:layout_height="30dp"
+            android:layout_margin="20dp"
+            android:background="@color/a3"
+            android:gravity="center"
+            android:hint="输入验证码..."
+            android:padding="5dp"
+            android:textColorHint="@color/a1"
+            android:textSize="15dp" />
+
+        <ImageView
+            android:id="@+id/code1"
+            android:layout_width="120dp"
+            android:layout_height="30dp"
+            android:layout_alignBottom="@+id/validate1ID"
+            android:layout_toRightOf="@+id/validate1ID"
+            android:gravity="center" />
+    </RelativeLayout>
+
+    <Button
         android:id="@+id/loginID"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="18dp"
-        android:textColor="@color/a2"
-        android:text="登录"  
-          />
-     
-      <RelativeLayout
+        android:text="登录"
+        android:textColor="@color/a2" />
+
+    <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent" >
 
@@ -101,16 +89,12 @@
             android:id="@+id/register1ID"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-          
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
             android:layout_marginBottom="10dp"
             android:layout_marginRight="10dp"
-            android:textColor="@color/a2"
-            android:text="点我注册" />
+            android:text="点我注册"
+            android:textColor="@color/a2" />
     </RelativeLayout>
-     
-      
-    
 
 </LinearLayout>
