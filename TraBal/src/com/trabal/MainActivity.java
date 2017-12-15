@@ -40,9 +40,9 @@ public class MainActivity extends Activity {
 		moreTv =(TextView)this.findViewById(R.id.moreID);
 		dynamicTv =(TextView)this.findViewById(R.id.dynamicID);
 		
-		indexTv.setTextColor(android.graphics.Color.BLUE);
-		moreTv.setTextColor(android.graphics.Color.WHITE);
-		dynamicTv.setTextColor(android.graphics.Color.WHITE);
+		indexTv.setTextColor(android.graphics.Color.CYAN);
+		moreTv.setTextColor(android.graphics.Color.BLACK);
+		dynamicTv.setTextColor(android.graphics.Color.BLACK);
 				
 				//…Ë÷√  ≈‰∆˜
 		content.setAdapter(new CustomPager());
@@ -57,9 +57,9 @@ public class MainActivity extends Activity {
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
 				content.setCurrentItem(0);
-			indexTv.setTextColor(android.graphics.Color.BLUE);
-			moreTv.setTextColor(android.graphics.Color.WHITE);
-			dynamicTv.setTextColor(android.graphics.Color.WHITE);
+			indexTv.setTextColor(android.graphics.Color.CYAN);
+			moreTv.setTextColor(android.graphics.Color.BLACK);
+			dynamicTv.setTextColor(android.graphics.Color.BLACK);
 			}
 		});
 		
@@ -69,9 +69,9 @@ public class MainActivity extends Activity {
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
 				content.setCurrentItem(1);
-			indexTv.setTextColor(android.graphics.Color.WHITE);
-			moreTv.setTextColor(android.graphics.Color.BLUE);
-			dynamicTv.setTextColor(android.graphics.Color.WHITE);
+			indexTv.setTextColor(android.graphics.Color.BLACK);
+			moreTv.setTextColor(android.graphics.Color.CYAN);
+			dynamicTv.setTextColor(android.graphics.Color.BLACK);
 				
 			}
 		});
@@ -82,9 +82,9 @@ public class MainActivity extends Activity {
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
 				content.setCurrentItem(2);
-			indexTv.setTextColor(android.graphics.Color.WHITE);
-			moreTv.setTextColor(android.graphics.Color.WHITE);
-			dynamicTv.setTextColor(android.graphics.Color.BLUE);
+			indexTv.setTextColor(android.graphics.Color.BLACK);
+			moreTv.setTextColor(android.graphics.Color.BLACK);
+			dynamicTv.setTextColor(android.graphics.Color.CYAN);
 				
 			}
 		});
@@ -148,18 +148,18 @@ public class MainActivity extends Activity {
 		@Override
 		public void onPageSelected(int arg0) {
 			if(arg0==0){
-				indexTv.setTextColor(android.graphics.Color.BLUE);
-				moreTv.setTextColor(android.graphics.Color.WHITE);
-				dynamicTv.setTextColor(android.graphics.Color.WHITE);
+				indexTv.setTextColor(android.graphics.Color.CYAN);
+				moreTv.setTextColor(android.graphics.Color.BLACK);
+				dynamicTv.setTextColor(android.graphics.Color.BLACK);
 				
 			}else if (arg0==1) {
-				indexTv.setTextColor(android.graphics.Color.WHITE);
-				moreTv.setTextColor(android.graphics.Color.BLUE);
-				dynamicTv.setTextColor(android.graphics.Color.WHITE);
+				indexTv.setTextColor(android.graphics.Color.BLACK);
+				moreTv.setTextColor(android.graphics.Color.CYAN);
+				dynamicTv.setTextColor(android.graphics.Color.BLACK);
 			}else if(arg0==2){
-				indexTv.setTextColor(android.graphics.Color.WHITE);
-				moreTv.setTextColor(android.graphics.Color.WHITE);
-				dynamicTv.setTextColor(android.graphics.Color.BLUE);
+				indexTv.setTextColor(android.graphics.Color.BLACK);
+				moreTv.setTextColor(android.graphics.Color.BLACK);
+				dynamicTv.setTextColor(android.graphics.Color.CYAN);
 		}
 	}
 
