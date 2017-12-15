@@ -2,10 +2,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".MainActivity" >
 
     <TextView
@@ -14,51 +10,69 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="Trabal"
-        android:textSize="20dp" />
+        android:textSize="20dp"
+        android:textStyle="bold" />
 
     <View
         android:id="@+id/interval"
         android:layout_width="fill_parent"
-        android:layout_height="2dp"
+        android:layout_height="1dp"
         android:layout_below="@id/appname"
-        android:background="#CFCFCF" />
+        android:layout_marginTop="10dp"
+        android:background="#F2F2F2" />
 
     <RelativeLayout
         android:id="@+id/navigation"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/interval"
+        android:layout_height="39dp"
+        android:layout_below="@+id/interval"
         android:orientation="horizontal" >
 
-        <TextView
-            android:id="@+id/city"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:gravity="left"
-            android:text="广州市" />
+        <ImageButton
+            android:id="@+id/searchID"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="90dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/search" />
+
+        <ImageButton
+            android:id="@+id/messageID"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="47dp"
+            android:layout_marginTop="11dp"
+            android:background="@drawable/message" />
+
+        <ImageButton
+            android:id="@+id/personID"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/person" />
+
+        <ImageButton
+            android:id="@+id/positionID"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_alignTop="@+id/guangzhou"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="1dp"
+            android:background="@drawable/position" />
 
         <TextView
-            android:id="@+id/search"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="80dp"
-            android:gravity="right"
-            android:text="搜索" />
-
-        <TextView
-            android:id="@+id/message"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="40dp"
-            android:gravity="right"
-            android:text="消息" />
-
-        <TextView
-            android:id="@+id/person"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:gravity="right"
-            android:text="个人" />
+            android:id="@+id/guangzhou"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="6dp"
+            android:layout_marginTop="17dp"
+            android:layout_toRightOf="@+id/positionID"
+            android:text="广州市"
+            android:textSize="16sp" />
     </RelativeLayout>
 
     <LinearLayout
@@ -67,41 +81,56 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/navigation"
         android:layout_marginTop="10dp"
-        android:orientation="horizontal" >
+        android:orientation="horizontal"
+        android:background="#FCFCFC" >
 
         <TextView
             android:id="@+id/indexID"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="30dp"
             android:layout_weight="1"
             android:gravity="center"
-            android:background="#ADDBE6"
-            android:text="首页" />
+            android:text="首页"
+            android:textColor="#000000" />
 
         <TextView
             android:id="@+id/moreID"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="30dp"
             android:layout_weight="1"
             android:gravity="center"
-            android:background="#ADDBE6"
-            android:text="发现" />
+            android:text="发现"
+            android:textColor="#000000" />
 
         <TextView
             android:id="@+id/dynamicID"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="30dp"
             android:layout_weight="1"
             android:gravity="center"
-            android:background="#ADDBE6"
-            android:text="动态" />
+            android:text="动态"
+            android:textColor="#000000" />
     </LinearLayout>
 
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/title"
+        android:layout_below="@+id/title" >
+
+        <View
+            android:id="@+id/interval1"
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="1dp"
+            android:background="#CFCFCF" />
+          
+    </RelativeLayout>
+    
     <android.support.v4.view.ViewPager
         android:id="@+id/content"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content" 
         android:layout_below="@id/title"/>
-
 
 </RelativeLayout>
