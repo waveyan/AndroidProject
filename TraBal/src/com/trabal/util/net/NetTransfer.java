@@ -22,10 +22,12 @@ import android.os.StrictMode;
 public class NetTransfer {
 	
 	private static String perfix="http://172.27.10.174:8000/";
+	private String status;
+	private String msg;
+	private String access_token;
 	
     @SuppressLint("NewApi")
-	public static String transfer(String url, String method,
-			ArrayList<BasicNameValuePair> parameters,
+	public static String transfer(String url, String method,ArrayList<BasicNameValuePair> parameters,
 			Map<String, String> headers) throws IOException {
     	StrictMode.ThreadPolicy policy=new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
@@ -43,9 +45,9 @@ public class NetTransfer {
 			if (code == 200) {
 				InputStream is = response.getEntity().getContent();
 				String text = Tools.readFromStream(is);
-				return return_data(text);
+				return text;
 			} else {
-				return return_data("{'msg':'«Î«Û ß∞‹','status':'fail'}");
+				return "{'msg':'«Î«Û ß∞‹','status':'fail'}";
 			}
 		} else if ("get".equals(method)) {
 			url += "?";
@@ -59,27 +61,50 @@ public class NetTransfer {
 			if (code == 200) {
 				InputStream is = response.getEntity().getContent();
 				String text = Tools.readFromStream(is);
-				return return_data(text);
+				return text;
 			} else {
 				return "{'msg':'«Î«Û ß∞‹'}";
 			}
 		}
-		return return_data("{'msg':'«Î«Û ß∞‹','status':'fail'}");
+		return "{'msg':'«Î«Û ß∞‹','status':'fail'}";
 
 	}
 
-	public static String return_data(String msg) {
-		String status = "";
-		String access_token = "";
+	public void return_data(String data) {
 		try {
-			JSONObject json = new JSONObject(msg);
-			status = json.getString("msg");
+			JSONObject json = new JSONObject(data);
+			msg=json.getString("msg");
+			status = json.getString("status");
 			access_token = json.getString("access_token");
 
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
-		return status;
-
 	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public String getMsg() {
+		return msg;
+	}
+
+	public void setMsg(String msg) {
+		this.msg = msg;
+	}
+
+	public String getAccess_token() {
+		return access_token;
+	}
+
+	public void setAccess_token(String access_token) {
+		this.access_token = access_token;
+	}
+	
+	
 }

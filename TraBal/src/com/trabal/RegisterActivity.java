@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import org.apache.http.message.BasicNameValuePair;
 
+import com.trabal.user.Bean.UserBean;
 import com.trabal.util.Code;
 import com.trabal.util.net.NetTransfer;
 
@@ -30,7 +31,6 @@ public class RegisterActivity extends Activity {
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 	    this.setContentView(R.layout.activity_register);
 	    
@@ -40,7 +40,6 @@ public class RegisterActivity extends Activity {
 			
 			@Override
 			public void onClick(View arg0) {
-				// TODO Auto-generated method stub
 				Intent intent=new Intent(RegisterActivity.this,LoginActivity.class);
 				RegisterActivity.this.startActivity(intent);
 			}
@@ -112,10 +111,22 @@ public class RegisterActivity extends Activity {
 				params.add(new BasicNameValuePair("password", password_text));
 				params.add(new BasicNameValuePair("action", "register"));
 				String url="user/base";
+				NetTransfer nt = new NetTransfer();
 				try {
 					String msg=NetTransfer.transfer(url, "post", params, null);
-					Toast.makeText(RegisterActivity.this, msg,
+					nt.return_data(msg);
+					if ("success".equals(nt.getStatus())) {
+						Intent intent = new Intent(RegisterActivity.this,LoginActivity.class);
+						UserBean user=new UserBean();
+						user.setPassword(password_text);
+						user.setTelephone(tel_text);
+						intent.putExtra("user", user);
+						RegisterActivity.this.startActivity(intent);
+						RegisterActivity.this.finish();
+					} else {
+						Toast.makeText(RegisterActivity.this, nt.getMsg(),
 								Toast.LENGTH_LONG).show();
+					}
 				} catch (IOException e) {
 					e.printStackTrace();
 				}

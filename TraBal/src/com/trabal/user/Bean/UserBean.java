@@ -1,16 +1,20 @@
 package com.trabal.user.Bean;
 
-public class UserBean {
+import java.io.Serializable;
+
+public class UserBean implements Serializable{
 	private String telephone;
 	private String password;
 	private String access_token;
-	private long id;
 	
-	public String getId() {
-		return String.valueOf(id);
+	public UserBean(String telephone, String password) {
+		super();
+		this.telephone = telephone;
+		this.password = password;
 	}
-	public void setId(long id) {
-		this.id = id;
+	
+	public UserBean() {
+		super();
 	}
 	public String getTelephone() {
 		return telephone;
