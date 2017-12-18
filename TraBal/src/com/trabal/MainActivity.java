@@ -1,28 +1,43 @@
 package com.trabal;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import com.trabal.ContentAdapter;
+import com.trabal.ContentModel;
 import com.trabal.linear.DynamicLinearLayout;
 import com.trabal.linear.IndexLinearLayout;
 import com.trabal.linear.MoreLinearLayout;
-
+import com.trabal.R;
 import android.os.Bundle;
 import android.app.Activity;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.support.v4.widget.DrawerLayout;
+import android.view.Gravity;
 import android.view.Menu;
-import android.view.TextureView;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.View.OnClickListener;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.AdapterView.OnItemClickListener;
 
 public class MainActivity extends Activity {
 
 	private ArrayList<LinearLayout> linears;
 	private android.support.v4.view.ViewPager content;
-	private  TextView indexTv,moreTv,dynamicTv;
+	private TextView indexTv, moreTv, dynamicTv;
+	private DrawerLayout drawerLayout;
+	private RelativeLayout rightLayout;
+	private List<ContentModel> list;
+	private ContentAdapter adapter;
+	private ImageButton imageButton;
+	private ListView listView;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -32,69 +47,91 @@ public class MainActivity extends Activity {
 		linears.add(new IndexLinearLayout(MainActivity.this));
 		linears.add(new MoreLinearLayout(MainActivity.this));
 		linears.add(new DynamicLinearLayout(MainActivity.this));
-		
-		//获取内容组件
+		getActionBar().hide();
+
+		imageButton = (ImageButton) findViewById(R.id.personID);
+		drawerLayout = (DrawerLayout) findViewById(R.id.drawerlayout);
+		rightLayout = (RelativeLayout) findViewById(R.id.right);
+		listView = (ListView) findViewById(R.id.right_listview);
+		// 获取内容组件
 		content = (android.support.v4.view.ViewPager) this
 				.findViewById(R.id.content);
-		indexTv =(TextView)this.findViewById(R.id.indexID);
-		moreTv =(TextView)this.findViewById(R.id.moreID);
-		dynamicTv =(TextView)this.findViewById(R.id.dynamicID);
-		
+		indexTv = (TextView) this.findViewById(R.id.indexID);
+		moreTv = (TextView) this.findViewById(R.id.moreID);
+		dynamicTv = (TextView) this.findViewById(R.id.dynamicID);
+
 		indexTv.setTextColor(android.graphics.Color.CYAN);
 		moreTv.setTextColor(android.graphics.Color.BLACK);
 		dynamicTv.setTextColor(android.graphics.Color.BLACK);
-				
-				//设置适配器
+
+		// 设置适配器
 		content.setAdapter(new CustomPager());
-		//设置当前页面
+		// 设置当前页面
 		content.setCurrentItem(0);
-		//设置内容组件事件处理
+		// 设置内容组件事件处理
 		content.setOnPageChangeListener(new CustomPagerChange());
-		
-		
+
+		initData();
+		adapter = new ContentAdapter(this, list);
+		listView.setAdapter(adapter);
+		imageButton.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				drawerLayout.openDrawer(Gravity.RIGHT);
+			}
+		});
 		indexTv.setOnClickListener(new View.OnClickListener() {
-			
+
 			@Override
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
 				content.setCurrentItem(0);
-			indexTv.setTextColor(android.graphics.Color.CYAN);
-			moreTv.setTextColor(android.graphics.Color.BLACK);
-			dynamicTv.setTextColor(android.graphics.Color.BLACK);
+				indexTv.setTextColor(android.graphics.Color.CYAN);
+				moreTv.setTextColor(android.graphics.Color.BLACK);
+				dynamicTv.setTextColor(android.graphics.Color.BLACK);
 			}
 		});
-		
-        moreTv.setOnClickListener(new View.OnClickListener() {
-			
+
+		moreTv.setOnClickListener(new View.OnClickListener() {
+
 			@Override
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
 				content.setCurrentItem(1);
-			indexTv.setTextColor(android.graphics.Color.BLACK);
-			moreTv.setTextColor(android.graphics.Color.CYAN);
-			dynamicTv.setTextColor(android.graphics.Color.BLACK);
-				
+				indexTv.setTextColor(android.graphics.Color.BLACK);
+				moreTv.setTextColor(android.graphics.Color.CYAN);
+				dynamicTv.setTextColor(android.graphics.Color.BLACK);
+
 			}
 		});
 
-        dynamicTv.setOnClickListener(new View.OnClickListener() {
-			
+		dynamicTv.setOnClickListener(new View.OnClickListener() {
+
 			@Override
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
 				content.setCurrentItem(2);
-			indexTv.setTextColor(android.graphics.Color.BLACK);
-			moreTv.setTextColor(android.graphics.Color.BLACK);
-			dynamicTv.setTextColor(android.graphics.Color.CYAN);
-				
+				indexTv.setTextColor(android.graphics.Color.BLACK);
+				moreTv.setTextColor(android.graphics.Color.BLACK);
+				dynamicTv.setTextColor(android.graphics.Color.CYAN);
+
 			}
 		});
-        
-      
+
 	}
 
-	
-	
+	private void initData() {
+		// TODO Auto-generated method stub
+		list = new ArrayList<ContentModel>();
+
+		list.add(new ContentModel(R.drawable.pingjia, "我的评价", 1));
+		list.add(new ContentModel(R.drawable.shoucang, "我的收藏", 2));
+		list.add(new ContentModel(R.drawable.luxian, "我的路线", 3));
+		list.add(new ContentModel(R.drawable.huodong, "历史活动", 4));
+		list.add(new ContentModel(R.drawable.haoyou, "我的好友", 5));
+	}
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.main, menu);
@@ -148,21 +185,21 @@ public class MainActivity extends Activity {
 
 		@Override
 		public void onPageSelected(int arg0) {
-			if(arg0==0){
+			if (arg0 == 0) {
 				indexTv.setTextColor(android.graphics.Color.CYAN);
 				moreTv.setTextColor(android.graphics.Color.BLACK);
 				dynamicTv.setTextColor(android.graphics.Color.BLACK);
-				
-			}else if (arg0==1) {
+
+			} else if (arg0 == 1) {
 				indexTv.setTextColor(android.graphics.Color.BLACK);
 				moreTv.setTextColor(android.graphics.Color.CYAN);
 				dynamicTv.setTextColor(android.graphics.Color.BLACK);
-			}else if(arg0==2){
+			} else if (arg0 == 2) {
 				indexTv.setTextColor(android.graphics.Color.BLACK);
 				moreTv.setTextColor(android.graphics.Color.BLACK);
 				dynamicTv.setTextColor(android.graphics.Color.CYAN);
+			}
 		}
-	}
 
-}
+	}
 }
