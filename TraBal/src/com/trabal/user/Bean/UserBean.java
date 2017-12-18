@@ -1,0 +1,35 @@
+package com.trabal.user.Bean;
+
+public class UserBean {
+	private String telephone;
+	private String password;
+	private String access_token;
+	private long id;
+	
+	public String getId() {
+		return String.valueOf(id);
+	}
+	public void setId(long id) {
+		this.id = id;
+	}
+	public String getTelephone() {
+		return telephone;
+	}
+	public void setTelephone(String telephone) {
+		this.telephone = telephone;
+	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	public String getAccess_token() {
+		return access_token;
+	}
+	public void setAccess_token(String access_token) {
+		this.access_token = access_token;
+	}
+	
+
+}
