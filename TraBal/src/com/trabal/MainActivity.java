@@ -14,6 +14,7 @@ import android.view.Menu;
 import android.view.TextureView;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -27,7 +28,6 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-
 		linears = new ArrayList<LinearLayout>();
 		linears.add(new IndexLinearLayout(MainActivity.this));
 		linears.add(new MoreLinearLayout(MainActivity.this));
@@ -50,6 +50,7 @@ public class MainActivity extends Activity {
 		content.setCurrentItem(0);
 		//设置内容组件事件处理
 		content.setOnPageChangeListener(new CustomPagerChange());
+		
 		
 		indexTv.setOnClickListener(new View.OnClickListener() {
 			
