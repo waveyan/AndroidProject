@@ -1,7 +1,6 @@
 package com.trabal.linear;
 
 import com.trabal.R;
-
 import android.app.Activity;
 import android.os.Bundle;
 

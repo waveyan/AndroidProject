@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import org.apache.http.message.BasicNameValuePair;
-
 import com.trabal.util.Code;
 import com.trabal.util.net.NetTransfer;
 
@@ -14,7 +13,9 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnTouchListener;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -22,7 +23,7 @@ import android.widget.Toast;
 
 public class LoginActivity extends Activity {
 
-	private ImageView code_view;
+	private ImageView code_view,imageView;
 	private Code cerificate_code;
 	private TextView telephone, password, code;
 	private Button submit;
@@ -32,7 +33,19 @@ public class LoginActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		this.setContentView(R.layout.activity_login);
-		initView();		
+		initView();
+		
+		imageView= (ImageView)this.findViewById(R.id.back1ID);
+		imageView.setOnTouchListener(new OnTouchListener() {
+			@Override
+			public boolean onTouch(View arg0, MotionEvent arg1) {
+				// TODO Auto-generated method stub
+				Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+
+				LoginActivity.this.startActivity(intent);
+				return false;
+			}
+		});
 	
 	}
 	
@@ -130,7 +143,7 @@ public class LoginActivity extends Activity {
 			Log.e("code", cerificate_code.getCode());
 
 		}
+		
 	}
-
 }
 
