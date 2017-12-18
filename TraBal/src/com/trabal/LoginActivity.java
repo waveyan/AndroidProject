@@ -39,7 +39,6 @@ public class LoginActivity extends Activity {
 		imageView.setOnTouchListener(new OnTouchListener() {
 			@Override
 			public boolean onTouch(View arg0, MotionEvent arg1) {
-				// TODO Auto-generated method stub
 				Intent intent = new Intent(LoginActivity.this, MainActivity.class);
 
 				LoginActivity.this.startActivity(intent);
@@ -100,9 +99,10 @@ public class LoginActivity extends Activity {
 				ArrayList params = new ArrayList();
 				params.add(new BasicNameValuePair("telephone", tel_text));
 				params.add(new BasicNameValuePair("password", password_text));
-				String url="login";
+				params.add(new BasicNameValuePair("action", "login"));
+				String url="user/base";
 				try {
-					String msg=NetTransfer.transfer(url, "post", params, null);
+					String msg=NetTransfer.transfer(url,"post", params, null);
 					Toast.makeText(LoginActivity.this, msg,
 								Toast.LENGTH_LONG).show();
 				} catch (IOException e) {

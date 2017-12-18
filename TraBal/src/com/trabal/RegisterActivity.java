@@ -110,7 +110,8 @@ public class RegisterActivity extends Activity {
 				ArrayList params = new ArrayList();
 				params.add(new BasicNameValuePair("telephone", tel_text));
 				params.add(new BasicNameValuePair("password", password_text));
-				String url="register";
+				params.add(new BasicNameValuePair("action", "register"));
+				String url="user/base";
 				try {
 					String msg=NetTransfer.transfer(url, "post", params, null);
 					Toast.makeText(RegisterActivity.this, msg,
