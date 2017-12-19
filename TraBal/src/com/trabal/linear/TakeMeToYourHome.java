@@ -15,12 +15,17 @@ import com.trabal.util.net.ImageDownloadTask;
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class TakeMeToYourHome extends Activity {
 	
 	private ImageView pic1,pic2,pic3,pic4;
+	
+	private ImageButton favourButton;
 	
 	private TextView englishname,chinaname,introduction,openTimes,cost,address,hs_telephone,content,pic1_text,pic2_text,pic3_text;
 	
@@ -39,6 +44,7 @@ public class TakeMeToYourHome extends Activity {
 			String data=NetTransfer.transfer(url, "get",params , true);
 			NetTransfer nt=new NetTransfer();
 			hsb=nt.handle_HS_data(data);
+			Log.e("ssss",data);
 			initView();
 			
 		} catch (IOException e) {
@@ -47,6 +53,7 @@ public class TakeMeToYourHome extends Activity {
 	}
 	
 	private void initView(){
+		//初始化数据
 		pic1=(ImageView)this.findViewById(R.id.pic1);
 		pic2=(ImageView)this.findViewById(R.id.pic2);
 		pic3=(ImageView)this.findViewById(R.id.pic3);
@@ -77,6 +84,43 @@ public class TakeMeToYourHome extends Activity {
 		pic1_text.setText(hsb.getPic1_text());
 		pic2_text.setText(hsb.getPic2_text());
 		pic3_text.setText(hsb.getPic3_text());
+		favourButton=(ImageButton)this.findViewById(R.id.favourButton);
+		if(hsb.getIsfavour()==1){
+			favourButton.setBackgroundResource(R.drawable.favour_clicked);
+		}
+		//绑定收藏事件
+		favourButton.setOnClickListener(new FavourClick());
+	}
+	
+	//收藏事件
+	private class FavourClick implements View.OnClickListener{
+
+		@Override
+		public void onClick(View arg0) {
+			// 网络传输
+			ArrayList params = new ArrayList();
+			params.add(new BasicNameValuePair("hotspot_id", "1"));
+			params.add(new BasicNameValuePair("action","favour_hs"));
+			String url="user/base";
+			try {
+				String data=NetTransfer.transfer(url, "put",params , true);
+				NetTransfer nt=new NetTransfer();
+				nt.return_data(data);
+				if("success_favour".equals(nt.getStatus())){
+					TakeMeToYourHome.this.favourButton.setBackgroundResource(R.drawable.favour_clicked);
+
+				}
+				else if("success_unfavour".equals(nt.getStatus())){
+					TakeMeToYourHome.this.favourButton.setBackgroundResource(R.drawable.favour);
+				}
+				Toast.makeText(TakeMeToYourHome.this, nt.getMsg(),
+						Toast.LENGTH_LONG).show();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			
+			
+		}
 		
 	}
 }

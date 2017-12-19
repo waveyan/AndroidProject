@@ -60,6 +60,7 @@
             android:layout_marginTop="10dp" >
 
             <ImageView
+                android:id="@+id/pic4"
                 android:layout_width="fill_parent"
                 android:layout_height="240dp"
                 android:src="@drawable/dw2" />
@@ -128,6 +129,7 @@
                     android:background="@drawable/adress" />
 
                 <TextView
+                    android:id="@+id/Address"
                     android:layout_width="wrap_content"
                     android:layout_height="20dp"
                     android:layout_marginLeft="5dp"
@@ -152,6 +154,7 @@
                     android:background="@drawable/tele" />
 
                 <TextView
+                    android:id="@+id/hs_telephone"
                     android:layout_width="wrap_content"
                     android:layout_height="20dp"
                     android:layout_marginLeft="5dp"
@@ -170,6 +173,7 @@
                 android:layout_marginTop="3dp" >
 
                 <TextView
+                    android:id="@+id/content"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
@@ -202,6 +206,7 @@
                 android:layout_marginTop="5dp" >
 
                 <TextView
+                    android:id="@+id/pic1_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
@@ -220,6 +225,7 @@
                 android:layout_marginTop="5dp" >
 
                 <ImageView
+                    android:id="@+id/pic1"
                     android:layout_width="wrap_content"
                     android:layout_height="210dp"
                     android:src="@drawable/dw1" />
@@ -234,6 +240,7 @@
                 android:layout_marginTop="5dp" >
 
                 <TextView
+                    android:id="@+id/pic2_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
@@ -252,6 +259,7 @@
                 android:layout_marginTop="5dp" >
 
                 <ImageView
+                    android:id="@+id/pic2"
                     android:layout_width="wrap_content"
                     android:layout_height="210dp"
                     android:src="@drawable/dw3" />
@@ -266,6 +274,7 @@
                 android:layout_marginTop="5dp" >
 
                 <TextView
+                    android:id="@+id/pic3_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="monospace"
@@ -282,6 +291,7 @@
                 android:layout_marginTop="5dp" >
 
                 <ImageView
+                    android:id="@+id/pic3"
                     android:layout_width="wrap_content"
                     android:layout_height="300dp"
                     android:src="@drawable/dw4" />

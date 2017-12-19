@@ -11,6 +11,7 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.methods.HttpPut;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONException;
@@ -38,10 +39,10 @@ public class NetTransfer {
 		StrictMode.setThreadPolicy(policy);
 		url = perfix + url + "/";
 		HttpClient client = new DefaultHttpClient();
-		if ("post".equals(method) || "put".equals(method)) {
+		if ("post".equals(method)) {
 			HttpPost httppost = new HttpPost(url);
 			if (is_verify) {
-				httppost.setHeader("access_token","6d016c076367aa61010480f64244393c");
+				httppost.setHeader("access-token","e3cfc4515beca6fca23938a6e9f7b6a1");
 			}
 			httppost.setEntity(new UrlEncodedFormEntity(parameters, "UTF-8"));
 			HttpResponse response = client.execute(httppost);
@@ -61,7 +62,7 @@ public class NetTransfer {
 			}
 			HttpGet httpget = new HttpGet(url);
 			if (is_verify) {
-				httpget.setHeader("access-token","6d016c076367aa61010480f64244393c");
+				httpget.setHeader("access-token","e3cfc4515beca6fca23938a6e9f7b6a1");
 			}
 			HttpResponse response = client.execute(httpget);
 			int code = response.getStatusLine().getStatusCode();
@@ -71,6 +72,22 @@ public class NetTransfer {
 				return text;
 			} else {
 				return "{'msg':'«Î«Û ß∞‹'}";
+			}
+		}
+		else if("put".equals(method)){
+			HttpPut httpput = new HttpPut(url);
+			if (is_verify) {
+				httpput.setHeader("access-token","e3cfc4515beca6fca23938a6e9f7b6a1");
+			}
+			httpput.setEntity(new UrlEncodedFormEntity(parameters, "UTF-8"));
+			HttpResponse response = client.execute(httpput);
+			int code = response.getStatusLine().getStatusCode();
+			if (code == 200) {
+				InputStream is = response.getEntity().getContent();
+				String text = Tools.readFromStream(is);
+				return text;
+			} else {
+				return "{'msg':'«Î«Û ß∞‹','status':'fail'}";
 			}
 		}
 		return "{'msg':'«Î«Û ß∞‹','status':'fail'}";
@@ -112,6 +129,7 @@ public class NetTransfer {
 			hsb.setWorktime(json.getString("worktime"));
 			hsb.setTelephone(json.getString("telephone"));
 			hsb.setUrl(json.getString("url"));
+			hsb.setIsfavour(json.getInt("isfavour"));
 			return hsb;
 
 		} catch (JSONException e) {

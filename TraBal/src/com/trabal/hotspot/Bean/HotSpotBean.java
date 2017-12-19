@@ -22,6 +22,7 @@ public class HotSpotBean implements Serializable {
 	private int arrvied;
 	private String url;
 	private String telephone;
+	private int isfavour;
 	
 	public String getName() {
 		return name;
@@ -138,6 +139,12 @@ public class HotSpotBean implements Serializable {
 	}
 	public void setTelephone(String telephone) {
 		this.telephone = telephone;
+	}
+	public int getIsfavour() {
+		return isfavour;
+	}
+	public void setIsfavour(int isfavour) {
+		this.isfavour = isfavour;
 	}
 	
 
