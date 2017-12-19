@@ -113,7 +113,7 @@ public class RegisterActivity extends Activity {
 				String url="user/base";
 				NetTransfer nt = new NetTransfer();
 				try {
-					String msg=NetTransfer.transfer(url, "post", params, null);
+					String msg=NetTransfer.transfer(url, "post", params, false);
 					nt.return_data(msg);
 					if ("success".equals(nt.getStatus())) {
 						Intent intent = new Intent(RegisterActivity.this,LoginActivity.class);

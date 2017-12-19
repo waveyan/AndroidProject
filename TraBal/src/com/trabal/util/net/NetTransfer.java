@@ -16,28 +16,32 @@ import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.trabal.hotspot.Bean.HotSpotBean;
+
 import android.annotation.SuppressLint;
 import android.os.StrictMode;
 
 public class NetTransfer {
-	
-	private static String perfix="http://172.27.10.174:8000/";
+
+	private static String perfix = "http://172.27.10.174:8000/";
+	private static String media_perfix="http://172.27.10.174:8000/media/";
 	private String status;
 	private String msg;
 	private String access_token;
-	
-    @SuppressLint("NewApi")
-	public static String transfer(String url, String method,ArrayList<BasicNameValuePair> parameters,
-			Map<String, String> headers) throws IOException {
-    	StrictMode.ThreadPolicy policy=new StrictMode.ThreadPolicy.Builder().permitAll().build();
-        StrictMode.setThreadPolicy(policy);
-        url=perfix+url+"/";
+
+	@SuppressLint("NewApi")
+	public static String transfer(String url, String method,
+			ArrayList<BasicNameValuePair> parameters,
+			Boolean is_verify) throws IOException {
+		StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
+				.permitAll().build();
+		StrictMode.setThreadPolicy(policy);
+		url = perfix + url + "/";
 		HttpClient client = new DefaultHttpClient();
-		if ("post".equals(method)) {
+		if ("post".equals(method) || "put".equals(method)) {
 			HttpPost httppost = new HttpPost(url);
-			if (headers != null) {
-				httppost.setHeader("access_token", headers.get("access_token")
-						.toString());
+			if (is_verify) {
+				httppost.setHeader("access_token","6d016c076367aa61010480f64244393c");
 			}
 			httppost.setEntity(new UrlEncodedFormEntity(parameters, "UTF-8"));
 			HttpResponse response = client.execute(httppost);
@@ -56,6 +60,9 @@ public class NetTransfer {
 						+ URLEncoder.encode(item.getValue()) + "&";
 			}
 			HttpGet httpget = new HttpGet(url);
+			if (is_verify) {
+				httpget.setHeader("access-token","6d016c076367aa61010480f64244393c");
+			}
 			HttpResponse response = client.execute(httpget);
 			int code = response.getStatusLine().getStatusCode();
 			if (code == 200) {
@@ -73,12 +80,43 @@ public class NetTransfer {
 	public void return_data(String data) {
 		try {
 			JSONObject json = new JSONObject(data);
-			msg=json.getString("msg");
+			msg = json.getString("msg");
 			status = json.getString("status");
 			access_token = json.getString("access_token");
 
 		} catch (JSONException e) {
 			e.printStackTrace();
+		}
+	}
+	
+	public HotSpotBean handle_HS_data(String data){
+		try {
+			HotSpotBean hsb=new HotSpotBean();
+			JSONObject json = new JSONObject(data);
+			hsb.setAddress(json.getString("address"));
+			hsb.setArrvied(json.getInt("arrived"));
+			hsb.setCity(json.getString("city"));
+			hsb.setContent(json.getString("content"));
+			hsb.setLike(json.getInt("like"));
+			hsb.setName(json.getString("name"));
+			hsb.setEnglishName(json.getString("englishname"));
+			hsb.setPic1(this.media_perfix+json.getString("pic1"));
+			hsb.setPic2(this.media_perfix+json.getString("pic2"));
+			hsb.setPic3(this.media_perfix+json.getString("pic3"));
+			hsb.setPic1_text(json.getString("pic1_text"));
+			hsb.setPic2_text(json.getString("pic2_text"));
+			hsb.setPic3_text(json.getString("pic3_text"));
+			hsb.setPrice(json.getString("price"));
+			hsb.setType(json.getString("type"));
+			hsb.setWord(json.getString("word"));
+			hsb.setWorktime(json.getString("worktime"));
+			hsb.setTelephone(json.getString("telephone"));
+			hsb.setUrl(json.getString("url"));
+			return hsb;
+
+		} catch (JSONException e) {
+			e.printStackTrace();
+			return null;
 		}
 	}
 
@@ -105,6 +143,5 @@ public class NetTransfer {
 	public void setAccess_token(String access_token) {
 		this.access_token = access_token;
 	}
-	
-	
+
 }

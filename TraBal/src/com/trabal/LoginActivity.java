@@ -116,7 +116,7 @@ public class LoginActivity extends Activity {
 				NetTransfer nt = new NetTransfer();
 				try {
 					String msg = NetTransfer
-							.transfer(url, "post", params, null);
+							.transfer(url, "post", params, false);
 					nt.return_data(msg);
 					if ("success".equals(nt.getStatus())) {
 						
