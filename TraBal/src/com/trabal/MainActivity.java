@@ -1,9 +1,8 @@
 package com.trabal;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
-
 import com.trabal.ContentAdapter;
 import com.trabal.ContentModel;
 import com.trabal.linear.DynamicLinearLayout;
@@ -14,8 +13,13 @@ import com.trabal.linear.huodongActivity;
 import com.trabal.linear.luxianActivity;
 import com.trabal.linear.pingjiaActivity;
 import com.trabal.linear.shoucangActivity;
+import com.trabal.user.Bean.UserBean;
+import com.trabal.util.net.ImageDownloadTask;
+import com.trabal.util.net.NetTransfer;
 import com.trabal.R;
+
 import android.os.Bundle;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -28,26 +32,29 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.AdapterView.OnItemClickListener;
 
 public class MainActivity extends Activity {
 
 	private ArrayList<LinearLayout> linears;
 	private android.support.v4.view.ViewPager content;
-	private TextView indexTv, moreTv, dynamicTv;
+	private TextView indexTv, moreTv, dynamicTv,rightname;
 	private DrawerLayout drawerLayout;
 	private RelativeLayout rightLayout;
 	private List<ContentModel> list;
 	private ContentAdapter adapter;
 	private ImageButton imageButton;
 	private ListView listView;
+	private ImageView p_pic;
+	private UserBean user;
 
-	@Override
+	@SuppressLint("NewApi") @Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
@@ -87,13 +94,32 @@ public class MainActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				drawerLayout.openDrawer(Gravity.RIGHT);
-			}
+				//显示用户头像和昵称
+				Intent intent=MainActivity.this.getIntent();
+				user=(UserBean)intent.getSerializableExtra("user");
+				//网络传输获取用户头像和昵称
+				String url="user/base";
+				NetTransfer nt = new NetTransfer();
+				String data;
+				try {
+					data = NetTransfer.transfer(url, "get", null, true, user.getAccess_token());
+					user = nt.handle_user_data(data, user);
+					//设置远程头像
+					p_pic=(ImageView)MainActivity.this.findViewById(R.id.p_pic);
+					new ImageDownloadTask(p_pic).execute(user.getPic());
+					//设置昵称
+					rightname=(TextView)MainActivity.this.findViewById(R.id.right_name);
+					rightname.setText(user.getName());
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				
+			}		
 		});
 		indexTv.setOnClickListener(new View.OnClickListener() {
 
 			@Override
 			public void onClick(View arg0) {
-				// TODO Auto-generated method stub
 				content.setCurrentItem(0);
 				indexTv.setTextColor(android.graphics.Color.CYAN);
 				moreTv.setTextColor(android.graphics.Color.BLACK);
@@ -105,7 +131,6 @@ public class MainActivity extends Activity {
 
 			@Override
 			public void onClick(View arg0) {
-				// TODO Auto-generated method stub
 				content.setCurrentItem(1);
 				indexTv.setTextColor(android.graphics.Color.BLACK);
 				moreTv.setTextColor(android.graphics.Color.CYAN);
@@ -118,7 +143,6 @@ public class MainActivity extends Activity {
 
 			@Override
 			public void onClick(View arg0) {
-				// TODO Auto-generated method stub
 				content.setCurrentItem(2);
 				indexTv.setTextColor(android.graphics.Color.BLACK);
 				moreTv.setTextColor(android.graphics.Color.BLACK);
@@ -162,7 +186,6 @@ public class MainActivity extends Activity {
 	}
 
 	private void initData() {
-		// TODO Auto-generated method stub
 		list = new ArrayList<ContentModel>();
 
 		list.add(new ContentModel(R.drawable.pingjia, "我的评价", 1));
