@@ -4,6 +4,9 @@
     android:versionCode="1"
     android:versionName="1.0" >
 
+    <uses-permission android:name="android.permission.INTERNET" >
+    </uses-permission>
+
     <uses-sdk
         android:minSdkVersion="8"
         android:targetSdkVersion="18" />
@@ -13,14 +16,44 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
+        <activity android:name="com.trabal.RegisterActivity" >
+        </activity>
         <activity
-            android:name="com.trabal.MainActivity"
+            android:name="com.trabal.LoginActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+         <activity android:name="com.trabal.linear.LostInLA" >
+        </activity>
+        <activity android:name="com.trabal.linear.DIMUCUBE" >
+        </activity>
+        <activity android:name="com.trabal.linear.TakeMeToYourHome" >
+        </activity>
+        <activity android:name="com.trabal.linear.Timesmuseum" >
+        </activity>
+        <activity android:name="com.trabal.MainActivity" >
+        </activity>
+        <activity android:name="com.trabal.linear.RestaurantActivity" >
+        </activity>
+        <activity android:name="com.trabal.linear.ExhibitionActivity" >
+        </activity>
+        <activity android:name="com.trabal.linear.ForeignfoodActivity" >
+        </activity>
+        <activity android:name="com.trabal.linear.CoffeeActivity" >
+        </activity>
+        <activity android:name="com.trabal.linear.pingjiaActivity" >
+        </activity>
+        <activity android:name="com.trabal.linear.shoucangActivity" >
+        </activity>
+        <activity android:name="com.trabal.linear.luxianActivity" >
+        </activity>
+        <activity android:name="com.trabal.linear.huodongActivity" >
+        </activity>
+        <activity android:name="com.trabal.linear.haoyouActivity" >
         </activity>
     </application>
 

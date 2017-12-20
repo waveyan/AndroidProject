@@ -18,7 +18,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
-public class CoffeeActivity extends Activity {
+public class ExhibitionActivity extends Activity {
 	private List<listview1> Listview = new ArrayList<listview1>();
 	ImageView imageView;
 
@@ -26,22 +26,22 @@ public class CoffeeActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		this.setContentView(R.layout.activity_coffee);
+		this.setContentView(R.layout.activity_exhibition);
 
 		initListview1();
-		ListView listview1 = (ListView) findViewById(R.id.listview_coffee);
+		ListView listview1 = (ListView) findViewById(R.id.listview_exhibiton);
 
 		listviewAdapter fruitAdapter = new listviewAdapter(
-				CoffeeActivity.this, R.layout.listview_item, Listview);
+				ExhibitionActivity.this, R.layout.listview_item, Listview);
 		listview1.setAdapter(fruitAdapter);
 		
 	}
 
 	private void initListview1() {
 		// TODO Auto-generated method stub
-		listview1 Coffee = new listview1("Lost in L.A.", R.drawable.l7,
-				R.drawable.l1, R.drawable.l2, R.drawable.l3);
-		Listview.add(Coffee);
+		listview1 Exhibition = new listview1("广州时代美术馆", R.drawable.t6,
+				R.drawable.t2, R.drawable.t3, R.drawable.t7);
+		Listview.add(Exhibition);
 	}
 
 }

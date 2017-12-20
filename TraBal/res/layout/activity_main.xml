@@ -68,7 +68,7 @@
                 android:layout_height="16dp"
                 android:layout_alignTop="@+id/guangzhou"
                 android:layout_marginLeft="10dp"
-                android:layout_marginTop="1dp"
+                android:layout_marginTop="3dp"
                 android:background="@drawable/position" />
 
             <TextView
@@ -76,7 +76,7 @@
                 android:layout_width="100dp"
                 android:layout_height="50dp"
                 android:layout_marginLeft="6dp"
-                android:layout_marginTop="17dp"
+                android:layout_marginTop="12dp"
                 android:layout_toRightOf="@+id/positionID"
                 android:text="广州市"
                 android:textSize="16sp" />

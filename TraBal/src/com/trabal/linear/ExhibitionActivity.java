@@ -4,70 +4,37 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.trabal.R;
+import com.trabal.listview1;
+import com.trabal.listviewAdapter;
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MotionEvent;
-import android.view.View;
-import android.view.View.OnTouchListener;
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemSelectedListener;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.Spinner;
+import android.widget.ListView;
+import android.widget.Toast;
 
-public class ExhibitionActivity extends Activity implements
-		OnItemSelectedListener {
-	private ImageView imageView;
-	private Spinner spDown;
-	private List<String> list;
-	private ArrayAdapter<String> adapter;
+public class ExhibitionActivity extends Activity {
+	private List<listview1> Listview = new ArrayList<listview1>();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		this.setContentView(R.layout.activity_exhibition);
-		spDown = (Spinner) findViewById(R.id.spDwon);
-		list = new ArrayList<String>();
-		list.add("北京");
-		list.add("上海");
-		list.add("广州");
-		list.add("深圳");
-		imageView = (ImageView) this.findViewById(R.id.Exhibition1);
-		adapter = new ArrayAdapter<String>(this,
-				android.R.layout.simple_spinner_item, list);
-		adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
-		spDown.setAdapter(adapter);
-		spDown.setOnItemSelectedListener(this);
-		imageView.setOnTouchListener(new OnTouchListener() {
-			@Override
-			public boolean onTouch(View arg0, MotionEvent arg1) {
-				// TODO Auto-generated method stub
-				Intent intent = new Intent(ExhibitionActivity.this,
-						Timesmuseum.class);
 
-				ExhibitionActivity.this.startActivity(intent);
-				return false;
-			}
-		});
+		initListview1();
+        ListView listview1 = (ListView) findViewById(R.id.listview_exhibiton);
+        
+        listviewAdapter fruitAdapter = new listviewAdapter(ExhibitionActivity.this, R.layout.listview_item, Listview);
+        listview1.setAdapter(fruitAdapter);
+ 
 	}
-	 @Override  
-	    public boolean onCreateOptionsMenu(Menu menu) {  
-	        getMenuInflater().inflate(R.menu.main, menu);  
-	        return true;  
-	    } 
-	@Override
-	public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2,
-			long arg3) {
+
+	private void initListview1() {
 		// TODO Auto-generated method stub
-
+		listview1 Exhibition = new listview1("等我餸上門", R.drawable.dw6,R.drawable.dw1,R.drawable.dw3,R.drawable.dw2 );
+		Listview.add(Exhibition);
 	}
+	}   
 
-	@Override
-	public void onNothingSelected(AdapterView<?> arg0) {
-		// TODO Auto-generated method stub
-
-	}
-}
+	

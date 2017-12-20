@@ -27,6 +27,34 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+         <activity android:name="com.trabal.linear.LostInLA" >
+        </activity>
+        <activity android:name="com.trabal.linear.DIMUCUBE" >
+        </activity>
+        <activity android:name="com.trabal.linear.TakeMeToYourHome" >
+        </activity>
+        <activity android:name="com.trabal.linear.Timesmuseum" >
+        </activity>
+        <activity android:name="com.trabal.MainActivity" >
+        </activity>
+        <activity android:name="com.trabal.linear.RestaurantActivity" >
+        </activity>
+        <activity android:name="com.trabal.linear.ExhibitionActivity" >
+        </activity>
+        <activity android:name="com.trabal.linear.ForeignfoodActivity" >
+        </activity>
+        <activity android:name="com.trabal.linear.CoffeeActivity" >
+        </activity>
+        <activity android:name="com.trabal.linear.pingjiaActivity" >
+        </activity>
+        <activity android:name="com.trabal.linear.shoucangActivity" >
+        </activity>
+        <activity android:name="com.trabal.linear.luxianActivity" >
+        </activity>
+        <activity android:name="com.trabal.linear.huodongActivity" >
+        </activity>
+        <activity android:name="com.trabal.linear.haoyouActivity" >
+        </activity>
     </application>
 
 </manifest>

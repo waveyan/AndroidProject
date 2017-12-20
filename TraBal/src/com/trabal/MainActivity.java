@@ -3,14 +3,22 @@ package com.trabal;
 import java.util.ArrayList;
 import java.util.List;
 
+
 import com.trabal.ContentAdapter;
 import com.trabal.ContentModel;
 import com.trabal.linear.DynamicLinearLayout;
 import com.trabal.linear.IndexLinearLayout;
 import com.trabal.linear.MoreLinearLayout;
+import com.trabal.linear.haoyouActivity;
+import com.trabal.linear.huodongActivity;
+import com.trabal.linear.luxianActivity;
+import com.trabal.linear.pingjiaActivity;
+import com.trabal.linear.shoucangActivity;
 import com.trabal.R;
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.support.v4.widget.DrawerLayout;
@@ -19,8 +27,8 @@ import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -118,7 +126,39 @@ public class MainActivity extends Activity {
 
 			}
 		});
+		
+		listView.setOnItemClickListener(new OnItemClickListener() {
 
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				switch ((int) id) {
+				case 1:
+					Intent intent = new Intent(MainActivity.this,pingjiaActivity.class);
+					MainActivity.this.startActivity(intent);
+					break;
+				case 2:
+					Intent intent1 = new Intent(MainActivity.this,shoucangActivity.class);
+					MainActivity.this.startActivity(intent1);
+					break;
+				case 3:
+					Intent intent2 = new Intent(MainActivity.this,luxianActivity.class);
+					MainActivity.this.startActivity(intent2);
+					break;
+				case 4:
+					Intent intent3 = new Intent(MainActivity.this,huodongActivity.class);
+					MainActivity.this.startActivity(intent3);
+					break;
+				case 5:
+					Intent intent4 = new Intent(MainActivity.this,haoyouActivity.class);
+					MainActivity.this.startActivity(intent4);
+					break;
+				default:
+					break;
+				}
+				drawerLayout.closeDrawer(Gravity.RIGHT);
+			}
+		});
 	}
 
 	private void initData() {
