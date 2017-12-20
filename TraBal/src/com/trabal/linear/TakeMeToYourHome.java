@@ -9,10 +9,12 @@ import org.apache.http.message.BasicNameValuePair;
 import com.trabal.LoginActivity;
 import com.trabal.R;
 import com.trabal.hotspot.Bean.HotSpotBean;
+import com.trabal.user.Bean.UserBean;
 import com.trabal.util.net.NetTransfer;
 import com.trabal.util.net.ImageDownloadTask;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -31,6 +33,8 @@ public class TakeMeToYourHome extends Activity {
 	
 	private HotSpotBean hsb;
 	
+	private UserBean user;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -41,10 +45,11 @@ public class TakeMeToYourHome extends Activity {
 		params.add(new BasicNameValuePair("id", "1"));
 		String url="hotspot/base";
 		try {
-			String data=NetTransfer.transfer(url, "get",params , true);
+			Intent intent=TakeMeToYourHome.this.getIntent();
+			user=(UserBean)intent.getSerializableExtra("user");
+			String data=NetTransfer.transfer(url, "get",params , true,user.getAccess_token());
 			NetTransfer nt=new NetTransfer();
 			hsb=nt.handle_HS_data(data);
-			Log.e("ssss",data);
 			initView();
 			
 		} catch (IOException e) {
@@ -103,7 +108,7 @@ public class TakeMeToYourHome extends Activity {
 			params.add(new BasicNameValuePair("action","favour_hs"));
 			String url="user/base";
 			try {
-				String data=NetTransfer.transfer(url, "put",params , true);
+				String data=NetTransfer.transfer(url, "put",params , true,user.getAccess_token());
 				NetTransfer nt=new NetTransfer();
 				nt.return_data(data);
 				if("success_favour".equals(nt.getStatus())){

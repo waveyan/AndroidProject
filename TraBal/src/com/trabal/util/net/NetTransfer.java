@@ -18,6 +18,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.trabal.hotspot.Bean.HotSpotBean;
+import com.trabal.user.Bean.UserBean;
 
 import android.annotation.SuppressLint;
 import android.os.StrictMode;
@@ -33,7 +34,7 @@ public class NetTransfer {
 	@SuppressLint("NewApi")
 	public static String transfer(String url, String method,
 			ArrayList<BasicNameValuePair> parameters,
-			Boolean is_verify) throws IOException {
+			Boolean is_verify,String access_token) throws IOException {
 		StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
 				.permitAll().build();
 		StrictMode.setThreadPolicy(policy);
@@ -42,7 +43,7 @@ public class NetTransfer {
 		if ("post".equals(method)) {
 			HttpPost httppost = new HttpPost(url);
 			if (is_verify) {
-				httppost.setHeader("access-token","e3cfc4515beca6fca23938a6e9f7b6a1");
+				httppost.setHeader("access-token",access_token);
 			}
 			httppost.setEntity(new UrlEncodedFormEntity(parameters, "UTF-8"));
 			HttpResponse response = client.execute(httppost);
@@ -56,13 +57,15 @@ public class NetTransfer {
 			}
 		} else if ("get".equals(method)) {
 			url += "?";
-			for (BasicNameValuePair item : parameters) {
-				url += item.getName().toString().trim() + "="
-						+ URLEncoder.encode(item.getValue()) + "&";
+			if(parameters!=null){
+				for (BasicNameValuePair item : parameters) {
+					url += item.getName().toString().trim() + "="
+							+ URLEncoder.encode(item.getValue()) + "&";
+				}
 			}
 			HttpGet httpget = new HttpGet(url);
 			if (is_verify) {
-				httpget.setHeader("access-token","e3cfc4515beca6fca23938a6e9f7b6a1");
+				httpget.setHeader("access-token",access_token);
 			}
 			HttpResponse response = client.execute(httpget);
 			int code = response.getStatusLine().getStatusCode();
@@ -77,7 +80,7 @@ public class NetTransfer {
 		else if("put".equals(method)){
 			HttpPut httpput = new HttpPut(url);
 			if (is_verify) {
-				httpput.setHeader("access-token","e3cfc4515beca6fca23938a6e9f7b6a1");
+				httpput.setHeader("access-token",access_token);
 			}
 			httpput.setEntity(new UrlEncodedFormEntity(parameters, "UTF-8"));
 			HttpResponse response = client.execute(httpput);
@@ -132,6 +135,27 @@ public class NetTransfer {
 			hsb.setIsfavour(json.getInt("isfavour"));
 			return hsb;
 
+		} catch (JSONException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	
+	public UserBean handle_user_data(String data,UserBean user){
+		
+		try {
+			UserBean u =user;
+			JSONObject json = new JSONObject(data);
+			u.setAddress(json.getString("address"));
+			u.setBirthday(json.getString("birthday"));
+			u.setCredit(json.getInt("credit"));
+			u.setEmail(json.getString("email"));
+			u.setGender(json.getString("gender"));
+			u.setIntroduction(json.getString("introduction"));
+			u.setName(json.getString("name"));
+			u.setPic((this.media_perfix+json.getString("pic")));
+			return u;
 		} catch (JSONException e) {
 			e.printStackTrace();
 			return null;

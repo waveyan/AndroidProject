@@ -158,7 +158,7 @@
             android:src="@drawable/headpic" />
 
         <TextView
-            android:id="@+id/right_textview"
+            android:id="@+id/right_name"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
             android:layout_below="@id/p_pic"

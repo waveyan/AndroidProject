@@ -36,7 +36,6 @@ public class ImageDownloadTask extends AsyncTask<String, Void, Bitmap> {
 			try {
 				in.close();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
         }
@@ -46,7 +45,6 @@ public class ImageDownloadTask extends AsyncTask<String, Void, Bitmap> {
     // Task÷¥––ÕÍ±œ£¨∑µªÿbitmap
     @Override
     public void onPostExecute(Bitmap result) {
-        // Set bitmap image for the result
         imageView.setImageBitmap(result);
     }
 }

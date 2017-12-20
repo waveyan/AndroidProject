@@ -116,7 +116,7 @@ public class LoginActivity extends Activity {
 				NetTransfer nt = new NetTransfer();
 				try {
 					String msg = NetTransfer
-							.transfer(url, "post", params, false);
+							.transfer(url, "post", params, false,null);
 					nt.return_data(msg);
 					if ("success".equals(nt.getStatus())) {
 						
@@ -125,11 +125,19 @@ public class LoginActivity extends Activity {
 						user.setPassword(password_text);
 						user.setTelephone(tel_text);
 						user.setAccess_token(nt.getAccess_token());
+						/**
+						 * 当前activity
+						 * 本地数据库local
+						 * 数据库版本为1
+						 */
 						UserDao dao=new UserDao(LoginActivity.this,"local",1);
-						dao.insert(user);
-						
+						UserBean old_user=dao.querryOne(nt.getAccess_token());
+						if(old_user==null)
+								dao.insert(user);
 						Intent intent = new Intent(LoginActivity.this,
 								MainActivity.class);
+						//保持该用户登录状态
+						intent.putExtra("user", user);
 						LoginActivity.this.startActivity(intent);
 						LoginActivity.this.finish();
 					} else {

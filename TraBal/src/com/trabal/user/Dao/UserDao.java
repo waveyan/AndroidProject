@@ -43,8 +43,9 @@ public class UserDao {
 		String sql="select * from user where access_token=?";
 		String[] selectionArgs=new String[]{access_token};
 		Cursor c=db.rawQuery(sql, selectionArgs);
-		UserBean user=new UserBean();
+		UserBean user=null;
 		while(c.moveToNext()){
+			user=new UserBean();
 			user.setTelephone(c.getString(c.getColumnIndex("telephone")));
 			user.setPassword(c.getString(c.getColumnIndex("password")));
 			user.setAccess_token(c.getString(c.getColumnIndex("access_token")));
