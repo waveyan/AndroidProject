@@ -1,14 +1,13 @@
 package com.trabal;
 
-
 import java.io.IOException;
 import java.util.ArrayList;
-
 import org.apache.http.message.BasicNameValuePair;
 
 import com.trabal.user.Bean.UserBean;
 import com.trabal.util.Code;
 import com.trabal.util.net.NetTransfer;
+
 
 import android.app.Activity;
 import android.content.Intent;

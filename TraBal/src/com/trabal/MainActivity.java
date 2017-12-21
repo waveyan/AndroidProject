@@ -35,10 +35,33 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import java.util.TimerTask;
+
+import com.trabal.linear.DynamicLinearLayout;
+import com.trabal.linear.IndexLinearLayout;
+import com.trabal.linear.MoreLinearLayout;
+import com.trabal.linear.assessactivity;
+
+
+import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.util.Log;
+import android.util.TypedValue;
+import android.view.View;
+import android.view.ViewGroup;
+
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.view.ext.SatelliteMenu.SateliteClickedListener;
+
+
+import android.view.ext.*;
+
 
 public class MainActivity extends Activity {
 
@@ -78,8 +101,53 @@ public class MainActivity extends Activity {
 		indexTv.setTextColor(android.graphics.Color.CYAN);
 		moreTv.setTextColor(android.graphics.Color.BLACK);
 		dynamicTv.setTextColor(android.graphics.Color.BLACK);
+		
+		//卫星菜单动态实现
+		
+		android.view.ext.SatelliteMenu  menu = (android.view.ext.SatelliteMenu)this.findViewById(R.id.menu);
+		
+        float distance = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 120, getResources().getDisplayMetrics());
+        menu.setSatelliteDistance((int) distance);
+        menu.setExpandDuration(600);
+        menu.setCloseItemsOnClick(true);
+        menu.setTotalSpacingDegree(90);
+        menu.setMainImage(R.drawable.a018);
+        
+		
+		List<SatelliteMenuItem> items = new ArrayList<SatelliteMenuItem>();
+	    items.add(new SatelliteMenuItem(1, R.drawable.a014));
+	    items.add(new SatelliteMenuItem(2, R.drawable.a015));
+	    items.add(new SatelliteMenuItem(3, R.drawable.a016));
+	    items.add(new SatelliteMenuItem(4, R.drawable.a017));
+//        items.add(new SatelliteMenuItem(2, R.drawable.a017));
+//       items.add(new SatelliteMenuItem(1, R.drawable.a012));
+//	    items.add(new SatelliteMenuItem(5, R.drawable.sat_item));
+	    menu.addItems(items);   
+	    
+		
+		menu.setOnItemClickedListener(new SateliteClickedListener() {
 
-		// 设置适配器
+			@Override
+			public void eventOccured(int id) {
+ 
+ 				
+			switch ((int) id) {
+			case 1:
+				
+		        new Thread(new JumpPageThread()).start();
+				
+				break;
+
+			default:
+				break;
+			}
+				
+			}
+			
+		});
+		
+		
+		//设置适配器
 		content.setAdapter(new CustomPager());
 		// 设置当前页面
 		content.setCurrentItem(0);
@@ -200,6 +268,11 @@ public class MainActivity extends Activity {
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
+//	@Override
+//	public boolean onCreateOptionsMenu(Menu menu) {
+//		getMenuInflater().inflate(R.menu.main, menu);
+//		return true;
+//	}
 
 	/**
 	 * 内容组件适配器
@@ -264,5 +337,28 @@ public class MainActivity extends Activity {
 			}
 		}
 
+}
+	
+	//延迟2秒后跳转
+	private class JumpPageThread implements Runnable{
+		
+
+		@Override
+		public void run() {
+			// TODO Auto-generated method stub
+			
+			
+			try{
+				Thread.sleep(650);
+			}catch(Exception ex){
+				ex.printStackTrace();
+			}
+			
+			Intent intent =new Intent(MainActivity.this,assessactivity.class);
+	        MainActivity.this.startActivity(intent);
+			
+			
+		}
+		
 	}
 }

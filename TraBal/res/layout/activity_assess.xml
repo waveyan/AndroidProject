@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:id="@+id/bb1"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="#EBEBEB" >
+
+        <ImageButton
+            android:id="@+id/leftarrow1ID"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/d001" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/leftarrow1ID"
+            android:layout_marginLeft="7dp"
+            android:layout_toRightOf="@id/leftarrow1ID"
+            android:text="评价好去处"
+            android:textColor="#000000"
+            android:textSize="16dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/leftarrow1ID"
+            android:layout_marginLeft="280dp"
+            android:layout_toRightOf="@id/leftarrow1ID"
+            android:text="发布"
+            android:textColor="#698B69"
+            android:textSize="16dp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/bb2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/bb1" >
+
+        <TextView
+            android:id="@+id/fashoinID"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="15dp"
+            android:text="潮流指数"
+            android:textSize="16sp" />
+
+      <RatingBar 
+          android:numStars="5"
+          android:stepSize="0.5"
+          android:isIndicator="false"
+          android:rating="2.5"
+          android:id="@+id/ratingbar"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_centerHorizontal="true"
+          android:layout_marginTop="20dp"
+          android:layout_below="@+id/fashoinID"
+          
+          />
+        
+        <View
+            android:id="@+id/interval2"
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/ratingbar"
+            android:layout_marginTop="30dp"
+            android:background="#C1CDCD" />
+
+        <EditText
+            android:id="@+id/edID"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_below="@id/interval2"
+            android:background="#FFFFFF"
+            android:gravity="top|left"
+            android:hint="分享你对这里的评价和感受吧…(至少15字)"
+            android:textSize="12dp" />
+
+        <View
+            android:id="@+id/interval3"
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/edID"
+            android:background="#C1CDCD" />
+
+        <ImageButton
+            android:id="@+id/addID"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_below="@id/interval3"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/add"
+            android:tint="#A3A3A3" />
+
+        <View
+            android:id="@+id/interval4"
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/addID"
+            android:layout_marginTop="10dp"
+            android:background="#C1CDCD" />
+
+        <Button
+            android:id="@+id/positionID"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_below="@id/interval4"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/position"
+            android:tint="#A3A3A3" />
+
+        <TextView
+            android:id="@+id/txID"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@id/interval4"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@id/positionID"
+            android:background="#FFFFFF"
+            android:gravity="center_vertical"
+            android:hint="选择地点"
+            android:textSize="12dp" />
+
+        <View
+            android:id="@+id/interval5"
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/txID"
+            android:background="#C1CDCD" />
+
+        <ImageButton
+            android:id="@+id/cynID"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_below="@id/interval5"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/cyn"
+            android:tint="#A3A3A3" />
+
+        <EditText
+            android:id="@+id/ed1ID"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@id/interval5"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@id/cynID"
+            android:background="#FFFFFF"
+            android:gravity="center_vertical"
+            android:hint="人均消费"
+            android:textSize="12dp" />
+
+        <View
+            android:id="@+id/interval6"
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/ed1ID"
+            android:background="#C1CDCD" />
+    </RelativeLayout>
+
+</RelativeLayout>

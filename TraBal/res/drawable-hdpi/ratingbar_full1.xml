@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item android:id="@+android/backgourd" android:drawable="@drawable/a032" />
+    <item android:id="@+android/secondaryProgress" android:drawable="@drawable/a031" />
+    <item android:id="@+android/progess" android:drawable="@drawable/a030" />
+</layer-list>
