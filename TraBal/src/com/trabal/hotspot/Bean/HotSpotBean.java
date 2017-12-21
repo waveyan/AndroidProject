@@ -3,6 +3,7 @@ package com.trabal.hotspot.Bean;
 import java.io.Serializable;
 
 public class HotSpotBean implements Serializable {
+	private String id;
 	private String name;
 	private String englishName;
 	private String word;
@@ -24,6 +25,12 @@ public class HotSpotBean implements Serializable {
 	private String telephone;
 	private int isfavour;
 	
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
 	public String getName() {
 		return name;
 	}

@@ -35,18 +35,21 @@ public class TakeMeToYourHome extends Activity {
 	
 	private UserBean user;
 	
+	private Intent intent;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_takemetoyourhome);
 		
 		// ÍøÂç´«Êä
-		ArrayList params = new ArrayList();
-		params.add(new BasicNameValuePair("id", "1"));
-		String url="hotspot/base";
 		try {
-			Intent intent=TakeMeToYourHome.this.getIntent();
+			
+			intent=TakeMeToYourHome.this.getIntent();
 			user=(UserBean)intent.getSerializableExtra("user");
+			ArrayList params = new ArrayList();
+			params.add(new BasicNameValuePair("id", intent.getStringExtra("hotspot_id")));
+			String url="hotspot/base";
 			String data=NetTransfer.transfer(url, "get",params , true,user.getAccess_token());
 			NetTransfer nt=new NetTransfer();
 			hsb=nt.handle_HS_data(data);
@@ -104,7 +107,7 @@ public class TakeMeToYourHome extends Activity {
 		public void onClick(View arg0) {
 			// ÍøÂç´«Êä
 			ArrayList params = new ArrayList();
-			params.add(new BasicNameValuePair("hotspot_id", "1"));
+			params.add(new BasicNameValuePair("hotspot_id", TakeMeToYourHome.this.intent.getStringExtra("hotspot_id")));
 			params.add(new BasicNameValuePair("action","favour_hs"));
 			String url="user/base";
 			try {

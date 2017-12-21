@@ -14,6 +14,7 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpPut;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -156,6 +157,28 @@ public class NetTransfer {
 			u.setName(json.getString("name"));
 			u.setPic((this.media_perfix+json.getString("pic")));
 			return u;
+		} catch (JSONException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	public ArrayList handle_hs_list(String data){
+		try {
+			ArrayList<HotSpotBean> hs_list=new ArrayList<HotSpotBean>();
+			JSONObject json = new JSONObject(data);
+			JSONArray json_list = json.getJSONArray("all_hs_list");
+            for (int i = 0; i < json_list.length(); i++) {
+            	HotSpotBean hs=new HotSpotBean();
+            	hs.setId(json_list.getJSONObject(i).getString("id"));
+                hs.setName(json_list.getJSONObject(i).getString("name"));
+                hs.setPic1(this.media_perfix+json_list.getJSONObject(i).getString("pic1"));
+                hs.setPic2(this.media_perfix+json_list.getJSONObject(i).getString("pic2"));
+                hs.setPic3(this.media_perfix+json_list.getJSONObject(i).getString("pic3"));
+                hs_list.add(hs);
+            }
+			return hs_list;
+			
 		} catch (JSONException e) {
 			e.printStackTrace();
 			return null;
