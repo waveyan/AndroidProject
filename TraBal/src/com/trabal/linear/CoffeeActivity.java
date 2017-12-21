@@ -24,7 +24,6 @@ public class CoffeeActivity extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		this.setContentView(R.layout.activity_coffee);
 
@@ -38,10 +37,9 @@ public class CoffeeActivity extends Activity {
 	}
 
 	private void initListview1() {
-		// TODO Auto-generated method stub
-		listview1 Coffee = new listview1("Lost in L.A.", R.drawable.l7,
-				R.drawable.l1, R.drawable.l2, R.drawable.l3);
-		Listview.add(Coffee);
+//		listview1 Coffee = new listview1("Lost in L.A.", R.drawable.l7,
+//				R.drawable.l1, R.drawable.l2, R.drawable.l3);
+//		Listview.add(Coffee);
 	}
 
 }

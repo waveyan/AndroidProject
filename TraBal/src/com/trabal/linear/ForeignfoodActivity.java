@@ -39,9 +39,9 @@ public class ForeignfoodActivity extends Activity {
 
 	private void initListview1() {
 		// TODO Auto-generated method stub
-		listview1 Exhibition = new listview1("µãÄ§·»", R.drawable.dm6,
-				R.drawable.dm2, R.drawable.dm3, R.drawable.dm4);
-		Listview.add(Exhibition);
+//		listview1 Exhibition = new listview1("µãÄ§·»", R.drawable.dm6,
+//				R.drawable.dm2, R.drawable.dm3, R.drawable.dm4);
+//		Listview.add(Exhibition);
 	}
 
 }
