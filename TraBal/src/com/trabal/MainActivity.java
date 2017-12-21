@@ -42,7 +42,6 @@ import com.trabal.linear.IndexLinearLayout;
 import com.trabal.linear.MoreLinearLayout;
 import com.trabal.linear.assessactivity;
 
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -59,15 +58,13 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.view.ext.SatelliteMenu.SateliteClickedListener;
 
-
 import android.view.ext.*;
-
 
 public class MainActivity extends Activity {
 
 	private ArrayList<LinearLayout> linears;
 	private android.support.v4.view.ViewPager content;
-	private TextView indexTv, moreTv, dynamicTv,rightname;
+	private TextView indexTv, moreTv, dynamicTv, rightname;
 	private DrawerLayout drawerLayout;
 	private RelativeLayout rightLayout;
 	private List<ContentModel> list;
@@ -77,7 +74,8 @@ public class MainActivity extends Activity {
 	private ImageView p_pic;
 	private UserBean user;
 
-	@SuppressLint("NewApi") @Override
+	@SuppressLint("NewApi")
+	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
@@ -101,53 +99,48 @@ public class MainActivity extends Activity {
 		indexTv.setTextColor(android.graphics.Color.CYAN);
 		moreTv.setTextColor(android.graphics.Color.BLACK);
 		dynamicTv.setTextColor(android.graphics.Color.BLACK);
-		
-		//卫星菜单动态实现
-		
-		android.view.ext.SatelliteMenu  menu = (android.view.ext.SatelliteMenu)this.findViewById(R.id.menu);
-		
-        float distance = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 120, getResources().getDisplayMetrics());
-        menu.setSatelliteDistance((int) distance);
-        menu.setExpandDuration(600);
-        menu.setCloseItemsOnClick(true);
-        menu.setTotalSpacingDegree(90);
-        menu.setMainImage(R.drawable.a018);
-        
-		
+
+		// 卫星菜单动态实现
+
+		android.view.ext.SatelliteMenu menu = (android.view.ext.SatelliteMenu) this
+				.findViewById(R.id.menu);
+
+		float distance = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
+				120, getResources().getDisplayMetrics());
+		menu.setSatelliteDistance((int) distance);
+		menu.setExpandDuration(600);
+		menu.setCloseItemsOnClick(true);
+		menu.setTotalSpacingDegree(90);
+		menu.setMainImage(R.drawable.a018);
+
 		List<SatelliteMenuItem> items = new ArrayList<SatelliteMenuItem>();
-	    items.add(new SatelliteMenuItem(1, R.drawable.a014));
-	    items.add(new SatelliteMenuItem(2, R.drawable.a015));
-	    items.add(new SatelliteMenuItem(3, R.drawable.a016));
-	    items.add(new SatelliteMenuItem(4, R.drawable.a017));
-//        items.add(new SatelliteMenuItem(2, R.drawable.a017));
-//       items.add(new SatelliteMenuItem(1, R.drawable.a012));
-//	    items.add(new SatelliteMenuItem(5, R.drawable.sat_item));
-	    menu.addItems(items);   
-	    
-		
+		items.add(new SatelliteMenuItem(1, R.drawable.a014));
+		items.add(new SatelliteMenuItem(2, R.drawable.a015));
+		items.add(new SatelliteMenuItem(3, R.drawable.a016));
+		items.add(new SatelliteMenuItem(4, R.drawable.a017));
+		menu.addItems(items);
+
 		menu.setOnItemClickedListener(new SateliteClickedListener() {
 
 			@Override
 			public void eventOccured(int id) {
- 
- 				
-			switch ((int) id) {
-			case 1:
-				
-		        new Thread(new JumpPageThread()).start();
-				
-				break;
 
-			default:
-				break;
+				switch ((int) id) {
+				case 1:
+
+					new Thread(new JumpPageThread()).start();
+
+					break;
+
+				default:
+					break;
+				}
+
 			}
-				
-			}
-			
+
 		});
-		
-		
-		//设置适配器
+
+		// 设置适配器
 		content.setAdapter(new CustomPager());
 		// 设置当前页面
 		content.setCurrentItem(0);
@@ -162,27 +155,30 @@ public class MainActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				drawerLayout.openDrawer(Gravity.RIGHT);
-				//显示用户头像和昵称
-				Intent intent=MainActivity.this.getIntent();
-				user=(UserBean)intent.getSerializableExtra("user");
-				//网络传输获取用户头像和昵称
-				String url="user/base";
+				// 显示用户头像和昵称
+				Intent intent = MainActivity.this.getIntent();
+				user = (UserBean) intent.getSerializableExtra("user");
+				// 网络传输获取用户头像和昵称
+				String url = "user/base";
 				NetTransfer nt = new NetTransfer();
 				String data;
 				try {
-					data = NetTransfer.transfer(url, "get", null, true, user.getAccess_token());
+					data = NetTransfer.transfer(url, "get", null, true,
+							user.getAccess_token());
 					user = nt.handle_user_data(data, user);
-					//设置远程头像
-					p_pic=(ImageView)MainActivity.this.findViewById(R.id.p_pic);
+					// 设置远程头像
+					p_pic = (ImageView) MainActivity.this
+							.findViewById(R.id.p_pic);
 					new ImageDownloadTask(p_pic).execute(user.getPic());
-					//设置昵称
-					rightname=(TextView)MainActivity.this.findViewById(R.id.right_name);
+					// 设置昵称
+					rightname = (TextView) MainActivity.this
+							.findViewById(R.id.right_name);
 					rightname.setText(user.getName());
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
-				
-			}		
+
+			}
 		});
 		indexTv.setOnClickListener(new View.OnClickListener() {
 
@@ -218,7 +214,7 @@ public class MainActivity extends Activity {
 
 			}
 		});
-		
+
 		listView.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
@@ -226,23 +222,28 @@ public class MainActivity extends Activity {
 					int position, long id) {
 				switch ((int) id) {
 				case 1:
-					Intent intent = new Intent(MainActivity.this,pingjiaActivity.class);
+					Intent intent = new Intent(MainActivity.this,
+							pingjiaActivity.class);
 					MainActivity.this.startActivity(intent);
 					break;
 				case 2:
-					Intent intent1 = new Intent(MainActivity.this,shoucangActivity.class);
+					Intent intent1 = new Intent(MainActivity.this,
+							shoucangActivity.class);
 					MainActivity.this.startActivity(intent1);
 					break;
 				case 3:
-					Intent intent2 = new Intent(MainActivity.this,luxianActivity.class);
+					Intent intent2 = new Intent(MainActivity.this,
+							luxianActivity.class);
 					MainActivity.this.startActivity(intent2);
 					break;
 				case 4:
-					Intent intent3 = new Intent(MainActivity.this,huodongActivity.class);
+					Intent intent3 = new Intent(MainActivity.this,
+							huodongActivity.class);
 					MainActivity.this.startActivity(intent3);
 					break;
 				case 5:
-					Intent intent4 = new Intent(MainActivity.this,haoyouActivity.class);
+					Intent intent4 = new Intent(MainActivity.this,
+							haoyouActivity.class);
 					MainActivity.this.startActivity(intent4);
 					break;
 				default:
@@ -268,11 +269,12 @@ public class MainActivity extends Activity {
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
-//	@Override
-//	public boolean onCreateOptionsMenu(Menu menu) {
-//		getMenuInflater().inflate(R.menu.main, menu);
-//		return true;
-//	}
+
+	// @Override
+	// public boolean onCreateOptionsMenu(Menu menu) {
+	// getMenuInflater().inflate(R.menu.main, menu);
+	// return true;
+	// }
 
 	/**
 	 * 内容组件适配器
@@ -337,28 +339,25 @@ public class MainActivity extends Activity {
 			}
 		}
 
-}
-	
-	//延迟2秒后跳转
-	private class JumpPageThread implements Runnable{
-		
+	}
+
+	// 延迟2秒后跳转
+	private class JumpPageThread implements Runnable {
 
 		@Override
 		public void run() {
 			// TODO Auto-generated method stub
-			
-			
-			try{
+
+			try {
 				Thread.sleep(650);
-			}catch(Exception ex){
+			} catch (Exception ex) {
 				ex.printStackTrace();
 			}
-			
-			Intent intent =new Intent(MainActivity.this,assessactivity.class);
-	        MainActivity.this.startActivity(intent);
-			
-			
+
+			Intent intent = new Intent(MainActivity.this, assessactivity.class);
+			MainActivity.this.startActivity(intent);
+
 		}
-		
+
 	}
 }
