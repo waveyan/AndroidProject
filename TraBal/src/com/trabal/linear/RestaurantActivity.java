@@ -61,7 +61,7 @@ public class RestaurantActivity extends Activity {
 		NetTransfer nt = new NetTransfer();
 		String msg;
 		try {
-			String data = NetTransfer.transfer(url, "get", params, true, user.getAccess_token());
+			String data = NetTransfer.transfer(url, "get", params, true, user.getAccess_token(),null);
 			ArrayList<HotSpotBean> hs_list=nt.handle_hs_list(data);
 			if(hs_list!=null){
 				for(HotSpotBean hsb :hs_list){

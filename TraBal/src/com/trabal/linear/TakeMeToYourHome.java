@@ -50,7 +50,7 @@ public class TakeMeToYourHome extends Activity {
 			ArrayList params = new ArrayList();
 			params.add(new BasicNameValuePair("id", intent.getStringExtra("hotspot_id")));
 			String url="hotspot/base";
-			String data=NetTransfer.transfer(url, "get",params , true,user.getAccess_token());
+			String data=NetTransfer.transfer(url, "get",params , true,user.getAccess_token(),null);
 			NetTransfer nt=new NetTransfer();
 			hsb=nt.handle_HS_data(data);
 			initView();
@@ -111,7 +111,7 @@ public class TakeMeToYourHome extends Activity {
 			params.add(new BasicNameValuePair("action","favour_hs"));
 			String url="user/base";
 			try {
-				String data=NetTransfer.transfer(url, "put",params , true,user.getAccess_token());
+				String data=NetTransfer.transfer(url, "put",params , true,user.getAccess_token(),null);
 				NetTransfer nt=new NetTransfer();
 				nt.return_data(data);
 				if("success_favour".equals(nt.getStatus())){

@@ -3,6 +3,7 @@ package com.trabal;
 import com.trabal.RegisterActivity;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.apache.http.message.BasicNameValuePair;
 
@@ -10,7 +11,6 @@ import com.trabal.user.Bean.UserBean;
 import com.trabal.user.Dao.UserDao;
 import com.trabal.util.Code;
 import com.trabal.util.net.NetTransfer;
-
 
 import android.app.Activity;
 import android.content.Intent;
@@ -39,6 +39,27 @@ public class LoginActivity extends Activity {
 		this.setContentView(R.layout.activity_login);
 		initView(this.getIntent());
 
+		// test upload file
+		// String url="activity/base";
+		// ArrayList params = new ArrayList();
+		// params.add(new BasicNameValuePair("title", "123"));
+		// params.add(new BasicNameValuePair("subject", "123"));
+		// params.add(new BasicNameValuePair("time", "2017-10-10 19:30:30"));
+		// params.add(new BasicNameValuePair("person", "1"));
+		// params.add(new BasicNameValuePair("price", "30"));
+		// ArrayList<HashMap<String,String>> files=new
+		// ArrayList<HashMap<String,String>>();
+		// HashMap<String,String> file=new HashMap<String, String>();
+		// file.put("pic1","1.jpeg");
+		// files.add(file);
+		// try {
+		// String msg=NetTransfer.transfer(url, "post", params, true,
+		// "8e7c2373b74341b399da25c537bc8513", files);
+		// } catch (IOException e) {
+		// Log.e("ssssssssss",e.getMessage());
+		// e.printStackTrace();
+		// }
+
 		imageView = (ImageView) this.findViewById(R.id.back1ID);
 		imageView.setOnTouchListener(new OnTouchListener() {
 			@Override
@@ -66,10 +87,10 @@ public class LoginActivity extends Activity {
 		password = (TextView) this.findViewById(R.id.password1ID);
 		code = (TextView) this.findViewById(R.id.validate1ID);
 		submit = (Button) this.findViewById(R.id.loginID);
-		
-		//注册后跳转
-		UserBean newuser=(UserBean)intent.getSerializableExtra("user");
-		if(newuser!=null){
+
+		// 注册后跳转
+		UserBean newuser = (UserBean) intent.getSerializableExtra("user");
+		if (newuser != null) {
 			telephone.setText(newuser.getTelephone());
 			password.setText(newuser.getPassword());
 		}
@@ -116,28 +137,27 @@ public class LoginActivity extends Activity {
 				String url = "user/base";
 				NetTransfer nt = new NetTransfer();
 				try {
-					String msg = NetTransfer
-							.transfer(url, "post", params, false,null);
+					String msg = NetTransfer.transfer(url, "post", params,
+							false, null, null);
 					nt.return_data(msg);
 					if ("success".equals(nt.getStatus())) {
-						
-						//登录成功写入本地数据库
-						UserBean user=new UserBean();
+
+						// 登录成功写入本地数据库
+						UserBean user = new UserBean();
 						user.setPassword(password_text);
 						user.setTelephone(tel_text);
 						user.setAccess_token(nt.getAccess_token());
 						/**
-						 * 当前activity
-						 * 本地数据库local
-						 * 数据库版本为1
+						 * 当前activity 本地数据库local 数据库版本为1
 						 */
-						UserDao dao=new UserDao(LoginActivity.this,"local",1);
-						UserBean old_user=dao.querryOne(nt.getAccess_token());
-						if(old_user==null)
-								dao.insert(user);
+						UserDao dao = new UserDao(LoginActivity.this, "local",
+								1);
+						UserBean old_user = dao.querryOne(nt.getAccess_token());
+						if (old_user == null)
+							dao.insert(user);
 						Intent intent = new Intent(LoginActivity.this,
 								MainActivity.class);
-						//保持该用户登录状态
+						// 保持该用户登录状态
 						intent.putExtra("user", user);
 						LoginActivity.this.startActivity(intent);
 						LoginActivity.this.finish();
@@ -146,7 +166,7 @@ public class LoginActivity extends Activity {
 								Toast.LENGTH_LONG).show();
 					}
 				} catch (IOException e) {
-					
+
 					e.printStackTrace();
 				}
 

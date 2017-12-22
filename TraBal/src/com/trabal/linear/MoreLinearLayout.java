@@ -1,6 +1,18 @@
 package com.trabal.linear;
 
+import java.io.IOException;
+import java.util.ArrayList;
+
+import org.apache.http.message.BasicNameValuePair;
+
+import com.trabal.MainActivity;
 import com.trabal.R;
+import com.trabal.listview1;
+import com.trabal.activity.Bean.ActivityBean;
+import com.trabal.hotspot.Bean.HotSpotBean;
+import com.trabal.user.Bean.UserBean;
+import com.trabal.util.net.ImageDownloadTask;
+import com.trabal.util.net.NetTransfer;
 
 import android.app.Activity;
 import android.content.Context;
@@ -8,13 +20,20 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 public class MoreLinearLayout extends LinearLayout {
 
 	Context context;
 	ImageButton imageButton, imageButton2, imageButton3, imageButton4,
 			imageButton5, imageButton6, imageButton7;
+
+	ImageView act_image1, act_image2, act_image3, act_image4;
+
+	TextView tv1, tv2, tv3, tv4;
+
 	Intent intent;
 
 	public MoreLinearLayout(final Context context) {
@@ -36,6 +55,16 @@ public class MoreLinearLayout extends LinearLayout {
 		imageButton5 = (ImageButton) this.findViewById(R.id.furnitureID);
 		imageButton6 = (ImageButton) this.findViewById(R.id.shoppingID);
 		imageButton7 = (ImageButton) this.findViewById(R.id.teaID);
+		act_image1 = (ImageView) this.findViewById(R.id.caremaID);
+		act_image2 = (ImageView) this.findViewById(R.id.christmasID);
+		act_image3 = (ImageView) this.findViewById(R.id.paintID);
+		act_image4 = (ImageView) this.findViewById(R.id.houseID);
+		tv1 = (TextView) this.findViewById(R.id.tv1);
+		tv2 = (TextView) this.findViewById(R.id.tv2);
+		tv3 = (TextView) this.findViewById(R.id.tv3);
+		tv4 = (TextView) this.findViewById(R.id.tv4);
+		//¼ÓÔØ»î¶¯
+		init_act();
 		// Î¬³ÖµÇÂ¼×´Ì¬
 		intent = new Intent(context, RestaurantActivity.class);
 		Intent last_intent = ((Activity) context).getIntent();
@@ -51,6 +80,7 @@ public class MoreLinearLayout extends LinearLayout {
 		imageButton7.setOnClickListener(new ButtonOnClick());
 
 	}
+
 	class ButtonOnClick implements OnClickListener {
 
 		@Override
@@ -90,6 +120,32 @@ public class MoreLinearLayout extends LinearLayout {
 				break;
 			}
 		}
+	}
+
+	private void init_act() {
+		// ÍøÂç´«Êä
+		ArrayList params = new ArrayList();
+		params.add(new BasicNameValuePair("num","4"));
+		String url = "activity/base";
+		NetTransfer nt = new NetTransfer();
+		String msg;
+		try {
+			UserBean user =(UserBean)(((Activity)context) .getIntent().getSerializableExtra("user"));
+			String data = NetTransfer.transfer(url, "get", params, true,
+					user.getAccess_token(),null);
+			ArrayList<ActivityBean> ac_list = nt.handle_ac_list(data);
+			new ImageDownloadTask(act_image1).execute(ac_list.get(0).getPic1());
+			new ImageDownloadTask(act_image2).execute(ac_list.get(1).getPic1());
+			new ImageDownloadTask(act_image3).execute(ac_list.get(2).getPic1());
+			new ImageDownloadTask(act_image4).execute(ac_list.get(3).getPic1());
+			tv1.setText(ac_list.get(0).getIntroduction().substring(0, 20)+"...");
+			tv2.setText(ac_list.get(1).getIntroduction().substring(0, 20)+"...");
+			tv3.setText(ac_list.get(2).getIntroduction().substring(0, 20)+"...");
+			tv4.setText(ac_list.get(3).getIntroduction().substring(0, 20)+"...");
+			} catch (IOException e) {
+			e.printStackTrace();
+		}
+
 	}
 
 }

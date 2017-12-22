@@ -1,33 +1,40 @@
 package com.trabal.util.net;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpPut;
+import org.apache.http.entity.mime.MultipartEntityBuilder;
+import org.apache.http.entity.mime.content.FileBody;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.trabal.activity.Bean.ActivityBean;
 import com.trabal.hotspot.Bean.HotSpotBean;
 import com.trabal.user.Bean.UserBean;
 
 import android.annotation.SuppressLint;
 import android.os.StrictMode;
+import android.util.Log;
 
 public class NetTransfer {
 
 	private static String perfix = "http://172.27.10.174:8000/";
-	private static String media_perfix="http://172.27.10.174:8000/media/";
+	private static String media_perfix = "http://172.27.10.174:8000/media/";
 	private String status;
 	private String msg;
 	private String access_token;
@@ -35,7 +42,7 @@ public class NetTransfer {
 	@SuppressLint("NewApi")
 	public static String transfer(String url, String method,
 			ArrayList<BasicNameValuePair> parameters,
-			Boolean is_verify,String access_token) throws IOException {
+			Boolean is_verify,String access_token,ArrayList<HashMap<String,String>>files) throws IOException {
 		StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
 				.permitAll().build();
 		StrictMode.setThreadPolicy(policy);
@@ -45,6 +52,19 @@ public class NetTransfer {
 			HttpPost httppost = new HttpPost(url);
 			if (is_verify) {
 				httppost.setHeader("access-token",access_token);
+			}
+			if(files!=null){
+				MultipartEntityBuilder multipartEntityBuilder = MultipartEntityBuilder  
+	                    .create();  
+				for(HashMap<String,String> item : files){
+					for(String key:item.keySet()){
+						String value=item.get(key);
+						 FileBody binFileBody = new FileBody(new File(item.get(key))); 
+						multipartEntityBuilder.addPart(key, binFileBody); 
+					}
+				}
+				HttpEntity reqEntity = multipartEntityBuilder.build();  
+	            httppost.setEntity(reqEntity);  
 			}
 			httppost.setEntity(new UrlEncodedFormEntity(parameters, "UTF-8"));
 			HttpResponse response = client.execute(httppost);
@@ -109,10 +129,10 @@ public class NetTransfer {
 			e.printStackTrace();
 		}
 	}
-	
-	public HotSpotBean handle_HS_data(String data){
+
+	public HotSpotBean handle_HS_data(String data) {
 		try {
-			HotSpotBean hsb=new HotSpotBean();
+			HotSpotBean hsb = new HotSpotBean();
 			JSONObject json = new JSONObject(data);
 			hsb.setAddress(json.getString("address"));
 			hsb.setArrvied(json.getInt("arrived"));
@@ -121,9 +141,9 @@ public class NetTransfer {
 			hsb.setLike(json.getInt("like"));
 			hsb.setName(json.getString("name"));
 			hsb.setEnglishName(json.getString("englishname"));
-			hsb.setPic1(this.media_perfix+json.getString("pic1"));
-			hsb.setPic2(this.media_perfix+json.getString("pic2"));
-			hsb.setPic3(this.media_perfix+json.getString("pic3"));
+			hsb.setPic1(this.media_perfix + json.getString("pic1"));
+			hsb.setPic2(this.media_perfix + json.getString("pic2"));
+			hsb.setPic3(this.media_perfix + json.getString("pic3"));
 			hsb.setPic1_text(json.getString("pic1_text"));
 			hsb.setPic2_text(json.getString("pic2_text"));
 			hsb.setPic3_text(json.getString("pic3_text"));
@@ -137,16 +157,16 @@ public class NetTransfer {
 			return hsb;
 
 		} catch (JSONException e) {
+			Log.e("hb", e.getMessage());
 			e.printStackTrace();
 			return null;
 		}
 	}
-	
-	
-	public UserBean handle_user_data(String data,UserBean user){
-		
+
+	public UserBean handle_user_data(String data, UserBean user) {
+
 		try {
-			UserBean u =user;
+			UserBean u = user;
 			JSONObject json = new JSONObject(data);
 			u.setAddress(json.getString("address"));
 			u.setBirthday(json.getString("birthday"));
@@ -155,31 +175,76 @@ public class NetTransfer {
 			u.setGender(json.getString("gender"));
 			u.setIntroduction(json.getString("introduction"));
 			u.setName(json.getString("name"));
-			u.setPic((this.media_perfix+json.getString("pic")));
+			u.setPic((this.media_perfix + json.getString("pic")));
 			return u;
 		} catch (JSONException e) {
 			e.printStackTrace();
 			return null;
 		}
 	}
-	
-	public ArrayList handle_hs_list(String data){
+
+	public ArrayList handle_hs_list(String data) {
 		try {
-			ArrayList<HotSpotBean> hs_list=new ArrayList<HotSpotBean>();
+			ArrayList<HotSpotBean> hs_list = new ArrayList<HotSpotBean>();
 			JSONObject json = new JSONObject(data);
 			JSONArray json_list = json.getJSONArray("all_hs_list");
-            for (int i = 0; i < json_list.length(); i++) {
-            	HotSpotBean hs=new HotSpotBean();
-            	hs.setId(json_list.getJSONObject(i).getString("id"));
-                hs.setName(json_list.getJSONObject(i).getString("name"));
-                hs.setPic1(this.media_perfix+json_list.getJSONObject(i).getString("pic1"));
-                hs.setPic2(this.media_perfix+json_list.getJSONObject(i).getString("pic2"));
-                hs.setPic3(this.media_perfix+json_list.getJSONObject(i).getString("pic3"));
-                hs_list.add(hs);
-            }
+			for (int i = 0; i < json_list.length(); i++) {
+				HotSpotBean hs = new HotSpotBean();
+				hs.setId(json_list.getJSONObject(i).getString("id"));
+				hs.setName(json_list.getJSONObject(i).getString("name"));
+				hs.setPic1(this.media_perfix
+						+ json_list.getJSONObject(i).getString("pic1"));
+				hs.setPic2(this.media_perfix
+						+ json_list.getJSONObject(i).getString("pic2"));
+				hs.setPic3(this.media_perfix
+						+ json_list.getJSONObject(i).getString("pic3"));
+				hs_list.add(hs);
+			}
 			return hs_list;
-			
+
 		} catch (JSONException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	public ArrayList handle_ac_list(String data) {
+		try {
+			ArrayList<ActivityBean> ab_list = new ArrayList<ActivityBean>();
+			JSONObject json = new JSONObject(data);
+			JSONArray json_list = json.getJSONArray("activity");
+			for (int i = 0; i < json_list.length(); i++) {
+				ActivityBean ab = new ActivityBean();
+				ab.setId(json_list.getJSONObject(i).getString("id"));
+				ab.setIntroduction(json_list.getJSONObject(i).getString(
+						"introduction"));
+				ab.setPersion(json_list.getJSONObject(i).getString("person"));
+				ab.setPrice(json_list.getJSONObject(i).getString("price"));
+				ab.setSubject(json_list.getJSONObject(i).getString("subject"));
+				ab.setTelephone(json_list.getJSONObject(i).getString(
+						"telephone"));
+				ab.setTitle(json_list.getJSONObject(i).getString("title"));
+				ab.setType(json_list.getJSONObject(i).getString("type"));
+				ab.setWebsite(json_list.getJSONObject(i).getString("website"));
+				ab.setPic1(this.media_perfix
+						+ json_list.getJSONObject(i).getString("pic1"));
+				ab.setPic2(this.media_perfix
+						+ json_list.getJSONObject(i).getString("pic2"));
+				ab.setPic3(this.media_perfix
+						+ json_list.getJSONObject(i).getString("pic3"));
+				try {
+					String data1 = json_list.getJSONObject(i).getString(
+							"hotspot");
+					ab.setHsb(handle_HS_data(data1));
+				} catch (JSONException e) {
+				}
+
+				ab_list.add(ab);
+			}
+			return ab_list;
+
+		} catch (JSONException e) {
+			Log.e("hb", e.getMessage());
 			e.printStackTrace();
 			return null;
 		}

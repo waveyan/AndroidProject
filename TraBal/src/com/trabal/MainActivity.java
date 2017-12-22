@@ -149,7 +149,7 @@ public class MainActivity extends Activity {
 				String data;
 				try {
 					data = NetTransfer.transfer(url, "get", null, true,
-							user.getAccess_token());
+							user.getAccess_token(),null);
 					user = nt.handle_user_data(data, user);
 					// ÉèÖÃÔ¶³ÌÍ·Ïñ
 					p_pic = (ImageView) MainActivity.this
