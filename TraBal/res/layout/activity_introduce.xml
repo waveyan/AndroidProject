@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <RelativeLayout
+        android:id="@+id/ahID"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="#EBEBEB" >
+
+        <ImageButton
+            android:id="@+id/leftarrow8ID"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/d001" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/leftarrow8ID"
+            android:layout_marginLeft="7dp"
+            android:layout_toRightOf="@id/leftarrow8ID"
+            android:text="活动介绍"
+            android:textColor="#000000"
+            android:textSize="16dp" />
+
+        <TextView
+            android:id="@+id/sure2ID"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/leftarrow8ID"
+            android:layout_marginLeft="280dp"
+            android:layout_toRightOf="@id/leftarrow8ID"
+            android:text="确定"
+            android:textColor="#698B69"
+            android:textSize="16dp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/ah1ID"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/ahID"
+        android:background="#FFFFFF" >
+
+        <EditText
+            android:id="@+id/ed6ID"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#FFFFFF"
+            android:gravity="top|left" />
+
+        <Button
+            android:id="@+id/addpictureID"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:background="#EBEBEB"
+            android:gravity="center"
+            android:text="添加图片"
+            android:textColor="#000000"
+            android:textSize="13dp" />
+    </RelativeLayout>
+
+</RelativeLayout>

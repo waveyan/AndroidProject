@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scrollView1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scrollbars="none" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <RelativeLayout
+            android:id="@+id/ac2ID"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="#EBEBEB" >
+
+            <ImageButton
+                android:id="@+id/leftarrow2ID"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/d001" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/leftarrow2ID"
+                android:layout_marginLeft="7dp"
+                android:layout_toRightOf="@id/leftarrow2ID"
+                android:text="提交活动"
+                android:textColor="#000000"
+                android:textSize="16dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/leftarrow2ID"
+                android:layout_marginLeft="280dp"
+                android:layout_toRightOf="@id/leftarrow2ID"
+                android:text="预览"
+                android:textColor="#AAAAAA"
+                android:textSize="16dp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/ac3ID"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/ac2ID"
+            android:background="#FFFFFF" >
+
+            <TextView
+                android:id="@+id/posterID"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:text="添加活动海报"
+                android:textColor="#000000"
+                android:textSize="16dp" />
+
+            <ImageButton
+                android:id="@+id/add1ID"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="12dp"
+                android:layout_toLeftOf="@id/posterID"
+                android:background="@drawable/add1" />
+
+            <View
+                android:id="@+id/interval8"
+                android:layout_width="fill_parent"
+                android:layout_height="8dp"
+                android:layout_below="@+id/posterID"
+                android:layout_marginTop="10dp"
+                android:background="#698B69" />
+
+            <Button
+                android:id="@+id/classifyID"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_below="@id/interval8"
+                android:background="#FFFFFF"
+                android:gravity="center_vertical"
+                android:paddingLeft="18dp"
+                android:text="活动分类"
+                android:textSize="13dp" />
+
+            <TextView
+                android:id="@+id/tx8ID"
+                android:layout_width="270dp"
+                android:layout_height="30dp"
+                android:layout_alignBottom="@id/classifyID"
+                android:layout_toRightOf="@id/classifyID"
+                android:gravity="right" />
+
+            <Button
+                android:id="@+id/right7ID"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_below="@id/interval8"
+                android:layout_marginTop="10dp"
+                android:layout_toRightOf="@id/tx8ID"
+                android:background="@drawable/right"
+                android:gravity="center_vertical" />
+
+            <Button
+                android:id="@+id/themeID"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_below="@id/classifyID"
+                android:background="#FFFFFF"
+                android:gravity="center_vertical"
+                android:paddingLeft="18dp"
+                android:text="活动主题"
+                android:textSize="13dp" />
+
+            <TextView
+                android:id="@+id/tx4ID"
+                android:layout_width="270dp"
+                android:layout_height="30dp"
+                android:layout_alignBottom="@id/themeID"
+                android:layout_toRightOf="@id/themeID"
+                android:gravity="right" />
+
+            <Button
+                android:id="@+id/right3ID"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_below="@id/classifyID"
+                android:layout_marginTop="10dp"
+                android:layout_toRightOf="@id/tx4ID"
+                android:background="@drawable/right"
+                android:gravity="center_vertical" />
+
+            <Button
+                android:id="@+id/timeID"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_below="@id/themeID"
+                android:background="#FFFFFF"
+                android:gravity="center_vertical"
+                android:paddingLeft="18dp"
+                android:text="活动时间"
+                android:textSize="13dp" />
+
+            <TextView
+                android:id="@+id/tx6ID"
+                android:layout_width="270dp"
+                android:layout_height="30dp"
+                android:layout_alignBottom="@id/timeID"
+                android:layout_toRightOf="@id/timeID"
+                android:gravity="right" />
+
+            <Button
+                android:id="@+id/right5ID"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_below="@id/themeID"
+                android:layout_marginTop="10dp"
+                android:layout_toRightOf="@id/tx6ID"
+                android:background="@drawable/right"
+                android:gravity="center_vertical" />
+
+            <Button
+                android:id="@+id/placeID"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_below="@id/timeID"
+                android:background="#FFFFFF"
+                android:gravity="center_vertical"
+                android:paddingLeft="18dp"
+                android:text="活动场地"
+                android:textSize="13dp" />
+
+            <TextView
+                android:id="@+id/tx5ID"
+                android:layout_width="270dp"
+                android:layout_height="30dp"
+                android:layout_alignBottom="@id/placeID"
+                android:layout_toRightOf="@id/placeID"
+                android:gravity="right" />
+
+            <Button
+                android:id="@+id/right4ID"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_below="@id/timeID"
+                android:layout_marginTop="10dp"
+                android:layout_toRightOf="@id/tx5ID"
+                android:background="@drawable/right"
+                android:gravity="center_vertical" />
+
+            <View
+                android:id="@+id/interval9"
+                android:layout_width="fill_parent"
+                android:layout_height="8dp"
+                android:layout_below="@+id/placeID"
+                android:background="#698B69" />
+
+            <Button
+                android:id="@+id/introduceID"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_below="@id/interval9"
+                android:background="#FFFFFF"
+                android:gravity="center_vertical"
+                android:paddingLeft="18dp"
+                android:text="活动介绍"
+                android:textSize="13dp" />
+
+            <TextView
+                android:id="@+id/tx3ID"
+                android:layout_width="270dp"
+                android:layout_height="30dp"
+                android:layout_alignBottom="@id/introduceID"
+                android:layout_toRightOf="@id/introduceID"
+                android:gravity="right" />
+
+            <Button
+                android:id="@+id/right2ID"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_below="@id/interval9"
+                android:layout_marginTop="10dp"
+                android:layout_toRightOf="@id/tx3ID"
+                android:background="@drawable/right"
+                android:gravity="center_vertical" />
+
+            <TextView
+                android:id="@+id/pointID"
+                android:layout_width="fill_parent"
+                android:layout_height="35dp"
+                android:layout_below="@+id/introduceID"
+                android:background="#698B69"
+                android:paddingLeft="18dp"
+                android:paddingTop="18dp"
+                android:text="以下可选，完善详细信息可加速审核"
+                android:textColor="#FFFFFF"
+                android:textSize="8dp" />
+
+            <Button
+                android:id="@+id/priceID"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_below="@id/pointID"
+                android:background="#FFFFFF"
+                android:gravity="center_vertical"
+                android:paddingLeft="18dp"
+                android:text="活动票价"
+                android:textSize="13dp" />
+
+            <TextView
+                android:id="@+id/tx7ID"
+                android:layout_width="270dp"
+                android:layout_height="30dp"
+                android:layout_alignBottom="@id/priceID"
+                android:layout_toRightOf="@id/priceID"
+                android:gravity="right" />
+
+            <Button
+                android:id="@+id/right6ID"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_below="@id/pointID"
+                android:layout_marginTop="10dp"
+                android:layout_toRightOf="@id/tx7ID"
+                android:background="@drawable/right"
+                android:gravity="center_vertical" />
+
+            <Button
+                android:id="@+id/telephoneID"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_below="@id/priceID"
+                android:background="#FFFFFF"
+                android:gravity="center_vertical"
+                android:paddingLeft="18dp"
+                android:text="咨询电话"
+                android:textSize="13dp" />
+
+            <TextView
+                android:id="@+id/tx2ID"
+                android:layout_width="270dp"
+                android:layout_height="30dp"
+                android:layout_alignBottom="@id/telephoneID"
+                android:layout_toRightOf="@id/telephoneID"
+                android:gravity="right" />
+
+            <Button
+                android:id="@+id/right1ID"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_below="@id/priceID"
+                android:layout_marginTop="10dp"
+                android:layout_toRightOf="@id/tx2ID"
+                android:background="@drawable/right"
+                android:gravity="center_vertical" />
+
+            <Button
+                android:id="@+id/officialID"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_below="@id/telephoneID"
+                android:background="#FFFFFF"
+                android:gravity="center_vertical"
+                android:paddingLeft="18dp"
+                android:text="活动官网"
+                android:textSize="13dp" />
+
+            <TextView
+                android:id="@+id/tx1ID"
+                android:layout_width="270dp"
+                android:layout_height="30dp"
+                android:layout_alignBottom="@id/officialID"
+                android:layout_toRightOf="@id/officialID"
+                android:gravity="right" />
+
+            <Button
+                android:id="@+id/rightID"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_below="@id/telephoneID"
+                android:layout_marginTop="10dp"
+                android:layout_toRightOf="@id/tx1ID"
+                android:background="@drawable/right"
+                android:gravity="center_vertical" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/ac1ID"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/ac3ID"
+            android:background="#698B69" >
+
+            <Button
+                android:id="@+id/addactivityID"
+                android:layout_width="170dp"
+                android:layout_height="30dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                android:background="#838B8B"
+                android:gravity="center"
+                android:text="提交活动"
+                android:textColor="#FFFFFF"
+                android:textSize="13dp" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+</ScrollView>

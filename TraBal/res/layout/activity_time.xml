@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <RelativeLayout
+        android:id="@+id/agID"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="#FFFFFF" >
+
+        <ImageButton
+            android:id="@+id/leftarrow6ID"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/d001" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/leftarrow6ID"
+            android:layout_marginLeft="7dp"
+            android:layout_toRightOf="@id/leftarrow6ID"
+            android:text="活动时间"
+            android:textColor="#000000"
+            android:textSize="16dp" />
+
+        <TextView
+            android:id="@+id/sure5ID"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/leftarrow6ID"
+            android:layout_marginLeft="280dp"
+            android:layout_toRightOf="@id/leftarrow6ID"
+            android:text="确定"
+            android:textColor="#698B69"
+            android:textSize="16dp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/ag1ID"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/agID"
+        android:background="#698B69" >
+
+        <EditText
+            android:id="@+id/ed9ID"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="15dp"
+            android:background="#FFFFFF"
+            android:gravity="center_vertical"
+            android:hint="12月23日-12月25日  19:00-21:00"
+            android:paddingLeft="10dp"
+            android:textSize="12dp" />
+    </RelativeLayout>
+
+</RelativeLayout>

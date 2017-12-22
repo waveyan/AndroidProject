@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF" >
+
+    <RelativeLayout
+        android:id="@+id/adID"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="#EBEBEB" >
+
+        <ImageButton
+            android:id="@+id/leftarrow3ID"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/d001" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/leftarrow3ID"
+            android:layout_centerHorizontal="true"
+            android:text="推荐好去处"
+            android:textColor="#000000"
+            android:textSize="17dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/leftarrow3ID"
+            android:layout_marginLeft="280dp"
+            android:layout_toRightOf="@id/leftarrow3ID"
+            android:text="发送"
+            android:textColor="#AAAAAA"
+            android:textSize="16dp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/ad1ID"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/adID"
+        android:background="#FFFFFF" >
+
+        <EditText
+            android:id="@+id/ed3ID"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginLeft="10dp"
+            android:background="#FFFFFF"
+            android:gravity="center_vertical"
+            android:hint="地点名称"
+            android:textSize="13dp" />
+
+        <Button
+            android:id="@+id/choseID"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@id/ed3ID"
+            android:background="#FFFFFF"
+            android:drawableRight="@drawable/right"
+            android:gravity="center_vertical"
+            android:paddingLeft="10dp"
+            android:text="选择品类"
+            android:textColor="#757575"
+            android:textSize="13dp" />
+    </RelativeLayout>
+
+</RelativeLayout>

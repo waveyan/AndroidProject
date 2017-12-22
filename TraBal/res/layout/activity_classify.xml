@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scrollView1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scrollbars="none" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#698B69" >
+
+        <RelativeLayout
+            android:id="@+id/aeID"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="#FFFFFF" >
+
+            <ImageButton
+                android:id="@+id/leftarrow4ID"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/d001" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/leftarrow4ID"
+                android:layout_marginLeft="7dp"
+                android:layout_toRightOf="@id/leftarrow4ID"
+                android:text="活动分类"
+                android:textColor="#000000"
+                android:textSize="16dp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/ae1ID"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/aeID"
+            android:background="#698B69" >
+
+            <Button
+                android:id="@+id/a001"
+                android:layout_width="match_parent"
+                android:layout_height="42dp"
+                android:layout_below="@id/interval8"
+                android:background="#698B69"
+                android:gravity="center_vertical"
+                android:paddingLeft="18dp"
+                android:text="圣诞季"
+                android:textColor="#FFFFFF"
+                android:textSize="15dp" />
+
+            <View
+                android:id="@+id/interval10"
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/a001"
+                android:layout_marginLeft="16dp"
+                android:background="#C1CDCD" />
+
+            <Button
+                android:id="@+id/a002"
+                android:layout_width="match_parent"
+                android:layout_height="42dp"
+                android:layout_below="@id/interval10"
+                android:background="#698B69"
+                android:gravity="center_vertical"
+                android:paddingLeft="18dp"
+                android:text="主题展览"
+                android:textColor="#FFFFFF"
+                android:textSize="15dp" />
+
+            <View
+                android:id="@+id/interval11"
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/a002"
+                android:layout_marginLeft="16dp"
+                android:background="#C1CDCD" />
+
+            <Button
+                android:id="@+id/a003"
+                android:layout_width="match_parent"
+                android:layout_height="42dp"
+                android:layout_below="@id/interval11"
+                android:background="#698B69"
+                android:gravity="center_vertical"
+                android:paddingLeft="18dp"
+                android:text="城中必关注"
+                android:textColor="#FFFFFF"
+                android:textSize="15dp" />
+
+            <View
+                android:id="@+id/interval12"
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/a003"
+                android:layout_marginLeft="16dp"
+                android:background="#C1CDCD" />
+
+            <Button
+                android:id="@+id/a004"
+                android:layout_width="match_parent"
+                android:layout_height="42dp"
+                android:layout_below="@id/interval12"
+                android:background="#698B69"
+                android:gravity="center_vertical"
+                android:paddingLeft="18dp"
+                android:text="音乐演出"
+                android:textColor="#FFFFFF"
+                android:textSize="15dp" />
+
+            <View
+                android:id="@+id/interval13"
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/a004"
+                android:layout_marginLeft="16dp"
+                android:background="#C1CDCD" />
+
+            <Button
+                android:id="@+id/a005"
+                android:layout_width="match_parent"
+                android:layout_height="42dp"
+                android:layout_below="@id/interval13"
+                android:background="#698B69"
+                android:gravity="center_vertical"
+                android:paddingLeft="18dp"
+                android:text="歌剧话剧"
+                android:textColor="#FFFFFF"
+                android:textSize="15dp" />
+
+            <View
+                android:id="@+id/interval14"
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/a005"
+                android:layout_marginLeft="16dp"
+                android:background="#C1CDCD" />
+
+            <Button
+                android:id="@+id/a006"
+                android:layout_width="match_parent"
+                android:layout_height="42dp"
+                android:layout_below="@id/interval14"
+                android:background="#698B69"
+                android:gravity="center_vertical"
+                android:paddingLeft="18dp"
+                android:text="周边买买"
+                android:textColor="#FFFFFF"
+                android:textSize="15dp" />
+
+            <View
+                android:id="@+id/interval15"
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/a006"
+                android:layout_marginLeft="16dp"
+                android:background="#C1CDCD" />
+
+            <Button
+                android:id="@+id/a007"
+                android:layout_width="match_parent"
+                android:layout_height="42dp"
+                android:layout_below="@id/interval15"
+                android:background="#698B69"
+                android:gravity="center_vertical"
+                android:paddingLeft="18dp"
+                android:text="休闲沙龙"
+                android:textColor="#FFFFFF"
+                android:textSize="15dp" />
+
+            <View
+                android:id="@+id/interval16"
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/a007"
+                android:layout_marginLeft="16dp"
+                android:background="#C1CDCD" />
+
+            <Button
+                android:id="@+id/a008"
+                android:layout_width="match_parent"
+                android:layout_height="42dp"
+                android:layout_below="@id/interval16"
+                android:background="#698B69"
+                android:gravity="center_vertical"
+                android:paddingLeft="18dp"
+                android:text="好康折扣"
+                android:textColor="#FFFFFF"
+                android:textSize="15dp" />
+
+            <View
+                android:id="@+id/interval17"
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/a008"
+                android:layout_marginLeft="16dp"
+                android:background="#C1CDCD" />
+
+            <Button
+                android:id="@+id/a009"
+                android:layout_width="match_parent"
+                android:layout_height="42dp"
+                android:layout_below="@id/interval17"
+                android:background="#698B69"
+                android:gravity="center_vertical"
+                android:paddingLeft="18dp"
+                android:text="动漫卡通"
+                android:textColor="#FFFFFF"
+                android:textSize="15dp" />
+
+            <View
+                android:id="@+id/interval18"
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/a009"
+                android:layout_marginLeft="16dp"
+                android:background="#C1CDCD" />
+
+            <Button
+                android:id="@+id/a010"
+                android:layout_width="match_parent"
+                android:layout_height="42dp"
+                android:layout_below="@id/interval18"
+                android:background="#698B69"
+                android:gravity="center_vertical"
+                android:paddingLeft="18dp"
+                android:text="体育现场"
+                android:textColor="#FFFFFF"
+                android:textSize="15dp" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+</ScrollView>

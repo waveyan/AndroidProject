@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <RelativeLayout
+        android:id="@+id/aiID"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="#EBEBEB" >
+
+        <ImageButton
+            android:id="@+id/leftarrow10ID"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/d001" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/leftarrow10ID"
+            android:layout_marginLeft="7dp"
+            android:layout_toRightOf="@id/leftarrow10ID"
+            android:text="活动票价"
+            android:textColor="#000000"
+            android:textSize="16dp" />
+
+        <TextView
+            android:id="@+id/sure7ID"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/leftarrow10ID"
+            android:layout_marginLeft="280dp"
+            android:layout_toRightOf="@id/leftarrow10ID"
+            android:text="确定"
+            android:textColor="#698B69"
+            android:textSize="16dp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/ai1ID"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/aiID"
+        android:background="#698B69" >
+
+        <Button
+            android:id="@+id/c001"
+            android:layout_width="match_parent"
+            android:layout_height="42dp"
+            android:background="#698B69"
+            android:gravity="center_vertical"
+            android:paddingLeft="18dp"
+            android:text="免费活动"
+            android:textColor="#FFFFFF"
+            android:textSize="15dp" />
+
+        <View
+            android:id="@+id/interval22"
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/c001"
+            android:background="#C1CDCD" />
+
+        <Button
+            android:id="@+id/c002"
+            android:layout_width="match_parent"
+            android:layout_height="42dp"
+            android:layout_below="@id/interval22"
+            android:background="#698B69"
+            android:gravity="center_vertical"
+            android:paddingLeft="18dp"
+            android:text="付费活动"
+            android:textColor="#FFFFFF"
+            android:textSize="15dp" />
+
+        <EditText
+            android:id="@+id/ed11ID"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@id/c002"
+            android:background="#FFFFFF"
+            android:gravity="center_vertical"
+            android:hint="请输入票价(CYN 125)"
+            android:paddingLeft="18dp"
+            android:textSize="12dp" />
+    </RelativeLayout>
+
+</RelativeLayout>

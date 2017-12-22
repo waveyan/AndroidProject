@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#698B69" >
+
+    <RelativeLayout
+        android:id="@+id/akID"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="#FFFFFF" >
+
+        <ImageButton
+            android:id="@+id/leftarrow11ID"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/d001" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/leftarrow11ID"
+            android:layout_marginLeft="7dp"
+            android:layout_toRightOf="@id/leftarrow11ID"
+            android:text="活动官网"
+            android:textColor="#000000"
+            android:textSize="16dp" />
+
+        <TextView
+            android:id="@+id/sureID"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/leftarrow11ID"
+            android:layout_marginLeft="280dp"
+            android:layout_toRightOf="@id/leftarrow11ID"
+            android:text="确定"
+            android:textColor="#698B69"
+            android:textSize="16dp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/ak1ID"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/akID" >
+
+        <EditText
+            android:id="@+id/ed8ID"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginTop="10dp"
+            android:background="#FFFFFF"
+            android:gravity="top|left" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/ed8ID"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="8dp"
+            android:text="请填写活动官方网站，禁止提交其他第三方平台网站链接"
+            android:textColor="#FFFFFF"
+            android:textSize="10dp" />
+    </RelativeLayout>
+
+</RelativeLayout>
