@@ -22,7 +22,6 @@ import android.os.Bundle;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.support.v4.widget.DrawerLayout;
@@ -35,23 +34,9 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import java.util.TimerTask;
-
-import com.trabal.linear.DynamicLinearLayout;
-import com.trabal.linear.IndexLinearLayout;
-import com.trabal.linear.MoreLinearLayout;
 import com.trabal.linear.assessactivity;
 
-import android.app.Activity;
-import android.content.Intent;
-import android.os.Bundle;
-import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager.OnPageChangeListener;
-import android.util.Log;
 import android.util.TypedValue;
-import android.view.View;
-import android.view.ViewGroup;
-
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;

@@ -94,21 +94,13 @@
             android:layout_below="@+id/edID"
             android:background="#C1CDCD" />
 
-        <ImageButton
-            android:id="@+id/addID"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_below="@id/interval3"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/add"
-            android:tint="#A3A3A3" />
+
 
         <View
             android:id="@+id/interval4"
             android:layout_width="fill_parent"
             android:layout_height="1dp"
-            android:layout_below="@+id/addID"
+            android:layout_below="@+id/interval3"
             android:layout_marginTop="10dp"
             android:background="#C1CDCD" />
 
@@ -169,6 +161,19 @@
             android:layout_height="1dp"
             android:layout_below="@+id/ed1ID"
             android:background="#C1CDCD" />
+   <com.trabal.MyGridView
+            android:id="@+id/gridView"
+            android:layout_below="@+id/interval6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_weight="111"
+            android:columnWidth="90dp"
+            android:gravity="center"
+            android:horizontalSpacing="5dp"
+            android:numColumns="4"
+            android:stretchMode="columnWidth"
+            android:verticalSpacing="5dp" />
     </RelativeLayout>
 
 </RelativeLayout>
