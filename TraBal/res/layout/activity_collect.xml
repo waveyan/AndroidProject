@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <ImageButton
+        android:id="@+id/backButton"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/back" />
+
+    <TextView
+        android:id="@+id/collectID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/backButton"
+        android:layout_marginLeft="7dp"
+        android:layout_toRightOf="@id/backButton"
+        android:text="我的收藏"
+        android:textColor="#000000"
+        android:textSize="16dp" />
+
+   
+     <Spinner  
+        android:id="@+id/spDwon"  
+        android:layout_width="220dp"  
+        android:layout_height="wrap_content"     
+        android:layout_marginLeft="255dp" 
+        android:layout_marginTop="1dp"/>  
+
+     
+    <LinearLayout
+        android:id="@+id/collecttitle"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/collectID"
+        android:layout_marginTop="15dp"
+        android:background="#FCFCFC"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/siteID"
+            android:layout_width="fill_parent"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="地点"
+            android:textColor="#000000" />
+
+        <TextView
+            android:id="@+id/exerciseID"
+            android:layout_width="fill_parent"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="活动"
+            android:textColor="#000000" />
+
+        <TextView
+            android:id="@+id/lineID"
+            android:layout_width="fill_parent"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="线路"
+            android:textColor="#000000" />
+    </LinearLayout>
+
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/content1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/collecttitle" />
+
+</RelativeLayout>
