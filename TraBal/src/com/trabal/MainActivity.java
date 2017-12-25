@@ -3,6 +3,8 @@ package com.trabal;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.squareup.picasso.Picasso;
 import com.trabal.ContentAdapter;
 import com.trabal.ContentModel;
 import com.trabal.linear.DynamicLinearLayout;
@@ -14,7 +16,6 @@ import com.trabal.linear.luxianActivity;
 import com.trabal.linear.pingjiaActivity;
 import com.trabal.linear.shoucangActivity;
 import com.trabal.user.Bean.UserBean;
-import com.trabal.util.net.ImageDownloadTask;
 import com.trabal.util.net.NetTransfer;
 import com.trabal.R;
 
@@ -57,7 +58,7 @@ public class MainActivity extends Activity {
 	private ImageButton imageButton;
 	private ListView listView;
 	private ImageView p_pic;
-	private UserBean user;
+	UserBean user;
 
 	@SuppressLint("NewApi")
 	@Override
@@ -97,7 +98,7 @@ public class MainActivity extends Activity {
 		menu.setCloseItemsOnClick(true);
 		menu.setTotalSpacingDegree(90);
 		menu.setMainImage(R.drawable.a018);
-
+		
 		List<SatelliteMenuItem> items = new ArrayList<SatelliteMenuItem>();
 		items.add(new SatelliteMenuItem(1, R.drawable.a014));
 		items.add(new SatelliteMenuItem(2, R.drawable.a015));
@@ -154,7 +155,7 @@ public class MainActivity extends Activity {
 					// …Ë÷√‘∂≥ÃÕ∑œÒ
 					p_pic = (ImageView) MainActivity.this
 							.findViewById(R.id.p_pic);
-					new ImageDownloadTask(p_pic).execute(user.getPic());
+					Picasso.with(MainActivity.this).load(user.getPic()).into(p_pic);
 					// …Ë÷√Í«≥∆
 					rightname = (TextView) MainActivity.this
 							.findViewById(R.id.right_name);
@@ -338,8 +339,11 @@ public class MainActivity extends Activity {
 			} catch (Exception ex) {
 				ex.printStackTrace();
 			}
+			
 
 			Intent intent = new Intent(MainActivity.this, assessactivity.class);
+			//Œ¨≥÷µ«¬º◊¥Ã¨
+			intent.putExtra("user",MainActivity.this.user );
 			MainActivity.this.startActivity(intent);
 
 		}

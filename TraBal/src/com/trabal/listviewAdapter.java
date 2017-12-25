@@ -2,12 +2,10 @@ package com.trabal;
 
 import java.util.List;
 
-import com.trabal.linear.ExhibitionActivity;
+import com.squareup.picasso.Picasso;
 import com.trabal.linear.RestaurantActivity;
 import com.trabal.linear.TakeMeToYourHome;
-import com.trabal.linear.Timesmuseum;
 import com.trabal.user.Bean.UserBean;
-import com.trabal.util.net.ImageDownloadTask;
 
 import android.app.Activity;
 import android.content.Context;
@@ -58,10 +56,10 @@ public class listviewAdapter extends BaseAdapter {
 				context.startActivity(intent);
 			}
 		});
-		new ImageDownloadTask(itemImage1).execute(objects.get(position).getImageId1());
-		new ImageDownloadTask(itemImage2).execute(objects.get(position).getImageId2());
-		new ImageDownloadTask(itemImage3).execute(objects.get(position).getImageId3());
-		new ImageDownloadTask(itemImage4).execute(objects.get(position).getImageId4());
+		Picasso.with(context).load(objects.get(position).getImageId1()).into(itemImage1);
+		Picasso.with(context).load(objects.get(position).getImageId2()).into(itemImage2);
+		Picasso.with(context).load(objects.get(position).getImageId3()).into(itemImage3);
+		Picasso.with(context).load(objects.get(position).getImageId4()).into(itemImage4);
 		item_textview1.setText(objects.get(position).getName());
 		return view;
 

@@ -6,12 +6,12 @@ import java.util.Map;
 
 import org.apache.http.message.BasicNameValuePair;
 
+import com.squareup.picasso.Picasso;
 import com.trabal.LoginActivity;
 import com.trabal.R;
 import com.trabal.hotspot.Bean.HotSpotBean;
 import com.trabal.user.Bean.UserBean;
 import com.trabal.util.net.NetTransfer;
-import com.trabal.util.net.ImageDownloadTask;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -77,10 +77,10 @@ public class TakeMeToYourHome extends Activity {
 		pic1_text=(TextView)this.findViewById(R.id.pic1_text);
 		pic2_text=(TextView)this.findViewById(R.id.pic2_text);
 		pic3_text=(TextView)this.findViewById(R.id.pic3_text);
-		new ImageDownloadTask(pic1).execute(hsb.getPic1());
-		new ImageDownloadTask(pic2).execute(hsb.getPic2());
-		new ImageDownloadTask(pic3).execute(hsb.getPic3());
-		new ImageDownloadTask(pic4).execute(hsb.getPic2());
+		Picasso.with(TakeMeToYourHome.this).load(hsb.getPic1()).into(pic1);
+		Picasso.with(TakeMeToYourHome.this).load(hsb.getPic2()).into(pic2);
+		Picasso.with(TakeMeToYourHome.this).load(hsb.getPic3()).into(pic3);
+		Picasso.with(TakeMeToYourHome.this).load(hsb.getPic2()).into(pic4);
 		englishname.setText(hsb.getEnglishName());
 		chinaname.setText(hsb.getName());
 		introduction.setText(hsb.getWord());

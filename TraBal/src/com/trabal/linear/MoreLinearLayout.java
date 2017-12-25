@@ -5,13 +5,13 @@ import java.util.ArrayList;
 
 import org.apache.http.message.BasicNameValuePair;
 
+import com.squareup.picasso.Picasso;
 import com.trabal.MainActivity;
 import com.trabal.R;
 import com.trabal.listview1;
 import com.trabal.activity.Bean.ActivityBean;
 import com.trabal.hotspot.Bean.HotSpotBean;
 import com.trabal.user.Bean.UserBean;
-import com.trabal.util.net.ImageDownloadTask;
 import com.trabal.util.net.NetTransfer;
 
 import android.app.Activity;
@@ -134,10 +134,10 @@ public class MoreLinearLayout extends LinearLayout {
 			String data = NetTransfer.transfer(url, "get", params, true,
 					user.getAccess_token(),null);
 			ArrayList<ActivityBean> ac_list = nt.handle_ac_list(data);
-			new ImageDownloadTask(act_image1).execute(ac_list.get(0).getPic1());
-			new ImageDownloadTask(act_image2).execute(ac_list.get(1).getPic1());
-			new ImageDownloadTask(act_image3).execute(ac_list.get(2).getPic1());
-			new ImageDownloadTask(act_image4).execute(ac_list.get(3).getPic1());
+			Picasso.with(context).load(ac_list.get(0).getPic1()).into(act_image1);
+			Picasso.with(context).load(ac_list.get(1).getPic1()).into(act_image2);
+			Picasso.with(context).load(ac_list.get(2).getPic1()).into(act_image3);
+			Picasso.with(context).load(ac_list.get(3).getPic1()).into(act_image4);
 			tv1.setText(ac_list.get(0).getIntroduction().substring(0, 20)+"...");
 			tv2.setText(ac_list.get(1).getIntroduction().substring(0, 20)+"...");
 			tv3.setText(ac_list.get(2).getIntroduction().substring(0, 20)+"...");

@@ -30,6 +30,7 @@
             android:textSize="16dp" />
 
         <TextView
+            android:id="@+id/post"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@id/leftarrow1ID"
@@ -66,7 +67,6 @@
           android:layout_centerHorizontal="true"
           android:layout_marginTop="20dp"
           android:layout_below="@+id/fashoinID"
-          
           />
         
         <View

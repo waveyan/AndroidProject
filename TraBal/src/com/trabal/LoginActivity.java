@@ -39,27 +39,6 @@ public class LoginActivity extends Activity {
 		this.setContentView(R.layout.activity_login);
 		initView(this.getIntent());
 
-		// test upload file
-		// String url="activity/base";
-		// ArrayList params = new ArrayList();
-		// params.add(new BasicNameValuePair("title", "123"));
-		// params.add(new BasicNameValuePair("subject", "123"));
-		// params.add(new BasicNameValuePair("time", "2017-10-10 19:30:30"));
-		// params.add(new BasicNameValuePair("person", "1"));
-		// params.add(new BasicNameValuePair("price", "30"));
-		// ArrayList<HashMap<String,String>> files=new
-		// ArrayList<HashMap<String,String>>();
-		// HashMap<String,String> file=new HashMap<String, String>();
-		// file.put("pic1","1.jpeg");
-		// files.add(file);
-		// try {
-		// String msg=NetTransfer.transfer(url, "post", params, true,
-		// "8e7c2373b74341b399da25c537bc8513", files);
-		// } catch (IOException e) {
-		// Log.e("ssssssssss",e.getMessage());
-		// e.printStackTrace();
-		// }
-
 		imageView = (ImageView) this.findViewById(R.id.back1ID);
 		imageView.setOnTouchListener(new OnTouchListener() {
 			@Override

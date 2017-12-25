@@ -9,14 +9,23 @@ import android.widget.RatingBar;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
+
+import org.apache.http.message.BasicNameValuePair;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -24,6 +33,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
@@ -34,11 +44,14 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.SimpleAdapter;
 import android.widget.SimpleAdapter.ViewBinder;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.trabal.MyDialog;
 import com.trabal.MyDialog.OnButtonClickListener;
 import com.trabal.R;
+import com.trabal.util.net.FileUpload;
+import com.trabal.util.net.NetTransfer;
 
 
 public class assessactivity extends Activity implements
@@ -58,23 +71,14 @@ OnButtonClickListener, OnItemClickListener{
     private Bitmap bmp; // 导入临时图片
     private ArrayList<HashMap<String, Object>> imageItem;
     private SimpleAdapter simpleAdapter; // 适配器
+    private TextView post;
+    private RatingBar rate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
     	
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-//		super.onCreate(savedInstanceState);
-//	    setContentView(R.layout.activity_assess);
-//	    ratingbar = (RatingBar)findViewById(R.id.ratingbar);
-//	    ratingbar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
-//			
-//			@Override
-//			public void onRatingChanged(RatingBar arg0, float arg1, boolean arg2) {
-//				// TODO Auto-generated method stub
-//				
-//			}
-//		});
     	
         /*
          * 防止键盘挡住输入框 不希望遮挡设置activity属性 android:windowSoftInputMode="adjustPan"
@@ -90,6 +94,8 @@ OnButtonClickListener, OnItemClickListener{
     }
 
     private void init() {
+    	post=(TextView)this.findViewById(R.id.post);
+    	post.setOnClickListener(new PostOnclick());
         gridView = (GridView) findViewById(R.id.gridView);
         gridView.setOnItemClickListener(this);
         dialog = new MyDialog(this);
@@ -117,7 +123,6 @@ OnButtonClickListener, OnItemClickListener{
             @Override
             public boolean setViewValue(View view, Object data,
                     String textRepresentation) {
-                // TODO Auto-generated method stub
                 if (view instanceof ImageView && data instanceof Bitmap) {
                     ImageView i = (ImageView) view;
                     i.setImageBitmap((Bitmap) data);
@@ -132,7 +137,6 @@ OnButtonClickListener, OnItemClickListener{
 //点击dialog跳转
     @Override
     public void camera() {
-        // TODO Auto-generated method stub
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(new File(
                 Environment.getExternalStorageDirectory(), "temp.jpg")));
@@ -141,7 +145,6 @@ OnButtonClickListener, OnItemClickListener{
 
     @Override
     public void gallery() {
-        // TODO Auto-generated method stub
         Intent intent = new Intent(Intent.ACTION_PICK,
                 android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         startActivityForResult(intent, IMAGE_OPEN);
@@ -150,13 +153,11 @@ OnButtonClickListener, OnItemClickListener{
 
     @Override
     public void cancel() {
-        // TODO Auto-generated method stub
         dialog.cancel();
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        // TODO Auto-generated method stub
         super.onActivityResult(requestCode, resultCode, data);
 
         if (resultCode == NONE)
@@ -193,7 +194,10 @@ OnButtonClickListener, OnItemClickListener{
                         // TODO Auto-generated method stub
                         if (view instanceof ImageView && data instanceof Bitmap) {
                             ImageView i = (ImageView) view;
-                            i.setImageBitmap((Bitmap) data);
+                            Bitmap bm_data=(Bitmap) data;
+                            HashMap<String,Object> hm=new HashMap<String, Object>();
+//                            hm.put("pic", value)
+                            i.setImageBitmap(bm_data);
                             return true;
                         }
                         return false;
@@ -215,9 +219,10 @@ OnButtonClickListener, OnItemClickListener{
 
     @Override
     protected void onResume() {
-        // TODO Auto-generated method stub
         super.onResume();
         if (!TextUtils.isEmpty(pathImage)) {
+        	//
+        	Log.e("pathImage",pathImage);
             Bitmap addbmp = BitmapFactory.decodeFile(pathImage);
             HashMap<String, Object> map = new HashMap<String, Object>();
             map.put("itemImage", addbmp);
@@ -229,7 +234,6 @@ OnButtonClickListener, OnItemClickListener{
                 @Override
                 public boolean setViewValue(View view, Object data,
                         String textRepresentation) {
-                    // TODO Auto-generated method stub
                     if (view instanceof ImageView && data instanceof Bitmap) {
                         ImageView i = (ImageView) view;
                         i.setImageBitmap((Bitmap) data);
@@ -249,9 +253,8 @@ OnButtonClickListener, OnItemClickListener{
 
     @Override
     public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-        // TODO Auto-generated method stub
-        if (imageItem.size() == 10) { // 第一张为默认图片
-            Toast.makeText(assessactivity.this, "图片数9张已满",
+        if (imageItem.size() == 4) { // 第一张为默认图片
+            Toast.makeText(assessactivity.this, "图片数3张已满",
                     Toast.LENGTH_SHORT).show();
         } else if (position == 0) { // 点击图片位置为+ 0对应0张图片
             // 选择图片
@@ -291,6 +294,8 @@ OnButtonClickListener, OnItemClickListener{
     public void startPhotoZoom(Uri uri) {
         Intent intent = new Intent("com.android.camera.action.CROP");
         intent.setDataAndType(uri, IMAGE_UNSPECIFIED);
+        Log.e("uri",uri.getPath());
+        
         intent.putExtra("crop", "true");
         // aspectX aspectY 是宽高的比例
         intent.putExtra("aspectX", 1);
@@ -299,8 +304,83 @@ OnButtonClickListener, OnItemClickListener{
         intent.putExtra("outputX", 64);
         intent.putExtra("outputY", 64);
         intent.putExtra("return-data", true);
+        
         startActivityForResult(intent, PHOTORESOULT);
     }
+    
+    /**
+     * 压缩图片（质量压缩）
+     * @param bitmap
+     */
+    public static File compressImage(Bitmap bitmap,String filename) {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);//质量压缩方法，这里100表示不压缩，把压缩后的数据存放到baos中
+        int options = 100;
+        while (baos.toByteArray().length / 1024 > 500) {  //循环判断如果压缩后图片是否大于500kb,大于继续压缩
+            baos.reset();//重置baos即清空baos
+            options -= 10;//每次都减少10
+            bitmap.compress(Bitmap.CompressFormat.JPEG, options, baos);//这里压缩options%，把压缩后的数据存放到baos中
+            long length = baos.toByteArray().length;
+        }
+//        SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHHmmss");
+//        Date date = new Date(System.currentTimeMillis());
+//        String filename = format.format(date);
+        File file = new File(Environment.getExternalStorageDirectory(),filename+".png");
+        try {
+            FileOutputStream fos = new FileOutputStream(file);
+            try {
+                fos.write(baos.toByteArray());
+                fos.flush();
+                fos.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        return file;
+    }
+    
+    class PostOnclick implements View.OnClickListener{
+
+		@Override
+		public void onClick(View arg0) {
+		    ArrayList<HashMap<String, Object>> every_pic=assessactivity.this.imageItem;
+		    int i=0;
+			if(every_pic.size()!=0){
+				HashMap<String,Object> temp=new HashMap<String,Object>();
+				for(HashMap<String,Object> item : every_pic){
+					i++;
+					if(i==1)
+						continue;
+					File f=assessactivity.compressImage((Bitmap)item.get("itemImage"),String.valueOf(i));				
+					temp.put("pic"+String.valueOf(i-1), f);
+				}
+//				// test upload file
+//				 String url="activity/base";
+//				 ArrayList<BasicNameValuePair> nv_list=new ArrayList<BasicNameValuePair>();
+//				 nv_list.add(new BasicNameValuePair("subject","真人CS野战"));
+//				 nv_list.add(new BasicNameValuePair("title","真人CS野战"));
+//				 nv_list.add(new BasicNameValuePair("time","2013-09-05 12:46:57"));
+//				 nv_list.add(new BasicNameValuePair("type","真人CS野战"));
+//				 nv_list.add(new BasicNameValuePair("introduction","真人CS野战"));
+//				 nv_list.add(new BasicNameValuePair("person","1"));
+//				 nv_list.add(new BasicNameValuePair("telephone","真人CS野战"));
+//				 nv_list.add(new BasicNameValuePair("website","真人CS野战"));
+//				 nv_list.add(new BasicNameValuePair("price","11"));
+//				 try {
+//				 NetTransfer.transfer(url, "post", nv_list, true,
+//				 "8e7c2373b74341b399da25c537bc8513", temp);
+//				 } catch (IOException e) {
+//				 Log.e("ssssssssss",e.getMessage());
+//				 e.printStackTrace();
+//				 }
+			}
+			
+		}
+    	
+    }
+    
 
 }
 

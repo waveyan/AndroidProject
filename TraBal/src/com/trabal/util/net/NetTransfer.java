@@ -1,6 +1,7 @@
 package com.trabal.util.net;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URLEncoder;
@@ -8,6 +9,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.http.Header;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -23,6 +25,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
 import com.trabal.activity.Bean.ActivityBean;
 import com.trabal.hotspot.Bean.HotSpotBean;
 import com.trabal.user.Bean.UserBean;
@@ -38,11 +43,13 @@ public class NetTransfer {
 	private String status;
 	private String msg;
 	private String access_token;
+	private String id;
 
 	@SuppressLint("NewApi")
 	public static String transfer(String url, String method,
-			ArrayList<BasicNameValuePair> parameters,
-			Boolean is_verify,String access_token,ArrayList<HashMap<String,String>>files) throws IOException {
+			ArrayList<BasicNameValuePair> parameters, Boolean is_verify,
+			String access_token, HashMap<String, Object> files)
+			throws IOException {
 		StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
 				.permitAll().build();
 		StrictMode.setThreadPolicy(policy);
@@ -51,20 +58,7 @@ public class NetTransfer {
 		if ("post".equals(method)) {
 			HttpPost httppost = new HttpPost(url);
 			if (is_verify) {
-				httppost.setHeader("access-token",access_token);
-			}
-			if(files!=null){
-				MultipartEntityBuilder multipartEntityBuilder = MultipartEntityBuilder  
-	                    .create();  
-				for(HashMap<String,String> item : files){
-					for(String key:item.keySet()){
-						String value=item.get(key);
-						 FileBody binFileBody = new FileBody(new File(item.get(key))); 
-						multipartEntityBuilder.addPart(key, binFileBody); 
-					}
-				}
-				HttpEntity reqEntity = multipartEntityBuilder.build();  
-	            httppost.setEntity(reqEntity);  
+				httppost.setHeader("access-token", access_token);
 			}
 			httppost.setEntity(new UrlEncodedFormEntity(parameters, "UTF-8"));
 			HttpResponse response = client.execute(httppost);
@@ -72,13 +66,24 @@ public class NetTransfer {
 			if (code == 200) {
 				InputStream is = response.getEntity().getContent();
 				String text = Tools.readFromStream(is);
+				NetTransfer nt=new NetTransfer();
+				nt.return_data(text);
+				if (files != null && "success".equals(nt.getStatus())) {
+					HashMap<String, String> foolish=new HashMap<String, String>();
+					for (BasicNameValuePair nv : parameters){
+						foolish.put(nv.getName(), nv.getValue());
+					}
+					foolish.put("action", "upload_pic");
+					foolish.put("instance_id", nt.id);
+					NetTransfer.asynctransfer(url, foolish, access_token, files);
+				}
 				return text;
 			} else {
 				return "{'msg':'请求失败','status':'fail'}";
 			}
 		} else if ("get".equals(method)) {
 			url += "?";
-			if(parameters!=null){
+			if (parameters != null) {
 				for (BasicNameValuePair item : parameters) {
 					url += item.getName().toString().trim() + "="
 							+ URLEncoder.encode(item.getValue()) + "&";
@@ -86,7 +91,7 @@ public class NetTransfer {
 			}
 			HttpGet httpget = new HttpGet(url);
 			if (is_verify) {
-				httpget.setHeader("access-token",access_token);
+				httpget.setHeader("access-token", access_token);
 			}
 			HttpResponse response = client.execute(httpget);
 			int code = response.getStatusLine().getStatusCode();
@@ -97,11 +102,10 @@ public class NetTransfer {
 			} else {
 				return "{'msg':'请求失败'}";
 			}
-		}
-		else if("put".equals(method)){
+		} else if ("put".equals(method)) {
 			HttpPut httpput = new HttpPut(url);
 			if (is_verify) {
-				httpput.setHeader("access-token",access_token);
+				httpput.setHeader("access-token", access_token);
 			}
 			httpput.setEntity(new UrlEncodedFormEntity(parameters, "UTF-8"));
 			HttpResponse response = client.execute(httpput);
@@ -118,12 +122,63 @@ public class NetTransfer {
 
 	}
 
+	/**
+	 * 上传文件专用
+	 * @throws FileNotFoundException 
+	 */
+	@SuppressLint("NewApi") 
+	public static void asynctransfer(String url,
+			HashMap<String, String> data, String access_token,
+			HashMap<String, Object> files) throws FileNotFoundException {
+
+		StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
+				.permitAll().build();
+		StrictMode.setThreadPolicy(policy);
+
+//		url = perfix + url + "/";
+
+		AsyncHttpClient client = new AsyncHttpClient();
+		RequestParams p = new RequestParams();
+		client.addHeader("access-token", access_token);
+
+			for (String key : data.keySet()) {
+				p.put(key, data.get(key));
+			}
+
+		if (files != null) {
+				for (String key : files.keySet()) {
+					p.put(key, (File)files.get(key));
+				}
+		}
+
+		client.post(url, p, new AsyncHttpResponseHandler() {
+
+			@Override
+			public void onFailure(int arg0, Header[] arg1, byte[] arg2,
+					Throwable arg3) {
+				String msg = new String(arg2);
+				Log.e("failure", arg3.getMessage());
+
+			}
+
+			@Override
+			public void onSuccess(int arg0, Header[] arg1, byte[] arg2) {
+				String msg = new String(arg2);
+				Log.e("success", msg);
+
+			}
+		});
+		
+
+	}
+
 	public void return_data(String data) {
 		try {
 			JSONObject json = new JSONObject(data);
 			msg = json.getString("msg");
 			status = json.getString("status");
 			access_token = json.getString("access_token");
+			id=json.getString("id");
 
 		} catch (JSONException e) {
 			e.printStackTrace();
