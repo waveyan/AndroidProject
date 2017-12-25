@@ -7,14 +7,17 @@ import com.trabal.activity.Bean.ActivityBean;
 import com.trabal.linear.SiteLinearLayout.MyBaseAdapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.LinearLayout.LayoutParams;
 
 
@@ -24,7 +27,7 @@ public class ExerciseLinearLayout extends LinearLayout {
 	private ListView mlistView;
 	private ArrayList<ActivityBean> ab_list;
 	
-	public ExerciseLinearLayout(Context context) {
+	public ExerciseLinearLayout(final Context context) {
 		super(context);
 		this.context = context;
 
@@ -59,6 +62,17 @@ public class ExerciseLinearLayout extends LinearLayout {
 		
 		// 创建一个Adapter的实例
 		mlistView.setAdapter(new MyBaseAdapter());
+		
+		mlistView.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+					long arg3) {
+				Intent intent=new Intent(context,HdxiangqingActivity.class);
+				context.startActivity(intent);
+			}
+			
+		});
 
 	}
 	
