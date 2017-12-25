@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/background" >
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="140dp"
+        android:layout_marginTop="8dp" >
+
+        <RelativeLayout
+            android:layout_width="320dp"
+            android:layout_height="140dp"
+            android:layout_centerHorizontal="true" >
+
+            <TextView
+                android:layout_width="300dp"
+                android:layout_height="130dp"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="2dp"
+                android:background="#ffffff" />
+
+            <ImageView
+                android:id="@+id/huodong_image"
+                android:layout_width="150dp"
+                android:layout_height="100dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="15dp" />
+
+            <TextView
+                android:id="@+id/huodong_textview1"
+                android:layout_width="70dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="5dp"
+                android:background="#698B69"
+                android:gravity="center"
+                android:textColor="#ffffff"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/huodong_textview2"
+                android:layout_width="150dp"
+                android:layout_height="45dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="15dp"
+                android:layout_toRightOf="@+id/huodong_image"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/huodong_textview3"
+                android:layout_width="150dp"
+                android:layout_height="18dp"
+                android:layout_below="@+id/huodong_textview2"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="10dp"
+                android:layout_toRightOf="@+id/huodong_image"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/huodong_textview4"
+                android:layout_width="150dp"
+                android:layout_height="18dp"
+                android:layout_below="@+id/huodong_textview3"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="13dp"
+                android:layout_toRightOf="@+id/huodong_image"
+                android:textColor="#9E9E9E"
+                android:textSize="12sp" />
+            </RelativeLayout>
+        </RelativeLayout>
+    </RelativeLayout>

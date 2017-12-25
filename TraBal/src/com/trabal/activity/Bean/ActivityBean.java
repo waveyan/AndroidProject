@@ -14,7 +14,29 @@ public class ActivityBean {
 	private String pic1;
 	private String pic2;
 	private String pic3;
+	private String pic4;
+	public String getPic4() {
+		return pic4;
+	}
+	public void setPic4(String pic4) {
+		this.pic4 = pic4;
+	}
 	private String price;
+	private String english;
+	private String time;
+	
+	public String getEnglish() {
+		return english;
+	}
+	public void setEnglish(String english) {
+		this.english = english;
+	}
+	public String getTime() {
+		return time;
+	}
+	public void setTime(String time) {
+		this.time = time;
+	}
 	private HotSpotBean hsb;
 	
 	public String getId() {
@@ -95,7 +117,5 @@ public class ActivityBean {
 	public void setHsb(HotSpotBean hsb) {
 		this.hsb = hsb;
 	}
-	
-	
 
 }

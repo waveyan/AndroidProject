@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.Map;
 
 import org.apache.http.message.BasicNameValuePair;
-
 import com.squareup.picasso.Picasso;
 import com.trabal.LoginActivity;
 import com.trabal.R;
@@ -18,43 +17,64 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class TakeMeToYourHome extends Activity {
-	
-	private ImageView pic1,pic2,pic3,pic4;
-	
-	private ImageButton favourButton;
-	
-	private TextView englishname,chinaname,introduction,openTimes,cost,address,hs_telephone,content,pic1_text,pic2_text,pic3_text;
-	
+
+	private ImageView pic1, pic2, pic3, pic4;
+
+	private ImageButton favourButton, backButton;
+
+	private TextView englishname, chinaname, introduction, openTimes, cost,
+			address, hs_telephone, content, pic1_text, pic2_text, pic3_text;
+
 	private HotSpotBean hsb;
-	
+
 	private UserBean user;
-	
-	private Intent intent;
-	
+
+	private Intent last_intent;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_takemetoyourhome);
-		
+
+		// 获取上一个页面传过来的用户
+		last_intent = TakeMeToYourHome.this.getIntent();
+		user = (UserBean) last_intent.getSerializableExtra("user");
+
+		backButton = (ImageButton) this.findViewById(R.id.backButton);
+
+		backButton.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				Intent intent = new Intent(TakeMeToYourHome.this,
+						RestaurantActivity.class);
+				intent.putExtra("user", user);
+				intent.putExtra("what", last_intent.getStringExtra("what"));
+				TakeMeToYourHome.this.startActivity(intent);
+			}
+		});
+
 		// 网络传输
 		try {
-			
-			intent=TakeMeToYourHome.this.getIntent();
-			user=(UserBean)intent.getSerializableExtra("user");
+
 			ArrayList params = new ArrayList();
-			params.add(new BasicNameValuePair("id", intent.getStringExtra("hotspot_id")));
-			String url="hotspot/base";
-			String data=NetTransfer.transfer(url, "get",params , true,user.getAccess_token(),null);
-			NetTransfer nt=new NetTransfer();
-			hsb=nt.handle_HS_data(data);
+			params.add(new BasicNameValuePair("id", last_intent
+					.getStringExtra("hotspot_id")));
+			String url = "hotspot/base";
+			String data = NetTransfer.transfer(url, "get", params, true,
+					user.getAccess_token(), null);
+			NetTransfer nt = new NetTransfer();
+			hsb = nt.handle_HS_data(data);
 			initView();
-			
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -92,43 +112,45 @@ public class TakeMeToYourHome extends Activity {
 		pic1_text.setText(hsb.getPic1_text());
 		pic2_text.setText(hsb.getPic2_text());
 		pic3_text.setText(hsb.getPic3_text());
-		favourButton=(ImageButton)this.findViewById(R.id.favourButton);
-		if(hsb.getIsfavour()==1){
+		favourButton = (ImageButton) this.findViewById(R.id.favourButton);
+		if (hsb.getIsfavour() == 1) {
 			favourButton.setBackgroundResource(R.drawable.favour_clicked);
 		}
-		//绑定收藏事件
+		// 绑定收藏事件
 		favourButton.setOnClickListener(new FavourClick());
 	}
-	
-	//收藏事件
-	private class FavourClick implements View.OnClickListener{
+
+	// 收藏事件
+	private class FavourClick implements View.OnClickListener {
 
 		@Override
 		public void onClick(View arg0) {
 			// 网络传输
 			ArrayList params = new ArrayList();
-			params.add(new BasicNameValuePair("hotspot_id", TakeMeToYourHome.this.intent.getStringExtra("hotspot_id")));
-			params.add(new BasicNameValuePair("action","favour_hs"));
-			String url="user/base";
+			params.add(new BasicNameValuePair("hotspot_id",
+					TakeMeToYourHome.this.last_intent.getStringExtra("hotspot_id")));
+			params.add(new BasicNameValuePair("action", "favour_hs"));
+			String url = "user/base";
 			try {
-				String data=NetTransfer.transfer(url, "put",params , true,user.getAccess_token(),null);
-				NetTransfer nt=new NetTransfer();
+				String data = NetTransfer.transfer(url, "put", params, true,
+						user.getAccess_token(), null);
+				NetTransfer nt = new NetTransfer();
 				nt.return_data(data);
-				if("success_favour".equals(nt.getStatus())){
-					TakeMeToYourHome.this.favourButton.setBackgroundResource(R.drawable.favour_clicked);
+				if ("success_favour".equals(nt.getStatus())) {
+					TakeMeToYourHome.this.favourButton
+							.setBackgroundResource(R.drawable.favour_clicked);
 
-				}
-				else if("success_unfavour".equals(nt.getStatus())){
-					TakeMeToYourHome.this.favourButton.setBackgroundResource(R.drawable.favour);
+				} else if ("success_unfavour".equals(nt.getStatus())) {
+					TakeMeToYourHome.this.favourButton
+							.setBackgroundResource(R.drawable.favour);
 				}
 				Toast.makeText(TakeMeToYourHome.this, nt.getMsg(),
 						Toast.LENGTH_LONG).show();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			
-			
+
 		}
-		
+
 	}
 }
