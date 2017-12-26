@@ -7,9 +7,12 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.trabal.MainActivity;
 import com.trabal.R;
+import com.trabal.user.Bean.UserBean;
 
 public class addactivity extends Activity {
 	private Button button, button1, button2, button3, button4, button5,
@@ -18,11 +21,14 @@ public class addactivity extends Activity {
 	private TextView TextView_result, TextView_result1, TextView_result2,
 			TextView_result3, TextView_result4, TextView_result5,
 			TextView_result6, TextView_result7;
+	private ImageButton backTv;
+	private UserBean user;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_addactivity);
+		backTv = (ImageButton)findViewById(R.id.leftarrow2ID);
 		button = (Button) findViewById(R.id.classifyID);
 		button1 = (Button) findViewById(R.id.themeID);
 		button2 = (Button) findViewById(R.id.timeID);
@@ -47,13 +53,26 @@ public class addactivity extends Activity {
 		TextView_result5 = (TextView) findViewById(R.id.tx6ID);
 		TextView_result6 = (TextView) findViewById(R.id.tx7ID);
 		TextView_result7 = (TextView) findViewById(R.id.tx8ID);
+        backTv.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				Intent last_intent = addactivity.this.getIntent();
+				user = (UserBean)last_intent.getSerializableExtra("user");
+				Intent intent = new Intent(addactivity.this,MainActivity.class);
+				intent.putExtra("user", user);
+				addactivity.this.startActivity(intent);
+				
+			}
+		});
 		button.setOnClickListener(new View.OnClickListener() {
 
 			@Override
 			public void onClick(View arg0) {
 				Intent intent = new Intent(addactivity.this,
 						classifyactivity.class);
-				startActivity(intent);
+				addactivity.this.startActivityForResult(intent, 200);
 			}
 		});
 		button11.setOnClickListener(new View.OnClickListener() {
@@ -62,7 +81,7 @@ public class addactivity extends Activity {
 			public void onClick(View arg0) {
 				Intent intent = new Intent(addactivity.this,
 						classifyactivity.class);
-				startActivity(intent);
+				addactivity.this.startActivityForResult(intent, 200);
 			}
 		});
 

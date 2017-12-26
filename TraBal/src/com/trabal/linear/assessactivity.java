@@ -20,6 +20,7 @@ import java.util.HashMap;
 import org.apache.http.message.BasicNameValuePair;
 
 import android.app.Activity;
+
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
@@ -29,7 +30,6 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.text.TextUtils;
@@ -47,17 +47,19 @@ import android.widget.SimpleAdapter.ViewBinder;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.trabal.MainActivity;
 import com.trabal.MyDialog;
 import com.trabal.MyDialog.OnButtonClickListener;
+import com.trabal.user.Bean.UserBean;
 import com.trabal.R;
 import com.trabal.util.net.FileUpload;
 import com.trabal.util.net.NetTransfer;
 
 
+
 public class assessactivity extends Activity implements
 OnButtonClickListener, OnItemClickListener{
 	private RatingBar ratingbar;
-	private ImageButton addID;
     private MyDialog dialog;// 图片选择对话框
     public static final int NONE = 0;
     public static final int PHOTOHRAPH = 1;// 拍照
@@ -71,9 +73,11 @@ OnButtonClickListener, OnItemClickListener{
     private Bitmap bmp; // 导入临时图片
     private ArrayList<HashMap<String, Object>> imageItem;
     private SimpleAdapter simpleAdapter; // 适配器
+
     private TextView post;
     private RatingBar rate;
-
+    private ImageButton backTv;
+	private UserBean user;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
     	
@@ -89,14 +93,34 @@ OnButtonClickListener, OnItemClickListener{
         // 锁定屏幕
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.activity_assess);
+        
+        backTv = (ImageButton)findViewById(R.id.leftarrow1ID);
+        backTv.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Intent last_intent = assessactivity.this.getIntent();
+				user=(UserBean)last_intent.getSerializableExtra("user");
+				Intent intent = new Intent(assessactivity.this,MainActivity.class);
+				intent.putExtra("user", user);
+				assessactivity.this.startActivity(intent);
+			
+			}
+		});
+        
         init();
         initData();
+        
+   
     }
+
 
     private void init() {
     	post=(TextView)this.findViewById(R.id.post);
     	post.setOnClickListener(new PostOnclick());
         gridView = (GridView) findViewById(R.id.gridView);
+
         gridView.setOnItemClickListener(this);
         dialog = new MyDialog(this);
         dialog.setOnButtonClickListener(this);
@@ -110,9 +134,9 @@ OnButtonClickListener, OnItemClickListener{
         /*
          * 载入默认图片添加图片加号
          */
-        bmp = BitmapFactory.decodeResource(getResources(),
-                R.drawable.gridview_addpic); // 加号
-        imageItem = new ArrayList<HashMap<String, Object>>();
+        bmp = BitmapFactory.decodeResource(getResources(), 
+                R.drawable.gridview_addpic);                            //   bitmap加载加号图片gridview_addpic
+        imageItem = new ArrayList<HashMap<String, Object>>();           //   动态数组
         HashMap<String, Object> map = new HashMap<String, Object>();
         map.put("itemImage", bmp);
         imageItem.add(map);
@@ -121,7 +145,7 @@ OnButtonClickListener, OnItemClickListener{
                 new int[] { R.id.imageView1 });
         simpleAdapter.setViewBinder(new ViewBinder() {
             @Override
-            public boolean setViewValue(View view, Object data,
+            public boolean setViewValue(View view, Object data,         //  数据与适配器绑定
                     String textRepresentation) {
                 if (view instanceof ImageView && data instanceof Bitmap) {
                     ImageView i = (ImageView) view;
@@ -136,7 +160,9 @@ OnButtonClickListener, OnItemClickListener{
 
 //点击dialog跳转
     @Override
-    public void camera() {
+
+    public void camera() {                                                //跳转系统相机
+
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(new File(
                 Environment.getExternalStorageDirectory(), "temp.jpg")));
@@ -157,13 +183,13 @@ OnButtonClickListener, OnItemClickListener{
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {   //回调函数：新Activity关闭后 旧Activity得到
         super.onActivityResult(requestCode, resultCode, data);
 
         if (resultCode == NONE)
             return;
         // 拍照
-        if (requestCode == PHOTOHRAPH) {
+        if (requestCode == PHOTOHRAPH) {                                     //拍照
             // 设置文件保存路径这里放在跟目录下
             File picture = new File(Environment.getExternalStorageDirectory()
                     + "/temp.jpg");
@@ -174,12 +200,12 @@ OnButtonClickListener, OnItemClickListener{
             return;
 
         // 处理结果
-        if (requestCode == PHOTORESOULT) {
-            Bundle extras = data.getExtras();
+        if (requestCode == PHOTORESOULT) {                                  //返回结果
+            Bundle extras = data.getExtras();                               //获得intent放回的值
             if (extras != null) {
                 Bitmap photo = extras.getParcelable("data");
-                ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                photo.compress(Bitmap.CompressFormat.JPEG, 75, stream);// (0-100)压缩文件
+                ByteArrayOutputStream stream = new ByteArrayOutputStream(); //ByteArrayOutputStream 获取内存缓存区的数据
+                photo.compress(Bitmap.CompressFormat.JPEG, 75, stream);     // (0-100)压缩文件
                 // 将图片放入gridview中
                 HashMap<String, Object> map = new HashMap<String, Object>();
                 map.put("itemImage", photo);
@@ -204,26 +230,24 @@ OnButtonClickListener, OnItemClickListener{
                     }
                 });
                 gridView.setAdapter(simpleAdapter);
-                simpleAdapter.notifyDataSetChanged();
+                simpleAdapter.notifyDataSetChanged();                        //适配器内容改变时动态刷新列表
                 dialog.dismiss();
             }
 
         }
         // 打开图片
-        if (resultCode == RESULT_OK && requestCode == IMAGE_OPEN) {
-            startPhotoZoom(data.getData());
+        if (resultCode == RESULT_OK && requestCode == IMAGE_OPEN) {           //系统相册打开且选择了照片
+            startPhotoZoom(data.getData());                                     
         }
-        super.onActivityResult(requestCode, resultCode, data);
+        super.onActivityResult(requestCode, resultCode, data);                //返回新Activity数据
 
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        if (!TextUtils.isEmpty(pathImage)) {
-        	//
-        	Log.e("pathImage",pathImage);
-            Bitmap addbmp = BitmapFactory.decodeFile(pathImage);
+        if (!TextUtils.isEmpty(pathImage)) {                                   //判断字符串是否为空
+            Bitmap addbmp = BitmapFactory.decodeFile(pathImage);               //Bitmap获取图片资源
             HashMap<String, Object> map = new HashMap<String, Object>();
             map.put("itemImage", addbmp);
             imageItem.add(map);
@@ -270,7 +294,7 @@ OnButtonClickListener, OnItemClickListener{
     /*
      * Dialog对话框提示用户删除操作 position为删除图片位置
      */
-    protected void dialog(final int position) {
+    protected void dialog(final int position) {                                       //已添加的图片进行删除操作
         AlertDialog.Builder builder = new Builder(assessactivity.this);
         builder.setMessage("确认移除已添加图片吗？");
         builder.setTitle("提示");
@@ -291,7 +315,7 @@ OnButtonClickListener, OnItemClickListener{
         builder.create().show();
     }
 
-    public void startPhotoZoom(Uri uri) {
+    public void startPhotoZoom(Uri uri) {                                                //剪切图片
         Intent intent = new Intent("com.android.camera.action.CROP");
         intent.setDataAndType(uri, IMAGE_UNSPECIFIED);
         Log.e("uri",uri.getPath());

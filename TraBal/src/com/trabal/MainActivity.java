@@ -10,10 +10,12 @@ import com.trabal.ContentModel;
 import com.trabal.linear.DynamicLinearLayout;
 import com.trabal.linear.IndexLinearLayout;
 import com.trabal.linear.MoreLinearLayout;
+import com.trabal.linear.addactivity;
 import com.trabal.linear.haoyouActivity;
 import com.trabal.linear.huodongActivity;
 import com.trabal.linear.luxianActivity;
 import com.trabal.linear.pingjiaActivity;
+import com.trabal.linear.recommendationactivity;
 import com.trabal.linear.shoucangActivity;
 import com.trabal.user.Bean.UserBean;
 import com.trabal.util.net.NetTransfer;
@@ -85,6 +87,9 @@ public class MainActivity extends Activity {
 		indexTv.setTextColor(android.graphics.Color.CYAN);
 		moreTv.setTextColor(android.graphics.Color.BLACK);
 		dynamicTv.setTextColor(android.graphics.Color.BLACK);
+		// 显示用户头像和昵称
+		Intent intent = MainActivity.this.getIntent();
+		user = (UserBean) intent.getSerializableExtra("user");       //获取上一intent的user值
 
 		// 卫星菜单动态实现
 
@@ -113,9 +118,19 @@ public class MainActivity extends Activity {
 
 				switch ((int) id) {
 				case 1:
-
-					new Thread(new JumpPageThread()).start();
-
+					new Thread(new JumpPageThread1()).start();
+					break;
+					
+				case 2:
+					new Thread(new JumpPageThread2()).start();
+					break;
+					
+				case 3:
+					new Thread(new JumpPageThread3()).start();
+					break;
+					
+				case 4:
+					new Thread(new JumpPageThread4()).start();
 					break;
 
 				default:
@@ -141,9 +156,6 @@ public class MainActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				drawerLayout.openDrawer(Gravity.RIGHT);
-				// 显示用户头像和昵称
-				Intent intent = MainActivity.this.getIntent();
-				user = (UserBean) intent.getSerializableExtra("user");
 				// 网络传输获取用户头像和昵称
 				String url = "user/base";
 				NetTransfer nt = new NetTransfer();
@@ -327,8 +339,8 @@ public class MainActivity extends Activity {
 
 	}
 
-	// 延迟2秒后跳转
-	private class JumpPageThread implements Runnable {
+	// 卫星菜单1 延迟2秒后跳转
+	private class JumpPageThread1 implements Runnable {
 
 		@Override
 		public void run() {
@@ -339,11 +351,68 @@ public class MainActivity extends Activity {
 			} catch (Exception ex) {
 				ex.printStackTrace();
 			}
-			
 
 			Intent intent = new Intent(MainActivity.this, assessactivity.class);
-			//维持登录状态
-			intent.putExtra("user",MainActivity.this.user );
+			intent.putExtra("user", user);
+			MainActivity.this.startActivity(intent);
+
+		}
+
+	}
+	// 卫星菜单2 延迟2秒后跳转
+	private class JumpPageThread2 implements Runnable {
+
+		@Override
+		public void run() {
+			// TODO Auto-generated method stub
+
+			try {
+				Thread.sleep(650);
+			} catch (Exception ex) {
+				ex.printStackTrace();
+			}
+
+			Intent intent = new Intent(MainActivity.this, addactivity.class);
+			intent.putExtra("user", user);
+			MainActivity.this.startActivity(intent);
+
+		}
+
+	}
+	// 卫星菜单3 延迟2秒后跳转
+	private class JumpPageThread3 implements Runnable {
+
+		@Override
+		public void run() {
+			// TODO Auto-generated method stub
+
+			try {
+				Thread.sleep(650);
+			} catch (Exception ex) {
+				ex.printStackTrace();
+			}
+
+			Intent intent = new Intent(MainActivity.this, recommendationactivity.class);
+			intent.putExtra("user", user);
+			MainActivity.this.startActivity(intent);
+
+		}
+
+	}
+	// 卫星菜单4 延迟2秒后跳转
+	private class JumpPageThread4 implements Runnable {
+
+		@Override
+		public void run() {
+			// TODO Auto-generated method stub
+
+			try {
+				Thread.sleep(650);
+			} catch (Exception ex) {
+				ex.printStackTrace();
+			}
+			Intent intent = new Intent(MainActivity.this, assessactivity.class);
+			intent.putExtra("user", user);
 			MainActivity.this.startActivity(intent);
 
 		}
