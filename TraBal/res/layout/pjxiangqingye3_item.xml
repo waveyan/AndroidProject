@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <RelativeLayout
+        android:id="@+id/avID"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="#EBEBEB" >
+
+        <ImageButton
+            android:id="@+id/leftarrow16ID"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/d001" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/leftarrow16ID"
+            android:layout_marginLeft="7dp"
+            android:layout_toRightOf="@id/leftarrow16ID"
+            android:text="评价详情"
+            android:textColor="#000000"
+            android:textSize="16dp" />
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/pjxqy_headpic3"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_below="@id/avID"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="23dp"
+        android:background="@drawable/person"
+        android:gravity="left" />
+
+    <RelativeLayout
+        android:id="@+id/av1ID"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/avID"
+        android:layout_marginLeft="60dp"
+        android:layout_marginTop="20dp"
+        android:background="#ffffff" >
+
+        <TextView
+            android:id="@+id/pjxqy_name3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="9dp"
+            android:layout_marginTop="8dp"
+            android:text="ABCSDFSF"
+            android:textColor="#000000"
+            android:textSize="15dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/pjxqy_level3"
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="12dp"
+            android:layout_toRightOf="@id/pjxqy_name3"
+            android:background="#698B69"
+            android:gravity="center"
+            android:text="Lv.1"
+            android:textColor="#FFFFFF"
+            android:textSize="10dp" />
+
+        <ImageView
+            android:id="@+id/pjxqy_time3"
+            android:layout_width="13dp"
+            android:layout_height="13dp"
+            android:layout_marginLeft="80dp"
+            android:layout_marginTop="11dp"
+            android:layout_toRightOf="@id/pjxqy_level3"
+            android:background="@drawable/time" />
+
+        <TextView
+            android:id="@+id/pjxqy_date3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:layout_toRightOf="@id/pjxqy_time3"
+            android:text="12-20"
+            android:textColor="#838B8B"
+            android:textSize="10dp" />
+
+        <RatingBar
+            android:id="@+id/pjxqy_stars3"
+            style="?android:attr/ratingBarStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/pjxqy_name3"
+            android:layout_below="@id/pjxqy_name3"
+            android:numStars="5"
+            android:stepSize="1" />
+
+        <TextView
+            android:id="@+id/pjxqy_cyn3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/pjxqy_name3"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="3dp"
+            android:layout_toRightOf="@id/pjxqy_stars3"
+            android:text="CYN"
+            android:textColor="#000000"
+            android:textSize="10dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/pjxqy_price3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/pjxqy_name3"
+            android:layout_marginLeft="2dp"
+            android:layout_marginTop="3dp"
+            android:layout_toRightOf="@id/pjxqy_cyn3"
+            android:text="30/人"
+            android:textColor="#000000"
+            android:textSize="10dp" />
+
+        <TextView
+            android:id="@+id/pjxqy_pj3"
+            android:layout_width="238dp"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/pjxqy_name3"
+            android:layout_below="@id/pjxqy_stars3"
+            android:layout_marginTop="3dp"
+            android:text="位于写字楼下的独立咖啡馆，仿佛是理想中咖啡馆甚佳的选址。几乎必点拿铁，出品很有诚意，再看15-20的均价超良心"
+            android:textColor="#000000"
+            android:textSize="10dp" />
+
+        <ImageView
+            android:id="@+id/pjxqy_pic3"
+            android:layout_width="70dp"
+            android:layout_height="60dp"
+            android:layout_alignLeft="@id/pjxqy_pj3"
+            android:layout_below="@id/pjxqy_pj3"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/wanghong1" />
+
+        <ImageView
+            android:id="@+id/pjxqy_pic4"
+            android:layout_width="70dp"
+            android:layout_height="60dp"
+            android:layout_below="@id/pjxqy_pj3"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="15dp"
+            android:layout_toRightOf="@id/pjxqy_pic3"
+            android:background="@drawable/wanghong2" />
+
+        <ImageView
+            android:id="@+id/pjxqy_pic5"
+            android:layout_width="70dp"
+            android:layout_height="60dp"
+            android:layout_below="@id/pjxqy_pj3"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="15dp"
+            android:layout_toRightOf="@id/pjxqy_pic4"
+            android:background="@drawable/wanghong3" />
+
+        <ImageView
+            android:id="@+id/pjxqy_blank3"
+            android:layout_width="250dp"
+            android:layout_height="40dp"
+            android:layout_below="@id/pjxqy_pic3" />
+
+        <ImageView
+            android:id="@+id/pjxqy_icon3"
+            android:layout_width="17dp"
+            android:layout_height="17dp"
+            android:layout_alignLeft="@id/pjxqy_name3"
+            android:layout_below="@id/pjxqy_pic3"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/icon" />
+
+        <TextView
+            android:id="@+id/pjxqy_site3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/pjxqy_pic3"
+            android:layout_marginLeft="3dp"
+            android:layout_marginTop="11dp"
+            android:layout_toRightOf="@id/pjxqy_icon3"
+            android:text="21GRAM COFFEE"
+            android:textSize="10dp" />
+
+        <ImageView
+            android:id="@+id/pjxqy_love3"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_below="@id/pjxqy_pic3"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="8dp"
+            android:layout_toRightOf="@id/pjxqy_price3"
+            android:background="@drawable/love" />
+
+        <ImageView
+            android:id="@+id/pjxqy_comment3"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_alignRight="@id/pjxqy_date3"
+            android:layout_below="@id/pjxqy_pic3"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/comment" />
+    </RelativeLayout>
+
+    <View
+        android:id="@+id/pjxqy_interval6"
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/av1ID"
+        android:layout_marginTop="1dp"
+        android:background="#CFCFCF" />
+
+    <ImageView
+        android:id="@+id/pjxqy_head16"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_below="@id/pjxqy_interval6"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/person" />
+
+    <ImageView
+        android:id="@+id/pjxqy_head17"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_below="@id/pjxqy_interval6"
+        android:layout_marginLeft="60dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/person" />
+
+    <ImageView
+        android:id="@+id/pjxqy_head18"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_below="@+id/pjxqy_interval6"
+        android:layout_marginLeft="100dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/person" />
+
+    <ImageView
+        android:id="@+id/pjxqy_head19"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_below="@+id/pjxqy_interval6"
+        android:layout_marginLeft="140dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/person" />
+
+    <ImageView
+        android:id="@+id/pjxqy_head20"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_below="@+id/pjxqy_interval6"
+        android:layout_marginLeft="180dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/person" />
+
+    <View
+        android:id="@+id/pjxqy_interval7"
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/pjxqy_head16"
+        android:layout_marginTop="10dp"
+        android:background="#CFCFCF" />
+
+    <EditText
+        android:id="@+id/pjxqy_pl3"
+        android:layout_width="270dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:hint="说两句吧"
+        android:textSize="12dp" />
+
+    <Button
+        android:id="@+id/pjxqy_send3"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@id/pjxqy_pl3"
+        android:background="#919191"
+        android:text="发送"
+        android:textColor="#FFFFFF"
+        android:textSize="12dp" />
+
+</RelativeLayout>

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#698B69" >
+
+    <RelativeLayout
+        android:id="@+id/arID"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="#EBEBEB" >
+
+        <ImageButton
+            android:id="@+id/leftarrow12ID"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/d001" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/leftarrow12ID"
+            android:layout_marginLeft="7dp"
+            android:layout_toRightOf="@id/leftarrow12ID"
+            android:text="消息"
+            android:textColor="#000000"
+            android:textSize="16dp" />
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/xiaoxi_head"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_below="@id/arID"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="19dp"
+        android:background="@drawable/head"
+        android:gravity="left" />
+
+    <ImageView
+        android:id="@+id/rightangle"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_below="@id/arID"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="27dp"
+        android:layout_toRightOf="@id/xiaoxi_head"
+        android:background="@drawable/rightangle" />
+
+    <RelativeLayout
+        android:id="@+id/ar1ID"
+        android:layout_width="290dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/arID"
+        android:layout_marginTop="27dp"
+        android:layout_toRightOf="@id/rightangle"
+        android:background="#ffffff" >
+
+        <TextView
+            android:id="@+id/tx13ID"
+            android:layout_width="260dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="23dp"
+            android:text="除了周杰伦，你的2000年代还有什么？这些以[复刻回忆]为主题的好去处想给你一些特别提示："
+            android:textColor="#000000"
+            android:textSize="14dp" />
+
+        <ImageView
+            android:id="@+id/blank4ID"
+            android:layout_width="290dp"
+            android:layout_height="30dp"
+            android:layout_below="@id/tx13ID" />
+
+        <TextView
+            android:id="@+id/date4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tx13ID"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="4dp"
+            android:text="12-20"
+            android:textColor="#838B8B"
+            android:textSize="10dp" />
+    </RelativeLayout>
+
+</RelativeLayout>
