@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <RelativeLayout
+        android:id="@+id/awID"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="#FCFCFC" >
+
+        <Button
+            android:id="@+id/syxqy_leftarrow"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/d001" />
+
+        <LinearLayout
+            android:id="@+id/syxqy_title"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="8dp"
+            android:background="#FCFCFC"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/syxqy_position"
+                android:layout_width="fill_parent"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="地点"
+                android:textColor="#000000" />
+
+            <TextView
+                android:id="@+id/syxqy_comment"
+                android:layout_width="fill_parent"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="评价"
+                android:textColor="#000000" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/syxqy_collect"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/collect" />
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/syxqy_pic"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_below="@id/awID"
+        android:background="@drawable/wanghong4" />
+
+    <TextView
+        android:id="@+id/syxqy_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/syxqy_pic"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="9dp"
+        android:text="福田区购物公园地铁站外，是深圳“公园式”情景空间的购物中心COCO Park，这里也是福田CBD主要生活商业区。"
+        android:textSize="11dp"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/syxqy_map"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:layout_alignLeft="@id/syxqy_text"
+        android:layout_below="@id/syxqy_text"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/map" />
+
+    <TextView
+        android:id="@+id/syxqy_maptext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/syxqy_map"
+        android:layout_marginLeft="8dp"
+        android:layout_toRightOf="@id/syxqy_map"
+        android:text="查看商圈地图"
+        android:textColor="#828282"
+        android:textSize="12dp"
+        android:textStyle="bold" />
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/syxqy_content"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/syxqy_map" />
+
+</RelativeLayout>
