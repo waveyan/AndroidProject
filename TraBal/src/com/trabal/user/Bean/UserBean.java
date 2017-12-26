@@ -1,6 +1,7 @@
 package com.trabal.user.Bean;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class UserBean implements Serializable{
 	private String telephone;
@@ -14,7 +15,17 @@ public class UserBean implements Serializable{
     private String introduction;
     private String email;
     private Integer credit;
-	
+    private ArrayList<EvaluationBean> eb;
+    
+    
+	public ArrayList<EvaluationBean> getEb() {
+		return eb;
+	}
+
+	public void setEb(ArrayList<EvaluationBean> eb) {
+		this.eb = eb;
+	}
+
 	public UserBean(String telephone, String password) {
 		super();
 		this.telephone = telephone;

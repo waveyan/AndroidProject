@@ -30,6 +30,7 @@ import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import com.trabal.activity.Bean.ActivityBean;
 import com.trabal.hotspot.Bean.HotSpotBean;
+import com.trabal.user.Bean.EvaluationBean;
 import com.trabal.user.Bean.UserBean;
 
 import android.annotation.SuppressLint;
@@ -220,27 +221,7 @@ public class NetTransfer {
 			return null;
 		}
 	}
-
-	public UserBean handle_user_data(String data, UserBean user) {
-
-		try {
-			UserBean u = user;
-			JSONObject json = new JSONObject(data);
-			u.setAddress(json.getString("address"));
-			u.setBirthday(json.getString("birthday"));
-			u.setCredit(json.getInt("credit"));
-			u.setEmail(json.getString("email"));
-			u.setGender(json.getString("gender"));
-			u.setIntroduction(json.getString("introduction"));
-			u.setName(json.getString("name"));
-			u.setPic((this.media_perfix + json.getString("pic")));
-			return u;
-		} catch (JSONException e) {
-			e.printStackTrace();
-			return null;
-		}
-	}
-
+	
 	public ArrayList handle_hs_list(String data) {
 		try {
 			ArrayList<HotSpotBean> hs_list = new ArrayList<HotSpotBean>();
@@ -258,6 +239,118 @@ public class NetTransfer {
 		}
 	}
 
+	public UserBean handle_user_data(String data, UserBean user) {
+
+		try {
+			UserBean u = user;
+			JSONObject json = new JSONObject(data);
+			u.setAddress(json.getString("address"));
+			u.setBirthday(json.getString("birthday"));
+			u.setCredit(json.getInt("credit"));
+			u.setEmail(json.getString("email"));
+			u.setGender(json.getString("gender"));
+			u.setIntroduction(json.getString("introduction"));
+			u.setName(json.getString("name"));
+			u.setPic((this.media_perfix + json.getString("pic")));
+			try{
+			u.setEb(handle_eb_list(json.getString("evaluation")));
+			}
+			catch(Exception e){}
+			return u;
+		} catch (JSONException e) {
+			Log.e("handle_user_data", e.getMessage());
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	public ArrayList<UserBean> handle_follow_user_list(String data){
+		
+		try {
+			UserBean user=new UserBean();
+			ArrayList<UserBean> user_list=new ArrayList<UserBean>();
+			JSONObject json = new JSONObject(data);
+			JSONArray json_list = json.getJSONArray("following");
+			for (int i = 0; i < json_list.length(); i++) {
+				user =handle_user_data(json_list.getString(i),user);
+				user_list.add(user);
+			}
+			return user_list;
+
+		} catch (JSONException e) {
+			e.printStackTrace();
+			return null;
+		}
+		
+	}
+	
+	public ArrayList<UserBean> handle_fans_list(String data){
+		
+		try {
+			
+			ArrayList<UserBean> user_list=new ArrayList<UserBean>();
+			JSONObject json = new JSONObject(data);
+			JSONArray json_list = json.getJSONArray("follower");
+			for (int i = 0; i < json_list.length(); i++) {
+				UserBean user=new UserBean();
+				user =handle_user_data(json_list.getString(i),user);
+				user_list.add(user);
+			}
+			return user_list;
+
+		} catch (JSONException e) {
+			Log.e("handle_fans_list",e.getMessage());
+			e.printStackTrace();
+			return null;
+		}
+		
+	}
+	
+	//不处理人的
+	public EvaluationBean handle_eb_data(String data){
+		try {
+			JSONObject json = new JSONObject(data);
+			EvaluationBean e=new EvaluationBean();
+			try{
+			e.setHs(handle_hs_data(json.getString("hotspot")));
+			}catch(Exception e1){}
+			e.setMood(json.getString("feeling"));
+			e.setPic1(json.getString("pic1"));
+			e.setPic2(json.getString("pic2"));
+			e.setPic3(json.getString("pic3"));
+			e.setPrice(json.getDouble("price"));
+			e.setRate(json.getInt("rate"));
+			e.setTime(json.getString("time"));
+			return e;
+		} catch (JSONException e) {
+			e.printStackTrace();
+			Log.e("handle_eb_data",e.getMessage());
+			return null;
+		}
+		
+	}
+	
+	//
+	public ArrayList<EvaluationBean> handle_eb_list(String data){
+		try {
+			ArrayList<EvaluationBean> eb_list = new ArrayList<EvaluationBean>();
+			JSONObject json = new JSONObject(data);
+			JSONArray json_list = json.getJSONArray("evaluation");
+			
+			for (int i = 0; i < json_list.length(); i++) {
+				EvaluationBean eb=handle_eb_data(json_list.getString(i));
+				eb_list.add(eb);
+			}
+			return eb_list;
+
+		} catch (JSONException e) {
+			Log.e("handle_eb_list", e.getMessage());
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	
 	public ActivityBean handle_ac_data(String data){
 		JSONObject json;
 		try {
@@ -308,6 +401,7 @@ public class NetTransfer {
 			return null;
 		}
 	}
+	
 
 	public String getStatus() {
 		return status;
