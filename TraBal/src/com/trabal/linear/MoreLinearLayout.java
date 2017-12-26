@@ -8,7 +8,6 @@ import org.apache.http.message.BasicNameValuePair;
 import com.squareup.picasso.Picasso;
 import com.trabal.MainActivity;
 import com.trabal.R;
-import com.trabal.listview1;
 import com.trabal.activity.Bean.ActivityBean;
 import com.trabal.hotspot.Bean.HotSpotBean;
 import com.trabal.user.Bean.UserBean;
@@ -91,30 +90,37 @@ public class MoreLinearLayout extends LinearLayout {
 			case R.id.coffeeID:
 				intent.putExtra("what", "coffee");
 				context.startActivity(intent);
+//				((Activity)context).finish();
 				break;
 			case R.id.restaurantID:
 				intent.putExtra("what", "restaurant");
 				context.startActivity(intent);
+//				((Activity)context).finish();
 				break;
 			case R.id.cakeID:
 				intent.putExtra("what", "cake");
 				context.startActivity(intent);
+//				((Activity)context).finish();
 				break;
 			case R.id.showID:
 				intent.putExtra("what", "show");
 				context.startActivity(intent);
+//				((Activity)context).finish();
 				break;
 			case R.id.furnitureID:
 				intent.putExtra("what", "furniture");
 				context.startActivity(intent);
+//				((Activity)context).finish();
 				break;
 			case R.id.shoppingID:
 				intent.putExtra("what", "shopping");
 				context.startActivity(intent);
+//				((Activity)context).finish();
 				break;
 			case R.id.teaID:
 				intent.putExtra("what", "tea");
 				context.startActivity(intent);
+//				((Activity)context).finish();
 				break;
 			default:
 				break;

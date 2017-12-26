@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -25,7 +26,9 @@ import android.widget.AdapterView.OnItemSelectedListener;
 import com.trabal.MainActivity;
 import com.trabal.R;
 import com.trabal.activity.Bean.ActivityBean;
+import com.trabal.hotspot.Bean.HotSpotBean;
 import com.trabal.user.Bean.UserBean;
+import com.trabal.util.net.NetTransfer;
 
 public class collectActivity extends Activity implements OnItemSelectedListener {
 
@@ -38,6 +41,8 @@ public class collectActivity extends Activity implements OnItemSelectedListener 
 	private ArrayAdapter<String> adapter;
 	private UserBean user;
 	private ImageButton imageButton;
+	ArrayList<HotSpotBean> hs_list;
+	ArrayList<ActivityBean> ab_list;
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -45,15 +50,34 @@ public class collectActivity extends Activity implements OnItemSelectedListener 
 		// 获取上一个页面传过来的用户
 		Intent intent = collectActivity.this.getIntent();
 		user = (UserBean) intent.getSerializableExtra("user");
+		
+		//网络传输获得数据，一次性获取收藏的活动和地点
+		String url = "user/get_my_favour";
+		try {
+			String data = NetTransfer.transfer(url, "get", null, true, user.getAccess_token(),null);
+			NetTransfer nt = new NetTransfer();
+			//防止收藏为空时的空指针
+			hs_list=new ArrayList<HotSpotBean> ();
+			ArrayList<HotSpotBean> hs_data=nt.handle_hs_list(data);
+			if(hs_data!=null)
+				hs_list=hs_data;
+			ArrayList<ActivityBean> ab_data=nt.handle_ac_list(data);
+			ab_list=new ArrayList<ActivityBean> ();
+			if(ab_data!=null)
+				ab_list=ab_data;
+		}
+		catch (Exception e) {
+			Log.e("地点收藏",e.getMessage());
+		}
 
 
 
 		// ================================
 
 		linears = new ArrayList<LinearLayout>();
-		linears.add(new SiteLinearLayout(collectActivity.this));
-		linears.add(new ExerciseLinearLayout(collectActivity.this));
-		linears.add(new LineLinearLayout(collectActivity.this));
+		linears.add(new SiteLinearLayout(collectActivity.this,user));
+		linears.add(new ExerciseLinearLayout(collectActivity.this,user));
+		linears.add(new LineLinearLayout(collectActivity.this,user));
 
 		// 获取内容组件
 		content1 = (android.support.v4.view.ViewPager) this

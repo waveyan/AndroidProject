@@ -1,10 +1,12 @@
 package com.trabal;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
 import com.squareup.picasso.Picasso;
 
+import com.trabal.hotspot.Bean.HotSpotBean;
 import com.trabal.linear.RestaurantActivity;
 import com.trabal.linear.TakeMeToYourHome;
 import com.trabal.user.Bean.UserBean;
@@ -25,10 +27,10 @@ public class listviewAdapter extends BaseAdapter {
 
 	private Context context;
 
-	private List<listview1> objects;
+	private ArrayList<HotSpotBean>  objects;
 
 	public listviewAdapter(Context context, int textViewResourceId,
-			List<listview1> objects) {
+			ArrayList<HotSpotBean> objects) {
 		this.context = context;
 		this.objects = objects;
 	}
@@ -44,7 +46,7 @@ public class listviewAdapter extends BaseAdapter {
 		TextView item_textview1 = (TextView) view.findViewById(R.id.item_text1);
 		
 		
-		itemImage1.setOnClickListener(new OnClickListener() {
+		view.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View arg0) {
@@ -53,15 +55,17 @@ public class listviewAdapter extends BaseAdapter {
 				Intent intent = new Intent(listviewAdapter.this.context, TakeMeToYourHome.class);
 				UserBean user = (UserBean) last_intent.getSerializableExtra("user");
 				intent.putExtra("user", user);
-				intent.putExtra("hotspot_id",objects.get(position).getId());
-
+				String what= last_intent.getStringExtra("what");
+				intent.putExtra("what", last_intent.getStringExtra("what"));
+				intent.putExtra("hsb",objects.get(position));
 				context.startActivity(intent);
+				((Activity)context).finish();
 			}
 		});
-		Picasso.with(context).load(objects.get(position).getImageId1()).into(itemImage1);
-		Picasso.with(context).load(objects.get(position).getImageId2()).into(itemImage2);
-		Picasso.with(context).load(objects.get(position).getImageId3()).into(itemImage3);
-		Picasso.with(context).load(objects.get(position).getImageId4()).into(itemImage4);
+		Picasso.with(context).load(objects.get(position).getPic1()).into(itemImage1);
+		Picasso.with(context).load(objects.get(position).getPic2()).into(itemImage2);
+		Picasso.with(context).load(objects.get(position).getPic3()).into(itemImage3);
+		Picasso.with(context).load(objects.get(position).getPic2()).into(itemImage4);
 		item_textview1.setText(objects.get(position).getName());
 		return view;
 

@@ -37,6 +37,8 @@ public class TakeMeToYourHome extends Activity {
 	private UserBean user;
 
 	private Intent last_intent;
+	
+	private String from;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -46,38 +48,33 @@ public class TakeMeToYourHome extends Activity {
 		// 获取上一个页面传过来的用户
 		last_intent = TakeMeToYourHome.this.getIntent();
 		user = (UserBean) last_intent.getSerializableExtra("user");
+		from =last_intent.getStringExtra("from");
 
 		backButton = (ImageButton) this.findViewById(R.id.backButton);
+		
+		hsb=(HotSpotBean)last_intent.getSerializableExtra("hsb");
+		initView();
 
 		backButton.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View arg0) {
-				// TODO Auto-generated method stub
-				Intent intent = new Intent(TakeMeToYourHome.this,
-						RestaurantActivity.class);
+				Intent intent;
+				if("collect".equals(from)){
+					intent = new Intent(TakeMeToYourHome.this,
+							collectActivity.class);
+				}
+				else{
+					intent = new Intent(TakeMeToYourHome.this,
+							RestaurantActivity.class);
+					String what= last_intent.getStringExtra("what");
+					intent.putExtra("what", last_intent.getStringExtra("what"));
+				}
 				intent.putExtra("user", user);
-				intent.putExtra("what", last_intent.getStringExtra("what"));
 				TakeMeToYourHome.this.startActivity(intent);
+				TakeMeToYourHome.this.finish();
 			}
 		});
-
-		// 网络传输
-		try {
-
-			ArrayList params = new ArrayList();
-			params.add(new BasicNameValuePair("id", last_intent
-					.getStringExtra("hotspot_id")));
-			String url = "hotspot/base";
-			String data = NetTransfer.transfer(url, "get", params, true,
-					user.getAccess_token(), null);
-			NetTransfer nt = new NetTransfer();
-			hsb = nt.handle_HS_data(data);
-			initView();
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 	}
 	
 	private void initView(){
@@ -127,8 +124,7 @@ public class TakeMeToYourHome extends Activity {
 		public void onClick(View arg0) {
 			// 网络传输
 			ArrayList params = new ArrayList();
-			params.add(new BasicNameValuePair("hotspot_id",
-					TakeMeToYourHome.this.last_intent.getStringExtra("hotspot_id")));
+			params.add(new BasicNameValuePair("hotspot_id",hsb.getId()));
 			params.add(new BasicNameValuePair("action", "favour_hs"));
 			String url = "user/base";
 			try {

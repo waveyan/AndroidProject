@@ -11,12 +11,12 @@ import com.trabal.linear.DynamicLinearLayout;
 import com.trabal.linear.IndexLinearLayout;
 import com.trabal.linear.MoreLinearLayout;
 import com.trabal.linear.addactivity;
+import com.trabal.linear.collectActivity;
 import com.trabal.linear.haoyouActivity;
 import com.trabal.linear.huodongActivity;
 import com.trabal.linear.luxianActivity;
 import com.trabal.linear.pingjiaActivity;
 import com.trabal.linear.recommendationactivity;
-import com.trabal.linear.shoucangActivity;
 import com.trabal.user.Bean.UserBean;
 import com.trabal.util.net.NetTransfer;
 import com.trabal.R;
@@ -222,27 +222,37 @@ public class MainActivity extends Activity {
 				case 1:
 					Intent intent = new Intent(MainActivity.this,
 							pingjiaActivity.class);
+					intent.putExtra("user", user);
 					MainActivity.this.startActivity(intent);
+//					MainActivity.this.finish();
 					break;
 				case 2:
 					Intent intent1 = new Intent(MainActivity.this,
-							shoucangActivity.class);
+							collectActivity.class);
+					intent1.putExtra("user", user);
 					MainActivity.this.startActivity(intent1);
+//					MainActivity.this.finish();
 					break;
 				case 3:
 					Intent intent2 = new Intent(MainActivity.this,
 							luxianActivity.class);
+					intent2.putExtra("user", user);
 					MainActivity.this.startActivity(intent2);
+//					MainActivity.this.finish();
 					break;
 				case 4:
 					Intent intent3 = new Intent(MainActivity.this,
 							huodongActivity.class);
+					intent3.putExtra("user", user);
 					MainActivity.this.startActivity(intent3);
+//					MainActivity.this.finish();
 					break;
 				case 5:
 					Intent intent4 = new Intent(MainActivity.this,
 							haoyouActivity.class);
+					intent4.putExtra("user", user);
 					MainActivity.this.startActivity(intent4);
+//					MainActivity.this.finish();
 					break;
 				default:
 					break;

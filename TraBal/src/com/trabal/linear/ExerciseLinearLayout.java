@@ -2,9 +2,11 @@ package com.trabal.linear;
 
 import java.util.ArrayList;
 
+import com.squareup.picasso.Picasso;
 import com.trabal.R;
 import com.trabal.activity.Bean.ActivityBean;
 import com.trabal.linear.SiteLinearLayout.MyBaseAdapter;
+import com.trabal.user.Bean.UserBean;
 
 import android.content.Context;
 import android.content.Intent;
@@ -26,10 +28,13 @@ public class ExerciseLinearLayout extends LinearLayout {
 
 	private ListView mlistView;
 	private ArrayList<ActivityBean> ab_list;
+	private UserBean user;
 	
-	public ExerciseLinearLayout(final Context context) {
+	public ExerciseLinearLayout(final Context context,UserBean user) {
 		super(context);
 		this.context = context;
+		//保存登录状态
+		this.user=user;
 
 		this.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT,
 				LayoutParams.FILL_PARENT));
@@ -41,24 +46,8 @@ public class ExerciseLinearLayout extends LinearLayout {
 		
 		mlistView = (ListView) findViewById(R.id.exercise_listview);
 
-		// 创建数据源
-		ab_list = new ArrayList<ActivityBean>();
-
-		ActivityBean ab = new ActivityBean();
-		ab.setType("艺术展览");
-		ab.setTitle("生活总有说不完的美好");
-		ab.setEnglish("Poem");
-		ab.setTime("三天后结束");
-		ab.setPic1(String.valueOf(R.drawable.l2));
-
-		ActivityBean ab1 = new ActivityBean();
-		ab1.setType("艺术展览");
-		ab1.setTitle("历史总是惊人的相似");
-		ab1.setEnglish("Poem");
-		ab1.setTime("三天后结束");
-		ab1.setPic1(String.valueOf(R.drawable.l3));
-		ab_list.add(ab);
-		ab_list.add(ab1);
+		// 创建数据源,收藏地点和活动在collectActivity中一次性获取
+		ab_list = ((collectActivity)this.context).ab_list;
 		
 		// 创建一个Adapter的实例
 		mlistView.setAdapter(new MyBaseAdapter());
@@ -90,7 +79,7 @@ public class ExerciseLinearLayout extends LinearLayout {
 			return position;
 		}
 
-		public View getView(int position, View convertView, ViewGroup parent) {
+		public View getView(final int position, View convertView, ViewGroup parent) {
 			View view = LayoutInflater.from(context).inflate(
 					R.layout.huodong_listview_item, null);
 			TextView mTextView1 = (TextView) view
@@ -107,7 +96,16 @@ public class ExerciseLinearLayout extends LinearLayout {
 			mTextView4.setText(ab_list.get(position).getTime());
 			ImageView imageView = (ImageView) view
 					.findViewById(R.id.huodong_image);
-			imageView.setBackgroundResource(Integer.parseInt(ab_list.get(position).getPic1()));
+			Picasso.with(context).load(ab_list.get(position).getPic1()).into(imageView);
+			view.setOnClickListener(new View.OnClickListener() {
+				
+				@Override
+				public void onClick(View arg0) {
+					Intent intent =new Intent(ExerciseLinearLayout.this.context,HdxiangqingActivity.class);
+					intent.putExtra("ab", ab_list.get(position));
+					ExerciseLinearLayout.this.context.startActivity(intent);
+				}
+			});
 			return view;
 		}
 	}

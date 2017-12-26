@@ -2,9 +2,20 @@ package com.trabal.linear;
 
 import java.util.ArrayList;
 
+import org.apache.http.message.BasicNameValuePair;
+
+import com.squareup.picasso.Picasso;
 import com.trabal.R;
+import com.trabal.listviewAdapter;
 import com.trabal.activity.Bean.ActivityBean;
+import com.trabal.hotspot.Bean.HotSpotBean;
+import com.trabal.user.Bean.UserBean;
+import com.trabal.util.net.NetTransfer;
+
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,12 +28,19 @@ import android.widget.LinearLayout.LayoutParams;
 
 public class SiteLinearLayout extends LinearLayout {
 	private ListView mlistView;
-	private ArrayList<ActivityBean> ab_list;
-	Context context;
+	private Context context;
+	private UserBean user;
+	private Intent last_intent;
+	ArrayList<HotSpotBean> hs_list;
 
-	public SiteLinearLayout(Context context) {
+
+	public SiteLinearLayout(Context context,UserBean user) {
 		super(context);
 		this.context = context;
+		//登录状态
+		this.user=user;
+		//
+		hs_list=((collectActivity)this.context).hs_list;
 
 		this.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT,
 				LayoutParams.FILL_PARENT));
@@ -34,52 +52,34 @@ public class SiteLinearLayout extends LinearLayout {
 
 		
 		mlistView = (ListView) findViewById(R.id.site_listview);
-
-		// 创建数据源
-		ab_list = new ArrayList<ActivityBean>();
-
-		ActivityBean ab = new ActivityBean();
-		ab.setTitle("生活总有说不完的美好");
-		ab.setPic1(String.valueOf(R.drawable.l2));
-		ab.setPic2(String.valueOf(R.drawable.l2));
-		ab.setPic3(String.valueOf(R.drawable.l2));
-		ab.setPic4(String.valueOf(R.drawable.l2));
-
-		ActivityBean ab1 = new ActivityBean();
-		ab1.setTitle("艺术展览");
-		ab1.setPic1(String.valueOf(R.drawable.l3));
-		ab1.setPic2(String.valueOf(R.drawable.l1));
-		ab1.setPic3(String.valueOf(R.drawable.l2));
-		ab1.setPic4(String.valueOf(R.drawable.l4));
-		
-		ab_list.add(ab);
-		ab_list.add(ab1);
 		
 		// 创建一个Adapter的实例
 		mlistView.setAdapter(new MyBaseAdapter());
 
 	}
-
+	
+	//地点收藏的适配器
 	class MyBaseAdapter extends BaseAdapter {
 
 		public int getCount() {
-			return ab_list.size();
+			return hs_list.size();
 		}
 
 		public Object getItem(int position) {
-			return ab_list.get(position);
+			return hs_list.get(position);
 		}
 
 		public long getItemId(int position) {
 			return position;
 		}
 
-		public View getView(int position, View convertView, ViewGroup parent) {
+		public View getView(final int position, View convertView, ViewGroup parent) {
+
 			View view = LayoutInflater.from(context).inflate(
 					R.layout.listview_item, null);
 			TextView mTextView1 = (TextView) view
 					.findViewById(R.id.item_text1);
-			mTextView1.setText(ab_list.get(position).getTitle());
+			mTextView1.setText(hs_list.get(position).getName());
 			ImageView imageView1 = (ImageView) view
 					.findViewById(R.id.item1);
 			ImageView imageView2 = (ImageView) view
@@ -88,10 +88,22 @@ public class SiteLinearLayout extends LinearLayout {
 					.findViewById(R.id.item4);
 			ImageView imageView4 = (ImageView) view
 					.findViewById(R.id.item5);
-			imageView1.setBackgroundResource(Integer.parseInt(ab_list.get(position).getPic1()));
-			imageView2.setBackgroundResource(Integer.parseInt(ab_list.get(position).getPic2()));
-			imageView3.setBackgroundResource(Integer.parseInt(ab_list.get(position).getPic3()));
-			imageView4.setBackgroundResource(Integer.parseInt(ab_list.get(position).getPic4()));
+			//地点收藏图片展示
+			Picasso.with(context).load(hs_list.get(position).getPic1()).into(imageView1);
+			Picasso.with(context).load(hs_list.get(position).getPic2()).into(imageView2);
+			Picasso.with(context).load(hs_list.get(position).getPic3()).into(imageView3);
+			Picasso.with(context).load(hs_list.get(position).getPic2()).into(imageView4);
+			view.setOnClickListener(new View.OnClickListener(){
+
+				@Override
+				public void onClick(View arg0) {
+					// 维持登录状态
+					Intent intent = new Intent(SiteLinearLayout.this.context, TakeMeToYourHome.class);
+					intent.putExtra("user", user);
+					intent.putExtra("from","collect");
+					intent.putExtra("hsb", hs_list.get(position));
+					context.startActivity(intent);
+				}});
 			return view;
 		}
 	}

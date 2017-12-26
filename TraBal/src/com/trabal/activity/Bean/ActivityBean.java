@@ -1,14 +1,16 @@
 package com.trabal.activity.Bean;
 
+import java.io.Serializable;
+
 import com.trabal.hotspot.Bean.HotSpotBean;
 
-public class ActivityBean {
+public class ActivityBean implements Serializable{
 	private String id;
 	private String title;
 	private String subject;
 	private String type;
 	private String introduction;
-	private String persion;
+	private String person;
 	private String telephone;
 	private String website;
 	private String pic1;
@@ -69,11 +71,11 @@ public class ActivityBean {
 	public void setIntroduction(String introduction) {
 		this.introduction = introduction;
 	}
-	public String getPersion() {
-		return persion;
+	public String getPerson() {
+		return person;
 	}
-	public void setPersion(String persion) {
-		this.persion = persion;
+	public void setPerson(String person) {
+		this.person = person;
 	}
 	public String getTelephone() {
 		return telephone;
