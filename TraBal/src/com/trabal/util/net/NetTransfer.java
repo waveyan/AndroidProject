@@ -359,8 +359,21 @@ public class NetTransfer {
 			ab.setId(json.getString("id"));
 			try{
 			ab.setHsb(handle_hs_data(json.getString("hotspot")));
+			UserBean user=new UserBean();
+			ab.setHost_user(handle_user_data(json.getString("hot_user"), user));
+			
+			//想去的人
+			ArrayList<UserBean> wanttogo_user_list=new ArrayList<UserBean>();
+			JSONArray json_list = json.getJSONArray("wanttogo");
+			for (int i = 0; i < json_list.length(); i++) {
+				UserBean who_want_to_go=new UserBean();
+				user =handle_user_data(json_list.getString(i),user);
+				wanttogo_user_list.add(user);
+			}
+			ab.setWho_want_to_go(wanttogo_user_list);
 			}
 			catch (JSONException e) {
+				Log.e("handle_ac_data_wanttogo",e.getMessage());
 			}
 			ab.setIntroduction(json.getString("introduction"));
 			ab.setPerson(json.getString("person"));

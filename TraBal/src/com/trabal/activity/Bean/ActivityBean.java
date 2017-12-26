@@ -1,8 +1,10 @@
 package com.trabal.activity.Bean;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 import com.trabal.hotspot.Bean.HotSpotBean;
+import com.trabal.user.Bean.UserBean;
 
 public class ActivityBean implements Serializable{
 	private String id;
@@ -17,16 +19,32 @@ public class ActivityBean implements Serializable{
 	private String pic2;
 	private String pic3;
 	private String pic4;
+	private String price;
+	private String english;
+	private String time;
+	private HotSpotBean hsb;
+	private UserBean host_user;
+	private ArrayList<UserBean> who_want_to_go;
+	
+	
+	public ArrayList<UserBean> getWho_want_to_go() {
+		return who_want_to_go;
+	}
+	public void setWho_want_to_go(ArrayList<UserBean> who_want_to_go) {
+		this.who_want_to_go = who_want_to_go;
+	}
+	public UserBean getHost_user() {
+		return host_user;
+	}
+	public void setHost_user(UserBean host_user) {
+		this.host_user = host_user;
+	}
 	public String getPic4() {
 		return pic4;
 	}
 	public void setPic4(String pic4) {
 		this.pic4 = pic4;
 	}
-	private String price;
-	private String english;
-	private String time;
-	
 	public String getEnglish() {
 		return english;
 	}
@@ -39,8 +57,6 @@ public class ActivityBean implements Serializable{
 	public void setTime(String time) {
 		this.time = time;
 	}
-	private HotSpotBean hsb;
-	
 	public String getId() {
 		return id;
 	}
