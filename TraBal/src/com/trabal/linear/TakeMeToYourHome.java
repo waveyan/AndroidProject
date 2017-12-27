@@ -64,6 +64,12 @@ public class TakeMeToYourHome extends Activity {
 					intent = new Intent(TakeMeToYourHome.this,
 							collectActivity.class);
 				}
+				else if("hdxiangqing".equals(from)){
+					intent = new Intent(TakeMeToYourHome.this,
+							HdxiangqingActivity.class);
+					intent.putExtra("ab",last_intent.getSerializableExtra("ab"));
+					intent.putExtra("from",last_intent.getSerializableExtra("last_from"));
+				}
 				else{
 					intent = new Intent(TakeMeToYourHome.this,
 							RestaurantActivity.class);

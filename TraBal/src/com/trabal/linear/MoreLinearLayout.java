@@ -34,10 +34,16 @@ public class MoreLinearLayout extends LinearLayout {
 	TextView tv1, tv2, tv3, tv4;
 
 	Intent intent;
+	
+	UserBean user;
+	
+	ArrayList<ActivityBean> ac_list;
 
 	public MoreLinearLayout(final Context context) {
 		super(context);
 		this.context = context;
+		
+		user =(UserBean)(((Activity)context) .getIntent().getSerializableExtra("user"));
 
 		this.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT,
 				LayoutParams.FILL_PARENT));
@@ -136,22 +142,60 @@ public class MoreLinearLayout extends LinearLayout {
 		NetTransfer nt = new NetTransfer();
 		String msg;
 		try {
-			UserBean user =(UserBean)(((Activity)context) .getIntent().getSerializableExtra("user"));
 			String data = NetTransfer.transfer(url, "get", params, true,
 					user.getAccess_token(),null);
-			ArrayList<ActivityBean> ac_list = nt.handle_ac_list(data);
+			ac_list = nt.handle_ac_list(data);
 			Picasso.with(context).load(ac_list.get(0).getPic1()).into(act_image1);
 			Picasso.with(context).load(ac_list.get(1).getPic1()).into(act_image2);
 			Picasso.with(context).load(ac_list.get(2).getPic1()).into(act_image3);
 			Picasso.with(context).load(ac_list.get(3).getPic1()).into(act_image4);
+			//bug£¡£¡£¡£¡£¡£¡
 			tv1.setText(ac_list.get(0).getIntroduction().substring(0, 20)+"...");
 			tv2.setText(ac_list.get(1).getIntroduction().substring(0, 20)+"...");
 			tv3.setText(ac_list.get(2).getIntroduction().substring(0, 20)+"...");
 			tv4.setText(ac_list.get(3).getIntroduction().substring(0, 20)+"...");
+			
+			//µã»÷ÊÂ¼þ
+			ActivityClick activityclick1=new ActivityClick(0);
+			act_image1.setOnClickListener(activityclick1);
+			tv1.setOnClickListener(activityclick1);
+			
+			ActivityClick activityclick2=new ActivityClick(1);
+			act_image2.setOnClickListener(activityclick2);
+			tv2.setOnClickListener(activityclick2);
+			
+			ActivityClick activityclick3=new ActivityClick(2);
+			act_image3.setOnClickListener(activityclick3);
+			tv3.setOnClickListener(activityclick3);
+			
+			ActivityClick activityclick4=new ActivityClick(3);
+			act_image4.setOnClickListener(activityclick4);
+			tv4.setOnClickListener(activityclick4);
+			
 			} catch (IOException e) {
 			e.printStackTrace();
 		}
 
+	}
+	
+	private class ActivityClick implements View.OnClickListener{
+		
+		private int position;
+
+		public ActivityClick(int position){
+			this.position=position;
+		}
+
+		@Override
+		public void onClick(View arg0) {
+			Intent intent =new Intent(MoreLinearLayout.this.context,HdxiangqingActivity.class);
+			intent.putExtra("ab", MoreLinearLayout.this.ac_list.get(position));
+			intent.putExtra("user", MoreLinearLayout.this.user);
+			intent.putExtra("from", "more");
+			MoreLinearLayout.this.context.startActivity(intent);
+			
+		}
+		
 	}
 
 }

@@ -43,13 +43,14 @@ public class collectActivity extends Activity implements OnItemSelectedListener 
 	private ImageButton imageButton;
 	ArrayList<HotSpotBean> hs_list;
 	ArrayList<ActivityBean> ab_list;
+	private Intent last_intent;
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_collect);
 		// 获取上一个页面传过来的用户
-		Intent intent = collectActivity.this.getIntent();
-		user = (UserBean) intent.getSerializableExtra("user");
+		last_intent = collectActivity.this.getIntent();
+		user = (UserBean) last_intent.getSerializableExtra("user");
 		
 		//网络传输获得数据，一次性获取收藏的活动和地点
 		String url = "user/get_my_favour";
@@ -86,14 +87,21 @@ public class collectActivity extends Activity implements OnItemSelectedListener 
 		exerciseTv = (TextView) this.findViewById(R.id.exerciseID);
 		lineTv = (TextView) this.findViewById(R.id.lineID);
 
-		siteTv.setTextColor(android.graphics.Color.CYAN);
-		exerciseTv.setTextColor(android.graphics.Color.BLACK);
-		lineTv.setTextColor(android.graphics.Color.BLACK);
-
 		// 设置适配器
 		content1.setAdapter(new CustomPager());
-		// 设置当前页面
-		content1.setCurrentItem(0);
+		// 设置当前页面-----活动详情返回
+		if("collect_exercise".equals(last_intent.getStringExtra("from"))){
+			siteTv.setTextColor(android.graphics.Color.BLACK);
+			exerciseTv.setTextColor(android.graphics.Color.CYAN);
+			lineTv.setTextColor(android.graphics.Color.BLACK);
+			content1.setCurrentItem(1);
+		}
+		else{
+			siteTv.setTextColor(android.graphics.Color.CYAN);
+			exerciseTv.setTextColor(android.graphics.Color.BLACK);
+			lineTv.setTextColor(android.graphics.Color.BLACK);
+			content1.setCurrentItem(0);
+		}
 		// 设置内容组件事件处理
 		content1.setOnPageChangeListener(new CustomPagerChange());
 
@@ -101,7 +109,6 @@ public class collectActivity extends Activity implements OnItemSelectedListener 
 
 			@Override
 			public void onClick(View arg0) {
-				// TODO Auto-generated method stub
 				content1.setCurrentItem(0);
 				siteTv.setTextColor(android.graphics.Color.CYAN);
 				exerciseTv.setTextColor(android.graphics.Color.BLACK);
@@ -113,7 +120,6 @@ public class collectActivity extends Activity implements OnItemSelectedListener 
 
 			@Override
 			public void onClick(View arg0) {
-				// TODO Auto-generated method stub
 				content1.setCurrentItem(1);
 				siteTv.setTextColor(android.graphics.Color.BLACK);
 				exerciseTv.setTextColor(android.graphics.Color.CYAN);
@@ -126,7 +132,6 @@ public class collectActivity extends Activity implements OnItemSelectedListener 
 
 			@Override
 			public void onClick(View arg0) {
-				// TODO Auto-generated method stub
 				content1.setCurrentItem(2);
 				siteTv.setTextColor(android.graphics.Color.BLACK);
 				exerciseTv.setTextColor(android.graphics.Color.BLACK);

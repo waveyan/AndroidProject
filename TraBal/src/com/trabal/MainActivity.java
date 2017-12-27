@@ -61,6 +61,7 @@ public class MainActivity extends Activity {
 	private ListView listView;
 	private ImageView p_pic;
 	UserBean user;
+	Intent last_intent;
 
 	@SuppressLint("NewApi")
 	@Override
@@ -84,12 +85,9 @@ public class MainActivity extends Activity {
 		moreTv = (TextView) this.findViewById(R.id.moreID);
 		dynamicTv = (TextView) this.findViewById(R.id.dynamicID);
 
-		indexTv.setTextColor(android.graphics.Color.CYAN);
-		moreTv.setTextColor(android.graphics.Color.BLACK);
-		dynamicTv.setTextColor(android.graphics.Color.BLACK);
 		// 显示用户头像和昵称
-		Intent intent = MainActivity.this.getIntent();
-		user = (UserBean) intent.getSerializableExtra("user");       //获取上一intent的user值
+		last_intent = MainActivity.this.getIntent();
+		user = (UserBean) last_intent.getSerializableExtra("user");       //获取上一intent的user值
 
 		// 卫星菜单动态实现
 
@@ -144,7 +142,18 @@ public class MainActivity extends Activity {
 		// 设置适配器
 		content.setAdapter(new CustomPager());
 		// 设置当前页面
-		content.setCurrentItem(0);
+		if("more".equals(last_intent.getStringExtra("from"))){
+			indexTv.setTextColor(android.graphics.Color.BLACK);
+			moreTv.setTextColor(android.graphics.Color.CYAN);
+			dynamicTv.setTextColor(android.graphics.Color.BLACK);
+			content.setCurrentItem(1);
+		}
+		else{
+			indexTv.setTextColor(android.graphics.Color.CYAN);
+			moreTv.setTextColor(android.graphics.Color.BLACK);
+			dynamicTv.setTextColor(android.graphics.Color.BLACK);
+			content.setCurrentItem(0);
+		}
 		// 设置内容组件事件处理
 		content.setOnPageChangeListener(new CustomPagerChange());
 
@@ -230,6 +239,7 @@ public class MainActivity extends Activity {
 					Intent intent1 = new Intent(MainActivity.this,
 							collectActivity.class);
 					intent1.putExtra("user", user);
+					intent1.putExtra("from", "main");
 					MainActivity.this.startActivity(intent1);
 //					MainActivity.this.finish();
 					break;

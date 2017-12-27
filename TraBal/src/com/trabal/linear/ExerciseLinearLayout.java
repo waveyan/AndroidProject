@@ -35,6 +35,8 @@ public class ExerciseLinearLayout extends LinearLayout {
 		this.context = context;
 		//保存登录状态
 		this.user=user;
+		// 创建数据源,收藏地点和活动在collectActivity中一次性获取
+		ab_list = ((collectActivity)this.context).ab_list;
 
 		this.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT,
 				LayoutParams.FILL_PARENT));
@@ -46,22 +48,19 @@ public class ExerciseLinearLayout extends LinearLayout {
 		
 		mlistView = (ListView) findViewById(R.id.exercise_listview);
 
-		// 创建数据源,收藏地点和活动在collectActivity中一次性获取
-		ab_list = ((collectActivity)this.context).ab_list;
-		
 		// 创建一个Adapter的实例
 		mlistView.setAdapter(new MyBaseAdapter());
 		
-		mlistView.setOnItemClickListener(new OnItemClickListener() {
-
-			@Override
-			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
-					long arg3) {
-				Intent intent=new Intent(context,HdxiangqingActivity.class);
-				context.startActivity(intent);
-			}
-			
-		});
+//		mlistView.setOnItemClickListener(new OnItemClickListener() {
+//
+//			@Override
+//			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+//					long arg3) {
+//				Intent intent=new Intent(context,HdxiangqingActivity.class);
+//				context.startActivity(intent);
+//			}
+//			
+//		});
 
 	}
 	
@@ -103,6 +102,8 @@ public class ExerciseLinearLayout extends LinearLayout {
 				public void onClick(View arg0) {
 					Intent intent =new Intent(ExerciseLinearLayout.this.context,HdxiangqingActivity.class);
 					intent.putExtra("ab", ab_list.get(position));
+					intent.putExtra("user", ExerciseLinearLayout.this.user);
+					intent.putExtra("from", "collect");
 					ExerciseLinearLayout.this.context.startActivity(intent);
 				}
 			});

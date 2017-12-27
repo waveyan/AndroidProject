@@ -25,8 +25,20 @@ public class ActivityBean implements Serializable{
 	private HotSpotBean hsb;
 	private UserBean host_user;
 	private ArrayList<UserBean> who_want_to_go;
+	private int isfavour;
 	
 	
+	public int getIsfavour() {
+		return isfavour;
+	}
+	public void setIsfavour(int isfavour) {
+		this.isfavour = isfavour;
+	}
+	public ActivityBean() {
+		hsb=new HotSpotBean();
+		host_user=new UserBean();
+		who_want_to_go=new ArrayList<UserBean>();
+	}
 	public ArrayList<UserBean> getWho_want_to_go() {
 		return who_want_to_go;
 	}

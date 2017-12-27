@@ -360,15 +360,16 @@ public class NetTransfer {
 			try{
 			ab.setHsb(handle_hs_data(json.getString("hotspot")));
 			UserBean user=new UserBean();
-			ab.setHost_user(handle_user_data(json.getString("hot_user"), user));
+			ab.setHost_user(handle_user_data(json.getString("host_user"), user));
+			ab.setIsfavour(json.getInt("isfavour"));
 			
 			//想去的人
 			ArrayList<UserBean> wanttogo_user_list=new ArrayList<UserBean>();
 			JSONArray json_list = json.getJSONArray("wanttogo");
 			for (int i = 0; i < json_list.length(); i++) {
 				UserBean who_want_to_go=new UserBean();
-				user =handle_user_data(json_list.getString(i),user);
-				wanttogo_user_list.add(user);
+				who_want_to_go =handle_user_data(json_list.getString(i),who_want_to_go);
+				wanttogo_user_list.add(who_want_to_go);
 			}
 			ab.setWho_want_to_go(wanttogo_user_list);
 			}

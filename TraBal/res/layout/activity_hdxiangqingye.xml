@@ -350,6 +350,7 @@
             android:background="#ffffff" />
 
         <RelativeLayout
+            android:id="@+id/hd_hotspot"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_below="@+id/hd5"
