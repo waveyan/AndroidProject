@@ -13,7 +13,6 @@ public class HotSpotBean implements Serializable {
 	private String word;
 	private String worktime;
 	private String price;
-	private String city;
 	private String pic1;
 	private String pic3;
 	private String pic2;
@@ -30,6 +29,7 @@ public class HotSpotBean implements Serializable {
 	private int isfavour;
 	private ArrayList<EvaluationBean> ebs; 
 	private ArrayList<ActivityBean> abs;
+	private DistrictBean db;
 	
 	public HotSpotBean() {
 		ebs=new ArrayList<EvaluationBean>();
@@ -84,11 +84,12 @@ public class HotSpotBean implements Serializable {
 	public void setPrice(String price) {
 		this.price = price;
 	}
-	public String getCity() {
-		return city;
+	
+	public DistrictBean getDb() {
+		return db;
 	}
-	public void setCity(String city) {
-		this.city = city;
+	public void setDb(DistrictBean db) {
+		this.db = db;
 	}
 	public String getPic1() {
 		return pic1;

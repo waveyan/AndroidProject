@@ -2,8 +2,6 @@ package com.trabal.linear;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
-
 import org.apache.http.message.BasicNameValuePair;
 
 import com.trabal.R;
@@ -15,14 +13,8 @@ import com.trabal.util.net.NetTransfer;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.MotionEvent;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.View.OnTouchListener;
-import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 public class RestaurantActivity extends Activity {
 	private  ArrayList<HotSpotBean> hs_list;
