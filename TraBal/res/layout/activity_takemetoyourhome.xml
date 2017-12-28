@@ -15,7 +15,7 @@
         <RelativeLayout
             android:id="@+id/navigation"
             android:layout_width="wrap_content"
-            android:layout_height="22dp"
+            android:layout_height="30dp"
             android:orientation="horizontal" >
 
             <ImageButton
@@ -23,7 +23,17 @@
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
                 android:background="@drawable/back" />
+
+            <TextView
+                android:id="@+id/city"
+                android:layout_width="70dp"
+                android:layout_height="25dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="2dp"
+                android:text="广州市"
+                android:textSize="18sp" />
 
             <ImageButton
                 android:id="@+id/favourButton"
@@ -31,6 +41,7 @@
                 android:layout_height="20dp"
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="40dp"
+                android:layout_marginTop="5dp"
                 android:background="@drawable/favour" />
 
             <ImageButton
@@ -39,37 +50,23 @@
                 android:layout_height="20dp"
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="10dp"
+                android:layout_marginTop="5dp"
                 android:background="@drawable/share" />
         </RelativeLayout>
 
-        <TextView
-            android:id="@+id/city"
-            android:layout_width="70dp"
-            android:layout_height="20dp"
-            android:layout_above="@+id/times1"
-            android:layout_marginBottom="4dp"
-            android:layout_marginLeft="30dp"
-            android:text="广州市"
-            android:textSize="18sp" />
-
-        <LinearLayout
-            android:id="@+id/times1"
+        <ImageView
+            android:id="@+id/pic4"
             android:layout_width="fill_parent"
             android:layout_height="240dp"
             android:layout_below="@+id/navigation"
-            android:layout_marginTop="10dp" >
-
-            <ImageView
-                android:id="@+id/pic4"
-                android:layout_width="fill_parent"
-                android:layout_height="240dp"
-                android:src="@drawable/dw2" />
-        </LinearLayout>
+            android:layout_marginTop="10dp"
+            android:src="@drawable/dw2" />
 
         <LinearLayout
+            android:id="@+id/dd1"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/times1"
+            android:layout_below="@+id/pic4"
             android:orientation="vertical" >
 
             <TextView
@@ -164,139 +161,131 @@
                     android:textColor="#228b22"
                     android:textSize="10sp" />
             </RelativeLayout>
+        </LinearLayout>
 
-            <LinearLayout
-                android:id="@+id/Abstract"
-                android:layout_width="wrap_content"
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/dd1" >
+
+            <TextView
+                android:id="@+id/content"
+                android:layout_width="280dp"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/Tele"
-                android:layout_marginTop="3dp" >
+                android:layout_centerHorizontal="true"
+                android:fontFamily="monospace"
+                android:text="	等我餸上门是一家充满旧香港情怀的宵夜大排档，更近的传统大排档好像慢慢被来自异乡的小龙虾盖过了风头，而认真做粤式宵夜的好像也越来越少了。
+                
+    而位于老城区的这家等我餸上门却反行其道复刻起了8、90年代的香港大排档;没有空调冷气，也没有室内雅座，只有露天的胶凳折叠桌。
+                
+   ”餸”在这里是一个双关语，广东话里意为配饭的菜，也意指本店主要是外卖的形式;还有更深一层的意思就交给你们自由发挥了。另外，这里连menu和杯子的内容也都很有趣，就等你们自己去看了。"
+                android:textSize="11sp" />
 
-                <TextView
-                    android:id="@+id/content"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:fontFamily="monospace"
-                    android:text="等我餸上门是一家充满旧香港情怀的宵夜大排档，更近的传统大排档好像慢慢被来自异乡的小龙虾盖过了风头，而认真做粤式宵夜的好像也越来越少了。而位于老城区的这家等我餸上门却反行其道复刻起了8、90年代的香港大排档;没有空调冷气，也没有室内雅座，只有露天的胶凳折叠桌。”餸”在这里是一个双关语，广东话里意为配饭的菜，也意指本店主要是外卖的形式;还有更深一层的意思就交给你们自由发挥了。另外，这里连menu和杯子的内容也都很有趣，就等你们自己去看了。"
-                    android:textSize="11sp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/Whywelikeit"
+            <TextView
+                android:id="@+id/dd2"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/Abstract"
-                android:layout_marginTop="5dp" >
+                android:layout_below="@+id/content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="5dp"
+                android:background="#698B69" />
 
-                <ImageView
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingLeft="22dp"
-                    android:src="@drawable/whywelikeit" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/text1"
+            <TextView
+                android:id="@+id/dd3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/Whywelikeit"
-                android:layout_gravity="center"
-                android:layout_marginTop="5dp" >
+                android:layout_below="@+id/dd2"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="5dp"
+                android:text="WHY WE LIKE IT"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
-                <TextView
-                    android:id="@+id/pic1_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:fontFamily="monospace"
-                    android:text="朋友们聚在一起当然要喝啤酒吃宵夜，等我餸上门的怀旧氛围好像就是为此而设。"
-                    android:textSize="11sp" />
-            </LinearLayout>
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="11dp"
+                android:layout_below="@+id/dd3"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="2dp"
+                android:layout_toLeftOf="@+id/dd4"
+                android:background="#000000" />
 
-            <LinearLayout
-                android:id="@+id/x1"
+            <TextView
+                android:id="@+id/dd4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/text1"
-                android:layout_gravity="center"
-                android:layout_marginTop="5dp" >
+                android:layout_below="@+id/dd3"
+                android:layout_centerHorizontal="true"
+                android:text="探索亮點"
+                android:textSize="12sp"
+                android:textStyle="bold" />
 
-                <ImageView
-                    android:id="@+id/pic1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="210dp"
-                    android:src="@drawable/dw1" />
-            </LinearLayout>
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="11dp"
+                android:layout_below="@+id/dd3"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="2dp"
+                android:layout_toRightOf="@+id/dd4"
+                android:background="#000000" />
 
-            <LinearLayout
-                android:id="@+id/text2"
-                android:layout_width="wrap_content"
+            <TextView
+                android:id="@+id/pic1_text"
+                android:layout_width="280dp"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/x1"
-                android:layout_gravity="center"
-                android:layout_marginTop="5dp" >
+                android:layout_below="@+id/dd4"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:fontFamily="monospace"
+                android:text="朋友们聚在一起当然要喝啤酒吃宵夜，等我餸上门的怀旧氛围好像就是为此而设。"
+                android:textSize="11sp" />
 
-                <TextView
-                    android:id="@+id/pic2_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:fontFamily="monospace"
-                    android:text="店内以外卖为主，因此堂食作为并不算多，忙起来出品也要有一定的时间，但是这真诚的分量也值得期待。"
-                    android:textSize="11sp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/x2"
-                android:layout_width="wrap_content"
+            <ImageView
+                android:id="@+id/pic1"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/text2"
-                android:layout_gravity="center"
-                android:layout_marginTop="5dp" >
+                android:layout_below="@+id/pic1_text"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/dw1" />
 
-                <ImageView
-                    android:id="@+id/pic2"
-                    android:layout_width="fill_parent"
-                    android:layout_height="210dp"
-                    android:src="@drawable/dw3" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/text3"
-                android:layout_width="wrap_content"
+            <TextView
+                android:id="@+id/pic2_text"
+                android:layout_width="280dp"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/x2"
-                android:layout_gravity="center"
-                android:layout_marginTop="5dp" >
+                android:layout_below="@+id/pic1"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:fontFamily="monospace"
+                android:text="店内以外卖为主，因此堂食作为并不算多，忙起来出品也要有一定的时间，但是这真诚的分量也值得期待。"
+                android:textSize="11sp" />
 
-                <TextView
-                    android:id="@+id/pic3_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="monospace"
-                    android:text="餐牌以及包装上的内容很有趣，有趣到小编不方便多说，你们还是自己去看吧。"
-                    android:textSize="11sp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/x3"
-                android:layout_width="wrap_content"
+            <ImageView
+                android:id="@+id/pic2"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/text3"
-                android:layout_gravity="center"
-                android:layout_marginTop="5dp" >
+                android:layout_below="@+id/pic2_text"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/dw3" />
 
-                <ImageView
-                    android:id="@+id/pic3"
-                    android:layout_width="fill_parent"
-                    android:layout_height="300dp"
-                    android:src="@drawable/dw4" />
-            </LinearLayout>
-        </LinearLayout>
+            <TextView
+                android:id="@+id/pic3_text"
+                android:layout_width="280dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/pic2"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:fontFamily="monospace"
+                android:text="餐牌以及包装上的内容很有趣，有趣到小编不方便多说，你们还是自己去看吧。"
+                android:textSize="11sp" />
+
+            <ImageView
+                android:id="@+id/pic3"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/pic3_text"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/dw4" />
+        </RelativeLayout>
     </RelativeLayout>
 
 </ScrollView>
