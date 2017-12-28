@@ -23,6 +23,7 @@ public class addactivity extends Activity {
 			TextView_result6, TextView_result7;
 	private ImageButton backTv;
 	private UserBean user;
+	private Button submit;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +54,7 @@ public class addactivity extends Activity {
 		TextView_result5 = (TextView) findViewById(R.id.tx6ID);
 		TextView_result6 = (TextView) findViewById(R.id.tx7ID);
 		TextView_result7 = (TextView) findViewById(R.id.tx8ID);
+		submit=(Button)this.findViewById(R.id.addactivityID);
         backTv.setOnClickListener(new View.OnClickListener() {
 			
 			@Override

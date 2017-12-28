@@ -3,8 +3,6 @@ package com.trabal;
 import com.trabal.RegisterActivity;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
-
 import org.apache.http.message.BasicNameValuePair;
 
 import com.trabal.user.Bean.UserBean;
@@ -37,6 +35,7 @@ public class LoginActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		this.setContentView(R.layout.activity_login);
+		
 		initView(this.getIntent());
 
 		imageView = (ImageView) this.findViewById(R.id.back1ID);

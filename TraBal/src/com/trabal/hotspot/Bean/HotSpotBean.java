@@ -1,6 +1,10 @@
 package com.trabal.hotspot.Bean;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+
+import com.trabal.activity.Bean.ActivityBean;
+import com.trabal.user.Bean.EvaluationBean;
 
 public class HotSpotBean implements Serializable {
 	private String id;
@@ -24,7 +28,25 @@ public class HotSpotBean implements Serializable {
 	private String url;
 	private String telephone;
 	private int isfavour;
+	private ArrayList<EvaluationBean> ebs; 
+	private ArrayList<ActivityBean> abs;
 	
+	public HotSpotBean() {
+		ebs=new ArrayList<EvaluationBean>();
+		abs=new ArrayList<ActivityBean>();
+	}
+	public ArrayList<EvaluationBean> getEbs() {
+		return ebs;
+	}
+	public void setEbs(ArrayList<EvaluationBean> ebs) {
+		this.ebs = ebs;
+	}
+	public ArrayList<ActivityBean> getAbs() {
+		return abs;
+	}
+	public void setAbs(ArrayList<ActivityBean> abs) {
+		this.abs = abs;
+	}
 	public String getId() {
 		return id;
 	}

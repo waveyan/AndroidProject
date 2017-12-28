@@ -213,6 +213,12 @@ public class NetTransfer {
 			hsb.setUrl(json.getString("url"));
 			hsb.setIsfavour(json.getInt("isfavour"));
 			hsb.setId(json.getString("id"));
+			try{
+				hsb.setAbs(handle_ac_list(json.getString("activity")));
+			}catch(Exception e){}
+			try{
+				hsb.setEbs(handle_eb_list(json.getString("evaluation")));
+			}catch(Exception e){}
 			return hsb;
 
 		} catch (JSONException e) {
@@ -235,6 +241,7 @@ public class NetTransfer {
 
 		} catch (JSONException e) {
 			e.printStackTrace();
+			Log.e("handle_hs_list",e.getMessage());
 			return null;
 		}
 	}
@@ -313,6 +320,10 @@ public class NetTransfer {
 			EvaluationBean e=new EvaluationBean();
 			try{
 			e.setHs(handle_hs_data(json.getString("hotspot")));
+			}catch(Exception e1){}
+			try{
+				UserBean user=new UserBean();
+			e.setUser(handle_user_data(json.getString("user"),user));
 			}catch(Exception e1){}
 			e.setMood(json.getString("feeling"));
 			e.setPic1(json.getString("pic1"));
