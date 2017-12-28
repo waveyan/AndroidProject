@@ -29,6 +29,7 @@ import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import com.trabal.activity.Bean.ActivityBean;
+import com.trabal.hotspot.Bean.DistrictBean;
 import com.trabal.hotspot.Bean.HotSpotBean;
 import com.trabal.user.Bean.EvaluationBean;
 import com.trabal.user.Bean.UserBean;
@@ -194,7 +195,6 @@ public class NetTransfer {
 			JSONObject json = new JSONObject(data);
 			hsb.setAddress(json.getString("address"));
 			hsb.setArrvied(json.getInt("arrived"));
-			hsb.setCity(json.getString("city"));
 			hsb.setContent(json.getString("content"));
 			hsb.setLike(json.getInt("like"));
 			hsb.setName(json.getString("name"));
@@ -219,6 +219,9 @@ public class NetTransfer {
 			try{
 				hsb.setEbs(handle_eb_list(json.getString("evaluation")));
 			}catch(Exception e){}
+			try{
+				hsb.setDb(handle_db_data(json.getString("district")));
+			}catch(Exception e){}
 			return hsb;
 
 		} catch (JSONException e) {
@@ -242,6 +245,44 @@ public class NetTransfer {
 		} catch (JSONException e) {
 			e.printStackTrace();
 			Log.e("handle_hs_list",e.getMessage());
+			return null;
+		}
+	}
+	
+	public DistrictBean handle_db_data(String data){
+		JSONObject json;
+		try {
+			json = new JSONObject(data);
+			DistrictBean db=new DistrictBean();
+			db.setEnglishName(json.getString("englishname"));
+			db.setIntroduction(json.getString("introduction"));
+			db.setName(json.getString("name"));
+			db.setPic(this.media_perfix +json.getString("pic"));
+			try{
+				db.setHsb(handle_hs_list(json.getString("hotspot")));
+			}catch(Exception e){}
+			return db;
+		} catch (JSONException e) {
+			Log.e("handle_db_data",e.getMessage());
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	public ArrayList<DistrictBean> handle_db_list(String data){
+		try {
+			ArrayList<DistrictBean> db_list = new ArrayList<DistrictBean>();
+			JSONObject json = new JSONObject(data);
+			JSONArray json_list = json.getJSONArray("district");
+			for (int i = 0; i < json_list.length(); i++) {
+				DistrictBean db =handle_db_data(json_list.getString(i));
+				db_list.add(db);
+			}
+			return db_list;
+
+		} catch (JSONException e) {
+			e.printStackTrace();
+			Log.e("handle_db_list",e.getMessage());
 			return null;
 		}
 	}
