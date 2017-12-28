@@ -1,8 +1,9 @@
 package com.trabal.hotspot.Bean;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class DistrictBean {
+public class DistrictBean implements Serializable {
 	private String name;
 	private String englishName;
 	private String introduction;
