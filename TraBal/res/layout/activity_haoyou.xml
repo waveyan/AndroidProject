@@ -12,7 +12,7 @@
             >
 
             <ImageView
-                android:id="@+id/back_pingjia"
+                android:id="@+id/back_haoyou"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:layout_marginLeft="13dp"
@@ -24,7 +24,7 @@
                 android:layout_height="30dp"
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="6dp"
-                android:layout_toRightOf="@+id/back_pingjia"
+                android:layout_toRightOf="@+id/back_haoyou"
                 android:text="我的好友"
                 android:textColor="#000000"
                 android:textSize="20sp" 
