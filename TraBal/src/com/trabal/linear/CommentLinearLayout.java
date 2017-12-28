@@ -57,26 +57,31 @@ public class CommentLinearLayout extends LinearLayout {
 				ab_list = new ArrayList<ActivityBean>();
 
 				ActivityBean ab = new ActivityBean();
-				ab.setTitle("生活总有说不完的美好");
+				ab.setPerson("admin");
+				ab.setPrice("100/人");
+				ab.setTime("12:35");
+				ab.setIntroduction("位于写字楼下的独立咖啡馆，仿佛是理想中咖啡馆甚佳的选址。几乎必点拿铁，出品很有诚意，再看15-20的均价超良心,我想這是個好去處。");
+				ab.setTitle("Poem");
 				ab.setPic1(String.valueOf(R.drawable.person));
 				ab.setPic2(String.valueOf(R.drawable.l2));
 				ab.setPic3(String.valueOf(R.drawable.l2));
 				ab.setPic4(String.valueOf(R.drawable.l2));
 
-				ActivityBean ab1 = new ActivityBean();
-				ab1.setTitle("艺术展览");
-				ab1.setPic1(String.valueOf(R.drawable.l3));
-				ab1.setPic2(String.valueOf(R.drawable.l1));
-				ab1.setPic3(String.valueOf(R.drawable.l2));
-				ab1.setPic4(String.valueOf(R.drawable.l4));
-
 				ab_list.add(ab);
+				
+
+				ActivityBean ab1 = new ActivityBean();
+				ab1.setPerson("admin");
+				ab1.setPrice("100/人");
+				ab1.setTime("12:35");
+				ab1.setIntroduction("我想這是個好去處");
+				ab1.setTitle("Poem");
+				ab1.setPic1(String.valueOf(R.drawable.person));
+				ab1.setPic2(String.valueOf(R.drawable.l2));
+				ab1.setPic3(String.valueOf(R.drawable.l2));
+				ab1.setPic4(String.valueOf(R.drawable.l2));
+
 				ab_list.add(ab1);
-				
-				
-				
-				
-				
 				// 创建一个Adapter的实例
 				mlistView.setAdapter(new MyBaseAdapter());
 				mlistView.addHeaderView(headerView);
@@ -98,13 +103,21 @@ public class CommentLinearLayout extends LinearLayout {
 
 		public View getView(int position, View convertView, ViewGroup parent) {
 			View view = LayoutInflater.from(context).inflate(
-					R.layout.listview_item, null);
-			TextView mTextView1 = (TextView) view.findViewById(R.id.item_text1);
-			mTextView1.setText(ab_list.get(position).getTitle());
-			ImageView imageView1 = (ImageView) view.findViewById(R.id.item1);
-			ImageView imageView2 = (ImageView) view.findViewById(R.id.item3);
-			ImageView imageView3 = (ImageView) view.findViewById(R.id.item4);
-			ImageView imageView4 = (ImageView) view.findViewById(R.id.item5);
+					R.layout.pjxiangqingye3_item, null);
+			TextView mTextView1 = (TextView) view.findViewById(R.id.pjxqy_name3);
+			TextView mTextView2 = (TextView) view.findViewById(R.id.pjxqy_date3);
+			TextView mTextView3 = (TextView) view.findViewById(R.id.pjxqy_pj3);
+			TextView mTextView4 = (TextView) view.findViewById(R.id.pjxqy_site3);
+			TextView mTextView5 = (TextView) view.findViewById(R.id.pjxqy_price3);
+			mTextView1.setText(ab_list.get(position).getPerson());
+			mTextView2.setText(ab_list.get(position).getTime());
+			mTextView3.setText(ab_list.get(position).getIntroduction());
+			mTextView4.setText(ab_list.get(position).getTitle());
+			mTextView5.setText(ab_list.get(position).getPrice());
+			ImageView imageView1 = (ImageView) view.findViewById(R.id.pjxqy_headpic3);
+			ImageView imageView2 = (ImageView) view.findViewById(R.id.pjxqy_pic3);
+			ImageView imageView3 = (ImageView) view.findViewById(R.id.pjxqy_pic4);
+			ImageView imageView4 = (ImageView) view.findViewById(R.id.pjxqy_pic5);
 
 			imageView1.setBackgroundResource(Integer.parseInt(ab_list.get(
 					position).getPic1()));
