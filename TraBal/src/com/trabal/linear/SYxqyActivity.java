@@ -2,30 +2,36 @@ package com.trabal.linear;
 
 import java.util.ArrayList;
 
+import com.trabal.MainActivity;
 import com.trabal.R;
 import com.trabal.hotspot.Bean.DistrictBean;
 import com.trabal.user.Bean.UserBean;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.view.Menu;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.AdapterView.OnItemSelectedListener;
 
 public class SYxqyActivity extends Activity {
-
+	
+    private Button button;
 	private ArrayList<LinearLayout> linears;
 	private android.support.v4.view.ViewPager syxqy_content;
 	private TextView syxqy_positionTv, syxqy_commentTv;
 	private UserBean user;
 	public DistrictBean db;
+
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -74,6 +80,18 @@ public class SYxqyActivity extends Activity {
 				syxqy_positionTv.setTextColor(android.graphics.Color.BLACK);
 				syxqy_commentTv.setTextColor(android.graphics.Color.CYAN);
 
+			}
+		});
+		
+		//∑µªÿ…œ“ª≤„
+		button = (Button)findViewById(R.id.back_SY);
+		button.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				Intent intent = new Intent(SYxqyActivity.this,MainActivity.class);
+				intent.putExtra("user", user);
+				SYxqyActivity.this.startActivity(intent);
 			}
 		});
 
