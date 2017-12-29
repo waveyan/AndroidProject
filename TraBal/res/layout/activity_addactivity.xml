@@ -1,19 +1,19 @@
-<?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/scrollView1"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="fill_parent"
     android:scrollbars="none" >
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="match_parent" 
+        android:background="#698B69" >
 
         <RelativeLayout
             android:id="@+id/ac2ID"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:background="#EBEBEB" >
+            android:background="#EBEBEB">
 
             <ImageButton
                 android:id="@+id/leftarrow2ID"
@@ -333,7 +333,7 @@
         <RelativeLayout
             android:id="@+id/ac1ID"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="70dp"
             android:layout_below="@id/ac3ID"
             android:background="#698B69" >
 

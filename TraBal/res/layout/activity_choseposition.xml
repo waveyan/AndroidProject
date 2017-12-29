@@ -2,26 +2,40 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#698B69"
     android:orientation="vertical" >
 
-    <ImageButton
-        android:id="@+id/leftarrow2ID"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="12dp"
-        android:background="@drawable/d001" />
-
-    <EditText
-        android:id="@+id/ed2ID"
+    <RelativeLayout
+        android:id="@+id/axID"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="2dp"
-        android:layout_toRightOf="@id/leftarrow2ID"
-        android:background="#FFFFFF"
-        android:gravity="center_vertical"
-        android:hint="搜索好去处"
-        android:textSize="15dp" />
+        android:background="#FFFFFF" >
+
+        <ImageButton
+            android:id="@+id/leftarrow2ID"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/d001" />
+
+        <EditText
+            android:id="@+id/ed2ID"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="2dp"
+            android:layout_toRightOf="@id/leftarrow2ID"
+            android:background="#FFFFFF"
+            android:hint="搜索好去处"
+            android:textSize="15dp" />
+    </RelativeLayout>
+
+    <ListView
+        android:id="@+id/chose_listview"
+        android:layout_below="@+id/axID"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+    </ListView>
 
 </RelativeLayout>

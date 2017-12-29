@@ -31,33 +31,31 @@ public class RestaurantActivity extends Activity {
 		user = (UserBean) last_intent.getSerializableExtra("user");
 		
 		hs_list=initListview1();
+
 		ListView listview1 = (ListView) findViewById(R.id.listview_restaurant);
 
 		listviewAdapter fruitAdapter = new listviewAdapter(
 				RestaurantActivity.this, R.layout.listview_item, hs_list);
 		listview1.setAdapter(fruitAdapter);
 
-
-
 	}
 
 	private ArrayList<HotSpotBean> initListview1() {
 		// ÍøÂç´«Êä
 		ArrayList params = new ArrayList();
-		params.add(new BasicNameValuePair("what", last_intent.getStringExtra("what")));
+		params.add(new BasicNameValuePair("what", last_intent
+				.getStringExtra("what")));
 		String url = "hotspot/base";
 		NetTransfer nt = new NetTransfer();
 		try {
+
 			String data = NetTransfer.transfer(url, "get", params, true, user.getAccess_token(),null);
 			ArrayList<HotSpotBean> hs_list=nt.handle_hs_list(data);
 			return hs_list;
-
-			
 		} catch (IOException e) {
 			e.printStackTrace();
 			return null;
 		}
-		
 
 	}
 }

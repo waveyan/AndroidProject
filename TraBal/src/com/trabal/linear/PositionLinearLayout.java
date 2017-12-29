@@ -92,6 +92,8 @@ public class PositionLinearLayout extends LinearLayout {
 			View view = LayoutInflater.from(context).inflate(
 					R.layout.listview_item, null);
 			TextView mTextView1 = (TextView) view.findViewById(R.id.item_text1);
+			TextView mTextView2 = (TextView) view.findViewById(R.id.item_text2);
+			mTextView2.setText(db.getHsb().get(position).getWord());
 			mTextView1.setText(db.getHsb().get(position).getName());
 			ImageView imageView1 = (ImageView) view.findViewById(R.id.item1);
 			ImageView imageView2 = (ImageView) view.findViewById(R.id.item3);
