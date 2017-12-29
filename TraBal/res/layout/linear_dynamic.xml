@@ -5,11 +5,10 @@
     android:gravity="center"
     android:orientation="vertical" >
 
-    <TextView
+    <ListView
+        android:id="@+id/dynamic_listview"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="动态"
-        android:textSize="30dp" />
-
+        android:layout_height="fill_parent"
+        android:divider="@null" >
+    </ListView>
 </LinearLayout>
