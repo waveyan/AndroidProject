@@ -113,10 +113,10 @@ public class TakeMeToYourHome extends Activity {
 		pic1_text=(TextView)this.findViewById(R.id.pic1_text);
 		pic2_text=(TextView)this.findViewById(R.id.pic2_text);
 		pic3_text=(TextView)this.findViewById(R.id.pic3_text);
-		Picasso.with(TakeMeToYourHome.this).load(hsb.getPic1()).centerCrop().fit().into(pic1);
-		Picasso.with(TakeMeToYourHome.this).load(hsb.getPic2()).centerCrop().fit().into(pic2);
-		Picasso.with(TakeMeToYourHome.this).load(hsb.getPic3()).centerCrop().fit().into(pic3);
-		Picasso.with(TakeMeToYourHome.this).load(hsb.getPic2()).centerCrop().fit().into(pic4);
+		Picasso.with(TakeMeToYourHome.this).load(hsb.getPic1()).into(pic1);
+		Picasso.with(TakeMeToYourHome.this).load(hsb.getPic2()).into(pic2);
+		Picasso.with(TakeMeToYourHome.this).load(hsb.getPic3()).into(pic3);
+		Picasso.with(TakeMeToYourHome.this).load(hsb.getPic2()).into(pic4);
 		englishname.setText(hsb.getEnglishName());
 		chinaname.setText(hsb.getName());
 		introduction.setText(hsb.getWord());
