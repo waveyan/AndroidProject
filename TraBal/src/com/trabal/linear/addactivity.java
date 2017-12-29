@@ -1,20 +1,37 @@
 package com.trabal.linear;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+
 import android.app.Activity;
 import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.trabal.MainActivity;
+import com.trabal.MyDialog;
+import com.trabal.MyDialog.OnButtonClickListener;
 import com.trabal.R;
 import com.trabal.user.Bean.UserBean;
 
-public class addactivity extends Activity {
+public class addactivity extends Activity implements
+OnButtonClickListener{
 	private Button button, button1, button2, button3, button4, button5,
 			button6, button7, button11, button12, button13, button14, button15,
 			button16, button17, button18;
@@ -22,13 +39,25 @@ public class addactivity extends Activity {
 			TextView_result3, TextView_result4, TextView_result5,
 			TextView_result6, TextView_result7;
 	private ImageButton backTv;
+	private ImageView poster;
 	private UserBean user;
 	private Button submit;
+	private MyDialog myDialog;
+    private final int IMAGE_OPEN = 4;
+	public static final int PHOTOHRAPH = 1;
+	private static final int CROP_CODE = 1;
+	public static final int NONE = 0;
+    public static final int PHOTOZOOM = 2; // 缩放
+    public static final int PHOTORESOULT = 3;// 结果
+    public static final String IMAGE_UNSPECIFIED = "image/*";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_addactivity);
+		//海报
+		poster = (ImageView)findViewById(R.id.posterID);
+		
 		backTv = (ImageButton)findViewById(R.id.leftarrow2ID);
 		button = (Button) findViewById(R.id.classifyID);
 		button1 = (Button) findViewById(R.id.themeID);
@@ -55,6 +84,20 @@ public class addactivity extends Activity {
 		TextView_result6 = (TextView) findViewById(R.id.tx7ID);
 		TextView_result7 = (TextView) findViewById(R.id.tx8ID);
 		submit=(Button)this.findViewById(R.id.addactivityID);
+		
+		myDialog = new MyDialog(addactivity.this);
+		myDialog.setOnButtonClickListener(this);
+		
+		poster.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				myDialog.show();
+				
+			}
+		});
+		
         backTv.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
@@ -293,6 +336,35 @@ public class addactivity extends Activity {
 			}
 		});
 	}
+	
+
+	
+	//跳转系统相机
+	@Override
+	    public void camera() {                                                
+
+	        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+	        intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(new File(
+	                Environment.getExternalStorageDirectory(), "temp.jpg")));
+	        startActivityForResult(intent, PHOTOHRAPH);
+	        myDialog.dismiss();
+	    }
+	//跳转系统相册
+	@Override
+	    public void gallery() {                                                
+	        Intent intent = new Intent(Intent.ACTION_PICK,
+	                android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+	        intent.setType("image/*");
+	        startActivityForResult(intent, IMAGE_OPEN);
+	        myDialog.dismiss();
+
+	    }
+	@Override
+	    public void cancel() {
+	        myDialog.cancel();
+	    
+	    
+	    }
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -391,8 +463,66 @@ public class addactivity extends Activity {
 
 		}
 
-		super.onActivityResult(requestCode, resultCode, data);
-	};
+		  super.onActivityResult(requestCode, resultCode, data);
+
+	        //获取图片路径
+		  if (resultCode == NONE)
+	            return;
+	        // 拍照
+	        if (requestCode == PHOTOHRAPH) {                                     //拍照
+	            // 设置文件保存路径这里放在跟目录下
+	            File picture = new File(Environment.getExternalStorageDirectory()
+	                    + "/temp.jpg");
+	            startImageZoom(Uri.fromFile(picture));
+	          
+	        }
+
+	        if (data == null)
+	            return;
+	        
+	        
+	        if (requestCode == PHOTORESOULT) {                                  //返回结果
+	            Bundle extras = data.getExtras();                               //获得intent放回的值
+	            if (extras != null) {
+	                Bitmap photo = extras.getParcelable("data");
+	                ByteArrayOutputStream stream = new ByteArrayOutputStream(); //ByteArrayOutputStream 获取内存缓存区的数据
+	                photo.compress(Bitmap.CompressFormat.JPEG, 100, stream);  
+	                
+	                ((ImageView)findViewById(R.id.posterID)).setImageBitmap(photo);    //加载图片到头像
+	                
+	                
+//                    Uri uri = saveBitmap(photo, "temp");
+//	                           //启动图像裁剪
+//	                           startImageZoom(uri);
+	                       }
+	                   }
+	        if (resultCode == RESULT_OK && requestCode == IMAGE_OPEN) {           //系统相册打开且选择了照片
+	            startImageZoom(data.getData());                                     
+	        }
+      super.onActivityResult(requestCode, resultCode, data);   
+
+
+	}
+
+	public void startImageZoom(Uri uri) {                                                //剪切图片
+        Intent intent = new Intent("com.android.camera.action.CROP");
+        intent.setDataAndType(uri, IMAGE_UNSPECIFIED);
+        Log.e("uri",uri.getPath());
+      
+        intent.putExtra("crop", "true");
+        // aspectX aspectY 是宽高的比例
+        intent.putExtra("aspectX", 1.5);
+        intent.putExtra("aspectY", 1);
+        // outputX outputY 是裁剪图片宽高
+        intent.putExtra("outputX", 920);
+        intent.putExtra("outputY", 240);
+        intent.putExtra("return-data", true);
+        
+        startActivityForResult(intent, PHOTORESOULT);
+    }
+	
+
+ 
 
 }
 	

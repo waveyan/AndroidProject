@@ -22,6 +22,9 @@ public class FriendLinearLayout extends LinearLayout{
 	private ListView listView;
 	private ArrayList<UserBean> follow;
 	private UserBean user;
+
+	Intent last_intent;
+
 	Context context;
 	
 

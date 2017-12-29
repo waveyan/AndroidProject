@@ -57,6 +57,7 @@ public class MyDialog extends Dialog implements OnClickListener {
         void gallery();
         void cancel();
     }
+    
     private OnButtonClickListener onButtonClickListener;
 
     public OnButtonClickListener getOnButtonClickListener() {

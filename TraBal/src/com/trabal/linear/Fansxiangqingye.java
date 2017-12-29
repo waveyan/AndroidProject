@@ -67,11 +67,11 @@ public class Fansxiangqingye extends Activity {
 		ab.setPic2(String.valueOf(R.drawable.l2));
 		ab.setPic3(String.valueOf(R.drawable.l2));
 		ab.setPic4(String.valueOf(R.drawable.l2));
-		ab.setPic5(String.valueOf(R.drawable.person));
-		ab.setPic6(String.valueOf(R.drawable.person));
-		ab.setPic7(String.valueOf(R.drawable.person));
-		ab.setPic8(String.valueOf(R.drawable.person));
-		ab.setPic9(String.valueOf(R.drawable.person));
+//		ab.setPic5(String.valueOf(R.drawable.person));
+//		ab.setPic6(String.valueOf(R.drawable.person));
+//		ab.setPic7(String.valueOf(R.drawable.person));
+//		ab.setPic8(String.valueOf(R.drawable.person));
+//		ab.setPic9(String.valueOf(R.drawable.person));
 
 		ab_list.add(ab);
 
@@ -85,11 +85,11 @@ public class Fansxiangqingye extends Activity {
 		ab1.setPic2(String.valueOf(R.drawable.l2));
 		ab1.setPic3(String.valueOf(R.drawable.l2));
 		ab1.setPic4(String.valueOf(R.drawable.l2));
-		ab1.setPic5(String.valueOf(R.drawable.person));
-		ab1.setPic6(String.valueOf(R.drawable.person));
-		ab1.setPic7(String.valueOf(R.drawable.person));
-		ab1.setPic8(String.valueOf(R.drawable.person));
-		ab1.setPic9(String.valueOf(R.drawable.person));
+//		ab1.setPic5(String.valueOf(R.drawable.person));
+//		ab1.setPic6(String.valueOf(R.drawable.person));
+//		ab1.setPic7(String.valueOf(R.drawable.person));
+//		ab1.setPic8(String.valueOf(R.drawable.person));
+//		ab1.setPic9(String.valueOf(R.drawable.person));
 
 		ab_list.add(ab1);
 		// 创建一个Adapter的实例
@@ -183,16 +183,16 @@ public class Fansxiangqingye extends Activity {
 					position).getPic3()));
 			imageView4.setBackgroundResource(Integer.parseInt(ab_list.get(
 					position).getPic4()));
-			imageView5.setBackgroundResource(Integer.parseInt(ab_list.get(
-					position).getPic5()));
-			imageView6.setBackgroundResource(Integer.parseInt(ab_list.get(
-					position).getPic6()));
-			imageView7.setBackgroundResource(Integer.parseInt(ab_list.get(
-					position).getPic7()));
-			imageView8.setBackgroundResource(Integer.parseInt(ab_list.get(
-					position).getPic8()));
-			imageView9.setBackgroundResource(Integer.parseInt(ab_list.get(
-					position).getPic9()));
+//			imageView5.setBackgroundResource(Integer.parseInt(ab_list.get(
+//					position).getPic5()));
+//			imageView6.setBackgroundResource(Integer.parseInt(ab_list.get(
+//					position).getPic6()));
+//			imageView7.setBackgroundResource(Integer.parseInt(ab_list.get(
+//					position).getPic7()));
+//			imageView8.setBackgroundResource(Integer.parseInt(ab_list.get(
+//					position).getPic8()));
+//			imageView9.setBackgroundResource(Integer.parseInt(ab_list.get(
+//					position).getPic9()));
 			return view;
 		}
 

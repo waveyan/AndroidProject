@@ -43,8 +43,9 @@ public class RestaurantActivity extends Activity {
 	private ArrayList<HotSpotBean> initListview1() {
 		// 网络传输
 		ArrayList params = new ArrayList();
-		params.add(new BasicNameValuePair("what", last_intent
-				.getStringExtra("what")));
+
+		params.add(new BasicNameValuePair("what", last_intent.getStringExtra("what")));     //上传数据对接属性 
+
 		String url = "hotspot/base";
 		NetTransfer nt = new NetTransfer();
 		try {

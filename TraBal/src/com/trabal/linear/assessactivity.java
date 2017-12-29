@@ -180,6 +180,8 @@ OnButtonClickListener, OnItemClickListener{
     @Override
     public void cancel() {
         dialog.cancel();
+    
+    
     }
 
     @Override
