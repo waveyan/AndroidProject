@@ -62,10 +62,10 @@ public class listviewAdapter extends BaseAdapter {
 				((Activity)context).finish();
 			}
 		});
-		Picasso.with(context).load(objects.get(position).getPic1()).into(itemImage1);
-		Picasso.with(context).load(objects.get(position).getPic2()).into(itemImage2);
-		Picasso.with(context).load(objects.get(position).getPic3()).into(itemImage3);
-		Picasso.with(context).load(objects.get(position).getPic2()).into(itemImage4);
+		Picasso.with(context).load(objects.get(position).getPic1()).centerCrop().fit().into(itemImage1);
+		Picasso.with(context).load(objects.get(position).getPic2()).centerCrop().fit().into(itemImage2);
+		Picasso.with(context).load(objects.get(position).getPic3()).centerCrop().fit().into(itemImage3);
+		Picasso.with(context).load(objects.get(position).getPic2()).centerCrop().fit().into(itemImage4);
 		item_textview1.setText(objects.get(position).getName());
 		return view;
 

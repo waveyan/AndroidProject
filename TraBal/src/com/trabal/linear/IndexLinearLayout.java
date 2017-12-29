@@ -1,12 +1,17 @@
 package com.trabal.linear;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.squareup.picasso.Picasso;
+import com.trabal.MainActivity;
 import com.trabal.R;
 import com.trabal.listviewAdapter;
 import com.trabal.activity.Bean.ActivityBean;
+import com.trabal.hotspot.Bean.DistrictBean;
 import com.trabal.user.Bean.UserBean;
+import com.trabal.util.net.NetTransfer;
 
 import android.app.Activity;
 import android.content.Context;
@@ -28,14 +33,14 @@ public class IndexLinearLayout extends LinearLayout {
 
 	private Context context;
 	private ListView mlistView;
-	private ArrayList<ActivityBean> ab_list;
+	private ArrayList<DistrictBean> db_list;
 	private UserBean user;
 	
 
 	public IndexLinearLayout(final Context context) {
 		super(context);
 		this.context = context;
-		
+		user=((MainActivity)this.context).user;
 
 		this.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT,
 				LayoutParams.FILL_PARENT));
@@ -46,32 +51,17 @@ public class IndexLinearLayout extends LinearLayout {
 				LayoutParams.FILL_PARENT));
 		
 		mlistView = (ListView) findViewById(R.id.index_listview);
-
-		// 创建数据源
-		ab_list = new ArrayList<ActivityBean>();
-
-		ActivityBean ab = new ActivityBean();
-		ab.setTitle("生活总有说不完的美好");
-		ab.setPic1(String.valueOf(R.drawable.l2));
-		ab.setPic2(String.valueOf(R.drawable.l2));
-		ab.setPic3(String.valueOf(R.drawable.l2));
-		ab.setPic4(String.valueOf(R.drawable.l2));
-		ab.setPic5(String.valueOf(R.drawable.l2));
-		ab.setPic6(String.valueOf(R.drawable.l2));
-		ab.setPic7(String.valueOf(R.drawable.l2));
-
-		ActivityBean ab1 = new ActivityBean();
-		ab1.setTitle("艺术展览");
-		ab1.setPic1(String.valueOf(R.drawable.l3));
-		ab1.setPic2(String.valueOf(R.drawable.l1));
-		ab1.setPic3(String.valueOf(R.drawable.l2));
-		ab1.setPic4(String.valueOf(R.drawable.l4));
-		ab1.setPic5(String.valueOf(R.drawable.l2));
-		ab1.setPic6(String.valueOf(R.drawable.l2));
-		ab1.setPic7(String.valueOf(R.drawable.l2));
 		
-		ab_list.add(ab);
-		ab_list.add(ab1);
+		//网络请求，获取首页数据
+		String url="hotspot/create_index";
+		NetTransfer nt=new NetTransfer();
+		String data;
+		try {
+			data = NetTransfer.transfer(url, "get", null, true, user.getAccess_token(), null);
+			db_list=nt.handle_db_list(data);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		
 		// 创建一个Adapter的实例
 		mlistView.setAdapter(new MyBaseAdapter());
@@ -80,52 +70,115 @@ public class IndexLinearLayout extends LinearLayout {
 	
 	class MyBaseAdapter extends BaseAdapter {
 		
+		ImageView imageView1,imageView2,imageView3,imageView4,imageView5,imageView6,imageView7;
+		
 
 		public int getCount() {
-			return ab_list.size();
+			return db_list.size();
 		}
 
 		public Object getItem(int position) {
-			return ab_list.get(position);
+			return db_list.get(position);
 		}
 
 		public long getItemId(int position) {
 			return position;
 		}
 
-		public View getView(int position, View convertView, ViewGroup parent) {
+		public View getView(final int position, View convertView, ViewGroup parent) {
 			View view = LayoutInflater.from(context).inflate(
 					R.layout.index_listview_item, null);
 			TextView mTextView1 = (TextView) view
 					.findViewById(R.id.item_text1);
-			mTextView1.setText(ab_list.get(position).getTitle());
-			ImageView imageView1 = (ImageView) view
+			mTextView1.setText(db_list.get(position).getName());
+			imageView1 = (ImageView) view
 					.findViewById(R.id.item1);
-			ImageView imageView2 = (ImageView) view
+			imageView2 = (ImageView) view
 					.findViewById(R.id.item3);
-			ImageView imageView3 = (ImageView) view
+			imageView3 = (ImageView) view
 					.findViewById(R.id.item4);
-			ImageView imageView4 = (ImageView) view
+			imageView4 = (ImageView) view
 					.findViewById(R.id.item5);
-			ImageView imageView5 = (ImageView) view
+			imageView5 = (ImageView) view
 					.findViewById(R.id.item6);
-			ImageView imageView6 = (ImageView) view
+			imageView6 = (ImageView) view
 					.findViewById(R.id.item7);
-			ImageView imageView7 = (ImageView) view
+			imageView7 = (ImageView) view
 					.findViewById(R.id.item8);
 			
+			Picasso.with(context).load(db_list.get(position).getPic()).centerCrop().fit().into(imageView1);
+			Picasso.with(context).load(db_list.get(position).getHsb().get(0).getPic1()).centerCrop().fit().into(imageView2);
+			Picasso.with(context).load(db_list.get(position).getHsb().get(1).getPic1()).centerCrop().fit().into(imageView3);
+			Picasso.with(context).load(db_list.get(position).getHsb().get(2).getPic1()).centerCrop().fit().into(imageView4);
+			Picasso.with(context).load(db_list.get(position).getHsb().get(3).getPic1()).centerCrop().fit().into(imageView5);
+			Picasso.with(context).load(db_list.get(position).getHsb().get(4).getPic1()).centerCrop().fit().into(imageView6);
+			Picasso.with(context).load(db_list.get(position).getHsb().get(5).getPic1()).centerCrop().fit().into(imageView7);
 			
-			imageView1.setBackgroundResource(Integer.parseInt(ab_list.get(position).getPic1()));
-			imageView2.setBackgroundResource(Integer.parseInt(ab_list.get(position).getPic2()));
-			imageView3.setBackgroundResource(Integer.parseInt(ab_list.get(position).getPic3()));
-			imageView4.setBackgroundResource(Integer.parseInt(ab_list.get(position).getPic4()));
-			imageView5.setBackgroundResource(Integer.parseInt(ab_list.get(position).getPic5()));
-			imageView6.setBackgroundResource(Integer.parseInt(ab_list.get(position).getPic6()));
-			imageView7.setBackgroundResource(Integer.parseInt(ab_list.get(position).getPic7()));
+			
+			
+			class IVOnclick implements View.OnClickListener{
+
+				@Override
+				public void onClick(View arg0) {
+					if(arg0.getId()==imageView1.getId()){
+						// 维持登录状态
+						Intent intent = new Intent(IndexLinearLayout.this.context, SYxqyActivity.class);
+						intent.putExtra("user", user);
+						intent.putExtra("db", db_list.get(position));
+						IndexLinearLayout.this.context.startActivity(intent);
+						
+					}else if(arg0.getId()==imageView2.getId()){
+						Intent intent = new Intent(IndexLinearLayout.this.context, TakeMeToYourHome.class);
+						intent.putExtra("user", user);
+						intent.putExtra("hsb", db_list.get(position).getHsb().get(0));
+						intent.putExtra("from", "index");
+						IndexLinearLayout.this.context.startActivity(intent);
+					}else if(arg0.getId()==imageView3.getId()){
+						Intent intent = new Intent(IndexLinearLayout.this.context, TakeMeToYourHome.class);
+						intent.putExtra("user", user);
+						intent.putExtra("hsb", db_list.get(position).getHsb().get(1));
+						intent.putExtra("from", "index");
+						IndexLinearLayout.this.context.startActivity(intent);
+					}else if(arg0.getId()==imageView4.getId()){
+						Intent intent = new Intent(IndexLinearLayout.this.context, TakeMeToYourHome.class);
+						intent.putExtra("user", user);
+						intent.putExtra("hsb", db_list.get(position).getHsb().get(2));
+						intent.putExtra("from", "index");
+						IndexLinearLayout.this.context.startActivity(intent);
+					}else if(arg0.getId()==imageView5.getId()){
+						Intent intent = new Intent(IndexLinearLayout.this.context, TakeMeToYourHome.class);
+						intent.putExtra("user", user);
+						intent.putExtra("hsb", db_list.get(position).getHsb().get(3));
+						intent.putExtra("from", "index");
+						IndexLinearLayout.this.context.startActivity(intent);
+					}else if(arg0.getId()==imageView6.getId()){
+						Intent intent = new Intent(IndexLinearLayout.this.context, TakeMeToYourHome.class);
+						intent.putExtra("user", user);
+						intent.putExtra("hsb", db_list.get(position).getHsb().get(4));
+						intent.putExtra("from", "index");
+						IndexLinearLayout.this.context.startActivity(intent);
+					}else if(arg0.getId()==imageView7.getId()){
+						Intent intent = new Intent(IndexLinearLayout.this.context, TakeMeToYourHome.class);
+						intent.putExtra("user", user);
+						intent.putExtra("hsb", db_list.get(position).getHsb().get(5));
+						intent.putExtra("from", "index");
+						IndexLinearLayout.this.context.startActivity(intent);
+					}
+				}
+				
+			}
+			
+			imageView1.setOnClickListener(new IVOnclick());
+			imageView2.setOnClickListener(new IVOnclick());
+			imageView3.setOnClickListener(new IVOnclick());
+			imageView4.setOnClickListener(new IVOnclick());
+			imageView5.setOnClickListener(new IVOnclick());
+			imageView6.setOnClickListener(new IVOnclick());
+			imageView7.setOnClickListener(new IVOnclick());
 			return view;
-			
 
 		}
 	}
+	
 
 }

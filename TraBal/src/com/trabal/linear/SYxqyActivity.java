@@ -3,6 +3,9 @@ package com.trabal.linear;
 import java.util.ArrayList;
 
 import com.trabal.R;
+import com.trabal.hotspot.Bean.DistrictBean;
+import com.trabal.user.Bean.UserBean;
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
@@ -21,10 +24,14 @@ public class SYxqyActivity extends Activity {
 	private ArrayList<LinearLayout> linears;
 	private android.support.v4.view.ViewPager syxqy_content;
 	private TextView syxqy_positionTv, syxqy_commentTv;
+	private UserBean user;
+	public DistrictBean db;
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_syxiangqingye);
+		user=(UserBean)this.getIntent().getSerializableExtra("user");
+		db=(DistrictBean)this.getIntent().getSerializableExtra("db");
 
 		// ================================
 
@@ -53,7 +60,6 @@ public class SYxqyActivity extends Activity {
 
 			@Override
 			public void onClick(View arg0) {
-				// TODO Auto-generated method stub
 				syxqy_content.setCurrentItem(0);
 				syxqy_positionTv.setTextColor(android.graphics.Color.CYAN);
 				syxqy_commentTv.setTextColor(android.graphics.Color.BLACK);
@@ -64,7 +70,6 @@ public class SYxqyActivity extends Activity {
 
 			@Override
 			public void onClick(View arg0) {
-				// TODO Auto-generated method stub
 				syxqy_content.setCurrentItem(1);
 				syxqy_positionTv.setTextColor(android.graphics.Color.BLACK);
 				syxqy_commentTv.setTextColor(android.graphics.Color.CYAN);
@@ -128,6 +133,15 @@ public class SYxqyActivity extends Activity {
 		}
 
 	}
+
+	public DistrictBean getDb() {
+		return db;
+	}
+
+	public void setDb(DistrictBean db) {
+		this.db = db;
+	}
+	
 }
 
 

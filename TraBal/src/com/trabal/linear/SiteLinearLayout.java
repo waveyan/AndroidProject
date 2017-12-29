@@ -89,10 +89,10 @@ public class SiteLinearLayout extends LinearLayout {
 			ImageView imageView4 = (ImageView) view
 					.findViewById(R.id.item5);
 			//地点收藏图片展示
-			Picasso.with(context).load(hs_list.get(position).getPic1()).into(imageView1);
-			Picasso.with(context).load(hs_list.get(position).getPic2()).into(imageView2);
-			Picasso.with(context).load(hs_list.get(position).getPic3()).into(imageView3);
-			Picasso.with(context).load(hs_list.get(position).getPic2()).into(imageView4);
+			Picasso.with(context).load(hs_list.get(position).getPic1()).centerCrop().fit().into(imageView1);
+			Picasso.with(context).load(hs_list.get(position).getPic2()).centerCrop().fit().into(imageView2);
+			Picasso.with(context).load(hs_list.get(position).getPic3()).centerCrop().fit().into(imageView3);
+			Picasso.with(context).load(hs_list.get(position).getPic2()).centerCrop().fit().into(imageView4);
 			view.setOnClickListener(new View.OnClickListener(){
 
 				@Override

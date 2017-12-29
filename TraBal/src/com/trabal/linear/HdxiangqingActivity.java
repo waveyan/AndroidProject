@@ -124,17 +124,17 @@ public class HdxiangqingActivity extends Activity{
 		telephone.setText(ab.getTelephone());
 		introduction.setText(ab.getIntroduction());
 		
-		Picasso.with(HdxiangqingActivity.this).load(ab.getPic1()).into(pic1);
-		Picasso.with(HdxiangqingActivity.this).load(ab.getPic2()).into(pic2);
-		Picasso.with(HdxiangqingActivity.this).load(ab.getPic3()).into(pic3);
-		Picasso.with(HdxiangqingActivity.this).load(ab.getPic4()).into(pic4);
+		Picasso.with(HdxiangqingActivity.this).load(ab.getPic1()).centerCrop().fit().into(pic1);
+		Picasso.with(HdxiangqingActivity.this).load(ab.getPic2()).centerCrop().fit().into(pic2);
+		Picasso.with(HdxiangqingActivity.this).load(ab.getPic3()).centerCrop().fit().into(pic3);
+		Picasso.with(HdxiangqingActivity.this).load(ab.getPic4()).centerCrop().fit().into(pic4);
 		try{
-		Picasso.with(HdxiangqingActivity.this).load(ab.getHsb().getPic1()).into(hs1);
-		Picasso.with(HdxiangqingActivity.this).load(ab.getHsb().getPic2()).into(hs2);
-		Picasso.with(HdxiangqingActivity.this).load(ab.getHsb().getPic3()).into(hs3);
-		Picasso.with(HdxiangqingActivity.this).load(ab.getHsb().getPic2()).into(hs4);
+		Picasso.with(HdxiangqingActivity.this).load(ab.getHsb().getPic1()).centerCrop().fit().into(hs1);
+		Picasso.with(HdxiangqingActivity.this).load(ab.getHsb().getPic2()).centerCrop().fit().into(hs2);
+		Picasso.with(HdxiangqingActivity.this).load(ab.getHsb().getPic3()).centerCrop().fit().into(hs3);
+		Picasso.with(HdxiangqingActivity.this).load(ab.getHsb().getPic2()).centerCrop().fit().into(hs4);
 		host_user.setText(ab.getHost_user().getName());
-		Picasso.with(HdxiangqingActivity.this).load(ab.getHost_user().getPic()).into(host_usr_pic);
+		Picasso.with(HdxiangqingActivity.this).load(ab.getHost_user().getPic()).centerCrop().fit().into(host_usr_pic);
 		hotspot.setText(ab.getHsb().getName());
 		hs_name.setText(ab.getHsb().getName());
 		}catch(Exception e){

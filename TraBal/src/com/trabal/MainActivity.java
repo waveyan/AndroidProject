@@ -60,7 +60,7 @@ public class MainActivity extends Activity {
 	private ImageButton imageButton;
 	private ListView listView;
 	private ImageView p_pic;
-	UserBean user;
+	public UserBean user;
 	Intent last_intent;
 
 	@SuppressLint("NewApi")
@@ -68,6 +68,10 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		// 显示用户头像和昵称
+		last_intent = MainActivity.this.getIntent();
+		user = (UserBean) last_intent.getSerializableExtra("user");       //获取上一intent的user值
+
 		linears = new ArrayList<LinearLayout>();
 		linears.add(new IndexLinearLayout(MainActivity.this));
 		linears.add(new MoreLinearLayout(MainActivity.this));
@@ -84,10 +88,6 @@ public class MainActivity extends Activity {
 		indexTv = (TextView) this.findViewById(R.id.indexID);
 		moreTv = (TextView) this.findViewById(R.id.moreID);
 		dynamicTv = (TextView) this.findViewById(R.id.dynamicID);
-
-		// 显示用户头像和昵称
-		last_intent = MainActivity.this.getIntent();
-		user = (UserBean) last_intent.getSerializableExtra("user");       //获取上一intent的user值
 
 		// 卫星菜单动态实现
 

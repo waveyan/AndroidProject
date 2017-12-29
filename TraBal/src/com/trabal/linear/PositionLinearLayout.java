@@ -18,8 +18,10 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.LinearLayout.LayoutParams;
 
+import com.squareup.picasso.Picasso;
 import com.trabal.R;
 import com.trabal.activity.Bean.ActivityBean;
+import com.trabal.hotspot.Bean.DistrictBean;
 import com.trabal.linear.SiteLinearLayout.MyBaseAdapter;
 import com.trabal.user.Bean.UserBean;
 
@@ -30,12 +32,16 @@ public class PositionLinearLayout extends LinearLayout {
 	private UserBean user;
 	private ListView mlistView;
 	private ImageView imageView;
-	private ArrayList<ActivityBean> ab_list;
+	private DistrictBean db;
 	private View headerView;
 
 	public PositionLinearLayout(Context context) {
 		super(context);
 		this.context = context;
+		db=((SYxqyActivity)this.context).getDb();
+		// 获取上一个页面传过来的用户
+		last_intent = ((Activity) context).getIntent();
+		user = (UserBean) last_intent.getSerializableExtra("user");
 
 		this.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT,
 				LayoutParams.FILL_PARENT));
@@ -45,83 +51,73 @@ public class PositionLinearLayout extends LinearLayout {
 		this.addView(view, new LayoutParams(LayoutParams.FILL_PARENT,
 				LayoutParams.FILL_PARENT));
 
-		// 获取上一个页面传过来的用户
-		last_intent = ((Activity) context).getIntent();
-		user = (UserBean) last_intent.getSerializableExtra("user");
-
 		// header_listview
 		
 		mlistView = (ListView) view.findViewById(R.id.syxqy_position_listview);
 		
-		headerView = LayoutInflater.from(context).inflate(R.layout.header_listview, null);
-		
-		
-		
-		// 创建数据源
-		ab_list = new ArrayList<ActivityBean>();
-
-		ActivityBean ab = new ActivityBean();
-		ab.setTitle("生活总有说不完的美好");
-		ab.setPic1(String.valueOf(R.drawable.l2));
-		ab.setPic2(String.valueOf(R.drawable.l2));
-		ab.setPic3(String.valueOf(R.drawable.l2));
-		ab.setPic4(String.valueOf(R.drawable.l2));
-
-		ActivityBean ab1 = new ActivityBean();
-		ab1.setTitle("艺术展览");
-		ab1.setPic1(String.valueOf(R.drawable.l3));
-		ab1.setPic2(String.valueOf(R.drawable.l1));
-		ab1.setPic3(String.valueOf(R.drawable.l2));
-		ab1.setPic4(String.valueOf(R.drawable.l4));
-
-		ab_list.add(ab);
-		ab_list.add(ab1);
-		
-		
-		
-		
+		headerView = init_headerView();		
 		
 		// 创建一个Adapter的实例
-		mlistView.setAdapter(new MyBaseAdapter());
 		mlistView.addHeaderView(headerView);
-		
-		
+		mlistView.setAdapter(new MyBaseAdapter());
 		
 
+	}
+	
+	private View init_headerView (){
+		View headerView = LayoutInflater.from(context).inflate(R.layout.header_listview, null);	
+		ImageView pic=(ImageView) headerView.findViewById(R.id.syxqy_pic1);
+		TextView syxqy_text=(TextView) headerView.findViewById(R.id.syxqy_text1);
+		Picasso.with(context).load(db.getPic()).centerCrop().fit().into(pic);
+		syxqy_text.setText(db.getIntroduction());
+		return headerView;
+		
 	}
 
 	class MyBaseAdapter extends BaseAdapter {
 
 		public int getCount() {
-			return ab_list.size();
+			return db.getHsb().size();
 		}
 
 		public Object getItem(int position) {
-			return ab_list.get(position);
+			return db.getHsb().get(position);
 		}
 
 		public long getItemId(int position) {
 			return position;
 		}
 
-		public View getView(int position, View convertView, ViewGroup parent) {
+		public View getView(final int position, View convertView, ViewGroup parent) {
 			View view = LayoutInflater.from(context).inflate(
 					R.layout.listview_item, null);
 			TextView mTextView1 = (TextView) view.findViewById(R.id.item_text1);
-			mTextView1.setText(ab_list.get(position).getTitle());
+			mTextView1.setText(db.getHsb().get(position).getName());
 			ImageView imageView1 = (ImageView) view.findViewById(R.id.item1);
 			ImageView imageView2 = (ImageView) view.findViewById(R.id.item3);
 			ImageView imageView3 = (ImageView) view.findViewById(R.id.item4);
 			ImageView imageView4 = (ImageView) view.findViewById(R.id.item5);
+			
+			Picasso.with(context).load(db.getHsb().get(position).getPic1()).centerCrop().fit().into(imageView1);
+			Picasso.with(context).load(db.getHsb().get(position).getPic2()).centerCrop().fit().into(imageView2);
+			Picasso.with(context).load(db.getHsb().get(position).getPic3()).centerCrop().fit().into(imageView3);
+			Picasso.with(context).load(db.getHsb().get(position).getPic2()).centerCrop().fit().into(imageView4);
+			
+			view.setOnClickListener(new View.OnClickListener(){
 
-			imageView1.setBackgroundResource(Integer.parseInt(ab_list.get(
-					position).getPic1()));
-			imageView2.setBackgroundResource(Integer.parseInt(ab_list.get(
-					position).getPic2()));
-			imageView3.setBackgroundResource(Integer.parseInt(ab_list.get(
-					position).getPic3()));
-			imageView4.setBackgroundResource(Integer.parseInt(ab_list.get(
-					position).getPic4()));
+				@Override
+				public void onClick(View arg0) {
+					Intent intent = new Intent(PositionLinearLayout.this.context, TakeMeToYourHome.class);
+					intent.putExtra("user", user);
+					intent.putExtra("hsb", db.getHsb().get(position));
+					intent.putExtra("db", db);
+					intent.putExtra("from", "syxqy");
+					PositionLinearLayout.this.context.startActivity(intent);
+					
+				}
+				
+			});
+
 			return view;
 		}
 	}

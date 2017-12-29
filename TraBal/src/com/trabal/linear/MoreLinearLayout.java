@@ -145,10 +145,10 @@ public class MoreLinearLayout extends LinearLayout {
 			String data = NetTransfer.transfer(url, "get", params, true,
 					user.getAccess_token(),null);
 			ac_list = nt.handle_ac_list(data);
-			Picasso.with(context).load(ac_list.get(0).getPic1()).into(act_image1);
-			Picasso.with(context).load(ac_list.get(1).getPic1()).into(act_image2);
-			Picasso.with(context).load(ac_list.get(2).getPic1()).into(act_image3);
-			Picasso.with(context).load(ac_list.get(3).getPic1()).into(act_image4);
+			Picasso.with(context).load(ac_list.get(0).getPic1()).centerCrop().fit().into(act_image1);
+			Picasso.with(context).load(ac_list.get(1).getPic1()).centerCrop().fit().into(act_image2);
+			Picasso.with(context).load(ac_list.get(2).getPic1()).centerCrop().fit().into(act_image3);
+			Picasso.with(context).load(ac_list.get(3).getPic1()).centerCrop().fit().into(act_image4);
 			//bug£¡£¡£¡£¡£¡£¡
 			tv1.setText(ac_list.get(0).getIntroduction().substring(0, 20)+"...");
 			tv2.setText(ac_list.get(1).getIntroduction().substring(0, 20)+"...");

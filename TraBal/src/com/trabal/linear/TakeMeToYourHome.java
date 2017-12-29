@@ -7,6 +7,7 @@ import java.util.Map;
 import org.apache.http.message.BasicNameValuePair;
 import com.squareup.picasso.Picasso;
 import com.trabal.LoginActivity;
+import com.trabal.MainActivity;
 import com.trabal.R;
 import com.trabal.hotspot.Bean.HotSpotBean;
 import com.trabal.user.Bean.UserBean;
@@ -70,6 +71,18 @@ public class TakeMeToYourHome extends Activity {
 					intent.putExtra("ab",last_intent.getSerializableExtra("ab"));
 					intent.putExtra("from",last_intent.getSerializableExtra("last_from"));
 				}
+				else if("index".equals(from)){
+					intent = new Intent(TakeMeToYourHome.this,
+							MainActivity.class);
+					intent.putExtra("from", "index");
+				}
+				else if("syxqy".equals(from)){
+					intent = new Intent(TakeMeToYourHome.this,
+							SYxqyActivity.class);
+					intent.putExtra("from", "syxqy");
+					intent.putExtra("db", last_intent.getSerializableExtra("db"));
+					intent.putExtra("user", user);
+				}
 				else{
 					intent = new Intent(TakeMeToYourHome.this,
 							RestaurantActivity.class);
@@ -100,10 +113,10 @@ public class TakeMeToYourHome extends Activity {
 		pic1_text=(TextView)this.findViewById(R.id.pic1_text);
 		pic2_text=(TextView)this.findViewById(R.id.pic2_text);
 		pic3_text=(TextView)this.findViewById(R.id.pic3_text);
-		Picasso.with(TakeMeToYourHome.this).load(hsb.getPic1()).into(pic1);
-		Picasso.with(TakeMeToYourHome.this).load(hsb.getPic2()).into(pic2);
-		Picasso.with(TakeMeToYourHome.this).load(hsb.getPic3()).into(pic3);
-		Picasso.with(TakeMeToYourHome.this).load(hsb.getPic2()).into(pic4);
+		Picasso.with(TakeMeToYourHome.this).load(hsb.getPic1()).centerCrop().fit().into(pic1);
+		Picasso.with(TakeMeToYourHome.this).load(hsb.getPic2()).centerCrop().fit().into(pic2);
+		Picasso.with(TakeMeToYourHome.this).load(hsb.getPic3()).centerCrop().fit().into(pic3);
+		Picasso.with(TakeMeToYourHome.this).load(hsb.getPic2()).centerCrop().fit().into(pic4);
 		englishname.setText(hsb.getEnglishName());
 		chinaname.setText(hsb.getName());
 		introduction.setText(hsb.getWord());
