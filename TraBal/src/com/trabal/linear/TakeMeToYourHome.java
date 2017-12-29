@@ -19,6 +19,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -28,7 +29,7 @@ public class TakeMeToYourHome extends Activity {
 
 	private ImageView pic1, pic2, pic3, pic4;
 
-	private ImageButton favourButton, backButton;
+	private ImageButton favourButton, backButton,shareButton;
 
 	private TextView englishname, chinaname, introduction, openTimes, cost,
 			address, hs_telephone, content, pic1_text, pic2_text, pic3_text;
@@ -102,6 +103,7 @@ public class TakeMeToYourHome extends Activity {
 		pic2=(ImageView)this.findViewById(R.id.pic2);
 		pic3=(ImageView)this.findViewById(R.id.pic3);
 		pic4=(ImageView)this.findViewById(R.id.pic4);
+		shareButton=(ImageButton)this.findViewById(R.id.shareButton);
 		englishname=(TextView)this.findViewById(R.id.EnglishName);
 		chinaname=(TextView)this.findViewById(R.id.ChinaName);
 		introduction=(TextView)this.findViewById(R.id.Introduction);
@@ -134,6 +136,24 @@ public class TakeMeToYourHome extends Activity {
 		}
 		// 绑定收藏事件
 		favourButton.setOnClickListener(new FavourClick());
+		
+		//分享
+		shareButton.setOnClickListener(new View.OnClickListener(){
+
+			@Override
+			public void onClick(View arg0) {
+				Intent shareIntent = new Intent();
+				shareIntent.setAction(Intent.ACTION_SEND);
+				shareIntent.putExtra(Intent.EXTRA_TEXT,
+						"This is my Share text.");
+				shareIntent.setType("text/plain");
+				// 设置分享列表的标题，并且每次都显示分享列表
+				TakeMeToYourHome.this.startActivity(Intent
+						.createChooser(shareIntent, "分享到"));
+				
+			}
+			
+		});
 	}
 
 	// 收藏事件
