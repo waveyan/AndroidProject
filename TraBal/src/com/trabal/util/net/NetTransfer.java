@@ -176,6 +176,51 @@ public class NetTransfer {
 		});
 
 	}
+	
+	@SuppressLint("NewApi")
+	public static void upload_pic(String url, HashMap<String, String> data,
+			String access_token, HashMap<String, Object> files)
+			throws FileNotFoundException {
+
+		StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
+				.permitAll().build();
+		StrictMode.setThreadPolicy(policy);
+
+		 url = perfix + url + "/";
+
+		AsyncHttpClient client = new AsyncHttpClient();
+		RequestParams p = new RequestParams();
+		client.addHeader("access-token", access_token);
+
+		for (String key : data.keySet()) {
+			p.put(key, data.get(key));
+		}
+
+		if (files != null) {
+			for (String key : files.keySet()) {
+				p.put(key, (File) files.get(key));
+			}
+		}
+
+		client.post(url, p, new AsyncHttpResponseHandler() {
+
+			@Override
+			public void onFailure(int arg0, Header[] arg1, byte[] arg2,
+					Throwable arg3) {
+				String msg = new String(arg2);
+				Log.e("failure", arg3.getMessage());
+
+			}
+
+			@Override
+			public void onSuccess(int arg0, Header[] arg1, byte[] arg2) {
+				String msg = new String(arg2);
+				Log.e("success", msg);
+
+			}
+		});
+
+	}
 
 	public void return_data(String data) {
 		try {
@@ -527,5 +572,6 @@ public class NetTransfer {
 	public void setAccess_token(String access_token) {
 		this.access_token = access_token;
 	}
+
 
 }
