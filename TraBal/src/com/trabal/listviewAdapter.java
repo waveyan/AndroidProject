@@ -46,7 +46,7 @@ public class listviewAdapter extends BaseAdapter {
 		TextView item_textview1 = (TextView) view.findViewById(R.id.item_text1);
 		
 		
-		view.setOnClickListener(new OnClickListener() {
+		itemImage1.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View arg0) {

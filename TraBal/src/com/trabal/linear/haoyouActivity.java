@@ -33,9 +33,9 @@ public class haoyouActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_haoyou);
-
+		
 		Intent intent = haoyouActivity.this.getIntent();
-		user = (UserBean) intent.getSerializableExtra("user");
+		user = (UserBean)intent.getSerializableExtra("user");
 
 		// ================================
 		try {
@@ -52,8 +52,8 @@ public class haoyouActivity extends Activity {
 		}
 
 		linears = new ArrayList<LinearLayout>();
-		linears.add(new FansLinearLayout(haoyouActivity.this, user));
-		linears.add(new FriendLinearLayout(haoyouActivity.this, user));
+		linears.add(new FansLinearLayout(haoyouActivity.this,user));
+		linears.add(new FriendLinearLayout(haoyouActivity.this,user));
 
 		// 获取内容组件
 		content2 = (android.support.v4.view.ViewPager) this

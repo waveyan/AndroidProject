@@ -7,82 +7,86 @@
     <RelativeLayout
         android:id="@+id/lv1"
         android:layout_width="fill_parent"
-        android:layout_height="120dp"
-        android:layout_marginTop="0dp" >
+        android:layout_height="wrap_content" >
 
         <ImageView
             android:id="@+id/item1"
             android:layout_width="fill_parent"
-            android:layout_height="120dp" />
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/lv2"
-        android:layout_width="fill_parent"
-        android:layout_height="300dp"
-        android:layout_below="@+id/lv1"
-        android:background="#ffffff" >
+            android:layout_height="130dp" />
 
         <TextView
             android:id="@+id/item_text1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="20dp"
-            android:text="AA"
-            android:textSize="27sp" />
+            android:layout_marginTop="70dp"
+            android:fontFamily="serif"
+            android:text="A A"
+            android:textColor="#ffffff"
+            android:textSize="30sp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/lv2"
+        android:layout_width="fill_parent"
+        android:layout_height="254dp"
+        android:layout_below="@+id/lv1"
+        android:background="#ffffff" >
 
         <ImageView
             android:id="@+id/item3"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_below="@+id/item_text1"
-            android:layout_marginRight="20dp"
+            android:layout_width="110dp"
+            android:layout_height="110dp"
+            android:layout_marginRight="13dp"
             android:layout_marginTop="10dp"
             android:layout_toLeftOf="@+id/item4" />
 
         <ImageView
             android:id="@+id/item5"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_below="@+id/item_text1"
-            android:layout_marginLeft="20dp"
+            android:layout_width="110dp"
+            android:layout_height="110dp"
+            android:layout_marginLeft="13dp"
             android:layout_marginTop="10dp"
             android:layout_toRightOf="@+id/item4" />
 
         <ImageView
             android:id="@+id/item6"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="110dp"
+            android:layout_height="110dp"
             android:layout_below="@+id/item4"
-            android:layout_marginRight="20dp"
+            android:layout_marginRight="10dp"
             android:layout_marginTop="10dp"
             android:layout_toLeftOf="@+id/item7" />
 
         <ImageView
             android:id="@+id/item7"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="110dp"
+            android:layout_height="110dp"
             android:layout_below="@+id/item4"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="10dp" />
-        
-         <ImageView
+            android:layout_marginTop="13dp" />
+
+        <ImageView
             android:id="@+id/item8"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="110dp"
+            android:layout_height="110dp"
             android:layout_below="@+id/item4"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="13dp"
             android:layout_marginTop="10dp"
             android:layout_toRightOf="@+id/item7" />
 
-         <ImageView
-             android:id="@+id/item4"
-             android:layout_width="100dp"
-             android:layout_height="100dp"
-             android:layout_alignTop="@+id/item3"
-             android:layout_toRightOf="@+id/item6" />
-        
+        <ImageView
+            android:id="@+id/item4"
+            android:layout_width="110dp"
+            android:layout_height="110dp"
+            android:layout_alignTop="@+id/item3"
+            android:layout_toRightOf="@+id/item6" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="10dp"
+        android:layout_below="@+id/lv2" >
     </RelativeLayout>
 
 </RelativeLayout>
