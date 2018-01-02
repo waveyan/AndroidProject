@@ -5,7 +5,7 @@
 
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="260dp"
+        android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="5dp"
         android:orientation="horizontal" >
@@ -64,6 +64,7 @@
                 android:layout_alignLeft="@id/pjxqy_name3"
                 android:layout_below="@id/pjxqy_name3"
                 android:numStars="5"
+                android:rating="1"
                 android:stepSize="1" />
 
             <TextView
@@ -102,47 +103,29 @@
                 android:textColor="#000000"
                 android:textSize="10dp" />
 
-            <ImageView
-                android:id="@+id/pjxqy_pic3"
-                android:layout_width="70dp"
-                android:layout_height="60dp"
-                android:layout_alignLeft="@id/pjxqy_pj3"
+            <GridView
+                android:id="@+id/gridview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_below="@id/pjxqy_pj3"
-                android:layout_marginTop="15dp"
-                android:background="@drawable/wanghong1" />
-
-            <ImageView
-                android:id="@+id/pjxqy_pic4"
-                android:layout_width="70dp"
-                android:layout_height="60dp"
-                android:layout_below="@id/pjxqy_pj3"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="15dp"
-                android:layout_toRightOf="@id/pjxqy_pic3"
-                android:background="@drawable/wanghong2" />
-
-            <ImageView
-                android:id="@+id/pjxqy_pic5"
-                android:layout_width="70dp"
-                android:layout_height="60dp"
-                android:layout_below="@id/pjxqy_pj3"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="15dp"
-                android:layout_toRightOf="@id/pjxqy_pic4"
-                android:background="@drawable/wanghong3" />
+                android:numColumns="3" 
+                android:horizontalSpacing="10dp"
+                android:verticalSpacing ="10dp"
+                >
+            </GridView>
 
             <ImageView
                 android:id="@+id/pjxqy_blank3"
                 android:layout_width="250dp"
                 android:layout_height="40dp"
-                android:layout_below="@id/pjxqy_pic3" />
+                android:layout_below="@id/gridview" />
 
             <ImageView
                 android:id="@+id/pjxqy_icon3"
                 android:layout_width="17dp"
                 android:layout_height="17dp"
                 android:layout_alignLeft="@id/pjxqy_name3"
-                android:layout_below="@id/pjxqy_pic3"
+                android:layout_below="@id/gridview"
                 android:layout_marginTop="8dp"
                 android:background="@drawable/icon" />
 
@@ -150,7 +133,7 @@
                 android:id="@+id/pjxqy_site3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/pjxqy_pic3"
+                android:layout_below="@id/gridview"
                 android:layout_marginLeft="3dp"
                 android:layout_marginTop="11dp"
                 android:layout_toRightOf="@id/pjxqy_icon3"
@@ -161,18 +144,18 @@
                 android:id="@+id/pjxqy_love3"
                 android:layout_width="18dp"
                 android:layout_height="18dp"
-                android:layout_below="@id/pjxqy_pic3"
+                android:layout_below="@id/gridview"
                 android:layout_marginRight="5dp"
                 android:layout_marginTop="8dp"
                 android:layout_toLeftOf="@id/pjxqy_date3"
-                android:background="@drawable/love" />
+                android:background="@drawable/favour" />
 
             <ImageView
                 android:id="@+id/pjxqy_comment3"
                 android:layout_width="18dp"
                 android:layout_height="18dp"
                 android:layout_alignRight="@id/pjxqy_date3"
-                android:layout_below="@id/pjxqy_pic3"
+                android:layout_below="@id/gridview"
                 android:layout_marginTop="8dp"
                 android:background="@drawable/comment" />
 
@@ -188,56 +171,19 @@
                     android:layout_marginTop="5dp"
                     android:background="#CFCFCF" />
 
-                <ImageView
-                    android:id="@+id/pjxqy_head6"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
+                <GridView
+                    android:id="@+id/gridview1"
                     android:layout_below="@id/pjxqy_interval2"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="10dp"
-                    android:background="@drawable/person" />
-
-                <ImageView
-                    android:id="@+id/pjxqy_head7"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:layout_below="@id/pjxqy_interval2"
-                    android:layout_marginLeft="50dp"
-                    android:layout_marginTop="10dp"
-                    android:background="@drawable/person" />
-
-                <ImageView
-                    android:id="@+id/pjxqy_head8"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:layout_below="@+id/pjxqy_interval2"
-                    android:layout_marginLeft="80dp"
-                    android:layout_marginTop="10dp"
-                    android:background="@drawable/person" />
-
-                <ImageView
-                    android:id="@+id/pjxqy_head9"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:layout_below="@+id/pjxqy_interval2"
-                    android:layout_marginLeft="110dp"
-                    android:layout_marginTop="10dp"
-                    android:background="@drawable/person" />
-
-                <ImageView
-                    android:id="@+id/pjxqy_head10"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:layout_below="@+id/pjxqy_interval2"
-                    android:layout_marginLeft="140dp"
-                    android:layout_marginTop="10dp"
-                    android:background="@drawable/person" />
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:numColumns="7" >
+                </GridView>
 
                 <View
                     android:id="@+id/pjxqy_interval3"
                     android:layout_width="fill_parent"
                     android:layout_height="1dp"
-                    android:layout_below="@id/pjxqy_head6"
+                    android:layout_below="@id/gridview1"
                     android:layout_marginTop="10dp"
                     android:background="#CFCFCF" />
             </RelativeLayout>

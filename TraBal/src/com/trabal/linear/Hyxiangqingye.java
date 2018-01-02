@@ -71,11 +71,11 @@ public class Hyxiangqingye extends Activity {
 		ab.setPic2(String.valueOf(R.drawable.l2));
 		ab.setPic3(String.valueOf(R.drawable.l2));
 		ab.setPic4(String.valueOf(R.drawable.l2));
-		ab.setPic5(String.valueOf(R.drawable.person));
-		ab.setPic6(String.valueOf(R.drawable.person));
-		ab.setPic7(String.valueOf(R.drawable.person));
-		ab.setPic8(String.valueOf(R.drawable.person));
-		ab.setPic9(String.valueOf(R.drawable.person));
+//		ab.setPic5(String.valueOf(R.drawable.person));
+//		ab.setPic6(String.valueOf(R.drawable.person));
+//		ab.setPic7(String.valueOf(R.drawable.person));
+//		ab.setPic8(String.valueOf(R.drawable.person));
+//		ab.setPic9(String.valueOf(R.drawable.person));
 
 		ab_list.add(ab);
 
@@ -89,11 +89,11 @@ public class Hyxiangqingye extends Activity {
 		ab1.setPic2(String.valueOf(R.drawable.l2));
 		ab1.setPic3(String.valueOf(R.drawable.l2));
 		ab1.setPic4(String.valueOf(R.drawable.l2));
-		ab1.setPic5(String.valueOf(R.drawable.person));
-		ab1.setPic6(String.valueOf(R.drawable.person));
-		ab1.setPic7(String.valueOf(R.drawable.person));
-		ab1.setPic8(String.valueOf(R.drawable.person));
-		ab1.setPic9(String.valueOf(R.drawable.person));
+//		ab1.setPic5(String.valueOf(R.drawable.person));
+//		ab1.setPic6(String.valueOf(R.drawable.person));
+//		ab1.setPic7(String.valueOf(R.drawable.person));
+//		ab1.setPic8(String.valueOf(R.drawable.person));
+//		ab1.setPic9(String.valueOf(R.drawable.person));
 
 		ab_list.add(ab1);
 		// 创建一个Adapter的实例
@@ -151,6 +151,7 @@ public class Hyxiangqingye extends Activity {
 
 			TextView mTextView1 = (TextView) view
 					.findViewById(R.id.pjxqy_name3);
+			
 			TextView mTextView2 = (TextView) view
 					.findViewById(R.id.pjxqy_date3);
 			TextView mTextView3 = (TextView) view.findViewById(R.id.pjxqy_pj3);
@@ -165,12 +166,12 @@ public class Hyxiangqingye extends Activity {
 			mTextView5.setText(ab_list.get(position).getPrice());
 			ImageView imageView1 = (ImageView) view
 					.findViewById(R.id.pjxqy_headpic3);
-			ImageView imageView2 = (ImageView) view
-					.findViewById(R.id.pjxqy_pic3);
-			ImageView imageView3 = (ImageView) view
-					.findViewById(R.id.pjxqy_pic4);
-			ImageView imageView4 = (ImageView) view
-					.findViewById(R.id.pjxqy_pic5);
+//			ImageView imageView2 = (ImageView) view
+//					.findViewById(R.id.pjxqy_pic3);
+//			ImageView imageView3 = (ImageView) view
+//					.findViewById(R.id.pjxqy_pic4);
+//			ImageView imageView4 = (ImageView) view
+//					.findViewById(R.id.pjxqy_pic5);
 			ImageView imageView5 = (ImageView) view
 					.findViewById(R.id.pjxqy_head6);
 			ImageView imageView6 = (ImageView) view
@@ -184,22 +185,22 @@ public class Hyxiangqingye extends Activity {
 
 			imageView1.setBackgroundResource(Integer.parseInt(ab_list.get(
 					position).getPic1()));
-			imageView2.setBackgroundResource(Integer.parseInt(ab_list.get(
-					position).getPic2()));
-			imageView3.setBackgroundResource(Integer.parseInt(ab_list.get(
-					position).getPic3()));
-			imageView4.setBackgroundResource(Integer.parseInt(ab_list.get(
-					position).getPic4()));
-			imageView5.setBackgroundResource(Integer.parseInt(ab_list.get(
-					position).getPic5()));
-			imageView6.setBackgroundResource(Integer.parseInt(ab_list.get(
-					position).getPic6()));
-			imageView7.setBackgroundResource(Integer.parseInt(ab_list.get(
-					position).getPic7()));
-			imageView8.setBackgroundResource(Integer.parseInt(ab_list.get(
-					position).getPic8()));
-			imageView9.setBackgroundResource(Integer.parseInt(ab_list.get(
-					position).getPic9()));
+//			imageView2.setBackgroundResource(Integer.parseInt(ab_list.get(
+//					position).getPic2()));
+//			imageView3.setBackgroundResource(Integer.parseInt(ab_list.get(
+//					position).getPic3()));
+//			imageView4.setBackgroundResource(Integer.parseInt(ab_list.get(
+//					position).getPic4()));
+//			imageView5.setBackgroundResource(Integer.parseInt(ab_list.get(
+//					position).getPic5()));
+//			imageView6.setBackgroundResource(Integer.parseInt(ab_list.get(
+//					position).getPic6()));
+//			imageView7.setBackgroundResource(Integer.parseInt(ab_list.get(
+//					position).getPic7()));
+//			imageView8.setBackgroundResource(Integer.parseInt(ab_list.get(
+//					position).getPic8()));
+//			imageView9.setBackgroundResource(Integer.parseInt(ab_list.get(
+//					position).getPic9()));
 			return view;
 		}
 

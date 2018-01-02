@@ -1,6 +1,9 @@
 package com.trabal.linear;
 
+import java.io.IOException;
 import java.util.ArrayList;
+
+import org.apache.http.message.BasicNameValuePair;
 
 import android.app.Activity;
 import android.content.Context;
@@ -9,16 +12,24 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.LinearLayout.LayoutParams;
 
+import com.squareup.picasso.Picasso;
+import com.trabal.MainActivity;
 import com.trabal.R;
 import com.trabal.activity.Bean.ActivityBean;
 import com.trabal.linear.PositionLinearLayout.MyBaseAdapter;
+import com.trabal.user.Bean.EvaluationBean;
 import com.trabal.user.Bean.UserBean;
+import com.trabal.util.net.ImageDownloadTask;
+import com.trabal.util.net.NetTransfer;
 
 public class DynamicLinearLayout extends LinearLayout {
 
@@ -27,7 +38,10 @@ public class DynamicLinearLayout extends LinearLayout {
 	private UserBean user;
 	private ListView mlistView;
 	private View headerView;
-	private ArrayList<ActivityBean> ab_list;
+	private ArrayList<EvaluationBean> eb_list;
+	private ArrayList<String> list;
+	private BaseAdapter ba;
+	private ImageView love;
 
 	public DynamicLinearLayout(Context context) {
 		super(context);
@@ -45,69 +59,44 @@ public class DynamicLinearLayout extends LinearLayout {
 		last_intent = ((Activity) context).getIntent();
 		user = (UserBean) last_intent.getSerializableExtra("user");
 
-		// header_listview
-
 		mlistView = (ListView) view.findViewById(R.id.dynamic_listview);
 
-
-		// 创建数据源
-		ab_list = new ArrayList<ActivityBean>();
-
-		ActivityBean ab = new ActivityBean();
-		ab.setPerson("admin");
-		ab.setPrice("100/人");
-		ab.setTime("12:35");
-		ab.setIntroduction("位于写字楼下的独立咖啡馆，仿佛是理想中咖啡馆甚佳的选址。几乎必点拿铁，出品很有诚意，再看15-20的均价超良心,我想這是個好去處。");
-		ab.setTitle("Poem");
-		ab.setPic1(String.valueOf(R.drawable.person));
-		ab.setPic2(String.valueOf(R.drawable.l2));
-		ab.setPic3(String.valueOf(R.drawable.l2));
-		ab.setPic4(String.valueOf(R.drawable.l2));
-		ab.setPic5(String.valueOf(R.drawable.person));
-		ab.setPic6(String.valueOf(R.drawable.person));
-		ab.setPic7(String.valueOf(R.drawable.person));
-		ab.setPic8(String.valueOf(R.drawable.person));
-		ab.setPic9(String.valueOf(R.drawable.person));
-
-		ab_list.add(ab);
-
-		ActivityBean ab1 = new ActivityBean();
-		ab1.setPerson("admin");
-		ab1.setPrice("100/人");
-		ab1.setTime("12:35");
-		ab1.setIntroduction("我想這是個好去處");
-		ab1.setTitle("Poem");
-		ab1.setPic1(String.valueOf(R.drawable.person));
-		ab1.setPic2(String.valueOf(R.drawable.l2));
-		ab1.setPic3(String.valueOf(R.drawable.l2));
-		ab1.setPic4(String.valueOf(R.drawable.l2));
-		ab1.setPic5(String.valueOf(R.drawable.person));
-		ab1.setPic6(String.valueOf(R.drawable.person));
-		ab1.setPic7(String.valueOf(R.drawable.person));
-		ab1.setPic8(String.valueOf(R.drawable.person));
-		ab1.setPic9(String.valueOf(R.drawable.person));
-
-		ab_list.add(ab1);
 		// 创建一个Adapter的实例
-		mlistView.setAdapter(new MyBaseAdapter());
+		ba = new MyBaseAdapter();
+		mlistView.setAdapter(ba);
 
 	}
 
 	class MyBaseAdapter extends BaseAdapter {
 
+		public MyBaseAdapter() {
+			// 获取数据
+			String url = "evaluation/get_evaluation_from_my_follow";
+			NetTransfer nt = new NetTransfer();
+			try {
+				String data = NetTransfer.transfer(url, "get", null, true,
+						user.getAccess_token(), null);
+				eb_list = nt.handle_eb_list(data);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+
+		}
+
 		public int getCount() {
-			return ab_list.size();
+			return eb_list.size();
 		}
 
 		public Object getItem(int position) {
-			return ab_list.get(position);
+			return eb_list.get(position);
 		}
 
 		public long getItemId(int position) {
 			return position;
 		}
 
-		public View getView(int position, View convertView, ViewGroup parent) {
+		public View getView(final int position, View convertView,
+				ViewGroup parent) {
 			View view = LayoutInflater.from(context).inflate(
 					R.layout.pjxiangqingye3_item, null);
 			TextView mTextView1 = (TextView) view
@@ -119,19 +108,14 @@ public class DynamicLinearLayout extends LinearLayout {
 					.findViewById(R.id.pjxqy_site3);
 			TextView mTextView5 = (TextView) view
 					.findViewById(R.id.pjxqy_price3);
-			mTextView1.setText(ab_list.get(position).getPerson());
-			mTextView2.setText(ab_list.get(position).getTime());
-			mTextView3.setText(ab_list.get(position).getIntroduction());
-			mTextView4.setText(ab_list.get(position).getTitle());
-			mTextView5.setText(ab_list.get(position).getPrice());
+			mTextView1.setText(eb_list.get(position).getUser().getName());
+			mTextView2.setText(eb_list.get(position).getTime());
+			mTextView3.setText(eb_list.get(position).getMood());
+			mTextView4.setText(eb_list.get(position).getHs().getName());
+			mTextView5
+					.setText(String.valueOf(eb_list.get(position).getPrice()));
 			ImageView imageView1 = (ImageView) view
 					.findViewById(R.id.pjxqy_headpic3);
-			ImageView imageView2 = (ImageView) view
-					.findViewById(R.id.pjxqy_pic3);
-			ImageView imageView3 = (ImageView) view
-					.findViewById(R.id.pjxqy_pic4);
-			ImageView imageView4 = (ImageView) view
-					.findViewById(R.id.pjxqy_pic5);
 			ImageView imageView5 = (ImageView) view
 					.findViewById(R.id.pjxqy_head6);
 			ImageView imageView6 = (ImageView) view
@@ -143,26 +127,135 @@ public class DynamicLinearLayout extends LinearLayout {
 			ImageView imageView9 = (ImageView) view
 					.findViewById(R.id.pjxqy_head10);
 
+			Picasso.with(DynamicLinearLayout.this.context)
+					.load(eb_list.get(position).getUser().getPic())
+					.centerCrop().fit().into(imageView1);
 
-			imageView1.setBackgroundResource(Integer.parseInt(ab_list.get(
-					position).getPic1()));
-			imageView2.setBackgroundResource(Integer.parseInt(ab_list.get(
-					position).getPic2()));
-			imageView3.setBackgroundResource(Integer.parseInt(ab_list.get(
-					position).getPic3()));
-			imageView4.setBackgroundResource(Integer.parseInt(ab_list.get(
-					position).getPic4()));
-			imageView5.setBackgroundResource(Integer.parseInt(ab_list.get(
-					position).getPic5()));
-			imageView6.setBackgroundResource(Integer.parseInt(ab_list.get(
-					position).getPic6()));
-			imageView7.setBackgroundResource(Integer.parseInt(ab_list.get(
-					position).getPic7()));
-			imageView8.setBackgroundResource(Integer.parseInt(ab_list.get(
-					position).getPic8()));
-			imageView9.setBackgroundResource(Integer.parseInt(ab_list.get(
-					position).getPic9()));
+			// 动态图片
+			GridView gv = (GridView) view.findViewById(R.id.gridview);
+			// silly！！！！！
+			list = new ArrayList<String>();
+			if (eb_list.get(position).getPic1() != null
+					&& !("".equals(eb_list.get(position).getPic1())))
+				list.add(eb_list.get(position).getPic1());
+			if (eb_list.get(position).getPic2() != null
+					&& !("".equals(eb_list.get(position).getPic2())))
+				list.add(eb_list.get(position).getPic2());
+			if (eb_list.get(position).getPic3() != null
+					&& !("".equals(eb_list.get(position).getPic3())))
+				list.add(eb_list.get(position).getPic3());
+			if (list.size() == 0)
+				gv.setVisibility(View.INVISIBLE);
+			else if (list.size() == 1)
+				gv.setNumColumns(1);
+			else if (list.size() == 2)
+				gv.setNumColumns(2);
+			else
+				gv.setNumColumns(3);
+
+			gv.setAdapter(new BaseAdapter() {
+
+				@Override
+				public View getView(int arg0, View arg1, ViewGroup arg2) {
+					View view = View.inflate(DynamicLinearLayout.this.context,
+							R.layout.grid_item, null);
+					ImageView iv2 = (ImageView) view.findViewById(R.id.iv);
+					Picasso.with(DynamicLinearLayout.this.context)
+							.load(list.get(arg0)).into(iv2);
+					return view;
+				}
+
+				@Override
+				public long getItemId(int arg0) {
+					return arg0;
+				}
+
+				@Override
+				public Object getItem(int arg0) {
+					return list.get(arg0);
+				}
+
+				@Override
+				public int getCount() {
+					return list.size();
+				}
+			});
+
+			// 点赞的人
+			GridView gv1 = (GridView) view.findViewById(R.id.gridview1);
+			gv1.setAdapter(new BaseAdapter() {
+
+				@Override
+				public View getView(int arg0, View arg1, ViewGroup arg2) {
+					View view = View.inflate(DynamicLinearLayout.this.context,
+							R.layout.usrlike_item, null);
+					ImageView iv1 = (ImageView) view
+							.findViewById(R.id.usrlike_pic);
+					Picasso.with(DynamicLinearLayout.this.context)
+							.load(eb_list.get(position).getUsr_like().get(arg0)
+									.getPic()).into(iv1);
+					return view;
+				}
+
+				@Override
+				public long getItemId(int arg0) {
+					return arg0;
+				}
+
+				@Override
+				public Object getItem(int arg0) {
+					return eb_list.get(position).getUsr_like().get(arg0);
+				}
+
+				@Override
+				public int getCount() {
+					return eb_list.get(position).getUsr_like().size();
+				}
+			});
+
+			// 点赞
+			love = (ImageView) view.findViewById(R.id.pjxqy_love3);
+			// 已点赞时爱心的颜色
+			for (UserBean usr : eb_list.get(position).getUsr_like()) {
+				if (usr != null)
+					if (usr.getTelephone().equals(user.getTelephone()))
+						love.setBackgroundResource(R.drawable.favour_clicked);
+			}
+
+			love.setOnClickListener(new View.OnClickListener() {
+
+				@Override
+				public void onClick(View arg0) {
+					// 网络传输
+					ArrayList params = new ArrayList();
+					params.add(new BasicNameValuePair("evaluation_id", eb_list
+							.get(position).getId()));
+					String url = "evaluation/base";
+					String data;
+					try {
+						data = NetTransfer.transfer(url, "put", params, true,
+								user.getAccess_token(), null);
+						NetTransfer nt = new NetTransfer();
+						nt.return_data(data);
+						Toast.makeText(DynamicLinearLayout.this.context,
+								nt.getMsg(), Toast.LENGTH_LONG).show();
+						//刷新数据
+						String update_url = "evaluation/get_evaluation_from_my_follow";
+						NetTransfer update_nt = new NetTransfer();
+							String update_data = NetTransfer.transfer(update_url,
+									"get", null, true, user.getAccess_token(),
+									null);
+							eb_list = update_nt.handle_eb_list(update_data);
+						ba.notifyDataSetChanged();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+
+				}
+			});
+
 			return view;
 		}
 	}
+
 }

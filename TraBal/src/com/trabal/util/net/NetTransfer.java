@@ -57,7 +57,7 @@ public class NetTransfer {
 		StrictMode.setThreadPolicy(policy);
 		url = perfix + url + "/";
 		HttpClient client = new DefaultHttpClient();
-		//若有文件，也会上传
+		// 若有文件，也会上传
 		if ("post".equals(method)) {
 			HttpPost httppost = new HttpPost(url);
 			if (is_verify) {
@@ -69,23 +69,24 @@ public class NetTransfer {
 			if (code == 200) {
 				InputStream is = response.getEntity().getContent();
 				String text = Tools.readFromStream(is);
-				NetTransfer nt=new NetTransfer();
+				NetTransfer nt = new NetTransfer();
 				nt.return_data(text);
 				if (files != null && "success".equals(nt.getStatus())) {
-					HashMap<String, String> foolish=new HashMap<String, String>();
-					for (BasicNameValuePair nv : parameters){
+					HashMap<String, String> foolish = new HashMap<String, String>();
+					for (BasicNameValuePair nv : parameters) {
 						foolish.put(nv.getName(), nv.getValue());
 					}
 					foolish.put("action", "upload_pic");
 					foolish.put("instance_id", nt.id);
-					NetTransfer.asynctransfer(url, foolish, access_token, files);
+					NetTransfer
+							.asynctransfer(url, foolish, access_token, files);
 				}
 				return text;
 			} else {
 				return "{'msg':'请求失败','status':'fail'}";
 			}
 		} else if ("get".equals(method)) {
-			
+
 			if (parameters != null) {
 				url += "?";
 				for (BasicNameValuePair item : parameters) {
@@ -128,31 +129,32 @@ public class NetTransfer {
 
 	/**
 	 * 上传文件专用
-	 * @throws FileNotFoundException 
+	 * 
+	 * @throws FileNotFoundException
 	 */
-	@SuppressLint("NewApi") 
-	private static void asynctransfer(String url,
-			HashMap<String, String> data, String access_token,
-			HashMap<String, Object> files) throws FileNotFoundException {
+	@SuppressLint("NewApi")
+	private static void asynctransfer(String url, HashMap<String, String> data,
+			String access_token, HashMap<String, Object> files)
+			throws FileNotFoundException {
 
 		StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
 				.permitAll().build();
 		StrictMode.setThreadPolicy(policy);
 
-//		url = perfix + url + "/";
+		// url = perfix + url + "/";
 
 		AsyncHttpClient client = new AsyncHttpClient();
 		RequestParams p = new RequestParams();
 		client.addHeader("access-token", access_token);
 
-			for (String key : data.keySet()) {
-				p.put(key, data.get(key));
-			}
+		for (String key : data.keySet()) {
+			p.put(key, data.get(key));
+		}
 
 		if (files != null) {
-				for (String key : files.keySet()) {
-					p.put(key, (File)files.get(key));
-				}
+			for (String key : files.keySet()) {
+				p.put(key, (File) files.get(key));
+			}
 		}
 
 		client.post(url, p, new AsyncHttpResponseHandler() {
@@ -172,7 +174,6 @@ public class NetTransfer {
 
 			}
 		});
-		
 
 	}
 
@@ -182,7 +183,7 @@ public class NetTransfer {
 			msg = json.getString("msg");
 			status = json.getString("status");
 			access_token = json.getString("access_token");
-			id=json.getString("id");
+			id = json.getString("id");
 
 		} catch (JSONException e) {
 			e.printStackTrace();
@@ -213,15 +214,18 @@ public class NetTransfer {
 			hsb.setUrl(json.getString("url"));
 			hsb.setIsfavour(json.getInt("isfavour"));
 			hsb.setId(json.getString("id"));
-			try{
+			try {
 				hsb.setAbs(handle_ac_list(json.getString("activity")));
-			}catch(Exception e){}
-			try{
+			} catch (Exception e) {
+			}
+			try {
 				hsb.setEbs(handle_eb_list(json.getString("evaluation")));
-			}catch(Exception e){}
-			try{
+			} catch (Exception e) {
+			}
+			try {
 				hsb.setDb(handle_db_data(json.getString("district")));
-			}catch(Exception e){}
+			} catch (Exception e) {
+			}
 			return hsb;
 
 		} catch (JSONException e) {
@@ -230,59 +234,60 @@ public class NetTransfer {
 			return null;
 		}
 	}
-	
+
 	public ArrayList handle_hs_list(String data) {
 		try {
 			ArrayList<HotSpotBean> hs_list = new ArrayList<HotSpotBean>();
 			JSONObject json = new JSONObject(data);
 			JSONArray json_list = json.getJSONArray("hotspot");
 			for (int i = 0; i < json_list.length(); i++) {
-				HotSpotBean hs =handle_hs_data(json_list.getString(i));
+				HotSpotBean hs = handle_hs_data(json_list.getString(i));
 				hs_list.add(hs);
 			}
 			return hs_list;
 
 		} catch (JSONException e) {
 			e.printStackTrace();
-			Log.e("handle_hs_list",e.getMessage());
+			Log.e("handle_hs_list", e.getMessage());
 			return null;
 		}
 	}
-	
-	public DistrictBean handle_db_data(String data){
+
+	public DistrictBean handle_db_data(String data) {
 		JSONObject json;
 		try {
 			json = new JSONObject(data);
-			DistrictBean db=new DistrictBean();
+			DistrictBean db = new DistrictBean();
 			db.setEnglishName(json.getString("englishname"));
 			db.setIntroduction(json.getString("introduction"));
 			db.setName(json.getString("name"));
-			db.setPic(this.media_perfix +json.getString("pic"));
-			try{
+			db.setPic(this.media_perfix + json.getString("pic"));
+			try {
 				db.setHsb(handle_hs_list(json.getString("hotspot")));
-			}catch(Exception e){}
+			} catch (Exception e) {
+			}
 			return db;
 		} catch (JSONException e) {
-			Log.e("handle_db_data",e.getMessage());
+			Log.e("handle_db_data", e.getMessage());
 			e.printStackTrace();
 			return null;
 		}
 	}
-	
-	public ArrayList<DistrictBean> handle_db_list(String data){
+
+	public ArrayList<DistrictBean> handle_db_list(String data) {
 		try {
 			ArrayList<DistrictBean> db_list = new ArrayList<DistrictBean>();
 			JSONObject json = new JSONObject(data);
 			JSONArray json_list = json.getJSONArray("district");
 			for (int i = 0; i < json_list.length(); i++) {
-				DistrictBean db =handle_db_data(json_list.getString(i));
+				DistrictBean db = handle_db_data(json_list.getString(i));
 				db_list.add(db);
 			}
 			return db_list;
 
 		} catch (JSONException e) {
 			e.printStackTrace();
-			Log.e("handle_db_list",e.getMessage());
+			Log.e("handle_db_list", e.getMessage());
 			return null;
 		}
 	}
@@ -292,6 +297,7 @@ public class NetTransfer {
 		try {
 			UserBean u = user;
 			JSONObject json = new JSONObject(data);
+			u.setTelephone(json.getString("telephone"));
 			u.setAddress(json.getString("address"));
 			u.setBirthday(json.getString("birthday"));
 			u.setCredit(json.getInt("credit"));
@@ -300,10 +306,10 @@ public class NetTransfer {
 			u.setIntroduction(json.getString("introduction"));
 			u.setName(json.getString("name"));
 			u.setPic((this.media_perfix + json.getString("pic")));
-			try{
-			u.setEb(handle_eb_list(json.getString("evaluation")));
+			try {
+				u.setEb(handle_eb_list(json.getString("evaluation")));
+			} catch (Exception e) {
 			}
-			catch(Exception e){}
 			return u;
 		} catch (JSONException e) {
 			Log.e("handle_user_data", e.getMessage());
@@ -311,16 +317,36 @@ public class NetTransfer {
 			return null;
 		}
 	}
-	
-	public ArrayList<UserBean> handle_follow_user_list(String data){
-		
+
+	public ArrayList<UserBean> handle_usr_like_list(String data) {
 		try {
-			UserBean user=new UserBean();
-			ArrayList<UserBean> user_list=new ArrayList<UserBean>();
+			UserBean user = new UserBean();
+			ArrayList<UserBean> user_list = new ArrayList<UserBean>();
+			JSONObject json = new JSONObject(data);
+			JSONArray json_list = json.getJSONArray("usr_like");
+			for (int i = 0; i < json_list.length(); i++) {
+				user = handle_user_data(json_list.getString(i), user);
+				user_list.add(user);
+			}
+			return user_list;
+
+		} catch (JSONException e) {
+			Log.e("usr_like", e.getMessage());
+			e.printStackTrace();
+			return null;
+		}
+
+	}
+
+	public ArrayList<UserBean> handle_follow_user_list(String data) {
+
+		try {
+			UserBean user = new UserBean();
+			ArrayList<UserBean> user_list = new ArrayList<UserBean>();
 			JSONObject json = new JSONObject(data);
 			JSONArray json_list = json.getJSONArray("following");
 			for (int i = 0; i < json_list.length(); i++) {
-				user =handle_user_data(json_list.getString(i),user);
+				user = handle_user_data(json_list.getString(i), user);
 				user_list.add(user);
 			}
 			return user_list;
@@ -329,68 +355,78 @@ public class NetTransfer {
 			e.printStackTrace();
 			return null;
 		}
-		
+
 	}
-	
-	public ArrayList<UserBean> handle_fans_list(String data){
-		
+
+	public ArrayList<UserBean> handle_fans_list(String data) {
+
 		try {
-			
-			ArrayList<UserBean> user_list=new ArrayList<UserBean>();
+
+			ArrayList<UserBean> user_list = new ArrayList<UserBean>();
 			JSONObject json = new JSONObject(data);
 			JSONArray json_list = json.getJSONArray("follower");
 			for (int i = 0; i < json_list.length(); i++) {
-				UserBean user=new UserBean();
-				user =handle_user_data(json_list.getString(i),user);
+				UserBean user = new UserBean();
+				user = handle_user_data(json_list.getString(i), user);
 				user_list.add(user);
 			}
 			return user_list;
 
 		} catch (JSONException e) {
-			Log.e("handle_fans_list",e.getMessage());
+			Log.e("handle_fans_list", e.getMessage());
 			e.printStackTrace();
 			return null;
 		}
-		
+
 	}
-	
-	//不处理人的
-	public EvaluationBean handle_eb_data(String data){
+
+	// 不处理人的
+	public EvaluationBean handle_eb_data(String data) {
 		try {
 			JSONObject json = new JSONObject(data);
-			EvaluationBean e=new EvaluationBean();
-			try{
-			e.setHs(handle_hs_data(json.getString("hotspot")));
-			}catch(Exception e1){}
-			try{
-				UserBean user=new UserBean();
-			e.setUser(handle_user_data(json.getString("user"),user));
-			}catch(Exception e1){}
+			EvaluationBean e = new EvaluationBean();
+			try {
+				e.setHs(handle_hs_data(json.getString("hotspot")));
+			} catch (Exception e1) {
+			}
+			try {
+				UserBean user = new UserBean();
+				e.setUser(handle_user_data(json.getString("user"), user));
+			} catch (Exception e1) {
+			}
+			try {
+				e.setUsr_like(handle_usr_like_list(json.getString("usr_like")));
+			} catch (Exception e1) {
+			}
 			e.setMood(json.getString("feeling"));
-			e.setPic1(json.getString("pic1"));
-			e.setPic2(json.getString("pic2"));
-			e.setPic3(json.getString("pic3"));
+			if (!"".equals(json.getString("pic1")))
+				e.setPic1(this.media_perfix + json.getString("pic1"));
+			if (!"".equals(json.getString("pic2")))
+				e.setPic2(this.media_perfix + json.getString("pic2"));
+			if (!"".equals(json.getString("pic3")))
+				e.setPic3(this.media_perfix + json.getString("pic3"));
+			e.setId(json.getString("id"));
 			e.setPrice(json.getDouble("price"));
 			e.setRate(json.getInt("rate"));
 			e.setTime(json.getString("time"));
 			return e;
 		} catch (JSONException e) {
 			e.printStackTrace();
-			Log.e("handle_eb_data",e.getMessage());
+			Log.e("handle_eb_data", e.getMessage());
 			return null;
 		}
-		
+
 	}
-	
+
 	//
-	public ArrayList<EvaluationBean> handle_eb_list(String data){
+	public ArrayList<EvaluationBean> handle_eb_list(String data) {
 		try {
 			ArrayList<EvaluationBean> eb_list = new ArrayList<EvaluationBean>();
 			JSONObject json = new JSONObject(data);
 			JSONArray json_list = json.getJSONArray("evaluation");
-			
+
 			for (int i = 0; i < json_list.length(); i++) {
-				EvaluationBean eb=handle_eb_data(json_list.getString(i));
+				EvaluationBean eb = handle_eb_data(json_list.getString(i));
 				eb_list.add(eb);
 			}
 			return eb_list;
@@ -402,37 +438,37 @@ public class NetTransfer {
 		}
 	}
 
-	
-	public ActivityBean handle_ac_data(String data){
+	public ActivityBean handle_ac_data(String data) {
 		JSONObject json;
 		try {
 			json = new JSONObject(data);
-			ActivityBean ab=new ActivityBean();
+			ActivityBean ab = new ActivityBean();
 			ab.setId(json.getString("id"));
-			try{
-			ab.setHsb(handle_hs_data(json.getString("hotspot")));
-			UserBean user=new UserBean();
-			ab.setHost_user(handle_user_data(json.getString("host_user"), user));
-			ab.setIsfavour(json.getInt("isfavour"));
-			
-			//想去的人
-			ArrayList<UserBean> wanttogo_user_list=new ArrayList<UserBean>();
-			JSONArray json_list = json.getJSONArray("wanttogo");
-			for (int i = 0; i < json_list.length(); i++) {
-				UserBean who_want_to_go=new UserBean();
-				who_want_to_go =handle_user_data(json_list.getString(i),who_want_to_go);
-				wanttogo_user_list.add(who_want_to_go);
-			}
-			ab.setWho_want_to_go(wanttogo_user_list);
-			}
-			catch (JSONException e) {
-				Log.e("handle_ac_data_wanttogo",e.getMessage());
+			try {
+				ab.setHsb(handle_hs_data(json.getString("hotspot")));
+				UserBean user = new UserBean();
+				ab.setHost_user(handle_user_data(json.getString("host_user"),
+						user));
+				ab.setIsfavour(json.getInt("isfavour"));
+
+				// 想去的人
+				ArrayList<UserBean> wanttogo_user_list = new ArrayList<UserBean>();
+				JSONArray json_list = json.getJSONArray("wanttogo");
+				for (int i = 0; i < json_list.length(); i++) {
+					UserBean who_want_to_go = new UserBean();
+					who_want_to_go = handle_user_data(json_list.getString(i),
+							who_want_to_go);
+					wanttogo_user_list.add(who_want_to_go);
+				}
+				ab.setWho_want_to_go(wanttogo_user_list);
+			} catch (JSONException e) {
+				Log.e("handle_ac_data_wanttogo", e.getMessage());
 			}
 			ab.setIntroduction(json.getString("introduction"));
 			ab.setPerson(json.getString("person"));
 			ab.setPic1(this.media_perfix + json.getString("pic1"));
-			ab.setPic2(this.media_perfix +json.getString("pic2"));
-			ab.setPic3(this.media_perfix +json.getString("pic3"));
+			ab.setPic2(this.media_perfix + json.getString("pic2"));
+			ab.setPic3(this.media_perfix + json.getString("pic3"));
 			ab.setPrice(json.getString("price"));
 			ab.setSubject(json.getString("subject"));
 			ab.setTelephone(json.getString("telephone"));
@@ -443,20 +479,20 @@ public class NetTransfer {
 			ab.setTime(json.getString("time"));
 			return ab;
 		} catch (JSONException e) {
-			Log.e("handle_ac_data",e.getMessage());
+			Log.e("handle_ac_data", e.getMessage());
 			e.printStackTrace();
 			return null;
 		}
-		
+
 	}
-	
+
 	public ArrayList handle_ac_list(String data) {
 		try {
 			ArrayList<ActivityBean> ab_list = new ArrayList<ActivityBean>();
 			JSONObject json = new JSONObject(data);
 			JSONArray json_list = json.getJSONArray("activity");
 			for (int i = 0; i < json_list.length(); i++) {
-				ActivityBean ab=handle_ac_data(json_list.getString(i));
+				ActivityBean ab = handle_ac_data(json_list.getString(i));
 				ab_list.add(ab);
 			}
 			return ab_list;
@@ -467,7 +503,6 @@ public class NetTransfer {
 			return null;
 		}
 	}
-	
 
 	public String getStatus() {
 		return status;

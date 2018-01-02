@@ -1,6 +1,7 @@
 package com.trabal.user.Bean;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 import com.trabal.hotspot.Bean.HotSpotBean;
 
@@ -15,6 +16,21 @@ public class EvaluationBean implements Serializable{
 	private HotSpotBean hs;
 	private UserBean user;
 	private String time;
+	private ArrayList<UserBean> usr_like;
+	private String id;
+	
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
+	public ArrayList<UserBean> getUsr_like() {
+		return usr_like;
+	}
+	public void setUsr_like(ArrayList<UserBean> usr_like) {
+		this.usr_like = usr_like;
+	}
 	public int getRate() {
 		return rate;
 	}

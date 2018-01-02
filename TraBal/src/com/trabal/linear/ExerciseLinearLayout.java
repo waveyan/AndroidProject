@@ -95,7 +95,7 @@ public class ExerciseLinearLayout extends LinearLayout {
 			mTextView4.setText(ab_list.get(position).getTime());
 			ImageView imageView = (ImageView) view
 					.findViewById(R.id.huodong_image);
-			Picasso.with(context).load(ab_list.get(position).getPic1()).into(imageView);
+			Picasso.with(context).load(ab_list.get(position).getPic1()).centerCrop().fit().into(imageView);
 			view.setOnClickListener(new View.OnClickListener() {
 				
 				@Override
