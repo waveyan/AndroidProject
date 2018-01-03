@@ -11,6 +11,7 @@ import com.trabal.linear.DynamicLinearLayout;
 import com.trabal.linear.IndexLinearLayout;
 import com.trabal.linear.MoreLinearLayout;
 import com.trabal.linear.addactivity;
+import com.trabal.linear.XiaoxiActivity;
 import com.trabal.linear.collectActivity;
 import com.trabal.linear.haoyouActivity;
 import com.trabal.linear.huodongActivity;
@@ -57,7 +58,7 @@ public class MainActivity extends Activity {
 	private RelativeLayout rightLayout;
 	private List<ContentModel> list;
 	private ContentAdapter adapter;
-	private ImageButton imageButton;
+	private ImageButton imageButton,imageButton1;
 	private ListView listView;
 	private ImageView p_pic;
 	public UserBean user;
@@ -68,9 +69,10 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+
 		// 显示用户头像和昵称
 		last_intent = MainActivity.this.getIntent();
-		user = (UserBean) last_intent.getSerializableExtra("user");       //获取上一intent的user值
+		user = (UserBean) last_intent.getSerializableExtra("user");       
 
 		linears = new ArrayList<LinearLayout>();
 		linears.add(new IndexLinearLayout(MainActivity.this));
@@ -89,6 +91,7 @@ public class MainActivity extends Activity {
 		moreTv = (TextView) this.findViewById(R.id.moreID);
 		dynamicTv = (TextView) this.findViewById(R.id.dynamicID);
 
+   
 		// 卫星菜单动态实现
 
 		android.view.ext.SatelliteMenu menu = (android.view.ext.SatelliteMenu) this
@@ -165,6 +168,7 @@ public class MainActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				drawerLayout.openDrawer(Gravity.RIGHT);
+
 				// 网络传输获取用户头像和昵称
 				String url = "user/base";
 				NetTransfer nt = new NetTransfer();
@@ -268,6 +272,20 @@ public class MainActivity extends Activity {
 					break;
 				}
 				drawerLayout.closeDrawer(Gravity.RIGHT);
+			}
+		});
+		
+		//MessageID
+		imageButton1=(ImageButton)findViewById(R.id.messageID);
+		imageButton1.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				Intent intent=new Intent(MainActivity.this,XiaoxiActivity.class);
+				intent.putExtra("user", user);
+				MainActivity.this.startActivity(intent);
+				MainActivity.this.finish();
+				
 			}
 		});
 	}
