@@ -1,9 +1,12 @@
 package com.trabal.linear;
 
+import java.util.Calendar;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -20,6 +23,29 @@ public class timeactivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_time);
+		
+
+		EditText_time = (EditText) findViewById(R.id.ed9ID);
+
+		EditText_time.setOnClickListener(new View.OnClickListener() {
+			Calendar c = Calendar.getInstance();
+
+			@Override
+			public void onClick(View v) {
+				// 最后一个false表示不显示日期，如果要显示日期，最后参数可以是true或者不用输入
+				new DoubleDatePickerDialog(timeactivity.this, 0, new DoubleDatePickerDialog.OnDateSetListener() {
+
+					@Override
+					public void onDateSet(DatePicker startDatePicker, int startYear, int startMonthOfYear,
+							int startDayOfMonth, DatePicker endDatePicker, int endYear, int endMonthOfYear,
+							int endDayOfMonth) {
+						String textString = String.format("%d-%d-%d—%d-%d-%d", startYear,
+								startMonthOfYear + 1, startDayOfMonth, endYear, endMonthOfYear + 1, endDayOfMonth);
+						EditText_time.setText(textString);
+					}
+				}, c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DATE), false).show();
+			}
+		});
 
 		intent = this.getIntent();
 		EditText_time = (EditText) findViewById(R.id.ed9ID);

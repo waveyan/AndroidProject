@@ -73,10 +73,10 @@
             <TextView
                 android:id="@+id/tx8ID"
                 android:layout_width="270dp"
-                android:layout_height="30dp"
+                android:layout_height="40dp"
                 android:layout_alignBottom="@id/classifyID"
                 android:layout_toRightOf="@id/classifyID"
-                android:gravity="right" />
+                android:gravity="right|center_vertical" />
 
             <Button
                 android:id="@+id/right7ID"
@@ -102,10 +102,10 @@
             <TextView
                 android:id="@+id/tx4ID"
                 android:layout_width="270dp"
-                android:layout_height="30dp"
+                android:layout_height="40dp"
                 android:layout_alignBottom="@id/themeID"
                 android:layout_toRightOf="@id/themeID"
-                android:gravity="right" />
+                android:gravity="right|center_vertical" />
 
             <Button
                 android:id="@+id/right3ID"
@@ -125,16 +125,16 @@
                 android:background="#FFFFFF"
                 android:gravity="center_vertical"
                 android:paddingLeft="18dp"
-                android:text="活动时间"
+                android:text="活动日期"
                 android:textSize="13dp" />
 
             <TextView
                 android:id="@+id/tx6ID"
                 android:layout_width="270dp"
-                android:layout_height="30dp"
+                android:layout_height="40dp"
                 android:layout_alignBottom="@id/timeID"
                 android:layout_toRightOf="@id/timeID"
-                android:gravity="right" />
+                android:gravity="right|center_vertical" />
 
             <Button
                 android:id="@+id/right5ID"
@@ -160,10 +160,10 @@
             <TextView
                 android:id="@+id/tx5ID"
                 android:layout_width="270dp"
-                android:layout_height="30dp"
+                android:layout_height="40dp"
                 android:layout_alignBottom="@id/placeID"
                 android:layout_toRightOf="@id/placeID"
-                android:gravity="right" />
+                android:gravity="right|center_vertical" />
 
             <Button
                 android:id="@+id/right4ID"
@@ -196,10 +196,10 @@
             <TextView
                 android:id="@+id/tx3ID"
                 android:layout_width="270dp"
-                android:layout_height="30dp"
+                android:layout_height="40dp"
                 android:layout_alignBottom="@id/introduceID"
                 android:layout_toRightOf="@id/introduceID"
-                android:gravity="right" />
+                android:gravity="right|center_vertical" />
 
             <Button
                 android:id="@+id/right2ID"
@@ -237,10 +237,10 @@
             <TextView
                 android:id="@+id/tx7ID"
                 android:layout_width="270dp"
-                android:layout_height="30dp"
+                android:layout_height="40dp"
                 android:layout_alignBottom="@id/priceID"
                 android:layout_toRightOf="@id/priceID"
-                android:gravity="right" />
+                android:gravity="right|center_vertical" />
 
             <Button
                 android:id="@+id/right6ID"
@@ -266,10 +266,10 @@
             <TextView
                 android:id="@+id/tx2ID"
                 android:layout_width="270dp"
-                android:layout_height="30dp"
+                android:layout_height="40dp"
                 android:layout_alignBottom="@id/telephoneID"
                 android:layout_toRightOf="@id/telephoneID"
-                android:gravity="right" />
+                android:gravity="right|center_vertical" />
 
             <Button
                 android:id="@+id/right1ID"
@@ -295,10 +295,10 @@
             <TextView
                 android:id="@+id/tx1ID"
                 android:layout_width="270dp"
-                android:layout_height="30dp"
+                android:layout_height="40dp"
                 android:layout_alignBottom="@id/officialID"
                 android:layout_toRightOf="@id/officialID"
-                android:gravity="right" />
+                android:gravity="right|center_vertical" />
 
             <Button
                 android:id="@+id/rightID"
@@ -323,7 +323,7 @@
                 android:layout_width="170dp"
                 android:layout_height="30dp"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="5dp"
                 android:background="#838B8B"
                 android:gravity="center"
                 android:text="提交活动"
