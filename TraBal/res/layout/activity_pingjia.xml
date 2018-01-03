@@ -1,46 +1,38 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:fadingEdge="vertical"
-    android:scrollbars="vertical" >
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
 
     <RelativeLayout
+        android:id="@+id/avID"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="40dp"
+        android:background="#EBEBEB" >
 
-        <RelativeLayout
-            android:id="@+id/daohangtiao"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:background="#698B69" >
+        <ImageButton
+            android:id="@+id/back_pingjia"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/d001" />
 
-            <ImageView
-                android:id="@+id/back_pingjia"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_marginLeft="13dp"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/back_white" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:layout_marginLeft="5dp"
-                android:layout_marginTop="6dp"
-                android:layout_toRightOf="@+id/back_pingjia"
-                android:text="我的评价"
-                android:textColor="#ffffff"
-                android:textSize="20sp" 
-                android:fontFamily="monospace"/>
-        </RelativeLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@+id/daohangtiao"
-            android:orientation="vertical" >
-            
-        </LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/back_pingjia"
+            android:layout_marginLeft="7dp"
+            android:layout_toRightOf="@id/back_pingjia"
+            android:text="我的評價"
+            android:textColor="#000000"
+            android:textSize="16dp" />
     </RelativeLayout>
-</ScrollView>
+
+    <ListView
+        android:id="@+id/hyxiangqingyeID"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@+id/avID"
+        android:divider="@null" >
+    </ListView>
+
+</RelativeLayout>
