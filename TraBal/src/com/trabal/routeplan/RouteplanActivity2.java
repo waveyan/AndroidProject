@@ -25,6 +25,7 @@ public class RouteplanActivity2 extends Activity {
 	private ListView listView;
 	private ArrayList<ActivityBean> ab_list;
 	private Button button;
+	private TextView textview;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +55,19 @@ public class RouteplanActivity2 extends Activity {
 			@Override
 			public void onClick(View arg0) {
 				Intent intent = new Intent(RouteplanActivity2.this,RouteplanActivity1.class);
+				intent.putExtra("user", user);
+				RouteplanActivity2.this.startActivity(intent);
+				finish();
+			}
+		});
+		
+		//下一步跳转
+		textview =(TextView)findViewById(R.id.next);
+		
+		textview.setOnClickListener(new OnClickListener() {		
+			@Override
+			public void onClick(View arg0) {
+				Intent intent = new Intent(RouteplanActivity2.this,RouteplanActivity3.class);
 				intent.putExtra("user", user);
 				RouteplanActivity2.this.startActivity(intent);
 				finish();

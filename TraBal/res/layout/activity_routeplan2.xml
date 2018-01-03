@@ -27,6 +27,7 @@
             android:textSize="16sp" />
 
         <TextView
+            android:id="@+id/next"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@id/backButton"
@@ -37,10 +38,11 @@
             android:textSize="16sp" />
     </RelativeLayout>
 
-    <RelativeLayout
-        android:layout_width="fill_parent"
-        android:layout_height="130dp" >
-    </RelativeLayout>
+	<ImageView 
+	    android:layout_width="fill_parent"
+	    android:layout_height="120dp"
+	    android:background="@drawable/vintage"
+	    android:scaleType="fitXY"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
