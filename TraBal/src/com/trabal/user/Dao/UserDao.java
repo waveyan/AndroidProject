@@ -24,6 +24,7 @@ public class UserDao {
 		values.put("telephone", user.getTelephone());
 		values.put("password", user.getPassword());
 		values.put("access_token", user.getAccess_token());
+		values.put("pic", user.getPic());
 		db.insert("user", null, values);
 		db.close();
 	}
@@ -34,6 +35,7 @@ public class UserDao {
 		values.put("telephone", user.getTelephone());
 		values.put("password", user.getPassword());
 		values.put("access_token", user.getAccess_token());
+		values.put("pic", user.getPic());
 		db.update("user", values, "access_token=?",new String[]{user.getAccess_token()});
 		db.close();
 	}
@@ -49,6 +51,7 @@ public class UserDao {
 			user.setTelephone(c.getString(c.getColumnIndex("telephone")));
 			user.setPassword(c.getString(c.getColumnIndex("password")));
 			user.setAccess_token(c.getString(c.getColumnIndex("access_token")));
+			user.setPic(c.getString(c.getColumnIndex("pic")));
 		}
 		return user;
 	}
@@ -63,6 +66,7 @@ public class UserDao {
 			user.setTelephone(c.getString(c.getColumnIndex("telephone")));
 			user.setPassword(c.getString(c.getColumnIndex("password")));
 			user.setAccess_token(c.getString(c.getColumnIndex("access_token")));
+			user.setPic(c.getString(c.getColumnIndex("pic")));
 			list.add(user);
 		}
 		return list;

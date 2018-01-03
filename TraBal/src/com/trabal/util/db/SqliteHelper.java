@@ -13,7 +13,7 @@ public class SqliteHelper extends SQLiteOpenHelper {
 
 	@Override
 	public void onCreate(SQLiteDatabase arg0) {
-		arg0.execSQL("create table user(telephone varchar(20),password varchar(20),access_token varchar(50) primary key)");
+		arg0.execSQL("create table user(pic varchar(100),telephone varchar(20),password varchar(20),access_token varchar(50) primary key)");
 		
 		
 	}

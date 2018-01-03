@@ -2,23 +2,17 @@ package com.trabal.linear;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
+
 
 import android.app.Activity;
 import android.content.Intent;
-import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -45,7 +39,6 @@ OnButtonClickListener{
 	private MyDialog myDialog;
     private final int IMAGE_OPEN = 4;
 	public static final int PHOTOHRAPH = 1;
-	private static final int CROP_CODE = 1;
 	public static final int NONE = 0;
     public static final int PHOTOZOOM = 2; // Ëõ·Å
     public static final int PHOTORESOULT = 3;// ½á¹û

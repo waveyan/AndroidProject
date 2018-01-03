@@ -10,6 +10,11 @@
     <uses-sdk
         android:minSdkVersion="8"
         android:targetSdkVersion="18" />
+      <!-- 申明网络权限  -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!-- 申明权限 操作SD卡 -->  
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
 
     <application
         android:allowBackup="true"
@@ -18,16 +23,22 @@
         android:theme="@style/AppTheme" >
         <activity android:name="com.trabal.RegisterActivity" >
         </activity>
-        <activity
-            android:name="com.trabal.LoginActivity"
-            android:label="@string/app_name" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-         <activity android:name="com.trabal.linear.LostInLA" >
+        <activity android:name="com.trabal.linear.collectActivity"></activity>
+        <activity android:name="com.trabal.linear.Hyxiangqingye"></activity>
+        <activity android:name="com.trabal.linear.Fansxiangqingye"></activity>
+        <activity android:name="com.trabal.linear.recommendationactivity"></activity>
+        <activity	android:name="com.trabal.linear.chosepositionactivity" ></activity>
+        <activity	android:name="com.trabal.linear.classifyactivity" ></activity>
+        <activity	android:name="com.trabal.linear.themeactivity" ></activity>
+        <activity	android:name="com.trabal.linear.timeactivity" ></activity>
+        <activity	android:name="com.trabal.linear.placeactivity" ></activity>
+        <activity	android:name="com.trabal.linear.introduceactivity" ></activity>
+        <activity	android:name="com.trabal.linear.priceactivity" ></activity>
+        <activity	android:name="com.trabal.linear.telephoneactivity" ></activity>
+        <activity	android:name="com.trabal.linear.officialactivity" ></activity>
+        <activity android:name="com.trabal.linear.addactivity"></activity>
+       
+        <activity android:name="com.trabal.linear.LostInLA" >
         </activity>
         <activity android:name="com.trabal.linear.DIMUCUBE" >
         </activity>
@@ -53,7 +64,15 @@
         </activity>
         <activity android:name="com.trabal.linear.huodongActivity" >
         </activity>
+        <activity android:name="com.trabal.linear.assessactivity"></activity>
         <activity android:name="com.trabal.linear.haoyouActivity" >
+        </activity>
+        <activity android:name="com.trabal.LoginActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 

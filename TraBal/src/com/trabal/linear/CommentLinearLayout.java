@@ -150,12 +150,14 @@ public class CommentLinearLayout extends LinearLayout {
 
 			imageView1.setBackgroundResource(Integer.parseInt(ab_list.get(
 					position).getPic1()));
+
 //			imageView2.setBackgroundResource(Integer.parseInt(ab_list.get(
 //					position).getPic2()));
 //			imageView3.setBackgroundResource(Integer.parseInt(ab_list.get(
 //					position).getPic3()));
 //			imageView4.setBackgroundResource(Integer.parseInt(ab_list.get(
 //					position).getPic4()));
+
 //			imageView5.setBackgroundResource(Integer.parseInt(ab_list.get(
 //					position).getPic5()));
 //			imageView6.setBackgroundResource(Integer.parseInt(ab_list.get(

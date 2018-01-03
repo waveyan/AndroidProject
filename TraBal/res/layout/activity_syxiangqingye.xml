@@ -9,7 +9,7 @@
         android:background="#FCFCFC" >
 
         <Button
-            android:id="@+id/syxqy_leftarrow"
+            android:id="@+id/back_SY"
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_marginLeft="10dp"

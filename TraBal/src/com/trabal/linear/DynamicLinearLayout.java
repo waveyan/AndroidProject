@@ -28,7 +28,7 @@ import com.trabal.activity.Bean.ActivityBean;
 import com.trabal.linear.PositionLinearLayout.MyBaseAdapter;
 import com.trabal.user.Bean.EvaluationBean;
 import com.trabal.user.Bean.UserBean;
-import com.trabal.util.net.ImageDownloadTask;
+
 import com.trabal.util.net.NetTransfer;
 
 public class DynamicLinearLayout extends LinearLayout {
@@ -60,6 +60,7 @@ public class DynamicLinearLayout extends LinearLayout {
 		user = (UserBean) last_intent.getSerializableExtra("user");
 
 		mlistView = (ListView) view.findViewById(R.id.dynamic_listview);
+
 
 		// 创建一个Adapter的实例
 		ba = new MyBaseAdapter();
@@ -193,7 +194,7 @@ public class DynamicLinearLayout extends LinearLayout {
 							.findViewById(R.id.usrlike_pic);
 					Picasso.with(DynamicLinearLayout.this.context)
 							.load(eb_list.get(position).getUsr_like().get(arg0)
-									.getPic()).into(iv1);
+									.getPic()).resize(100, 100).centerCrop().into(iv1);
 					return view;
 				}
 
@@ -253,6 +254,7 @@ public class DynamicLinearLayout extends LinearLayout {
 
 				}
 			});
+
 
 			return view;
 		}

@@ -3,10 +3,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
     
-    <ImageView
+    <com.trabal.CircleImageView
         android:id="@+id/usrlike_pic"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" 
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="5dp"/>
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="3dp"/>
 </RelativeLayout>

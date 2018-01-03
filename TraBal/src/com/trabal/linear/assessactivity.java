@@ -117,10 +117,11 @@ OnButtonClickListener, OnItemClickListener{
 
 
     private void init() {
+    	//发布评论
     	post=(TextView)this.findViewById(R.id.post);
-    	post.setOnClickListener(new PostOnclick());
+    	post.setOnClickListener(new PostOnclick());    
+    	
         gridView = (GridView) findViewById(R.id.gridView);
-
         gridView.setOnItemClickListener(this);
         dialog = new MyDialog(this);
         dialog.setOnButtonClickListener(this);
@@ -135,7 +136,7 @@ OnButtonClickListener, OnItemClickListener{
          * 载入默认图片添加图片加号
          */
         bmp = BitmapFactory.decodeResource(getResources(), 
-                R.drawable.gridview_addpic);                            //   bitmap加载加号图片gridview_addpic
+                R.drawable.w012);                            //   bitmap加载加号图片gridview_addpic
         imageItem = new ArrayList<HashMap<String, Object>>();           //   动态数组
         HashMap<String, Object> map = new HashMap<String, Object>();
         map.put("itemImage", bmp);
@@ -327,8 +328,8 @@ OnButtonClickListener, OnItemClickListener{
         intent.putExtra("aspectX", 1);
         intent.putExtra("aspectY", 1);
         // outputX outputY 是裁剪图片宽高
-        intent.putExtra("outputX", 64);
-        intent.putExtra("outputY", 64);
+        intent.putExtra("outputX", 480);
+        intent.putExtra("outputY", 480);
         intent.putExtra("return-data", true);
         
         startActivityForResult(intent, PHOTORESOULT);
@@ -338,7 +339,8 @@ OnButtonClickListener, OnItemClickListener{
      * 压缩图片（质量压缩）
      * @param bitmap
      */
-    public static File compressImage(Bitmap bitmap,String filename) {
+    //bitmap转File
+    public static File compressImage(Bitmap bitmap,String filename) { 
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);//质量压缩方法，这里100表示不压缩，把压缩后的数据存放到baos中
         int options = 100;

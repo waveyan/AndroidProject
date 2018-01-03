@@ -1,8 +1,14 @@
 package com.trabal;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+
 
 import com.squareup.picasso.Picasso;
 import com.trabal.ContentAdapter;
@@ -21,35 +27,55 @@ import com.trabal.linear.recommendationactivity;
 import com.trabal.user.Bean.UserBean;
 import com.trabal.util.net.NetTransfer;
 import com.trabal.R;
+import org.apache.http.message.BasicNameValuePair;
 
-import android.os.Bundle;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
+import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.support.v4.widget.DrawerLayout;
+import android.util.Log;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
+import android.view.ext.SatelliteMenu.SateliteClickedListener;
+import android.view.ext.SatelliteMenuItem;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import com.trabal.linear.assessactivity;
-
-import android.util.TypedValue;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.view.ext.SatelliteMenu.SateliteClickedListener;
 
-import android.view.ext.*;
+import com.squareup.picasso.Picasso;
+import com.trabal.MyDialog.OnButtonClickListener;
+import com.trabal.MyDialog;
+import com.trabal.linear.DynamicLinearLayout;
+import com.trabal.linear.IndexLinearLayout;
+import com.trabal.linear.MoreLinearLayout;
+import com.trabal.linear.addactivity;
+import com.trabal.linear.assessactivity;
+import com.trabal.linear.collectActivity;
+import com.trabal.linear.haoyouActivity;
+import com.trabal.linear.huodongActivity;
+import com.trabal.linear.luxianActivity;
+import com.trabal.linear.pingjiaActivity;
+import com.trabal.linear.recommendationactivity;
+import com.trabal.user.Bean.UserBean;
+import com.trabal.util.net.NetTransfer;
 
-public class MainActivity extends Activity {
+public class MainActivity extends Activity implements OnButtonClickListener{
 
 	private ArrayList<LinearLayout> linears;
 	private android.support.v4.view.ViewPager content;
@@ -63,6 +89,17 @@ public class MainActivity extends Activity {
 	private ImageView p_pic;
 	public UserBean user;
 	Intent last_intent;
+	private MyDialog myDialog;
+    private final int IMAGE_OPEN = 4;
+	public static final int PHOTOHRAPH = 1;
+	public static final int NONE = 0;
+    public static final int PHOTOZOOM = 2; // 缩放
+    public static final int PHOTORESOULT = 3;// 结果
+    public static final String IMAGE_UNSPECIFIED = "image/*";
+    private String pathImage="headpic";
+    
+    
+    
 
 	@SuppressLint("NewApi")
 	@Override
@@ -84,12 +121,19 @@ public class MainActivity extends Activity {
 		drawerLayout = (DrawerLayout) findViewById(R.id.drawerlayout);
 		rightLayout = (RelativeLayout) findViewById(R.id.right);
 		listView = (ListView) findViewById(R.id.right_listview);
+		
 		// 获取内容组件
 		content = (android.support.v4.view.ViewPager) this
 				.findViewById(R.id.content);
 		indexTv = (TextView) this.findViewById(R.id.indexID);
 		moreTv = (TextView) this.findViewById(R.id.moreID);
 		dynamicTv = (TextView) this.findViewById(R.id.dynamicID);
+		
+		myDialog = new MyDialog(this);
+		myDialog.setOnButtonClickListener(this);
+	
+
+	
 
    
 		// 卫星菜单动态实现
@@ -169,6 +213,7 @@ public class MainActivity extends Activity {
 			public void onClick(View v) {
 				drawerLayout.openDrawer(Gravity.RIGHT);
 
+
 				// 网络传输获取用户头像和昵称
 				String url = "user/base";
 				NetTransfer nt = new NetTransfer();
@@ -225,6 +270,7 @@ public class MainActivity extends Activity {
 
 			}
 		});
+		
 
 		listView.setOnItemClickListener(new OnItemClickListener() {
 
@@ -232,6 +278,9 @@ public class MainActivity extends Activity {
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				switch ((int) id) {
+				case 0:
+					myDialog.show();
+					break;
 				case 1:
 					Intent intent = new Intent(MainActivity.this,
 							pingjiaActivity.class);
@@ -268,6 +317,7 @@ public class MainActivity extends Activity {
 					MainActivity.this.startActivity(intent4);
 //					MainActivity.this.finish();
 					break;
+				
 				default:
 					break;
 				}
@@ -292,7 +342,7 @@ public class MainActivity extends Activity {
 
 	private void initData() {
 		list = new ArrayList<ContentModel>();
-
+		list.add(new ContentModel(R.drawable.pingjia, "修改头像", 0));
 		list.add(new ContentModel(R.drawable.pingjia, "我的评价", 1));
 		list.add(new ContentModel(R.drawable.shoucang, "我的收藏", 2));
 		list.add(new ContentModel(R.drawable.luxian, "我的路线", 3));
@@ -305,6 +355,136 @@ public class MainActivity extends Activity {
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
+	
+	//跳转系统相机
+		@Override
+		    public void camera() {                                                
+
+		        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+		        intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(new File(
+		                Environment.getExternalStorageDirectory(), "temp.jpg")));
+		        startActivityForResult(intent, PHOTOHRAPH);
+		        myDialog.dismiss();
+		    }
+		//跳转系统相册
+		@Override
+		    public void gallery() {                                                
+		        Intent intent = new Intent(Intent.ACTION_PICK,
+		                android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+		        intent.setType("image/*");
+		        startActivityForResult(intent, IMAGE_OPEN);
+		        myDialog.dismiss();
+
+		    }
+		@Override
+		    public void cancel() {
+		        myDialog.cancel();
+		    
+		    
+		    }
+		
+		@Override
+		protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+
+
+			  super.onActivityResult(requestCode, resultCode, data);
+
+		        //获取图片路径
+			  if (resultCode == NONE)
+		            return;
+		        // 拍照
+		        if (requestCode == PHOTOHRAPH) {                                     //拍照
+		            // 设置文件保存路径这里放在跟目录下
+		            File picture = new File(Environment.getExternalStorageDirectory()
+		                    + "/temp.jpg");
+		            startImageZoom(Uri.fromFile(picture));
+		          
+		        }
+
+		        if (data == null)
+		            return;
+		        
+		        
+		        if (requestCode == PHOTORESOULT) {                                  //返回结果
+		            Bundle extras = data.getExtras();                               //获得intent放回的值
+		            if (extras != null) {
+		                Bitmap photo = extras.getParcelable("data");
+		                ByteArrayOutputStream stream = new ByteArrayOutputStream(); //ByteArrayOutputStream 获取内存缓存区的数据
+		                photo.compress(Bitmap.CompressFormat.JPEG, 100, stream);  
+		                HashMap<String, Object> map = new HashMap<String, Object>();
+		                File f1 = MainActivity.compressImage(photo,pathImage);
+		                map.put("pic", f1);
+		                HashMap<String, String> data1 = new HashMap<String, String>();
+		                data1.put("action", "alter");
+		                ((ImageView)findViewById(R.id.p_pic)).setImageBitmap(photo);    //加载图片到头像
+		                String url = "user/base";
+		               try {
+						NetTransfer.upload_pic(url, data1, user.getAccess_token(), map);
+					} catch (FileNotFoundException e) {
+						e.printStackTrace();
+					}
+//	                    Uri uri = saveBitmap(photo, "temp");
+//		                           //启动图像裁剪
+//		                           startImageZoom(uri);
+		                       }
+		                   }
+		        if (resultCode == RESULT_OK && requestCode == IMAGE_OPEN) {           //系统相册打开且选择了照片
+		            startImageZoom(data.getData());                                     
+		        }
+	      super.onActivityResult(requestCode, resultCode, data);   
+
+
+		}
+
+		public void startImageZoom(Uri uri) {                                                //剪切图片
+	        Intent intent = new Intent("com.android.camera.action.CROP");
+	        intent.setDataAndType(uri, IMAGE_UNSPECIFIED);
+	        Log.e("uri",uri.getPath());
+	      
+	        intent.putExtra("crop", "true");
+	        // aspectX aspectY 是宽高的比例
+	        intent.putExtra("aspectX", 1);
+	        intent.putExtra("aspectY", 1);
+	        // outputX outputY 是裁剪图片宽高
+	        intent.putExtra("outputX", 480);
+	        intent.putExtra("outputY", 480);
+	        intent.putExtra("return-data", true);
+	        
+	        startActivityForResult(intent, PHOTORESOULT);
+	    }
+		
+		
+		 //bitmap转File
+	    public static File compressImage(Bitmap bitmap,String filename) { 
+	        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+	        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);//质量压缩方法，这里100表示不压缩，把压缩后的数据存放到baos中
+	        int options = 100;
+	        while (baos.toByteArray().length / 1024 > 500) {  //循环判断如果压缩后图片是否大于500kb,大于继续压缩
+	            baos.reset();//重置baos即清空baos
+	            options -= 10;//每次都减少10
+	            bitmap.compress(Bitmap.CompressFormat.JPEG, options, baos);//这里压缩options%，把压缩后的数据存放到baos中
+	            long length = baos.toByteArray().length;
+	        }
+//	        SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHHmmss");
+//	        Date date = new Date(System.currentTimeMillis());
+//	        String filename = format.format(date);
+	        File file = new File(Environment.getExternalStorageDirectory(),filename+".png");
+	        try {
+	            FileOutputStream fos = new FileOutputStream(file);
+	            try {
+	                fos.write(baos.toByteArray());
+	                fos.flush();
+	                fos.close();
+	            } catch (IOException e) {
+	                e.printStackTrace();
+	            }
+	        } catch (FileNotFoundException e) {
+	            e.printStackTrace();
+	        }
+	        return file;
+	    }
+		
 
 	// @Override
 	// public boolean onCreateOptionsMenu(Menu menu) {
