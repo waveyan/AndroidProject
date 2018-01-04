@@ -51,6 +51,7 @@
             android:background="@drawable/crown" />
 
         <EditText
+            android:id="@+id/title"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:hint="输入标题（例如:广州一日游）"
@@ -71,6 +72,7 @@
             android:background="@drawable/time" />
 
         <EditText
+            android:id="@+id/time"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:hint="输入日期（例如:2018-1-1）"
@@ -91,6 +93,7 @@
             android:background="@drawable/add" />
 
         <EditText
+            android:id="@+id/introduce"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="top"
