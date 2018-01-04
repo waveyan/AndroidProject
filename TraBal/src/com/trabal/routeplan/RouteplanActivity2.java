@@ -4,6 +4,9 @@ import java.util.ArrayList;
 
 import com.trabal.R;
 import com.trabal.activity.Bean.ActivityBean;
+import com.trabal.linear.IndexLinearLayout;
+import com.trabal.linear.SYxqyActivity;
+import com.trabal.linear.TakeMeToYourHome;
 import com.trabal.routeplan.RouteplanActivity1.CustomAdapter;
 import com.trabal.user.Bean.UserBean;
 
@@ -108,13 +111,31 @@ public class RouteplanActivity2 extends Activity {
 			mTextView1.setText(ab_list.get(position).getId());
 			mTextView2.setText(ab_list.get(position).getEnglish());
 
-			ImageView imageView = (ImageView) view
+			final ImageView imageView = (ImageView) view
 					.findViewById(R.id.image1);
 
 			imageView.setBackgroundResource(Integer.parseInt(ab_list.get(
 					position).getPic1()));		
 
+			class IVOnclick implements View.OnClickListener{
+
+				@Override
+				public void onClick(View arg0) {
+					if(arg0.getId()==imageView.getId()){
+						// ά�ֵ�¼״̬
+						Intent intent = new Intent(RouteplanActivity2.this, TakeMeToYourHome.class);
+						intent.putExtra("user", user);
+						intent.putExtra("ab", ab_list.get(position));
+						RouteplanActivity2.this.startActivity(intent);
+					}
+					}
+				}
+	
+			
+			imageView.setOnClickListener(new IVOnclick());
+
 			return view;
+
 		}
 	}
 }

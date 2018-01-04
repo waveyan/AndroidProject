@@ -114,7 +114,7 @@ public class IndexLinearLayout extends LinearLayout {
 			Picasso.with(context).load(db_list.get(position).getHsb().get(4).getPic1()).centerCrop().fit().into(imageView6);
 			Picasso.with(context).load(db_list.get(position).getHsb().get(5).getPic1()).centerCrop().fit().into(imageView7);
 			
-			
+			imageView1.setAlpha(0.8f);
 			
 			class IVOnclick implements View.OnClickListener{
 
@@ -126,7 +126,6 @@ public class IndexLinearLayout extends LinearLayout {
 						intent.putExtra("user", user);
 						intent.putExtra("db", db_list.get(position));
 						IndexLinearLayout.this.context.startActivity(intent);
-						
 					}else if(arg0.getId()==imageView2.getId()){
 						Intent intent = new Intent(IndexLinearLayout.this.context, TakeMeToYourHome.class);
 						intent.putExtra("user", user);

@@ -84,6 +84,8 @@ public class RouteplanActivity1 extends Activity {
 			imageView.setBackgroundResource(Integer.parseInt(ab_list.get(
 					position).getPic1()));
 			
+			imageView.setAlpha(0.8f);
+			
 			view.setOnClickListener(new OnClickListener() {				
 				@Override
 				public void onClick(View arg0) {
