@@ -165,6 +165,7 @@
         </LinearLayout>
 
         <RelativeLayout
+            android:id="@+id/r1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/dd1" >
@@ -289,6 +290,125 @@
                 android:layout_marginTop="10dp"
                 android:scaleType="fitXY"
                 android:src="@drawable/dw4" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/r1"
+            android:background="#698B69" >
+
+            <RelativeLayout
+                android:id="@+id/r2"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:id="@+id/ddd3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="10dp"
+                    android:text="MORE FOR YOU"
+                    android:textColor="#ffffff"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="11dp"
+                    android:layout_below="@+id/ddd3"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_toLeftOf="@+id/ddd4"
+                    android:background="#ffffff" />
+
+                <TextView
+                    android:id="@+id/ddd4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/ddd3"
+                    android:layout_centerHorizontal="true"
+                    android:text="活动推荐"
+                    android:textColor="#ffffff"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="11dp"
+                    android:layout_below="@+id/ddd3"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_toRightOf="@+id/ddd4"
+                    android:background="#ffffff" />
+
+                <ListView
+                    android:id="@+id/listview1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/ddd4"
+                    android:layout_marginTop="7dp"
+                    android:divider="@null" >
+                </ListView>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/r3"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/r2">
+
+                <TextView
+                    android:id="@+id/dddd3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="15dp"
+                    android:text="MAYBE YOU WANT TO KNOW"
+                    android:textColor="#ffffff"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="11dp"
+                    android:layout_below="@+id/dddd3"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_toLeftOf="@+id/dddd4"
+                    android:background="#ffffff" />
+
+                <TextView
+                    android:id="@+id/dddd4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/dddd3"
+                    android:layout_centerHorizontal="true"
+                    android:text="旅人热评"
+                    android:textColor="#ffffff"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="11dp"
+                    android:layout_below="@+id/dddd3"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_toRightOf="@+id/dddd4"
+                    android:background="#ffffff" />
+
+                <ListView
+                    android:id="@+id/listview2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/dddd4"
+                    android:layout_marginTop="7dp"
+                    android:divider="@null" >
+                </ListView>
+            </RelativeLayout>
         </RelativeLayout>
     </RelativeLayout>
 
