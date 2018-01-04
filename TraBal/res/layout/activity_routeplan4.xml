@@ -46,7 +46,7 @@
         <ImageView
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:layout_centerVertical="true"
+            android:layout_marginTop="2dp"
             android:layout_marginLeft="10dp"
             android:background="@drawable/crown" />
 
@@ -67,7 +67,7 @@
         <ImageView
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:layout_centerVertical="true"
+            android:layout_marginTop="2dp"
             android:layout_marginLeft="10dp"
             android:background="@drawable/time" />
 
