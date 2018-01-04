@@ -4,5 +4,6 @@
     <string name="app_name">TraBal</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
+            <string name="no_result">对不起，没有搜索到相关数据！</string>
 
 </resources>

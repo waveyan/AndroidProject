@@ -1,14 +1,22 @@
 package com.trabal.routeplan;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
+import org.apache.http.message.BasicNameValuePair;
+
+import com.squareup.picasso.Picasso;
+import com.trabal.MainActivity;
 import com.trabal.R;
 import com.trabal.activity.Bean.ActivityBean;
 import com.trabal.linear.IndexLinearLayout;
 import com.trabal.linear.SYxqyActivity;
 import com.trabal.linear.TakeMeToYourHome;
+import com.trabal.hotspot.Bean.HotSpotBean;
+import com.trabal.route.mapmap.DriveRouteActivity;
 import com.trabal.routeplan.RouteplanActivity1.CustomAdapter;
 import com.trabal.user.Bean.UserBean;
+import com.trabal.util.net.NetTransfer;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -26,7 +34,7 @@ public class RouteplanActivity2 extends Activity {
 	private Intent last_intent;
 	private UserBean user;
 	private ListView listView;
-	private ArrayList<ActivityBean> ab_list;
+	private ArrayList<HotSpotBean> hsb_list,hsb_plan;
 	private Button button;
 	private TextView textview;
 
@@ -40,14 +48,8 @@ public class RouteplanActivity2 extends Activity {
 
 		listView = (ListView) this.findViewById(R.id.routeplan2_listview);
 
-		ab_list = new ArrayList<ActivityBean>();
-
-		ActivityBean ab = new ActivityBean();
-		ab.setEnglish("Shenzhen");
-		ab.setId("深圳");
-		ab.setPic1(String.valueOf(R.drawable.wanghong2));
-
-		ab_list.add(ab);
+		hsb_list = initListview1();
+		hsb_plan=new ArrayList<HotSpotBean>();
 
 		listView.setAdapter(new CustomAdapter());
 		
@@ -57,7 +59,7 @@ public class RouteplanActivity2 extends Activity {
 		button.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View arg0) {
-				Intent intent = new Intent(RouteplanActivity2.this,RouteplanActivity1.class);
+				Intent intent = new Intent(RouteplanActivity2.this,MainActivity.class);
 				intent.putExtra("user", user);
 				RouteplanActivity2.this.startActivity(intent);
 				finish();
@@ -66,12 +68,15 @@ public class RouteplanActivity2 extends Activity {
 		
 		//下一步跳转
 		textview =(TextView)findViewById(R.id.next);
-		
+		if(hsb_plan.size()<=2){
+			textview.setClickable(false);
+		}
 		textview.setOnClickListener(new OnClickListener() {		
 			@Override
 			public void onClick(View arg0) {
-				Intent intent = new Intent(RouteplanActivity2.this,RouteplanActivity3.class);
+				Intent intent = new Intent(RouteplanActivity2.this,DriveRouteActivity.class);
 				intent.putExtra("user", user);
+				intent.putExtra("hsb_plan", hsb_plan);
 				RouteplanActivity2.this.startActivity(intent);
 				finish();
 			}
@@ -81,12 +86,12 @@ public class RouteplanActivity2 extends Activity {
 	class CustomAdapter extends BaseAdapter {
 
 		public int getCount() {
-			return ab_list.size();
+			return hsb_list.size();
 		}
 
 		@Override
 		public Object getItem(int position) {
-			return ab_list.get(position);
+			return hsb_list.get(position);
 		}
 
 		@Override
@@ -108,34 +113,105 @@ public class RouteplanActivity2 extends Activity {
 			TextView mTextView2 = (TextView) view
 					.findViewById(R.id.text1);
 
-			mTextView1.setText(ab_list.get(position).getId());
-			mTextView2.setText(ab_list.get(position).getEnglish());
+			mTextView1.setText(hsb_list.get(position).getEnglishName());
+			mTextView2.setText(hsb_list.get(position).getName());
 
 			final ImageView imageView = (ImageView) view
 					.findViewById(R.id.image1);
+//
+//			imageView.setBackgroundResource(Integer.parseInt(ab_list.get(
+//					position).getPic1()));		
+//
+//			class IVOnclick implements View.OnClickListener{
+//
+//				@Override
+//				public void onClick(View arg0) {
+//					if(arg0.getId()==imageView.getId()){
+//						// 维持登录状态
+//						Intent intent = new Intent(RouteplanActivity2.this, TakeMeToYourHome.class);
+//						intent.putExtra("user", user);
+//						intent.putExtra("ab", ab_list.get(position));
+//						RouteplanActivity2.this.startActivity(intent);
+//					}
+//					}
+//				}
+//	
+//			
+//			imageView.setOnClickListener(new IVOnclick());
 
-			imageView.setBackgroundResource(Integer.parseInt(ab_list.get(
-					position).getPic1()));		
-
-			class IVOnclick implements View.OnClickListener{
-
+			
+			Picasso.with(RouteplanActivity2.this).load(hsb_list.get(position).getPic1()).centerCrop().fit().into(imageView);
+			
+			final Button btn=(Button)view.findViewById(R.id.addButton);
+			//防止滚动刷新
+			boolean flag=false;
+			for(HotSpotBean h : hsb_plan){
+				if(h.getId().equals(hsb_list.get(position).getId())){
+					flag=true;
+					break;
+				}
+			}
+			//变图
+			if(flag){
+				btn.setBackgroundResource(R.drawable.ojbk);
+			}
+			else{
+				
+				btn.setBackgroundResource(R.drawable.add_circle);
+			}
+			
+			
+			//选择地点
+			btn.setOnClickListener(new View.OnClickListener() {
+				
 				@Override
 				public void onClick(View arg0) {
-					if(arg0.getId()==imageView.getId()){
-						// 维持登录状态
-						Intent intent = new Intent(RouteplanActivity2.this, TakeMeToYourHome.class);
-						intent.putExtra("user", user);
-						intent.putExtra("ab", ab_list.get(position));
-						RouteplanActivity2.this.startActivity(intent);
+					boolean flag=false;
+					HotSpotBean tmp=null;
+					for(HotSpotBean h : hsb_plan){
+						if(h.getId().equals(hsb_list.get(position).getId())){
+							flag=true;
+							tmp=h;
+							break;
+						}
 					}
+					//变图
+					if(flag){
+						hsb_plan.remove(tmp);
+						btn.setBackgroundResource(R.drawable.add_circle);
 					}
+					else{
+						hsb_plan.add(hsb_list.get(position));
+						btn.setBackgroundResource(R.drawable.ojbk);
+					}
+					//是否可以下一步
+					if(hsb_plan.size()>=2)
+						textview.setClickable(true);
+					
 				}
-	
+			});
 			
-			imageView.setOnClickListener(new IVOnclick());
-
 			return view;
 
 		}
 	}
+	
+	private ArrayList<HotSpotBean> initListview1() {
+		// 网络传输
+		ArrayList params = new ArrayList();
+
+		String url = "hotspot/base";
+		NetTransfer nt = new NetTransfer();
+		try {
+
+			String data = NetTransfer.transfer(url, "get", params, true, user.getAccess_token(),null);
+			ArrayList<HotSpotBean> hs_list=nt.handle_hs_list(data);
+			return hs_list;
+		} catch (IOException e) {
+			e.printStackTrace();
+			return null;
+		}
+
+	}
+	
 }
