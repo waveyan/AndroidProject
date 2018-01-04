@@ -24,6 +24,8 @@ import com.trabal.linear.huodongActivity;
 import com.trabal.linear.luxianActivity;
 import com.trabal.linear.pingjiaActivity;
 import com.trabal.linear.recommendationactivity;
+import com.trabal.routeplan.RouteplanActivity1;
+import com.trabal.routeplan.RouteplanActivity2;
 import com.trabal.user.Bean.UserBean;
 import com.trabal.util.net.NetTransfer;
 import com.trabal.R;
@@ -552,6 +554,7 @@ public class MainActivity extends Activity implements OnButtonClickListener{
 				indexTv.setTextColor(android.graphics.Color.BLACK);
 				moreTv.setTextColor(android.graphics.Color.BLACK);
 				dynamicTv.setTextColor(android.graphics.Color.CYAN);
+				
 			}
 		}
 
@@ -562,8 +565,6 @@ public class MainActivity extends Activity implements OnButtonClickListener{
 
 		@Override
 		public void run() {
-			// TODO Auto-generated method stub
-
 			try {
 				Thread.sleep(650);
 			} catch (Exception ex) {
@@ -582,16 +583,15 @@ public class MainActivity extends Activity implements OnButtonClickListener{
 
 		@Override
 		public void run() {
-			// TODO Auto-generated method stub
-
 			try {
 				Thread.sleep(650);
 			} catch (Exception ex) {
 				ex.printStackTrace();
 			}
 
-			Intent intent = new Intent(MainActivity.this, addactivity.class);
+			Intent intent = new Intent(MainActivity.this, RouteplanActivity2.class);
 			intent.putExtra("user", user);
+			
 			MainActivity.this.startActivity(intent);
 
 		}
@@ -602,8 +602,6 @@ public class MainActivity extends Activity implements OnButtonClickListener{
 
 		@Override
 		public void run() {
-			// TODO Auto-generated method stub
-
 			try {
 				Thread.sleep(650);
 			} catch (Exception ex) {
@@ -622,14 +620,12 @@ public class MainActivity extends Activity implements OnButtonClickListener{
 
 		@Override
 		public void run() {
-			// TODO Auto-generated method stub
-
 			try {
 				Thread.sleep(650);
 			} catch (Exception ex) {
 				ex.printStackTrace();
 			}
-			Intent intent = new Intent(MainActivity.this, assessactivity.class);
+			Intent intent = new Intent(MainActivity.this, addactivity.class);
 			intent.putExtra("user", user);
 			MainActivity.this.startActivity(intent);
 
