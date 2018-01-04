@@ -31,6 +31,7 @@ import com.loopj.android.http.RequestParams;
 import com.trabal.activity.Bean.ActivityBean;
 import com.trabal.hotspot.Bean.DistrictBean;
 import com.trabal.hotspot.Bean.HotSpotBean;
+import com.trabal.route.Bean.RouteBean;
 import com.trabal.user.Bean.EvaluationBean;
 import com.trabal.user.Bean.UserBean;
 
@@ -69,18 +70,6 @@ public class NetTransfer {
 			if (code == 200) {
 				InputStream is = response.getEntity().getContent();
 				String text = Tools.readFromStream(is);
-				NetTransfer nt = new NetTransfer();
-				nt.return_data(text);
-				if (files != null && "success".equals(nt.getStatus())) {
-					HashMap<String, String> foolish = new HashMap<String, String>();
-					for (BasicNameValuePair nv : parameters) {
-						foolish.put(nv.getName(), nv.getValue());
-					}
-					foolish.put("action", "upload_pic");
-					foolish.put("instance_id", nt.id);
-					NetTransfer
-							.asynctransfer(url, foolish, access_token, files);
-				}
 				return text;
 			} else {
 				return "{'msg':'«Î«Û ß∞‹','status':'fail'}";
@@ -259,6 +248,8 @@ public class NetTransfer {
 			hsb.setUrl(json.getString("url"));
 			hsb.setIsfavour(json.getInt("isfavour"));
 			hsb.setId(json.getString("id"));
+			hsb.setLatitude(json.getString("latitude"));
+			hsb.setLongitude(json.getString("longitude"));
 			try {
 				hsb.setAbs(handle_ac_list(json.getString("activity")));
 			} catch (Exception e) {
@@ -547,6 +538,44 @@ public class NetTransfer {
 			e.printStackTrace();
 			return null;
 		}
+	}
+	
+	public RouteBean handle_rb_data(String data){
+		try {
+			JSONObject json = new JSONObject(data);
+			RouteBean rb=new RouteBean();
+			rb.setId(json.getInt("id"));
+			rb.setIntroduce(json.getString("introduce"));
+			rb.setTime(json.getString("time"));
+			rb.setTitle(json.getString("title"));
+			rb.setUser(json.getString("user"));
+			try{
+			rb.setHsb_list(handle_hs_list(json.getString("hotspot")));
+			}catch( Exception e){}
+			return rb;
+		} catch (JSONException e) {
+			e.printStackTrace();
+			Log.e("handle_rb_data",e.getMessage());
+			return null;
+		}
+	}
+	
+	public ArrayList<RouteBean> handle_rb_list(String data){
+		ArrayList<RouteBean> rb_list = new ArrayList<RouteBean>();
+		JSONArray json_list;
+		try {
+			JSONObject json = new JSONObject(data);
+			json_list = json.getJSONArray("route");
+			for (int i = 0; i < json_list.length(); i++) {
+				RouteBean ab = handle_rb_data(json_list.getString(i));
+				rb_list.add(ab);
+			}
+			return rb_list;
+		} catch (JSONException e) {
+			e.printStackTrace();
+			return null;
+		}
+
 	}
 
 	public String getStatus() {
