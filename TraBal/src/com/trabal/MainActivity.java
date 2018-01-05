@@ -589,7 +589,7 @@ public class MainActivity extends Activity implements OnButtonClickListener{
 				ex.printStackTrace();
 			}
 
-			Intent intent = new Intent(MainActivity.this, RouteplanActivity2.class);
+			Intent intent = new Intent(MainActivity.this, RouteplanActivity1.class);
 			intent.putExtra("user", user);
 			
 			MainActivity.this.startActivity(intent);
