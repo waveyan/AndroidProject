@@ -5,8 +5,6 @@
      <color name="a2">#FFFFE0</color>
       <color name="a3">#CCCCCC</color>
       <color name="a4">#000000</color>
-      
-      
     <color name="grey"> #ebebeb</color>
     <color name="black"> #000000</color>
     <color name="darkgrey"> #999999</color>
@@ -20,4 +18,5 @@
     <color name="itemlist">#f4f4f4</color>
     <color name="watermark_hint">#ccffffff</color>
     <color name="act_background">#efefef</color>
+       <color name="a5">#68838B</color>
 </resources>
