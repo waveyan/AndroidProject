@@ -43,6 +43,8 @@ OnButtonClickListener{
     public static final int PHOTOZOOM = 2; // 缩放
     public static final int PHOTORESOULT = 3;// 结果
     public static final String IMAGE_UNSPECIFIED = "image/*";
+	private Intent last_intent;
+
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +52,9 @@ OnButtonClickListener{
 		setContentView(R.layout.activity_addactivity);
 		//海报
 		poster = (ImageView)findViewById(R.id.posterID);
+		//用戶傳輸
+		last_intent = addactivity.this.getIntent();
+		user = (UserBean) last_intent.getSerializableExtra("user");
 		
 		backTv = (ImageButton)findViewById(R.id.leftarrow2ID);
 		button = (Button) findViewById(R.id.classifyID);
@@ -95,12 +100,10 @@ OnButtonClickListener{
 			
 			@Override
 			public void onClick(View arg0) {
-				// TODO Auto-generated method stub
-				Intent last_intent = addactivity.this.getIntent();
-				user = (UserBean)last_intent.getSerializableExtra("user");
 				Intent intent = new Intent(addactivity.this,MainActivity.class);
 				intent.putExtra("user", user);
 				addactivity.this.startActivity(intent);
+				finish();
 				
 			}
 		});
@@ -110,6 +113,7 @@ OnButtonClickListener{
 			public void onClick(View arg0) {
 				Intent intent = new Intent(addactivity.this,
 						classifyactivity.class);
+				intent.putExtra("user", user);
 				addactivity.this.startActivityForResult(intent, 200);
 			}
 		});
@@ -119,6 +123,7 @@ OnButtonClickListener{
 			public void onClick(View arg0) {
 				Intent intent = new Intent(addactivity.this,
 						classifyactivity.class);
+				intent.putExtra("user", user);
 				addactivity.this.startActivityForResult(intent, 200);
 			}
 		});
@@ -129,6 +134,7 @@ OnButtonClickListener{
 			public void onClick(View arg0) {
 				Intent intent = new Intent(addactivity.this,
 						classifyactivity.class);
+				intent.putExtra("user", user);
 				addactivity.this.startActivityForResult(intent, 200);
 			}
 		});
@@ -139,6 +145,7 @@ OnButtonClickListener{
 			public void onClick(View arg0) {
 				Intent intent = new Intent(addactivity.this,
 						themeactivity.class);
+				intent.putExtra("user", user);
 				addactivity.this.startActivityForResult(intent, 200);
 			}
 		});
@@ -148,6 +155,7 @@ OnButtonClickListener{
 			public void onClick(View arg0) {
 				Intent intent = new Intent(addactivity.this,
 						themeactivity.class);
+				intent.putExtra("user", user);
 				addactivity.this.startActivityForResult(intent, 200);
 			}
 		});
@@ -158,6 +166,7 @@ OnButtonClickListener{
 			public void onClick(View arg0) {
 				Intent intent = new Intent(addactivity.this,
 						themeactivity.class);
+				intent.putExtra("user", user);
 				addactivity.this.startActivityForResult(intent, 200);
 			}
 		});
@@ -167,6 +176,7 @@ OnButtonClickListener{
 			@Override
 			public void onClick(View arg0) {
 				Intent intent = new Intent(addactivity.this, timeactivity.class);
+				intent.putExtra("user", user);
 				addactivity.this.startActivityForResult(intent, 200);
 			}
 		});
@@ -175,6 +185,7 @@ OnButtonClickListener{
 			@Override
 			public void onClick(View arg0) {
 				Intent intent = new Intent(addactivity.this, timeactivity.class);
+				intent.putExtra("user", user);
 				addactivity.this.startActivityForResult(intent, 200);
 			}
 		});
@@ -184,6 +195,7 @@ OnButtonClickListener{
 			@Override
 			public void onClick(View arg0) {
 				Intent intent = new Intent(addactivity.this, timeactivity.class);
+				intent.putExtra("user", user);
 				addactivity.this.startActivityForResult(intent, 200);
 			}
 		});
@@ -194,7 +206,9 @@ OnButtonClickListener{
 			public void onClick(View arg0) {
 				Intent intent = new Intent(addactivity.this,
 						placeactivity.class);
+				intent.putExtra("user", user);
 				addactivity.this.startActivityForResult(intent, 200);
+				finish();
 			}
 		});
 		button14.setOnClickListener(new View.OnClickListener() {
@@ -203,6 +217,7 @@ OnButtonClickListener{
 			public void onClick(View arg0) {
 				Intent intent = new Intent(addactivity.this,
 						placeactivity.class);
+				intent.putExtra("user", user);
 				addactivity.this.startActivityForResult(intent, 200);
 			}
 		});
@@ -212,6 +227,7 @@ OnButtonClickListener{
 			public void onClick(View arg0) {
 				Intent intent = new Intent(addactivity.this,
 						placeactivity.class);
+				intent.putExtra("user", user);
 				addactivity.this.startActivityForResult(intent, 200);
 			}
 		});
@@ -222,6 +238,7 @@ OnButtonClickListener{
 			public void onClick(View arg0) {
 				Intent intent = new Intent(addactivity.this,
 						introduceactivity.class);
+				intent.putExtra("user", user);
 				addactivity.this.startActivityForResult(intent, 200);
 			}
 		});
@@ -231,6 +248,7 @@ OnButtonClickListener{
 			public void onClick(View arg0) {
 				Intent intent = new Intent(addactivity.this,
 						introduceactivity.class);
+				intent.putExtra("user", user);
 				addactivity.this.startActivityForResult(intent, 200);
 			}
 		});
@@ -240,6 +258,7 @@ OnButtonClickListener{
 			public void onClick(View arg0) {
 				Intent intent = new Intent(addactivity.this,
 						introduceactivity.class);
+				intent.putExtra("user", user);
 				addactivity.this.startActivityForResult(intent, 200);
 			}
 		});
@@ -250,6 +269,7 @@ OnButtonClickListener{
 			public void onClick(View arg0) {
 				Intent intent = new Intent(addactivity.this,
 						priceactivity.class);
+				intent.putExtra("user", user);
 				addactivity.this.startActivityForResult(intent, 200);
 			}
 		});
@@ -259,6 +279,7 @@ OnButtonClickListener{
 			public void onClick(View arg0) {
 				Intent intent = new Intent(addactivity.this,
 						priceactivity.class);
+				intent.putExtra("user", user);
 				addactivity.this.startActivityForResult(intent, 200);
 			}
 		});
@@ -268,6 +289,7 @@ OnButtonClickListener{
 			public void onClick(View arg0) {
 				Intent intent = new Intent(addactivity.this,
 						priceactivity.class);
+				intent.putExtra("user", user);
 				addactivity.this.startActivityForResult(intent, 200);
 			}
 		});
@@ -278,6 +300,7 @@ OnButtonClickListener{
 			public void onClick(View arg0) {
 				Intent intent = new Intent(addactivity.this,
 						telephoneactivity.class);
+				intent.putExtra("user", user);
 				addactivity.this.startActivityForResult(intent, 200);
 			}
 		});
@@ -287,6 +310,7 @@ OnButtonClickListener{
 			public void onClick(View arg0) {
 				Intent intent = new Intent(addactivity.this,
 						telephoneactivity.class);
+				intent.putExtra("user", user);
 				addactivity.this.startActivityForResult(intent, 200);
 			}
 		});
@@ -296,6 +320,7 @@ OnButtonClickListener{
 			public void onClick(View arg0) {
 				Intent intent = new Intent(addactivity.this,
 						telephoneactivity.class);
+				intent.putExtra("user", user);
 				addactivity.this.startActivityForResult(intent, 200);
 			}
 		});
@@ -306,6 +331,7 @@ OnButtonClickListener{
 			public void onClick(View arg0) {
 				Intent intent = new Intent(addactivity.this,
 						officialactivity.class);
+				intent.putExtra("user", user);
 				addactivity.this.startActivityForResult(intent, 200);
 			}
 		});
@@ -315,6 +341,7 @@ OnButtonClickListener{
 			public void onClick(View arg0) {
 				Intent intent = new Intent(addactivity.this,
 						officialactivity.class);
+				intent.putExtra("user", user);
 				addactivity.this.startActivityForResult(intent, 200);
 			}
 		});
@@ -325,6 +352,7 @@ OnButtonClickListener{
 			public void onClick(View arg0) {
 				Intent intent = new Intent(addactivity.this,
 						officialactivity.class);
+				intent.putExtra("user", user);
 				addactivity.this.startActivityForResult(intent, 200);
 			}
 		});

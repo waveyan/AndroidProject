@@ -9,6 +9,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.trabal.R;
+import com.trabal.user.Bean.UserBean;
 
 public class placeactivity extends Activity {
 	private ImageButton button;
@@ -16,12 +17,18 @@ public class placeactivity extends Activity {
 	private EditText EditText_place;
 
 	private Intent intent;
+	private Intent last_intent;
+	private UserBean user;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_place);
 		intent = this.getIntent();
+
+		// ÓÃ‘ô‚÷Ý”
+		last_intent = placeactivity.this.getIntent();
+		user = (UserBean) last_intent.getSerializableExtra("user");
 
 		EditText_place = (EditText) findViewById(R.id.ed5ID);
 		button = (ImageButton) findViewById(R.id.leftarrow7ID);
@@ -32,7 +39,9 @@ public class placeactivity extends Activity {
 			public void onClick(View arg0) {
 				Intent intent = new Intent(placeactivity.this,
 						addactivity.class);
+				intent.putExtra("user", user);
 				startActivity(intent);
+				finish();
 			}
 		});
 		sure.setOnClickListener(new View.OnClickListener() {

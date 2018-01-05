@@ -12,17 +12,24 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.trabal.R;
+import com.trabal.user.Bean.UserBean;
 
 public class timeactivity extends Activity {
 	private ImageButton button;
 	private TextView sure;
 	private EditText EditText_time;
 	private Intent intent;
+	private Intent last_intent;
+	private UserBean user;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_time);
+		
+		// ÓÃ‘ô‚÷Ý”
+		last_intent = timeactivity.this.getIntent();
+		user = (UserBean) last_intent.getSerializableExtra("user");
 		
 
 		EditText_time = (EditText) findViewById(R.id.ed9ID);
@@ -56,7 +63,9 @@ public class timeactivity extends Activity {
 			@Override
 			public void onClick(View arg0) {
 				Intent intent = new Intent(timeactivity.this, addactivity.class);
+				intent.putExtra("user", user);
 				startActivity(intent);
+				finish();
 			}
 		});
 		sure.setOnClickListener(new View.OnClickListener() {

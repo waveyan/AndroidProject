@@ -10,6 +10,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.trabal.R;
+import com.trabal.user.Bean.UserBean;
 
 public class officialactivity extends Activity {
 	private ImageButton button;
@@ -17,11 +18,17 @@ public class officialactivity extends Activity {
 	private EditText EditText_officialsite;
 
 	private Intent intent;
+	private Intent last_intent;
+	private UserBean user;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_official);
+
+		// ÓÃ‘ô‚÷Ý”
+		last_intent = officialactivity.this.getIntent();
+		user = (UserBean) last_intent.getSerializableExtra("user");
 
 		intent = this.getIntent();
 
@@ -34,7 +41,9 @@ public class officialactivity extends Activity {
 
 				Intent intent = new Intent(officialactivity.this,
 						addactivity.class);
+				intent.putExtra("user", user);
 				startActivity(intent);
+				finish();
 			}
 		});
 

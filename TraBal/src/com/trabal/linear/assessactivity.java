@@ -20,7 +20,6 @@ import java.util.HashMap;
 import org.apache.http.message.BasicNameValuePair;
 
 import android.app.Activity;
-
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
@@ -30,6 +29,7 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.text.TextUtils;
@@ -57,13 +57,12 @@ import com.trabal.MyDialog.OnButtonClickListener;
 import com.trabal.hotspot.Bean.HotSpotBean;
 import com.trabal.user.Bean.UserBean;
 import com.trabal.R;
+import com.trabal.user.Bean.UserBean;
 import com.trabal.util.net.FileUpload;
 import com.trabal.util.net.NetTransfer;
 
-
-
-public class assessactivity extends Activity implements
-OnButtonClickListener, OnItemClickListener{
+public class assessactivity extends Activity implements OnButtonClickListener,
+		OnItemClickListener {
 	private RatingBar ratingbar;
     private MyDialog dialog;// Í¼Æ¬Ñ¡Ôñ¶Ô»°¿ò
     public static final int NONE = 0;
@@ -111,11 +110,12 @@ OnButtonClickListener, OnItemClickListener{
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				Intent last_intent = assessactivity.this.getIntent();
-				user=(UserBean)last_intent.getSerializableExtra("user");
-				Intent intent = new Intent(assessactivity.this,MainActivity.class);
+				user = (UserBean) last_intent.getSerializableExtra("user");
+				Intent intent = new Intent(assessactivity.this,
+						MainActivity.class);
 				intent.putExtra("user", user);
 				assessactivity.this.startActivity(intent);
-			
+
 			}
 		});
         button = (Button) findViewById(R.id.positionID);
@@ -437,19 +437,17 @@ OnButtonClickListener, OnItemClickListener{
 
 		@Override
 		public void onClick(View arg0) {
-			
-	
-			
 		    ArrayList<HashMap<String, Object>> every_pic=assessactivity.this.imageItem;
 		    int i=0;
 		    HashMap<String,Object> temp=new HashMap<String,Object>();
 			if(every_pic.size()!=0){
 				for(HashMap<String,Object> item : every_pic){
 					i++;
-					if(i==1)
+					if (i == 1)
 						continue;
-					File f=assessactivity.compressImage((Bitmap)item.get("itemImage"),String.valueOf(i));				
-					temp.put("pic"+String.valueOf(i-1), f);
+					File f = assessactivity.compressImage(
+							(Bitmap) item.get("itemImage"), String.valueOf(i));
+					temp.put("pic" + String.valueOf(i - 1), f);
 				}
 			}
 			String feel_text = textView_fell.getText().toString().trim();
@@ -482,8 +480,5 @@ OnButtonClickListener, OnItemClickListener{
     	
     }
     
-
 }
-
-
 

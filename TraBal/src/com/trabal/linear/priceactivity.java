@@ -10,6 +10,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.trabal.R;
+import com.trabal.user.Bean.UserBean;
 
 public class priceactivity extends Activity {
 	private ImageButton button;
@@ -17,11 +18,17 @@ public class priceactivity extends Activity {
 	private TextView sure;
 	private EditText EditText_price;
 	private Intent intent;
+	private Intent last_intent;
+	private UserBean user;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_price);
+
+		// ÓÃ‘ô‚÷Ý”
+		last_intent = priceactivity.this.getIntent();
+		user = (UserBean) last_intent.getSerializableExtra("user");
 
 		intent = this.getIntent();
 		EditText_price = (EditText) findViewById(R.id.ed11ID);
@@ -34,7 +41,9 @@ public class priceactivity extends Activity {
 			public void onClick(View arg0) {
 				Intent intent = new Intent(priceactivity.this,
 						addactivity.class);
+				intent.putExtra("user", user);
 				startActivity(intent);
+				finish();
 			}
 		});
 

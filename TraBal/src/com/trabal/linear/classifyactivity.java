@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 
 import com.trabal.R;
+import com.trabal.user.Bean.UserBean;
 
 public class classifyactivity extends Activity {
 	private ImageButton button;
@@ -16,11 +17,17 @@ public class classifyactivity extends Activity {
 			button7, button8, button9, button10;
 
 	private Intent intent;
+	private Intent last_intent;
+	private UserBean user;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_classify);
+
+		// ÓÃ‘ô‚÷Ý”
+		last_intent = classifyactivity.this.getIntent();
+		user = (UserBean) last_intent.getSerializableExtra("user");
 
 		intent = this.getIntent();
 
@@ -41,7 +48,9 @@ public class classifyactivity extends Activity {
 			public void onClick(View arg0) {
 				Intent intent = new Intent(classifyactivity.this,
 						addactivity.class);
+				intent.putExtra("user", user);
 				startActivity(intent);
+				finish();
 			}
 		});
 

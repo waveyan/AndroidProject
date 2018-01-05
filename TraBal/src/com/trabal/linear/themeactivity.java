@@ -9,17 +9,24 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.trabal.R;
+import com.trabal.user.Bean.UserBean;
 
 public class themeactivity extends Activity {
 	private ImageButton button;
 	private TextView sure;
 	private EditText EditText_theme;
 	private Intent intent;
+	private Intent last_intent;
+	private UserBean user;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_theme);
+		
+		// ÓÃ‘ô‚÷Ý”
+		last_intent = themeactivity.this.getIntent();
+		user = (UserBean) last_intent.getSerializableExtra("user");
 
 		intent = this.getIntent();
 		EditText_theme = (EditText) findViewById(R.id.ed4ID);
@@ -31,7 +38,9 @@ public class themeactivity extends Activity {
 			public void onClick(View arg0) {
 				Intent intent = new Intent(themeactivity.this,
 						addactivity.class);
+				intent.putExtra("user", user);
 				startActivity(intent);
+				finish();
 			}
 		});
 		sure.setOnClickListener(new View.OnClickListener() {
