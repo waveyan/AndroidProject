@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" 
-    android:background="#4A4A4A">
+    android:background="@drawable/beijing">
     
      <RelativeLayout
         android:layout_width="wrap_content"
@@ -22,7 +22,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:gravity="center"
-            android:text="注册TraBal!Family"
+            android:text="注册Trabal!Family"
             android:textColor="@color/white"
             android:textSize="18sp" 
         />
@@ -32,7 +32,7 @@
         android:id="@+id/yonghu2ID"
         android:layout_width="fill_parent"
         android:layout_height="40dp"
-        android:background="@color/a1"
+        android:background="@color/a5"
         android:padding="5dp"
         android:layout_margin="15dp"
         android:textColorHint="@color/a2"
@@ -45,7 +45,7 @@
         android:id="@+id/password2ID"
         android:layout_width="fill_parent"
         android:layout_height="40dp"
-        android:background="@color/a1"
+        android:background="@color/a5"
         android:padding="5dp"
         android:layout_margin="15dp"
         android:textColorHint="@color/a2"
@@ -58,7 +58,7 @@
         android:id="@+id/comfirmID"
         android:layout_width="fill_parent"
         android:layout_height="40dp"
-        android:background="@color/a1"
+        android:background="@color/a5"
         android:padding="5dp"
         android:layout_margin="15dp"
         android:textColorHint="@color/a2"
@@ -73,12 +73,12 @@
       <EditText 
         android:layout_width="180dp"
         android:layout_height="30dp"
-        android:background="@color/a3"
+        android:background="@color/a5"
         android:gravity="center"
         android:padding="5dp"
         android:layout_margin="20dp"
         android:id="@+id/validate2ID"
-        android:textColorHint="@color/a1"
+        android:textColorHint="@color/a2"
         android:textSize="15dp"
         android:hint="输入验证码..."
        />

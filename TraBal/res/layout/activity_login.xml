@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#4A4A4A"
+    android:background="@drawable/beijing"
     android:orientation="vertical" >
 
     <RelativeLayout
@@ -18,32 +18,35 @@
             android:src="@drawable/a005" />
     </RelativeLayout>
 
-    <TextView
+    <RelativeLayout
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:gravity="center"
-        android:text="TraBal"
-        android:textColor="@color/white"
-        android:textSize="60sp"
-        android:textStyle="bold" />
+        android:layout_height="wrap_content" >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/biaoti" />
+    </RelativeLayout>
 
     <EditText
         android:id="@+id/yonghu1ID"
         android:layout_width="fill_parent"
         android:layout_height="40dp"
         android:layout_margin="20dp"
+        android:background="@color/a5"
+        android:hint="用户名/邮箱"
+        android:padding="5dp"
         android:textColorHint="@color/a2"
-        android:background="@color/a1"
-        android:textSize="15dp"
-        android:hint="用户名/邮箱" />
+        android:textSize="15dp" />
 
     <EditText
         android:id="@+id/password1ID"
         android:layout_width="fill_parent"
         android:layout_height="40dp"
         android:layout_margin="20dp"
-        android:background="@color/a1"
+        android:background="@color/a5"
         android:hint="密码  ..."
         android:padding="5dp"
         android:textColorHint="@color/a2"
@@ -58,11 +61,11 @@
             android:layout_width="180dp"
             android:layout_height="30dp"
             android:layout_margin="20dp"
-            android:background="@color/a3"
+            android:background="@color/a5"
             android:gravity="center"
             android:hint="输入验证码..."
-            android:padding="5dp" 
-            android:textColorHint="@color/a1"
+            android:padding="5dp"
+            android:textColorHint="@color/a2"
             android:textSize="15dp" />
 
         <ImageView
@@ -70,8 +73,8 @@
             android:layout_width="160dp"
             android:layout_height="30dp"
             android:layout_alignBottom="@+id/validate1ID"
+            android:layout_marginRight="20dp"
             android:layout_toRightOf="@+id/validate1ID"
-            android:layout_marginRight="20dp"           
             android:gravity="center" />
     </RelativeLayout>
 
