@@ -44,6 +44,7 @@ public class listviewAdapter extends BaseAdapter {
 		ImageView itemImage3 = (ImageView) view.findViewById(R.id.item4);
 		ImageView itemImage4 = (ImageView) view.findViewById(R.id.item5);
 		TextView item_textview1 = (TextView) view.findViewById(R.id.item_text1);
+		TextView item_textview2 = (TextView) view.findViewById(R.id.item_text2);
 		
 		
 		itemImage1.setOnClickListener(new OnClickListener() {
@@ -67,6 +68,7 @@ public class listviewAdapter extends BaseAdapter {
 		Picasso.with(context).load(objects.get(position).getPic3()).centerCrop().fit().into(itemImage3);
 		Picasso.with(context).load(objects.get(position).getPic2()).centerCrop().fit().into(itemImage4);
 		item_textview1.setText(objects.get(position).getName());
+		item_textview2.setText(objects.get(position).getWord());
 		return view;
 
 	}

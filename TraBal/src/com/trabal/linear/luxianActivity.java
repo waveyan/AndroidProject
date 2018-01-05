@@ -1,14 +1,20 @@
 package com.trabal.linear;
 
+import java.io.IOException;
 import java.util.ArrayList;
+
+import org.apache.http.message.BasicNameValuePair;
 
 import com.trabal.MainActivity;
 import com.trabal.R;
 import com.trabal.activity.Bean.ActivityBean;
+import com.trabal.route.Bean.RouteBean;
+import com.trabal.route.mapmap.DriveRouteActivity;
 import com.trabal.routeplan.RouteplanActivity1;
 import com.trabal.routeplan.RouteplanActivity2;
 import com.trabal.routeplan.RouteplanActivity4;
 import com.trabal.user.Bean.UserBean;
+import com.trabal.util.net.NetTransfer;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -21,13 +27,14 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class luxianActivity extends Activity{
 	private Intent last_intent;
 	private UserBean user;
 	private Button button;
 	private ListView listView;
-	private ArrayList<ActivityBean> ab_list;
+	private ArrayList<RouteBean> rb_list;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -53,15 +60,7 @@ public class luxianActivity extends Activity{
 		
 		listView = (ListView) this.findViewById(R.id.luxian_listview);
 
-		ab_list = new ArrayList<ActivityBean>();
-
-		ActivityBean ab = new ActivityBean();
-		ab.setTitle("广州一日游");
-		ab.setTime("2018-1-1");
-		ab.setIntroduction("这里有你想要的诗与远方");
-		
-
-		ab_list.add(ab);
+		rb_list = initRb_List();
 
 		listView.setAdapter(new CustomAdapter());
 }
@@ -69,12 +68,12 @@ public class luxianActivity extends Activity{
 	class CustomAdapter extends BaseAdapter {
 
 		public int getCount() {
-			return ab_list.size();
+			return rb_list.size();
 		}
 
 		@Override
 		public Object getItem(int position) {
-			return ab_list.get(position);
+			return rb_list.get(position);
 		}
 
 		@Override
@@ -99,12 +98,44 @@ public class luxianActivity extends Activity{
 			TextView mTextView3 = (TextView) view
 					.findViewById(R.id.text3);
 
-			mTextView1.setText(ab_list.get(position).getTitle());
-			mTextView2.setText(ab_list.get(position).getTime());
-			mTextView3.setText(ab_list.get(position).getIntroduction());
+			mTextView1.setText(rb_list.get(position).getTitle());
+			mTextView2.setText(rb_list.get(position).getTime());
+			mTextView3.setText(rb_list.get(position).getIntroduce());
+			
+			//点击事件
+			view.setOnClickListener(new View.OnClickListener() {
+				
+				@Override
+				public void onClick(View arg0) {
+					Intent intent = new Intent(luxianActivity.this,DriveRouteActivity.class);
+					intent.putExtra("user", user);
+					intent.putExtra("hsb_plan", rb_list.get(position).getHsb_list());
+					intent.putExtra("from", "mine");
+					luxianActivity.this.startActivity(intent);
+				}
+			});
 
 			return view;
 		}
+	}
+	
+	private ArrayList<RouteBean> initRb_List(){
+
+		//上传数据
+		String url="hotspot/route";
+		ArrayList<BasicNameValuePair> parameters=new ArrayList<BasicNameValuePair>();
+		parameters.add(new BasicNameValuePair("action","person"));
+		ArrayList<RouteBean> rb_list=new ArrayList<RouteBean>();
+		try {
+			String data=NetTransfer.transfer(url, "get", parameters, true, user.getAccess_token(), null);
+			NetTransfer nt=new NetTransfer();
+			rb_list=nt.handle_rb_list(data);
+			return rb_list;
+		} catch (IOException e) {
+			e.printStackTrace();
+			return null;
+		}
+	
 	}
 }
 

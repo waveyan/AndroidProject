@@ -8,6 +8,7 @@ import org.apache.http.message.BasicNameValuePair;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,6 +32,7 @@ import com.trabal.user.Bean.EvaluationBean;
 import com.trabal.user.Bean.UserBean;
 
 import com.trabal.util.net.NetTransfer;
+import com.trabal.util.net.Tools;
 
 public class DynamicLinearLayout extends LinearLayout {
 
@@ -133,7 +135,7 @@ public class DynamicLinearLayout extends LinearLayout {
 
 			Picasso.with(DynamicLinearLayout.this.context)
 					.load(eb_list.get(position).getUser().getPic())
-					.centerCrop().fit().into(imageView1);
+					.centerCrop().transform(new Tools.CircleTransform()).fit().into(imageView1);
 
 			// ¶¯Ì¬Í¼Æ¬
 			GridView gv = (GridView) view.findViewById(R.id.gridview);
@@ -156,7 +158,7 @@ public class DynamicLinearLayout extends LinearLayout {
 				gv.setNumColumns(2);
 			else
 				gv.setNumColumns(3);
-
+			
 			gv.setAdapter(new BaseAdapter() {
 
 				@Override

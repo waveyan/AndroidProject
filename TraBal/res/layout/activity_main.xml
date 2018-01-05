@@ -66,13 +66,13 @@
                 android:id="@+id/positionID"
                 android:layout_width="16dp"
                 android:layout_height="16dp"
-                android:layout_alignTop="@+id/guangzhou"
+                android:layout_alignTop="@+id/district"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="3dp"
                 android:background="@drawable/position" />
 
             <TextView
-                android:id="@+id/guangzhou"
+                android:id="@+id/district"
                 android:layout_width="100dp"
                 android:layout_height="50dp"
                 android:layout_marginLeft="6dp"

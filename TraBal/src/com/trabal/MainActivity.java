@@ -99,6 +99,7 @@ public class MainActivity extends Activity implements OnButtonClickListener{
     public static final int PHOTORESOULT = 3;// 结果
     public static final String IMAGE_UNSPECIFIED = "image/*";
     private String pathImage="headpic";
+    private TextView district;
     
     
     
@@ -130,13 +131,22 @@ public class MainActivity extends Activity implements OnButtonClickListener{
 		indexTv = (TextView) this.findViewById(R.id.indexID);
 		moreTv = (TextView) this.findViewById(R.id.moreID);
 		dynamicTv = (TextView) this.findViewById(R.id.dynamicID);
+		//地域
+		district=(TextView)this.findViewById(R.id.district);
+		district.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				Intent intent=new Intent(MainActivity.this,RouteplanActivity1.class);
+				intent.putExtra("user", user);
+				MainActivity.this.startActivity(intent);
+			}
+		});
+		
 		
 		myDialog = new MyDialog(this);
 		myDialog.setOnButtonClickListener(this);
 	
-
-	
-
    
 		// 卫星菜单动态实现
 

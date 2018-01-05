@@ -245,7 +245,7 @@
             <ImageView
                 android:id="@+id/pic1"
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="200dp"
                 android:layout_below="@+id/pic1_text"
                 android:layout_marginTop="10dp"
                 android:scaleType="fitXY"
@@ -265,7 +265,7 @@
             <ImageView
                 android:id="@+id/pic2"
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="200dp"
                 android:layout_below="@+id/pic2_text"
                 android:layout_marginTop="10dp"
                 android:scaleType="fitXY"
@@ -285,7 +285,7 @@
             <ImageView
                 android:id="@+id/pic3"
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="200dp"
                 android:layout_below="@+id/pic3_text"
                 android:layout_marginTop="10dp"
                 android:scaleType="fitXY"

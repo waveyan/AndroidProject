@@ -58,19 +58,23 @@ public class RouteplanActivity4 extends Activity {
 				parameters.add(new BasicNameValuePair("title",title.getText().toString().trim()));
 				parameters.add(new BasicNameValuePair("introduce",introduce.getText().toString().trim()));
 				parameters.add(new BasicNameValuePair("time",time.getText().toString().trim()));
-				parameters.add(new BasicNameValuePair("hotspot_ids",last_intent.getStringExtra("hs_ids")));
+				parameters.add(new BasicNameValuePair("hotspot_ids",hs_ids));
 				try {
 					String data=NetTransfer.transfer(url, "post", parameters, true, user.getAccess_token(), null);
 					NetTransfer nt=new NetTransfer();
 					nt.return_data(data);
 					Toast.makeText(RouteplanActivity4.this, nt.getMsg(),
 							Toast.LENGTH_SHORT).show();
+					if("success".equals(nt.getStatus())){
+						
 					Intent intent = new Intent(RouteplanActivity4.this,
 							MainActivity.class);
 					// 保持该用户登录状态
 					intent.putExtra("user", user);
 					RouteplanActivity4.this.startActivity(intent);
 					RouteplanActivity4.this.finish();
+					}
+					
 				} catch (IOException e) {
 					e.printStackTrace();
 				}

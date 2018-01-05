@@ -30,6 +30,7 @@ import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -55,7 +56,7 @@ public class TakeMeToYourHome extends Activity {
 	private ListView mListView, mlistView1;
 
 	private CustomAdapter ba;
-
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -108,25 +109,30 @@ public class TakeMeToYourHome extends Activity {
 				TakeMeToYourHome.this.finish();
 			}
 		});
-
 		// 活动listview
-		ab_list = new ArrayList<ActivityBean>();
-		// 网络传输获得数据，一次性获取收藏的活动和地点
-		String url = "user/get_my_activity";
-		try {
-			String data = NetTransfer.transfer(url, "get", null, true,
-					user.getAccess_token(), null);
+		ab_list = hsb.getAbs();
+		if(ab_list==null || ab_list.size()==0){
+			// 网络传输
+			ArrayList params = new ArrayList();
+			params.add(new BasicNameValuePair("action","hotspot"));     //上传数据对接属性 
+			params.add(new BasicNameValuePair("hotspot_id",hsb.getId()));     //上传数据对接属性 
+			String url = "activity/base";
 			NetTransfer nt = new NetTransfer();
-			// 防止收藏为空时的空指针
-			ArrayList<ActivityBean> ab_data = nt.handle_ac_list(data);
+			try {
+
+				String data = NetTransfer.transfer(url, "get", params, true, user.getAccess_token(),null);
+				ab_list=nt.handle_ac_list(data);
+			} catch (IOException e) {
+				ab_list=new ArrayList<ActivityBean>();
+				e.printStackTrace();
+			}
+		}
+		// 网络传输获得数据，一次性获取收藏的活动和地点
+		if (ab_list == null) {
 			ab_list = new ArrayList<ActivityBean>();
-			if (ab_data != null)
-				ab_list = ab_data;
-		} catch (Exception e) {
-			Log.e("地点收藏", e.getMessage());
 		}
 
-		// 初始化ListView控件
+		// 初始化ListView控件,活动列表
 		mListView = (ListView) findViewById(R.id.listview1);
 		// 创建一个Adapter的实例
 		MyBaseAdapter mAdapter = new MyBaseAdapter();
@@ -161,9 +167,12 @@ public class TakeMeToYourHome extends Activity {
 		pic3_text = (TextView) this.findViewById(R.id.pic3_text);
 		Picasso.with(TakeMeToYourHome.this).load(hsb.getPic1()).centerCrop()
 				.fit().into(pic1);
-		Picasso.with(TakeMeToYourHome.this).load(hsb.getPic2()).into(pic2);
-		Picasso.with(TakeMeToYourHome.this).load(hsb.getPic3()).into(pic3);
-		Picasso.with(TakeMeToYourHome.this).load(hsb.getPic2()).into(pic4);
+		Picasso.with(TakeMeToYourHome.this).load(hsb.getPic2()).centerCrop()
+				.fit().into(pic2);
+		Picasso.with(TakeMeToYourHome.this).load(hsb.getPic3()).centerCrop()
+				.fit().into(pic3);
+		Picasso.with(TakeMeToYourHome.this).load(hsb.getPic2()).centerCrop()
+				.fit().into(pic4);
 		englishname.setText(hsb.getEnglishName());
 		chinaname.setText(hsb.getName());
 		introduction.setText(hsb.getWord());
@@ -234,6 +243,7 @@ public class TakeMeToYourHome extends Activity {
 
 	}
 
+	// 活动详情页
 	class MyBaseAdapter extends BaseAdapter {
 
 		public int getCount() {
@@ -278,6 +288,7 @@ public class TakeMeToYourHome extends Activity {
 					intent.putExtra("user", TakeMeToYourHome.this.user);
 					intent.putExtra("hsb", hsb);
 					intent.putExtra("from", "take");
+					intent.putExtra("last_from", from);
 					TakeMeToYourHome.this.startActivity(intent);
 				}
 			});
@@ -285,15 +296,34 @@ public class TakeMeToYourHome extends Activity {
 		}
 	}
 
+	//评价
 	class CustomAdapter extends BaseAdapter {
 
 		private ArrayList<EvaluationBean> eb_list;
-		private ArrayList<String> list;
 		private ImageView love;
 
 		public CustomAdapter() {
 			// 获取数据
-			eb_list=hsb.getEbs();
+			eb_list = hsb.getEbs();
+			if(eb_list==null|| eb_list.size()==0){
+
+				// 网络传输
+				ArrayList params = new ArrayList();
+				params.add(new BasicNameValuePair("action","hotspot"));     //上传数据对接属性 
+				params.add(new BasicNameValuePair("hotspot_id",hsb.getId()));     //上传数据对接属性 
+				String url = "evaluation/base";
+				NetTransfer nt = new NetTransfer();
+				try {
+
+					String data = NetTransfer.transfer(url, "get", params, true, user.getAccess_token(),null);
+					eb_list=nt.handle_eb_list(data);
+				} catch (IOException e) {
+					eb_list=new ArrayList<EvaluationBean>();
+					e.printStackTrace();
+				}
+
+			
+			}
 
 		}
 
@@ -325,7 +355,7 @@ public class TakeMeToYourHome extends Activity {
 			mTextView1.setText(eb_list.get(position).getUser().getName());
 			mTextView2.setText(eb_list.get(position).getTime());
 			mTextView3.setText(eb_list.get(position).getMood());
-			mTextView4.setText(eb_list.get(position).getHs().getName());
+			mTextView4.setText(hsb.getName());
 			mTextView5
 					.setText(String.valueOf(eb_list.get(position).getPrice()));
 			ImageView imageView1 = (ImageView) view
@@ -344,11 +374,14 @@ public class TakeMeToYourHome extends Activity {
 			Picasso.with(TakeMeToYourHome.this)
 					.load(eb_list.get(position).getUser().getPic())
 					.centerCrop().fit().into(imageView1);
+			
+			RatingBar rate =(RatingBar)view.findViewById(R.id.pjxqy_stars3);
+			rate.setRating(Float.parseFloat(eb_list.get(position).getRate()));
 
 			// 动态图片
 			GridView gv = (GridView) view.findViewById(R.id.gridview);
 			// silly！！！！！
-			list = new ArrayList<String>();
+			final ArrayList<String> list = new ArrayList<String>();
 			if (eb_list.get(position).getPic1() != null
 					&& !("".equals(eb_list.get(position).getPic1())))
 				list.add(eb_list.get(position).getPic1());
@@ -374,8 +407,8 @@ public class TakeMeToYourHome extends Activity {
 					View view = View.inflate(TakeMeToYourHome.this,
 							R.layout.grid_item, null);
 					ImageView iv2 = (ImageView) view.findViewById(R.id.iv);
-					Picasso.with(TakeMeToYourHome.this)
-							.load(list.get(arg0)).into(iv2);
+					Picasso.with(TakeMeToYourHome.this).load(list.get(arg0))
+							.into(iv2);
 					return view;
 				}
 
@@ -452,13 +485,19 @@ public class TakeMeToYourHome extends Activity {
 								user.getAccess_token(), null);
 						NetTransfer nt = new NetTransfer();
 						nt.return_data(data);
-						Toast.makeText(TakeMeToYourHome.this,
-								nt.getMsg(), Toast.LENGTH_LONG).show();
+						Toast.makeText(TakeMeToYourHome.this, nt.getMsg(),
+								Toast.LENGTH_LONG).show();
 						// 刷新数据
-						String update_url = "evaluation/get_evaluation_from_my_follow";
+						String update_url = "evaluation/base";
+						ArrayList update_params = new ArrayList();
+						update_params.add(new BasicNameValuePair("action",
+								"hotspot"));
+						update_params.add(new BasicNameValuePair("hotspot_id",
+								hsb.getId()));
 						NetTransfer update_nt = new NetTransfer();
 						String update_data = NetTransfer.transfer(update_url,
-								"get", null, true, user.getAccess_token(), null);
+								"get", update_params, true,
+								user.getAccess_token(), null);
 						eb_list = update_nt.handle_eb_list(update_data);
 						ba.notifyDataSetChanged();
 					} catch (IOException e) {

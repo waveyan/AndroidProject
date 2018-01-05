@@ -305,6 +305,7 @@ public class NetTransfer {
 			return db;
 		} catch (JSONException e) {
 			Log.e("handle_db_data", e.getMessage());
+			
 			e.printStackTrace();
 			return null;
 		}
@@ -356,11 +357,12 @@ public class NetTransfer {
 
 	public ArrayList<UserBean> handle_usr_like_list(String data) {
 		try {
-			UserBean user = new UserBean();
+			
 			ArrayList<UserBean> user_list = new ArrayList<UserBean>();
 			JSONObject json = new JSONObject(data);
 			JSONArray json_list = json.getJSONArray("usr_like");
 			for (int i = 0; i < json_list.length(); i++) {
+				UserBean user = new UserBean();
 				user = handle_user_data(json_list.getString(i), user);
 				user_list.add(user);
 			}

@@ -118,27 +118,6 @@ public class RouteplanActivity2 extends Activity {
 
 			final ImageView imageView = (ImageView) view
 					.findViewById(R.id.image1);
-//
-//			imageView.setBackgroundResource(Integer.parseInt(ab_list.get(
-//					position).getPic1()));		
-//
-//			class IVOnclick implements View.OnClickListener{
-//
-//				@Override
-//				public void onClick(View arg0) {
-//					if(arg0.getId()==imageView.getId()){
-//						// 维持登录状态
-//						Intent intent = new Intent(RouteplanActivity2.this, TakeMeToYourHome.class);
-//						intent.putExtra("user", user);
-//						intent.putExtra("ab", ab_list.get(position));
-//						RouteplanActivity2.this.startActivity(intent);
-//					}
-//					}
-//				}
-//	
-//			
-//			imageView.setOnClickListener(new IVOnclick());
-
 			
 			Picasso.with(RouteplanActivity2.this).load(hsb_list.get(position).getPic1()).centerCrop().fit().into(imageView);
 			
@@ -159,7 +138,6 @@ public class RouteplanActivity2 extends Activity {
 				
 				btn.setBackgroundResource(R.drawable.add_circle);
 			}
-			
 			
 			//选择地点
 			btn.setOnClickListener(new View.OnClickListener() {
@@ -190,9 +168,7 @@ public class RouteplanActivity2 extends Activity {
 					
 				}
 			});
-			
 			return view;
-
 		}
 	}
 	
