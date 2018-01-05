@@ -293,15 +293,7 @@ public class TakeMeToYourHome extends Activity {
 
 		public CustomAdapter() {
 			// 获取数据
-			String url = "evaluation/get_evaluation_from_my_follow";
-			NetTransfer nt = new NetTransfer();
-			try {
-				String data = NetTransfer.transfer(url, "get", null, true,
-						user.getAccess_token(), null);
-				eb_list = nt.handle_eb_list(data);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+			eb_list=hsb.getEbs();
 
 		}
 

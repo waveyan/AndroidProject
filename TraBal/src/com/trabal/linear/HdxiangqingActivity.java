@@ -11,6 +11,7 @@ import com.trabal.R;
 import com.trabal.activity.Bean.ActivityBean;
 import com.trabal.user.Bean.UserBean;
 import com.trabal.util.net.NetTransfer;
+import com.trabal.util.net.Tools;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -84,6 +85,13 @@ public class HdxiangqingActivity extends Activity{
 					HdxiangqingActivity.this.startActivity(intent);
 					HdxiangqingActivity.this.finish();
 				}
+				else if("take".equals(from)){
+					Intent intent=new Intent(HdxiangqingActivity.this,TakeMeToYourHome.class);
+					intent.putExtra("user", user);
+					intent.putExtra("hsb", last_intent.getSerializableExtra("hsb"));
+					HdxiangqingActivity.this.startActivity(intent);
+					HdxiangqingActivity.this.finish();
+				}
 				
 //				Intent intent=new Intent(HdxiangqingActivity.this,huodongActivity.class);
 //				HdxiangqingActivity.this.startActivity(intent);			
@@ -134,7 +142,7 @@ public class HdxiangqingActivity extends Activity{
 		Picasso.with(HdxiangqingActivity.this).load(ab.getHsb().getPic3()).centerCrop().fit().into(hs3);
 		Picasso.with(HdxiangqingActivity.this).load(ab.getHsb().getPic2()).centerCrop().fit().into(hs4);
 		host_user.setText(ab.getHost_user().getName());
-		Picasso.with(HdxiangqingActivity.this).load(ab.getHost_user().getPic()).centerCrop().fit().into(host_usr_pic);
+		Picasso.with(HdxiangqingActivity.this).load(ab.getHost_user().getPic()).transform(new Tools.CircleTransform()).centerCrop().fit().into(host_usr_pic);
 		hotspot.setText(ab.getHsb().getName());
 		hs_name.setText(ab.getHsb().getName());
 		}catch(Exception e){
@@ -229,7 +237,7 @@ public class HdxiangqingActivity extends Activity{
 			all_w.setVisibility(View.INVISIBLE);
 			break;
 		case 1:
-			Picasso.with(HdxiangqingActivity.this).load(user_list.get(0).getPic()).into(w1);
+			Picasso.with(HdxiangqingActivity.this).load(user_list.get(0).getPic()).transform(new Tools.CircleTransform()).into(w1);
 			w1.setVisibility(View.VISIBLE);
 			w2.setVisibility(View.INVISIBLE);
 			w3.setVisibility(View.INVISIBLE);
@@ -237,8 +245,8 @@ public class HdxiangqingActivity extends Activity{
 			all_w.setVisibility(View.INVISIBLE);
 			break;
 		case 2:
-			Picasso.with(HdxiangqingActivity.this).load(user_list.get(0).getPic()).into(w1);
-			Picasso.with(HdxiangqingActivity.this).load(user_list.get(1).getPic()).into(w2);
+			Picasso.with(HdxiangqingActivity.this).load(user_list.get(0).getPic()).transform(new Tools.CircleTransform()).into(w1);
+			Picasso.with(HdxiangqingActivity.this).load(user_list.get(1).getPic()).transform(new Tools.CircleTransform()).into(w2);
 			w1.setVisibility(View.VISIBLE);
 			w2.setVisibility(View.VISIBLE);
 			w3.setVisibility(View.INVISIBLE);
@@ -246,29 +254,29 @@ public class HdxiangqingActivity extends Activity{
 			all_w.setVisibility(View.INVISIBLE);
 			break;
 		case 3:
-			Picasso.with(HdxiangqingActivity.this).load(user_list.get(0).getPic()).into(w1);
-			Picasso.with(HdxiangqingActivity.this).load(user_list.get(1).getPic()).into(w2);
-			Picasso.with(HdxiangqingActivity.this).load(user_list.get(2).getPic()).into(w3);
+			Picasso.with(HdxiangqingActivity.this).load(user_list.get(0).getPic()).transform(new Tools.CircleTransform()).into(w1);
+			Picasso.with(HdxiangqingActivity.this).load(user_list.get(1).getPic()).transform(new Tools.CircleTransform()).into(w2);
+			Picasso.with(HdxiangqingActivity.this).load(user_list.get(2).getPic()).transform(new Tools.CircleTransform()).into(w3);
 			w1.setVisibility(View.VISIBLE);
 			w2.setVisibility(View.VISIBLE);
 			w3.setVisibility(View.VISIBLE);
 			w4.setVisibility(View.INVISIBLE);
 			all_w.setVisibility(View.INVISIBLE);
 		case 4:
-			Picasso.with(HdxiangqingActivity.this).load(user_list.get(0).getPic()).into(w1);
-			Picasso.with(HdxiangqingActivity.this).load(user_list.get(1).getPic()).into(w2);
-			Picasso.with(HdxiangqingActivity.this).load(user_list.get(2).getPic()).into(w3);
-			Picasso.with(HdxiangqingActivity.this).load(user_list.get(3).getPic()).into(w4);
+			Picasso.with(HdxiangqingActivity.this).load(user_list.get(0).getPic()).transform(new Tools.CircleTransform()).into(w1);
+			Picasso.with(HdxiangqingActivity.this).load(user_list.get(1).getPic()).transform(new Tools.CircleTransform()).into(w2);
+			Picasso.with(HdxiangqingActivity.this).load(user_list.get(2).getPic()).transform(new Tools.CircleTransform()).into(w3);
+			Picasso.with(HdxiangqingActivity.this).load(user_list.get(3).getPic()).transform(new Tools.CircleTransform()).into(w4);
 			w1.setVisibility(View.VISIBLE);
 			w2.setVisibility(View.VISIBLE);
 			w3.setVisibility(View.VISIBLE);
 			w4.setVisibility(View.VISIBLE);
 			all_w.setVisibility(View.INVISIBLE);
 		default:
-			Picasso.with(HdxiangqingActivity.this).load(user_list.get(0).getPic()).into(w1);
-			Picasso.with(HdxiangqingActivity.this).load(user_list.get(1).getPic()).into(w2);
-			Picasso.with(HdxiangqingActivity.this).load(user_list.get(2).getPic()).into(w3);
-			Picasso.with(HdxiangqingActivity.this).load(user_list.get(3).getPic()).into(w4);
+			Picasso.with(HdxiangqingActivity.this).load(user_list.get(0).getPic()).transform(new Tools.CircleTransform()).into(w1);
+			Picasso.with(HdxiangqingActivity.this).load(user_list.get(1).getPic()).transform(new Tools.CircleTransform()).into(w2);
+			Picasso.with(HdxiangqingActivity.this).load(user_list.get(2).getPic()).transform(new Tools.CircleTransform()).into(w3);
+			Picasso.with(HdxiangqingActivity.this).load(user_list.get(3).getPic()).transform(new Tools.CircleTransform()).into(w4);
 			w1.setVisibility(View.VISIBLE);
 			w2.setVisibility(View.VISIBLE);
 			w3.setVisibility(View.VISIBLE);
