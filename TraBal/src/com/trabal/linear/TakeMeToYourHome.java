@@ -276,6 +276,7 @@ public class TakeMeToYourHome extends Activity {
 							HdxiangqingActivity.class);
 					intent.putExtra("ab", ab_list.get(position));
 					intent.putExtra("user", TakeMeToYourHome.this.user);
+					intent.putExtra("hsb", hsb);
 					intent.putExtra("from", "take");
 					TakeMeToYourHome.this.startActivity(intent);
 				}

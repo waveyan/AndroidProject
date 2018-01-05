@@ -403,7 +403,7 @@
                 <ListView
                     android:id="@+id/listview2"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="1440dp"
                     android:layout_below="@+id/dddd4"
                     android:layout_marginTop="7dp"
                     android:divider="@null" >
