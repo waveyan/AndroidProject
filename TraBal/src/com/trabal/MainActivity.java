@@ -26,6 +26,7 @@ import com.trabal.linear.pingjiaActivity;
 import com.trabal.linear.recommendationactivity;
 import com.trabal.routeplan.RouteplanActivity1;
 import com.trabal.routeplan.RouteplanActivity2;
+import com.trabal.search.search;
 import com.trabal.user.Bean.UserBean;
 import com.trabal.util.net.NetTransfer;
 import com.trabal.R;
@@ -86,7 +87,7 @@ public class MainActivity extends Activity implements OnButtonClickListener{
 	private RelativeLayout rightLayout;
 	private List<ContentModel> list;
 	private ContentAdapter adapter;
-	private ImageButton imageButton,imageButton1;
+	private ImageButton imageButton,imageButton1,imageButton2;
 	private ListView listView;
 	private ImageView p_pic;
 	public UserBean user;
@@ -101,9 +102,6 @@ public class MainActivity extends Activity implements OnButtonClickListener{
     private String pathImage="headpic";
     private TextView district;
     
-    
-    
-
 	@SuppressLint("NewApi")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -344,6 +342,20 @@ public class MainActivity extends Activity implements OnButtonClickListener{
 			@Override
 			public void onClick(View arg0) {
 				Intent intent=new Intent(MainActivity.this,XiaoxiActivity.class);
+				intent.putExtra("user", user);
+				MainActivity.this.startActivity(intent);
+				MainActivity.this.finish();
+				
+			}
+		});
+		
+		//searchID
+		imageButton2=(ImageButton)findViewById(R.id.searchID);
+		imageButton2.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				Intent intent=new Intent(MainActivity.this,search.class);
 				intent.putExtra("user", user);
 				MainActivity.this.startActivity(intent);
 				MainActivity.this.finish();
