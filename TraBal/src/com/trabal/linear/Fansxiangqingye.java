@@ -105,7 +105,7 @@ public class Fansxiangqingye extends Activity {
 				Intent intent = new Intent(Fansxiangqingye.this,haoyouActivity.class);
 				intent.putExtra("user", user);
 				Fansxiangqingye.this.startActivity(intent);
-				
+				finish();
 			}
 		});
 

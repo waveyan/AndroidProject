@@ -103,6 +103,7 @@ public class haoyouActivity extends Activity {
 				Intent intent = new Intent(haoyouActivity.this,MainActivity.class);
 				intent.putExtra("user", user);
 				haoyouActivity.this.startActivity(intent);
+				finish();
 			}
 		});
 	}

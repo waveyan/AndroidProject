@@ -109,7 +109,7 @@ public class Hyxiangqingye extends Activity {
 				Intent intent = new Intent(Hyxiangqingye.this,haoyouActivity.class);
 				intent.putExtra("user", user);
 				Hyxiangqingye.this.startActivity(intent);
-				
+				finish();
 			}
 		});
 

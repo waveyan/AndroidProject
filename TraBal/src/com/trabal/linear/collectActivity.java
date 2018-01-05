@@ -154,6 +154,7 @@ public class collectActivity extends Activity implements OnItemSelectedListener 
 						MainActivity.class);
 				intent.putExtra("user", user);
 				collectActivity.this.startActivity(intent);
+				finish();
 			}
 		});
 

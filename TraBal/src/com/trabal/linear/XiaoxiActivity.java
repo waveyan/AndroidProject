@@ -39,6 +39,7 @@ public class XiaoxiActivity extends Activity{
 				Intent intent=new Intent(XiaoxiActivity.this,MainActivity.class);
 				intent.putExtra("user", user);
 				XiaoxiActivity.this.startActivity(intent);
+				finish();
 			}
 		});
 	}

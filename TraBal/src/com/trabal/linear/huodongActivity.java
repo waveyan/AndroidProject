@@ -74,6 +74,7 @@ public class huodongActivity extends Activity {
 						MainActivity.class);
 				intent.putExtra("user", user);
 				huodongActivity.this.startActivity(intent);
+				finish();
 			}
 		});
 		

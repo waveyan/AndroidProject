@@ -107,7 +107,7 @@ public class pingjiaActivity extends Activity {
 				Intent intent = new Intent(pingjiaActivity.this,MainActivity.class);
 				intent.putExtra("user", user);
 				pingjiaActivity.this.startActivity(intent);
-				
+				finish();
 			}
 		});
 
