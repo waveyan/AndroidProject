@@ -1,5 +1,6 @@
 package com.trabal.linear;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import android.app.Activity;
@@ -20,23 +21,40 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 import com.trabal.R;
 import com.trabal.activity.Bean.ActivityBean;
+import com.trabal.hotspot.Bean.HotSpotBean;
+import com.trabal.linear.DynamicLinearLayout.MyBaseAdapter;
 import com.trabal.linear.FansLinearLayout.CustomAdapter;
+import com.trabal.user.Bean.EvaluationBean;
 import com.trabal.user.Bean.UserBean;
+import com.trabal.util.net.NetTransfer;
 
 public class chosepositionactivity extends Activity {
 
 	private ImageButton button;
-	private Intent intent;
+	private Intent last_intent;
 	private ListView listView;
 	private UserBean user;
-	private ArrayList<ActivityBean> follow;
+	private  ArrayList<HotSpotBean> hs_list;
+	private BaseAdapter ba;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_choseposition);
 
-		intent = this.getIntent();
+		
+		last_intent = chosepositionactivity.this.getIntent();
+		user = (UserBean) last_intent.getSerializableExtra("user");
+		
+		String url = "hotspot/base";
+		NetTransfer nt = new NetTransfer();
+		try {
+			String data = NetTransfer.transfer(url, "get", null, true, user.getAccess_token(),null);
+			hs_list=nt.handle_hs_list(data);	
+		
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 
 		button = (ImageButton) findViewById(R.id.leftarrow2ID);
 
@@ -44,8 +62,7 @@ public class chosepositionactivity extends Activity {
 
 			@Override
 			public void onClick(View arg0) {
-				Intent last_intent = chosepositionactivity.this.getIntent();
-				user = (UserBean) last_intent.getSerializableExtra("user");
+				
 				Intent intent = new Intent(chosepositionactivity.this,
 						assessactivity.class);
 				intent.putExtra("user", user);
@@ -55,29 +72,21 @@ public class chosepositionactivity extends Activity {
 
 		listView = (ListView) this.findViewById(R.id.chose_listview);
 
-		// 创建数据源
-		follow = new ArrayList<ActivityBean>();
-		ActivityBean ub = new ActivityBean();
-		ub.setTitle("紅舘");
-		follow.add(ub);
-
-		ActivityBean ab = new ActivityBean();
-		ab.setTitle("星空舘");
-		follow.add(ab);
-
-		listView.setAdapter(new CustomAdapter());
+		ba = new CustomAdapter();
+		listView.setAdapter(ba);
 
 	}
 
 	class CustomAdapter extends BaseAdapter {
-
+		
+		
 		public int getCount() {
-			return follow.size();
+			return hs_list.size();
 		}
 
 		@Override
 		public Object getItem(int position) {
-			return follow.get(position);
+			return hs_list.get(position);
 		}
 
 		@Override
@@ -93,7 +102,7 @@ public class chosepositionactivity extends Activity {
 			View view = LayoutInflater.from(chosepositionactivity.this)
 					.inflate(R.layout.chose_listview_item, null);
 			TextView name = (TextView) view.findViewById(R.id.chose_itemtext1);
-			name.setText(follow.get(position).getTitle());
+			name.setText(hs_list.get(position).getName());
 			
 			view.setOnClickListener(new View.OnClickListener() {
 				
@@ -102,9 +111,10 @@ public class chosepositionactivity extends Activity {
 					Intent last_intent = chosepositionactivity.this.getIntent();
 					user = (UserBean) last_intent.getSerializableExtra("user");
 					Intent intent = new Intent();
-					String backData = follow.get(position).getTitle();
+					String backData = hs_list.get(position).getName();
 					intent.putExtra("position", backData);
 					intent.putExtra("user", user);
+					intent.putExtra("positionID", hs_list.get(position).getId());
 					setResult(2000, intent);
 					// 结束当前页面(关闭当前界面)
 					finish();

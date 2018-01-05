@@ -7,12 +7,12 @@ import com.trabal.hotspot.Bean.HotSpotBean;
 
 public class EvaluationBean implements Serializable{
 
-	private int rate;
+	private String rate;
 	private String mood;
 	private String pic1;
 	private String pic2;
 	private String pic3;
-	private double price;
+	private String price;
 	private HotSpotBean hs;
 	private UserBean user;
 	private String time;
@@ -31,10 +31,10 @@ public class EvaluationBean implements Serializable{
 	public void setUsr_like(ArrayList<UserBean> usr_like) {
 		this.usr_like = usr_like;
 	}
-	public int getRate() {
+	public String getRate() {
 		return rate;
 	}
-	public void setRate(int rate) {
+	public void setRate(String rate) {
 		this.rate = rate;
 	}
 	public String getMood() {
@@ -62,10 +62,10 @@ public class EvaluationBean implements Serializable{
 		this.pic3 = pic3;
 	}
 	
-	public double getPrice() {
+	public String getPrice() {
 		return price;
 	}
-	public void setPrice(double price) {
+	public void setPrice(String price) {
 		this.price = price;
 	}
 	public HotSpotBean getHs() {

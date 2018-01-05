@@ -22,6 +22,6 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="5dp"
             android:text="-昵称"
-            android:textColor="#ff0000"
-            android:textSize="25sp" />
+            android:textColor="#ffffff"
+            android:textSize="18sp" />
 </RelativeLayout>

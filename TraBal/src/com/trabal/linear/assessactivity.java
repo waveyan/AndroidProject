@@ -40,6 +40,8 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.SimpleAdapter;
@@ -47,9 +49,12 @@ import android.widget.SimpleAdapter.ViewBinder;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.trabal.LoginActivity;
 import com.trabal.MainActivity;
 import com.trabal.MyDialog;
+import com.trabal.RegisterActivity;
 import com.trabal.MyDialog.OnButtonClickListener;
+import com.trabal.hotspot.Bean.HotSpotBean;
 import com.trabal.user.Bean.UserBean;
 import com.trabal.R;
 import com.trabal.util.net.FileUpload;
@@ -74,11 +79,16 @@ OnButtonClickListener, OnItemClickListener{
     private ArrayList<HashMap<String, Object>> imageItem;
     private SimpleAdapter simpleAdapter; // 适配器
 
-    private TextView post;
+    private TextView post,TextView_result ;
+    private EditText textView_fell,textView_cost;
     private RatingBar rate;
     private ImageButton backTv;
 	private UserBean user;
-    @Override
+	private Button button;
+	private String positionID;
+	
+   
+	@Override
     protected void onCreate(Bundle savedInstanceState) {
     	
         super.onCreate(savedInstanceState);
@@ -106,6 +116,50 @@ OnButtonClickListener, OnItemClickListener{
 				intent.putExtra("user", user);
 				assessactivity.this.startActivity(intent);
 			
+			}
+		});
+        button = (Button) findViewById(R.id.positionID);
+		TextView_result = (TextView) findViewById(R.id.txID);
+		textView_fell = (EditText) findViewById(R.id.edID);
+		textView_cost = (EditText) findViewById(R.id.ed1ID);
+		rate = (RatingBar) findViewById(R.id.ratingbar);
+		
+		
+
+//		rate.setOnRatingBarChangeListener(new OnRatingBarChangeListener() {
+//			
+//			@Override
+//			public void onRatingChanged(RatingBar arg0, float arg1, boolean arg2) {
+//				// TODO Auto-generated method stub
+//				
+//			}
+//		})
+		
+		
+		//选择地点
+		button.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View arg0) {
+				Intent last_intent = assessactivity.this.getIntent();
+				user = (UserBean) last_intent.getSerializableExtra("user");
+				Intent intent = new Intent(assessactivity.this,
+						chosepositionactivity.class);
+				intent.putExtra("user", user);
+				assessactivity.this.startActivityForResult(intent, 2000);
+			}
+		});
+
+		TextView_result.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View arg0) {
+				Intent last_intent = assessactivity.this.getIntent();
+				user = (UserBean) last_intent.getSerializableExtra("user");
+				Intent intent = new Intent(assessactivity.this,
+						chosepositionactivity.class);
+				intent.putExtra("user", user);
+				assessactivity.this.startActivityForResult(intent, 2000);
 			}
 		});
         
@@ -188,6 +242,16 @@ OnButtonClickListener, OnItemClickListener{
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {   //回调函数：新Activity关闭后 旧Activity得到
         super.onActivityResult(requestCode, resultCode, data);
+        
+        
+    	if (resultCode == 2000) {
+			// 获取返回的数据
+			String backData = data.getStringExtra("position");
+			//返回的id
+			positionID=data.getStringExtra("positionID");
+			// 设置给页面的文本TextView显示
+			TextView_result.setText(backData);
+		}
 
         if (resultCode == NONE)
             return;
@@ -373,10 +437,13 @@ OnButtonClickListener, OnItemClickListener{
 
 		@Override
 		public void onClick(View arg0) {
+			
+	
+			
 		    ArrayList<HashMap<String, Object>> every_pic=assessactivity.this.imageItem;
 		    int i=0;
+		    HashMap<String,Object> temp=new HashMap<String,Object>();
 			if(every_pic.size()!=0){
-				HashMap<String,Object> temp=new HashMap<String,Object>();
 				for(HashMap<String,Object> item : every_pic){
 					i++;
 					if(i==1)
@@ -384,26 +451,32 @@ OnButtonClickListener, OnItemClickListener{
 					File f=assessactivity.compressImage((Bitmap)item.get("itemImage"),String.valueOf(i));				
 					temp.put("pic"+String.valueOf(i-1), f);
 				}
-//				// test upload file
-//				 String url="activity/base";
-//				 ArrayList<BasicNameValuePair> nv_list=new ArrayList<BasicNameValuePair>();
-//				 nv_list.add(new BasicNameValuePair("subject","真人CS野战"));
-//				 nv_list.add(new BasicNameValuePair("title","真人CS野战"));
-//				 nv_list.add(new BasicNameValuePair("time","2013-09-05 12:46:57"));
-//				 nv_list.add(new BasicNameValuePair("type","真人CS野战"));
-//				 nv_list.add(new BasicNameValuePair("introduction","真人CS野战"));
-//				 nv_list.add(new BasicNameValuePair("person","1"));
-//				 nv_list.add(new BasicNameValuePair("telephone","真人CS野战"));
-//				 nv_list.add(new BasicNameValuePair("website","真人CS野战"));
-//				 nv_list.add(new BasicNameValuePair("price","11"));
-//				 try {
-//				 NetTransfer.transfer(url, "post", nv_list, true,
-//				 "8e7c2373b74341b399da25c537bc8513", temp);
-//				 } catch (IOException e) {
-//				 Log.e("ssssssssss",e.getMessage());
-//				 e.printStackTrace();
-//				 }
 			}
+			String feel_text = textView_fell.getText().toString().trim();
+//			String position_text = TextView_result.getText().toString().trim();
+			String cost_text =textView_cost.getText().toString().trim();
+			String rate_text =rate.getRating()+"";
+			
+
+			HashMap<String,String> assess = new HashMap<String,String>();
+			assess.put("feeling", feel_text);
+			assess.put("hotspot_id", positionID);
+			assess.put("price", cost_text);
+			assess.put("rate", rate_text);
+			
+			String url="evaluation/base";
+			NetTransfer nt = new NetTransfer();
+			try {
+				NetTransfer.upload_pic(url,assess, user.getAccess_token(), temp);
+			
+			} catch (Exception e) {
+				// TODO: handle exception
+				e.printStackTrace();
+			}
+			Intent intent = new Intent(assessactivity.this,MainActivity.class);
+			intent.putExtra("user", user);
+			assessactivity.this.startActivity(intent);
+			assessactivity.this.finish();
 			
 		}
     	

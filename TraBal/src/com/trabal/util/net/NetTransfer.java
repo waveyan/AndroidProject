@@ -442,8 +442,8 @@ public class NetTransfer {
 			if (!"".equals(json.getString("pic3")))
 				e.setPic3(this.media_perfix + json.getString("pic3"));
 			e.setId(json.getString("id"));
-			e.setPrice(json.getDouble("price"));
-			e.setRate(json.getInt("rate"));
+			e.setPrice(json.getString("price"));
+			e.setRate(json.getString("rate"));
 			e.setTime(json.getString("time"));
 			return e;
 		} catch (JSONException e) {

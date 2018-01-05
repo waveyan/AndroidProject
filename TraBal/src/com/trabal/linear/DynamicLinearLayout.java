@@ -16,6 +16,7 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RatingBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -109,6 +110,8 @@ public class DynamicLinearLayout extends LinearLayout {
 					.findViewById(R.id.pjxqy_site3);
 			TextView mTextView5 = (TextView) view
 					.findViewById(R.id.pjxqy_price3);
+			RatingBar rate =(RatingBar)view.findViewById(R.id.pjxqy_stars3);
+			rate.setRating(Float.parseFloat(eb_list.get(position).getRate()));
 			mTextView1.setText(eb_list.get(position).getUser().getName());
 			mTextView2.setText(eb_list.get(position).getTime());
 			mTextView3.setText(eb_list.get(position).getMood());
