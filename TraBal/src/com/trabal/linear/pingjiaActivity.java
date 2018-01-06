@@ -41,7 +41,7 @@ import android.widget.Toast;
 
 public class pingjiaActivity extends Activity {
 	private ListView listView;
-	private UserBean user, person = new UserBean();// 查看他人信息
+	private UserBean user, person;// 查看他人信息
 	private Intent last_intent;
 	ArrayList<EvaluationBean> hxb;
 	private View headerView;
@@ -77,9 +77,8 @@ public class pingjiaActivity extends Activity {
 				.findViewById(R.id.hyxqy_headpic6);
 
 		person = (UserBean) last_intent.getSerializableExtra("person");
-		mTextView6.setText(person.getName());
-		Picasso.with(pingjiaActivity.this).load(person.getPic()).centerCrop()
-				.fit().into(imageView2);
+		if(person==null)
+			person = new UserBean();
 		// 判断关注状态和数据来源
 		if ("mine".equals(flag)) {
 			status.setVisibility(View.INVISIBLE);
@@ -112,6 +111,9 @@ public class pingjiaActivity extends Activity {
 					}
 				if (flag)
 					status.setText("取消关注");
+				mTextView6.setText(person.getName());
+				Picasso.with(pingjiaActivity.this).load(person.getPic()).centerCrop()
+						.fit().into(imageView2);
 			}
 			// 得到某个人的所有评论
 			String evaluation_url = "evaluation/base";
