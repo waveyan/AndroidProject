@@ -1,0 +1,35 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".MainActivity" >
+
+     <TextView
+         android:id="@+id/x3"
+         android:layout_width="200dp"
+         android:layout_height="wrap_content"
+         android:layout_alignParentTop="true"
+         android:layout_centerHorizontal="true"
+         android:layout_marginTop="57dp"
+         android:gravity="center_horizontal"
+         android:text="感谢您提交的活动，审核通过后，活动将显示在您的个人界面"
+         android:textSize="20sp"
+          >
+	</TextView>
+        
+    
+
+     <Button
+         android:id="@+id/yes"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_centerHorizontal="true"
+         android:layout_below="@+id/x3"
+         android:layout_marginTop="68dp"
+         android:text="确认" />
+
+</RelativeLayout>
