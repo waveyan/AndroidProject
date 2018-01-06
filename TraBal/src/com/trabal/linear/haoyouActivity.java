@@ -46,7 +46,11 @@ public class haoyouActivity extends Activity {
 					user.getAccess_token(), null);
 			NetTransfer nt = new NetTransfer();
 			fans = nt.handle_fans_list(data);
+			if(fans==null)
+				fans=new ArrayList<UserBean>();
 			follow = nt.handle_follow_user_list(data);
+			if(follow==null)
+				follow=new ArrayList<UserBean>();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

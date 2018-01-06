@@ -90,9 +90,10 @@ public class FansLinearLayout extends LinearLayout {
 				public void onClick(View arg0) {
 					// ά�ֵ�¼״̬
 
-					Intent intent = new Intent(FansLinearLayout.this.context,Fansxiangqingye.class);
+					Intent intent = new Intent(FansLinearLayout.this.context,pingjiaActivity.class);
 					intent.putExtra("user", user);
-					intent.putExtra("hwb",fans.get(position).getEb());
+					intent.putExtra("flag", "follower");
+					intent.putExtra("person", fans.get(position));
 					context.startActivity(intent);
 				}});
 			

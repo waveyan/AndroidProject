@@ -35,8 +35,6 @@ public class FriendLinearLayout extends LinearLayout{
 		this.user=user;
 		follow=((haoyouActivity)this.context).follow;
 		
-		
-		
 		this.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT,
 				LayoutParams.FILL_PARENT));
 
@@ -84,9 +82,11 @@ public class FriendLinearLayout extends LinearLayout{
 				@Override
 				public void onClick(View arg0) {
 					// ά�ֵ�¼״̬
-					Intent intent = new Intent(FriendLinearLayout.this.context,Hyxiangqingye.class);
+					Intent intent = new Intent(FriendLinearLayout.this.context,pingjiaActivity.class);
 					intent.putExtra("user", user);
-					intent.putExtra("hxb",follow.get(position).getEb());
+//					intent.putExtra("hxb",follow.get(position).getEb());
+					intent.putExtra("flag", "following");
+					intent.putExtra("person", follow.get(position));
 					context.startActivity(intent);
 				}});
 			

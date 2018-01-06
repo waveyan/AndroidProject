@@ -136,6 +136,39 @@ public class DynamicLinearLayout extends LinearLayout {
 			Picasso.with(DynamicLinearLayout.this.context)
 					.load(eb_list.get(position).getUser().getPic())
 					.centerCrop().transform(new Tools.CircleTransform()).fit().into(imageView1);
+			
+			//用户头像
+			imageView1.setOnClickListener(new View.OnClickListener() {
+				
+				@Override
+				public void onClick(View arg0) {
+					Intent intent=new Intent(DynamicLinearLayout.this.context,pingjiaActivity.class);
+					if(eb_list.get(position).getUser().getTelephone().equals(user.getTelephone())){
+						intent.putExtra("flag", "mine");
+						String evaluation_url = "evaluation/base";
+						ArrayList<BasicNameValuePair> params1 = new ArrayList<BasicNameValuePair>();
+						params1.add(new BasicNameValuePair("action",
+								"person"));
+						try {
+							String evaluation = NetTransfer.transfer(
+									evaluation_url, "get", params1, true,
+									user.getAccess_token(), null);
+							ArrayList<EvaluationBean> myAssess = new NetTransfer()
+									.handle_eb_list(evaluation);
+							intent.putExtra("myAssess", myAssess);
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+					}
+					else{
+						intent.putExtra("person",eb_list.get(position).getUser());
+					}
+					intent.putExtra("user", user);
+					DynamicLinearLayout.this.context.startActivity(intent);
+					
+				}
+			});
+			
 
 			// 动态图片
 			GridView gv = (GridView) view.findViewById(R.id.gridview);
@@ -259,8 +292,6 @@ public class DynamicLinearLayout extends LinearLayout {
 
 				}
 			});
-
-
 			return view;
 		}
 	}

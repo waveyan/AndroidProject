@@ -21,6 +21,17 @@
                 android:scaleType="fitXY"
                 android:src="@drawable/b004" />
 
+            <TextView
+                android:id="@+id/status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/left3ID"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="10dp"
+                android:text="关注"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp" />
+
             <com.trabal.CircleImageView
                 android:id="@+id/hyxqy_headpic6"
                 android:layout_width="80dp"
