@@ -6,8 +6,11 @@ import com.trabal.R;
 import android.app.Activity;
 import android.os.Bundle;
 
+import java.io.IOException;
 import java.io.ObjectOutputStream.PutField;
 import java.util.ArrayList;
+
+import org.apache.http.message.BasicNameValuePair;
 
 import com.squareup.picasso.Picasso;
 import com.trabal.R;
@@ -17,6 +20,7 @@ import com.trabal.linear.CommentLinearLayout.MyBaseAdapter;
 import com.trabal.linear.FriendLinearLayout.CustomAdapter;
 import com.trabal.user.Bean.EvaluationBean;
 import com.trabal.user.Bean.UserBean;
+import com.trabal.util.net.NetTransfer;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -27,20 +31,25 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class pingjiaActivity extends Activity {
 	private ListView listView;
-	private ArrayList<UserBean> follow;
 	private UserBean user;
 	private Intent last_intent;
 	ArrayList<EvaluationBean> hxb;
 	private View headerView;
 	private ImageButton imageButton;
-	private ArrayList<ActivityBean> ab_list;
+	ArrayList<EvaluationBean> myAssess;
+	private ArrayList<String> list;
+	private ImageView love;
+	private BaseAdapter ba;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -49,54 +58,28 @@ public class pingjiaActivity extends Activity {
 
 		last_intent = pingjiaActivity.this.getIntent();
 		user = (UserBean) last_intent.getSerializableExtra("user");
+		myAssess = (ArrayList<EvaluationBean>) last_intent.getSerializableExtra("myAssess");
 
 		listView = (ListView) this.findViewById(R.id.hyxiangqingyeID);
 		// header_listview
 
 		headerView = LayoutInflater.from(pingjiaActivity.this).inflate(
 				R.layout.pingjia_item, null);
+		
+		TextView mTextView6 = (TextView) headerView.findViewById(R.id.hyxqy_name6);
+		mTextView6.setText(user.getName());
+		
+		ImageView imageView2 = (ImageView) headerView.findViewById(R.id.hyxqy_headpic6);
+		Picasso.with(pingjiaActivity.this).load(user.getPic()).centerCrop().fit().into(imageView2);
 
-		// 创建数据源
-		ab_list = new ArrayList<ActivityBean>();
-
-		ActivityBean ab = new ActivityBean();
-		ab.setPerson("admin");
-		ab.setPrice("100/人");
-		ab.setTime("12:35");
-		ab.setIntroduction("位于写字楼下的独立咖啡馆，仿佛是理想中咖啡馆甚佳的选址。几乎必点拿铁，出品很有诚意，再看15-20的均价超良心,我想這是個好去處。");
-		ab.setTitle("Poem");
-		ab.setPic1(String.valueOf(R.drawable.person));
-		ab.setPic2(String.valueOf(R.drawable.l2));
-		ab.setPic3(String.valueOf(R.drawable.l2));
-		ab.setPic4(String.valueOf(R.drawable.l2));
-//		ab.setPic5(String.valueOf(R.drawable.person));
-//		ab.setPic6(String.valueOf(R.drawable.person));
-//		ab.setPic7(String.valueOf(R.drawable.person));
-//		ab.setPic8(String.valueOf(R.drawable.person));
-//		ab.setPic9(String.valueOf(R.drawable.person));
-
-		ab_list.add(ab);
-
-		ActivityBean ab1 = new ActivityBean();
-		ab1.setPerson("admin");
-		ab1.setPrice("100/人");
-		ab1.setTime("12:35");
-		ab1.setIntroduction("我想這是個好去處");
-		ab1.setTitle("Poem");
-		ab1.setPic1(String.valueOf(R.drawable.person));
-		ab1.setPic2(String.valueOf(R.drawable.l2));
-		ab1.setPic3(String.valueOf(R.drawable.l2));
-		ab1.setPic4(String.valueOf(R.drawable.l2));
-//		ab1.setPic5(String.valueOf(R.drawable.person));
-//		ab1.setPic6(String.valueOf(R.drawable.person));
-//		ab1.setPic7(String.valueOf(R.drawable.person));
-//		ab1.setPic8(String.valueOf(R.drawable.person));
-//		ab1.setPic9(String.valueOf(R.drawable.person));
-
-		ab_list.add(ab1);
+		
+		
 		// 创建一个Adapter的实例
 		listView.addHeaderView(headerView);
 		listView.setAdapter(new CustomAdapter());
+		
+		ba = new CustomAdapter();
+		listView.setAdapter(ba);
 		
 		//返回上一个界面
 		imageButton =(ImageButton)findViewById(R.id.back_pingjia);
@@ -107,7 +90,7 @@ public class pingjiaActivity extends Activity {
 				Intent intent = new Intent(pingjiaActivity.this,MainActivity.class);
 				intent.putExtra("user", user);
 				pingjiaActivity.this.startActivity(intent);
-				finish();
+				
 			}
 		});
 
@@ -116,37 +99,21 @@ public class pingjiaActivity extends Activity {
 	class CustomAdapter extends BaseAdapter {
 
 		public int getCount() {
-			return ab_list.size();
+			return myAssess.size();
 		}
 
-		@Override
 		public Object getItem(int position) {
-			return ab_list.get(position);
+			return myAssess.get(position);
 		}
 
-		@Override
 		public long getItemId(int position) {
 			return position;
 		}
 
-		@Override
 		public View getView(final int position, View convertView,
 				ViewGroup parent) {
-
-			// 获取布局文件
-			View view = View.inflate(pingjiaActivity.this,
+			View view = LayoutInflater.from(pingjiaActivity.this).inflate(
 					R.layout.pjxiangqingye3_item, null);
-			/*
-			 * TextView pay =(TextView) view.findViewById(R.id.tv7ID); TextView
-			 * mood=(TextView) view.findViewById(R.id.tx12ID); TextView consumer
-			 * =(TextView) view.findViewById(R.id.hyxqy_name6);
-			 * 
-			 * 
-			 * pay.setText(hxb.get(position).getPrice()+"");
-			 * mood.setText(hxb.get(position).getMood());
-			 * consumer.setText(user.getName()+"");
-			 */
-
 			TextView mTextView1 = (TextView) view
 					.findViewById(R.id.pjxqy_name3);
 			TextView mTextView2 = (TextView) view
@@ -156,48 +123,150 @@ public class pingjiaActivity extends Activity {
 					.findViewById(R.id.pjxqy_site3);
 			TextView mTextView5 = (TextView) view
 					.findViewById(R.id.pjxqy_price3);
-			mTextView1.setText(ab_list.get(position).getPerson());
-			mTextView2.setText(ab_list.get(position).getTime());
-			mTextView3.setText(ab_list.get(position).getIntroduction());
-			mTextView4.setText(ab_list.get(position).getTitle());
-			mTextView5.setText(ab_list.get(position).getPrice());
+			
+			RatingBar rate =(RatingBar)view.findViewById(R.id.pjxqy_stars3);
+			rate.setRating(Float.parseFloat(myAssess.get(position).getRate()));
+			mTextView1.setText(user.getName()+"");
+			mTextView2.setText(myAssess.get(position).getTime());
+			mTextView3.setText(myAssess.get(position).getMood());
+			mTextView4.setText(myAssess.get(position).getHs().getName());
+			mTextView5
+					.setText(String.valueOf(myAssess.get(position).getPrice()));
+
+			
 			ImageView imageView1 = (ImageView) view
 					.findViewById(R.id.pjxqy_headpic3);
-//			ImageView imageView2 = (ImageView) view
-//					.findViewById(R.id.pjxqy_pic3);
-//			ImageView imageView3 = (ImageView) view
-//					.findViewById(R.id.pjxqy_pic4);
-//			ImageView imageView4 = (ImageView) view
-//					.findViewById(R.id.pjxqy_pic5);
-			ImageView imageView5 = (ImageView) view
-					.findViewById(R.id.pjxqy_head6);
-			ImageView imageView6 = (ImageView) view
-					.findViewById(R.id.pjxqy_head7);
-			ImageView imageView7 = (ImageView) view
-					.findViewById(R.id.pjxqy_head8);
-			ImageView imageView8 = (ImageView) view
-					.findViewById(R.id.pjxqy_head9);
-			ImageView imageView9 = (ImageView) view
-					.findViewById(R.id.pjxqy_head10);
+			
+			
 
-			imageView1.setBackgroundResource(Integer.parseInt(ab_list.get(
-					position).getPic1()));
-//			imageView2.setBackgroundResource(Integer.parseInt(ab_list.get(
-//					position).getPic2()));
-//			imageView3.setBackgroundResource(Integer.parseInt(ab_list.get(
-//					position).getPic3()));
-//			imageView4.setBackgroundResource(Integer.parseInt(ab_list.get(
-//					position).getPic4()));
-//			imageView5.setBackgroundResource(Integer.parseInt(ab_list.get(
-//					position).getPic5()));
-//			imageView6.setBackgroundResource(Integer.parseInt(ab_list.get(
-//					position).getPic6()));
-//			imageView7.setBackgroundResource(Integer.parseInt(ab_list.get(
-//					position).getPic7()));
-//			imageView8.setBackgroundResource(Integer.parseInt(ab_list.get(
-//					position).getPic8()));
-//			imageView9.setBackgroundResource(Integer.parseInt(ab_list.get(
-//					position).getPic9()));
+			Picasso.with(pingjiaActivity.this)
+					.load(user.getPic())
+					.centerCrop().fit().into(imageView1);
+
+			// 动态图片
+			GridView gv = (GridView) view.findViewById(R.id.gridview);
+			// silly！！！！！
+			list = new ArrayList<String>();
+			if (myAssess.get(position).getPic1() != null
+					&& !("".equals(myAssess.get(position).getPic1())))
+				list.add(myAssess.get(position).getPic1());
+			if (myAssess.get(position).getPic2() != null
+					&& !("".equals(myAssess.get(position).getPic2())))
+				list.add(myAssess.get(position).getPic2());
+			if (myAssess.get(position).getPic3() != null
+					&& !("".equals(myAssess.get(position).getPic3())))
+				list.add(myAssess.get(position).getPic3());
+			if (list.size() == 0)
+				gv.setVisibility(View.INVISIBLE);
+			else if (list.size() == 1)
+				gv.setNumColumns(1);
+			else if (list.size() == 2)
+				gv.setNumColumns(2);
+			else
+				gv.setNumColumns(3);
+
+			gv.setAdapter(new BaseAdapter() {
+
+				@Override
+				public View getView(int arg0, View arg1, ViewGroup arg2) {
+					View view = View.inflate(pingjiaActivity.this,
+							R.layout.grid_item, null);
+					ImageView iv2 = (ImageView) view.findViewById(R.id.iv);
+					Picasso.with(pingjiaActivity.this)
+							.load(list.get(arg0)).into(iv2);
+					return view;
+				}
+
+				@Override
+				public long getItemId(int arg0) {
+					return arg0;
+				}
+
+				@Override
+				public Object getItem(int arg0) {
+					return list.get(arg0);
+				}
+
+				@Override
+				public int getCount() {
+					return list.size();
+				}
+			});
+
+			// 点赞的人
+			GridView gv1 = (GridView) view.findViewById(R.id.gridview1);
+			gv1.setAdapter(new BaseAdapter() {
+
+				@Override
+				public View getView(int arg0, View arg1, ViewGroup arg2) {
+					View view = View.inflate(pingjiaActivity.this,
+							R.layout.usrlike_item, null);
+					ImageView iv1 = (ImageView) view
+							.findViewById(R.id.usrlike_pic);
+					Picasso.with(pingjiaActivity.this)
+							.load(myAssess.get(position).getUsr_like().get(arg0)
+									.getPic()).resize(100, 100).centerCrop().into(iv1);
+					return view;
+				}
+
+				@Override
+				public long getItemId(int arg0) {
+					return arg0;
+				}
+
+				@Override
+				public Object getItem(int arg0) {
+					return myAssess.get(position).getUsr_like().get(arg0);
+				}
+
+				@Override
+				public int getCount() {
+					return myAssess.get(position).getUsr_like().size();
+				}
+			});
+
+			// 点赞
+			love = (ImageView) view.findViewById(R.id.pjxqy_love3);
+			// 已点赞时爱心的颜色
+			for (UserBean usr : myAssess.get(position).getUsr_like()) {
+				if (usr != null)
+					if (usr.getTelephone().equals(user.getTelephone()))
+						love.setBackgroundResource(R.drawable.favour_clicked);
+			}
+
+			love.setOnClickListener(new View.OnClickListener() {
+
+				@Override
+				public void onClick(View arg0) {
+					// 网络传输
+					ArrayList params = new ArrayList();
+					params.add(new BasicNameValuePair("evaluation_id", myAssess
+							.get(position).getId()));
+					String url = "evaluation/base";
+					String data;
+					try {
+						data = NetTransfer.transfer(url, "put", params, true,
+								user.getAccess_token(), null);
+						NetTransfer nt = new NetTransfer();
+						nt.return_data(data);
+						Toast.makeText(pingjiaActivity.this,
+								nt.getMsg(), Toast.LENGTH_LONG).show();
+						//刷新数据
+						String update_url = "evaluation/get_evaluation_from_my_follow";
+						NetTransfer update_nt = new NetTransfer();
+							String update_data = NetTransfer.transfer(update_url,
+									"get", null, true, user.getAccess_token(),
+									null);
+							myAssess = update_nt.handle_eb_list(update_data);
+						ba.notifyDataSetChanged();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+
+				}
+			});
+
+
 			return view;
 		}
 

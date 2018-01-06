@@ -295,6 +295,7 @@ public class MainActivity extends Activity implements OnButtonClickListener{
 					Intent intent = new Intent(MainActivity.this,
 							pingjiaActivity.class);
 					intent.putExtra("user", user);
+					intent.putExtra("myAssess", user.getEb());
 					MainActivity.this.startActivity(intent);
 //					MainActivity.this.finish();
 					break;
