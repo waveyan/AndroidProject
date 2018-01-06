@@ -36,7 +36,7 @@ import android.widget.Toast;
 
 public class TakeMeToYourHome extends Activity {
 
-	private ImageView pic1, pic2, pic3, pic4;
+	private ImageView pic1, pic2, pic3, pic4, report;
 
 	private ImageButton favourButton, backButton, shareButton;
 
@@ -68,9 +68,25 @@ public class TakeMeToYourHome extends Activity {
 		from = last_intent.getStringExtra("from");
 
 		backButton = (ImageButton) this.findViewById(R.id.backButton);
+		report = (ImageView) this.findViewById(R.id.report);
 
 		hsb = (HotSpotBean) last_intent.getSerializableExtra("hsb");
 		initView();
+		
+		report.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				Intent intent;
+				intent = new Intent(TakeMeToYourHome.this,assessactivity.class);
+				intent.putExtra("user", user);
+				intent.putExtra("didian", hsb.getName());
+				intent.putExtra("hotspot_id",hsb.getId());
+				TakeMeToYourHome.this.startActivity(intent);
+				TakeMeToYourHome.this.finish();
+				
+			}
+		});
 
 		backButton.setOnClickListener(new OnClickListener() {
 
@@ -322,7 +338,6 @@ public class TakeMeToYourHome extends Activity {
 					e.printStackTrace();
 				}
 
-			
 			}
 
 		}
@@ -352,6 +367,8 @@ public class TakeMeToYourHome extends Activity {
 					.findViewById(R.id.pjxqy_site3);
 			TextView mTextView5 = (TextView) view
 					.findViewById(R.id.pjxqy_price3);
+			RatingBar rate =(RatingBar)view.findViewById(R.id.pjxqy_stars3);
+			rate.setRating(Float.parseFloat(eb_list.get(position).getRate()));
 			mTextView1.setText(eb_list.get(position).getUser().getName());
 			mTextView2.setText(eb_list.get(position).getTime());
 			mTextView3.setText(eb_list.get(position).getMood());
@@ -375,9 +392,7 @@ public class TakeMeToYourHome extends Activity {
 					.load(eb_list.get(position).getUser().getPic())
 					.centerCrop().fit().into(imageView1);
 			
-			RatingBar rate =(RatingBar)view.findViewById(R.id.pjxqy_stars3);
-			rate.setRating(Float.parseFloat(eb_list.get(position).getRate()));
-
+			
 			// ¶¯Ì¬Í¼Æ¬
 			GridView gv = (GridView) view.findViewById(R.id.gridview);
 			// silly£¡£¡£¡£¡£¡

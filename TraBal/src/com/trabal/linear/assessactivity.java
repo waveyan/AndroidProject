@@ -85,6 +85,8 @@ public class assessactivity extends Activity implements OnButtonClickListener,
 	private UserBean user;
 	private Button button;
 	private String positionID;
+	private Intent last_intent;
+	private String didian;
 	
    
 	@Override
@@ -92,6 +94,11 @@ public class assessactivity extends Activity implements OnButtonClickListener,
     	
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
+        last_intent = assessactivity.this.getIntent();
+		user = (UserBean) last_intent.getSerializableExtra("user");
+		didian = (String) last_intent.getSerializableExtra("didian");
+		
+		  
     	
         /*
          * 防止键盘挡住输入框 不希望遮挡设置activity属性 android:windowSoftInputMode="adjustPan"
@@ -123,6 +130,8 @@ public class assessactivity extends Activity implements OnButtonClickListener,
 		textView_fell = (EditText) findViewById(R.id.edID);
 		textView_cost = (EditText) findViewById(R.id.ed1ID);
 		rate = (RatingBar) findViewById(R.id.ratingbar);
+		 TextView_result.setText(didian);
+		
 		
 		
 
@@ -235,8 +244,7 @@ public class assessactivity extends Activity implements OnButtonClickListener,
     @Override
     public void cancel() {
         dialog.cancel();
-    
-    
+
     }
 
     @Override
@@ -451,10 +459,12 @@ public class assessactivity extends Activity implements OnButtonClickListener,
 				}
 			}
 			String feel_text = textView_fell.getText().toString().trim();
-//			String position_text = TextView_result.getText().toString().trim();
 			String cost_text =textView_cost.getText().toString().trim();
 			String rate_text =rate.getRating()+"";
 			
+			//地点发布
+			if(positionID==null)
+				positionID=last_intent.getStringExtra("hotspot_id");
 
 			HashMap<String,String> assess = new HashMap<String,String>();
 			assess.put("feeling", feel_text);
