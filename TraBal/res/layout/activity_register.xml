@@ -37,10 +37,15 @@
         android:layout_margin="15dp"
         android:textColorHint="@color/a2"
         android:textSize="15dp"
-        android:hint="用户名/邮箱"
+        android:hint="  用户名/邮箱"
+        android:drawableLeft="@drawable/a087"
        
          />
      
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" 
+        android:id="@+id/suibian">
       <EditText 
         android:id="@+id/password2ID"
         android:layout_width="fill_parent"
@@ -50,9 +55,26 @@
         android:layout_margin="15dp"
         android:textColorHint="@color/a2"
         android:textSize="15dp"
-        android:hint="密码  ..."
-       
+        android:hint=" 密码  ..."
+        android:drawableLeft="@drawable/a086"
+        android:password="true"
          />
+       <CheckBox 
+        android:id="@+id/box1"
+        style="@style/custom_checkbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"    
+        android:layout_alignBottom="@+id/password2ID"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="20dp"
+        />
+      </RelativeLayout>
+      
+      
+      
+      <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
       
       <EditText 
         android:id="@+id/comfirmID"
@@ -63,7 +85,21 @@
         android:layout_margin="15dp"
         android:textColorHint="@color/a2"
         android:textSize="15dp"
-        android:hint="确认密码  ..."/>
+        android:hint=" 确认密码  ..."
+        android:drawableLeft="@drawable/a086"
+        android:password="true"
+        />
+      
+       <CheckBox 
+        android:id="@+id/box2"
+        style="@style/custom_checkbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"    
+        android:layout_alignBottom="@+id/comfirmID"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="20dp"
+        />
+       </RelativeLayout>
       
     <RelativeLayout
        android:layout_width="fill_parent"

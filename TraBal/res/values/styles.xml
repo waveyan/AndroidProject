@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!--
         Base application theme, dependent on API level. This theme is replaced
@@ -26,6 +26,10 @@
         <item name="android:backgroundDimEnabled">false</item>
         <item name="android:windowBackground">@null</item><!--除去背景色-->
         </style>
+        
+     <style name="custom_checkbox" parent="@android:style/Widget.CompoundButton.CheckBox">
+         <item name="android:button">@drawable/my_checkbox</item>
+         </style>
     
     
 

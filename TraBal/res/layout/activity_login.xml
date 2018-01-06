@@ -36,25 +36,46 @@
         android:layout_height="40dp"
         android:layout_margin="20dp"
         android:background="@color/a5"
-        android:hint="用户名/邮箱"
-        android:padding="5dp"
+        android:hint="  用户名/邮箱"
+        android:padding="10dp"
         android:textColorHint="@color/a2"
-        android:textSize="15dp" />
+        android:textSize="15dp"
+        android:drawableLeft="@drawable/a087"
+         />
 
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
     <EditText
         android:id="@+id/password1ID"
         android:layout_width="fill_parent"
         android:layout_height="40dp"
         android:layout_margin="20dp"
         android:background="@color/a5"
-        android:hint="密码  ..."
-        android:padding="5dp"
+        android:hint=" 密码 ..."
         android:textColorHint="@color/a2"
-        android:textSize="15dp" />
+        android:textSize="15dp" 
+        android:password="true"
+        android:paddingLeft="10dp"
+        android:paddingRight="5dp"
+        android:drawableLeft="@drawable/a086"
+        />
+    
+    <CheckBox 
+        android:id="@+id/box"
+        style="@style/custom_checkbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"    
+        android:layout_alignBottom="@+id/password1ID"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="20dp"
+        />
+    </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp" >
 
         <EditText
             android:id="@+id/validate1ID"

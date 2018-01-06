@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import org.apache.http.message.BasicNameValuePair;
 
+
 import com.trabal.user.Bean.UserBean;
 import com.trabal.util.Code;
 import com.trabal.util.net.NetTransfer;
@@ -12,9 +13,13 @@ import com.trabal.util.net.NetTransfer;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,6 +30,7 @@ public class RegisterActivity extends Activity {
 	private TextView telephone,password,comfirm,code;
 	private Code cerificate_code;
 	private Button submit;
+	private CheckBox box1,box2;
 	
 	
 	
@@ -33,6 +39,11 @@ public class RegisterActivity extends Activity {
 		super.onCreate(savedInstanceState);
 	    this.setContentView(R.layout.activity_register);
 	    
+	    
+	    box1 = (CheckBox) this.findViewById(R.id.box1);
+		box1.setOnClickListener(new OnclickListenerImp());
+		box2 = (CheckBox) this.findViewById(R.id.box2);
+		box2.setOnClickListener(new OnclickListenerOmp());
 	    initView();
 	    back2TV=(ImageView)this.findViewById(R.id.back2ID);
 	    back2TV.setOnClickListener(new View.OnClickListener() {
@@ -95,6 +106,7 @@ public class RegisterActivity extends Activity {
 				if(!password_text.equals(comfirm_text)){
 					Toast.makeText(RegisterActivity.this, "新密码与确认密码不一致，请重新输入！",
 							Toast.LENGTH_LONG).show();
+					return;
 				}
 
 				if (!code_text.equals(cerificate_code.getCode().toLowerCase())) {
@@ -137,6 +149,37 @@ public class RegisterActivity extends Activity {
 		
 		
 	}
+    private class OnclickListenerImp implements OnClickListener{
+    	
+	    @Override
+	    public void onClick(View arg0) {
+	    	if(RegisterActivity.this.box1.isChecked()){
+	    		RegisterActivity.this.password.setTransformationMethod(HideReturnsTransformationMethod.getInstance());    	
+	    }	
+	    	else{
+	    	RegisterActivity.this.password.setTransformationMethod(PasswordTransformationMethod.getInstance());
+    	
+	    }
+
+	 }	
+
+	 }
+    
+ private class OnclickListenerOmp implements OnClickListener{
+    	
+	    @Override
+	    public void onClick(View arg0) {
+	    	if(RegisterActivity.this.box2.isChecked()){
+	    		RegisterActivity.this.comfirm.setTransformationMethod(HideReturnsTransformationMethod.getInstance());    	
+	    }	
+	    	else{
+	    	RegisterActivity.this.comfirm.setTransformationMethod(PasswordTransformationMethod.getInstance());
+    	
+	    }
+
+	 }	
+
+	 }
 	
     
     private class CodeOnClick implements View.OnClickListener {
