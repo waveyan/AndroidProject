@@ -13,10 +13,10 @@
         <EditText
             android:id="@+id/edit"
             android:layout_width="fill_parent"
-            android:layout_height="25dp"
+            android:layout_height="30dp"
             android:layout_marginLeft="13dp"
             android:layout_marginRight="10dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="5dp"
             android:layout_toLeftOf="@+id/cancel"
             android:background="#ffffff"
             android:fontFamily="monospace"
@@ -24,10 +24,10 @@
 
         <Spinner
             android:id="@+id/spinner1"
-            android:layout_marginLeft="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginLeft="10dp"
             android:entries="@array/search" />
 
         <TextView
@@ -42,5 +42,13 @@
             android:textColor="#698B69"
             android:textSize="16sp" />
     </RelativeLayout>
+
+    <ListView
+        android:layout_below="@+id/daohangtiao"
+        android:id="@+id/search_listview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" 
+        android:background="#698B69">
+    </ListView>
 
 </RelativeLayout>
