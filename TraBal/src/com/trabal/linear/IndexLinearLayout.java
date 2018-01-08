@@ -114,7 +114,8 @@ public class IndexLinearLayout extends LinearLayout {
 			Picasso.with(context).load(db_list.get(position).getHsb().get(4).getPic1()).centerCrop().fit().into(imageView6);
 			Picasso.with(context).load(db_list.get(position).getHsb().get(5).getPic1()).centerCrop().fit().into(imageView7);
 			
-//			imageView1.setAlpha(0.8f);
+			//Í¸Ã÷¶È
+			imageView1.setAlpha(0.8f);
 			
 			class IVOnclick implements View.OnClickListener{
 
