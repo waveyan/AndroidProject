@@ -2,25 +2,26 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal" 
-    android:paddingTop="20dp"
+    android:background="#698B69"
+    android:orientation="horizontal"
+    android:gravity="center_horizontal"
     android:paddingBottom="20dp"
-    android:gravity="center"
-    android:background="#698B69">
-    
-    <com.trabal.CircleImageView 
-        android:id="@+id/item_imageview1"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:src="@drawable/a013"/>
-    
-    <TextView
-        android:layout_marginLeft="10dp" 
-        android:id="@+id/item_friend"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="aa"
-        android:textColor="#ffffff"
-        android:textSize="15dp"/>
+    android:paddingTop="20dp" >
+
+        <com.trabal.CircleImageView
+            android:id="@+id/item_imageview1"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:src="@drawable/a013" />
+
+        <TextView
+            android:id="@+id/item_friend"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/item_imageview1"
+            android:text="aa"
+            android:textColor="#ffffff"
+            android:textSize="15dp" />
 
 </LinearLayout>
