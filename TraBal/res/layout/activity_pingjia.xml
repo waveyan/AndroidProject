@@ -2,30 +2,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
-    <RelativeLayout
-        android:id="@+id/avID"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:background="#EBEBEB" >
-
-        <ImageButton
-            android:id="@+id/back_pingjia"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="12dp"
-            android:background="@drawable/d001" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@id/back_pingjia"
-            android:layout_marginLeft="7dp"
-            android:layout_toRightOf="@id/back_pingjia"
-            android:text="我的評價"
-            android:textColor="#000000"
-            android:textSize="16dp" />
-    </RelativeLayout>
+    
 
     <ListView
         android:id="@+id/hyxiangqingyeID"

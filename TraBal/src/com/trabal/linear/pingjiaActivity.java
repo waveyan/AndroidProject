@@ -138,7 +138,7 @@ public class pingjiaActivity extends Activity {
 		listView.setAdapter(ba);
 
 		// 返回上一个界面
-		imageButton = (ImageButton) findViewById(R.id.back_pingjia);
+		imageButton = (ImageButton) headerView.findViewById(R.id.back_pingjia8);
 		imageButton.setOnClickListener(new OnClickListener() {
 
 			@Override
