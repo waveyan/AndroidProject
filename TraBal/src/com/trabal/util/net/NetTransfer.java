@@ -29,6 +29,7 @@ import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import com.trabal.activity.Bean.ActivityBean;
+import com.trabal.hotspot.Bean.CityBean;
 import com.trabal.hotspot.Bean.DistrictBean;
 import com.trabal.hotspot.Bean.HotSpotBean;
 import com.trabal.route.Bean.RouteBean;
@@ -288,6 +289,40 @@ public class NetTransfer {
 			return null;
 		}
 	}
+	
+	public CityBean handle_city_data(String data){
+		JSONObject json;
+		try {
+			json = new JSONObject(data);
+			CityBean city = new CityBean();
+			city.setId(json.getString("id"));
+			city.setName(json.getString("name"));
+			city.setEnglishname(json.getString("englishname"));
+			city.setPic(this.media_perfix + json.getString("pic"));
+			return city;
+		} catch (JSONException e) {
+			Log.e("handle_city_data", e.getMessage());
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	public ArrayList<CityBean> handle_city_list(String data){
+		try {
+			ArrayList<CityBean> city_list = new ArrayList<CityBean>();
+			JSONObject json = new JSONObject(data);
+			JSONArray json_list = json.getJSONArray("city");
+			for (int i = 0; i < json_list.length(); i++) {
+				CityBean city = handle_city_data(json_list.getString(i));
+				city_list.add(city);
+			}
+			return city_list;
+		} catch (JSONException e) {
+			e.printStackTrace();
+			Log.e("handle_city_list", e.getMessage());
+			return null;
+		}
+	}
 
 	public DistrictBean handle_db_data(String data) {
 		JSONObject json;
@@ -375,15 +410,36 @@ public class NetTransfer {
 		}
 
 	}
+	
+	public ArrayList<Object> handle_usr_list(String data) {
+		try {
+			
+			ArrayList<Object> user_list = new ArrayList<Object>();
+			JSONObject json = new JSONObject(data);
+			JSONArray json_list = json.getJSONArray("user");
+			for (int i = 0; i < json_list.length(); i++) {
+				UserBean user = new UserBean();
+				user = handle_user_data(json_list.getString(i), user);
+				user_list.add(user);
+			}
+			return user_list;
+
+		} catch (JSONException e) {
+			Log.e("handle_usr_list", e.getMessage());
+			e.printStackTrace();
+			return null;
+		}
+
+	}
 
 	public ArrayList<UserBean> handle_follow_user_list(String data) {
 
 		try {
-			UserBean user = new UserBean();
 			ArrayList<UserBean> user_list = new ArrayList<UserBean>();
 			JSONObject json = new JSONObject(data);
 			JSONArray json_list = json.getJSONArray("following");
 			for (int i = 0; i < json_list.length(); i++) {
+				UserBean user = new UserBean();
 				user = handle_user_data(json_list.getString(i), user);
 				user_list.add(user);
 			}

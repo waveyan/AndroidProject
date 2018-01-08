@@ -12,6 +12,7 @@ import com.trabal.R;
 import com.trabal.activity.Bean.ActivityBean;
 import com.trabal.hotspot.Bean.HotSpotBean;
 import com.trabal.linear.huodongActivity.MyBaseAdapter;
+import com.trabal.search.search;
 import com.trabal.user.Bean.EvaluationBean;
 import com.trabal.user.Bean.UserBean;
 import com.trabal.util.net.NetTransfer;
@@ -114,7 +115,11 @@ public class TakeMeToYourHome extends Activity {
 					intent.putExtra("db",
 							last_intent.getSerializableExtra("db"));
 					intent.putExtra("user", user);
-				} else {
+				} else if("search".equals(from)){
+					intent = new Intent(TakeMeToYourHome.this,
+							search.class);
+				}
+				else {
 					intent = new Intent(TakeMeToYourHome.this,
 							RestaurantActivity.class);
 					String what = last_intent.getStringExtra("what");
@@ -138,6 +143,8 @@ public class TakeMeToYourHome extends Activity {
 
 				String data = NetTransfer.transfer(url, "get", params, true, user.getAccess_token(),null);
 				ab_list=nt.handle_ac_list(data);
+				if(ab_list==null)
+					ab_list=new ArrayList<ActivityBean>();
 			} catch (IOException e) {
 				ab_list=new ArrayList<ActivityBean>();
 				e.printStackTrace();
@@ -333,6 +340,8 @@ public class TakeMeToYourHome extends Activity {
 
 					String data = NetTransfer.transfer(url, "get", params, true, user.getAccess_token(),null);
 					eb_list=nt.handle_eb_list(data);
+					if(eb_list==null)
+						eb_list=new ArrayList<EvaluationBean>();
 				} catch (IOException e) {
 					eb_list=new ArrayList<EvaluationBean>();
 					e.printStackTrace();

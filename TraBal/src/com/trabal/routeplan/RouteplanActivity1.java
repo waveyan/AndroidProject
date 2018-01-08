@@ -1,11 +1,17 @@
 package com.trabal.routeplan;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
+import com.squareup.picasso.Picasso;
+import com.trabal.MainActivity;
 import com.trabal.R;
 import com.trabal.activity.Bean.ActivityBean;
+import com.trabal.hotspot.Bean.CityBean;
 import com.trabal.user.Bean.UserBean;
+import com.trabal.util.net.NetTransfer;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -21,7 +27,7 @@ public class RouteplanActivity1 extends Activity {
 	private Intent last_intent;
 	private UserBean user;
 	private ListView listView;
-	private ArrayList<ActivityBean> ab_list;
+	private ArrayList<CityBean> ab_list;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -32,15 +38,18 @@ public class RouteplanActivity1 extends Activity {
 		user = (UserBean) last_intent.getSerializableExtra("user");
 
 		listView = (ListView) this.findViewById(R.id.routeplan1_listview);
-
-		ab_list = new ArrayList<ActivityBean>();
-
-		ActivityBean ab = new ActivityBean();
-		ab.setEnglish("Shenzhen");
-		ab.setId("深圳");
-		ab.setPic1(String.valueOf(R.drawable.wanghong2));
-
-		ab_list.add(ab);
+		
+		//获取数据
+		String url="hotspot/getcities";
+		try {
+			String data=NetTransfer.transfer(url, "get", null, true, user.getAccess_token(), null);
+			NetTransfer nt=new NetTransfer();
+			ab_list=nt.handle_city_list(data);
+			if(ab_list==null)
+				ab_list=new ArrayList<CityBean>();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 
 		listView.setAdapter(new CustomAdapter());
 	}
@@ -61,7 +70,7 @@ public class RouteplanActivity1 extends Activity {
 			return position;
 		}
 
-		@Override
+		@SuppressLint("NewApi") @Override
 		public View getView(final int position, View convertView,
 				ViewGroup parent) {
 
@@ -75,14 +84,13 @@ public class RouteplanActivity1 extends Activity {
 			TextView mTextView2 = (TextView) view
 					.findViewById(R.id.text1);
 
-			mTextView1.setText(ab_list.get(position).getId());
-			mTextView2.setText(ab_list.get(position).getEnglish());
+			mTextView1.setText(ab_list.get(position).getName());
+			mTextView2.setText(ab_list.get(position).getEnglishname());
 
 			ImageView imageView = (ImageView) view
 					.findViewById(R.id.image1);
 
-			imageView.setBackgroundResource(Integer.parseInt(ab_list.get(
-					position).getPic1()));
+			Picasso.with(RouteplanActivity1.this).load(ab_list.get(position).getPic()).centerCrop().fit().into(imageView);
 			
 			imageView.setAlpha(0.8f);
 			

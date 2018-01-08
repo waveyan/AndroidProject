@@ -79,7 +79,10 @@ public class SiteLinearLayout extends LinearLayout {
 					R.layout.listview_item, null);
 			TextView mTextView1 = (TextView) view
 					.findViewById(R.id.item_text1);
+			TextView mTextView2 = (TextView) view
+					.findViewById(R.id.item_text2);
 			mTextView1.setText(hs_list.get(position).getName());
+			mTextView2.setText(hs_list.get(position).getWord());
 			ImageView imageView1 = (ImageView) view
 					.findViewById(R.id.item1);
 			ImageView imageView2 = (ImageView) view

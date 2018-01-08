@@ -20,7 +20,9 @@
             android:layout_toLeftOf="@+id/cancel"
             android:background="#ffffff"
             android:fontFamily="monospace"
-            android:paddingLeft="70dp" />
+            android:paddingLeft="70dp"
+            android:imeOptions="actionSearch"
+            android:singleLine="true" />
 
         <Spinner
             android:id="@+id/spinner1"
@@ -41,6 +43,7 @@
             android:text="取消"
             android:textColor="#698B69"
             android:textSize="16sp" />
+        
     </RelativeLayout>
 
     <ListView

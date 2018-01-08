@@ -18,6 +18,7 @@ import com.trabal.activity.Bean.ActivityBean;
 import com.trabal.hotspot.Bean.HotSpotBean;
 import com.trabal.linear.CommentLinearLayout.MyBaseAdapter;
 import com.trabal.linear.FriendLinearLayout.CustomAdapter;
+import com.trabal.search.search;
 import com.trabal.user.Bean.EvaluationBean;
 import com.trabal.user.Bean.UserBean;
 import com.trabal.util.net.NetTransfer;
@@ -51,6 +52,7 @@ public class pingjiaActivity extends Activity {
 	private BaseAdapter ba;
 	private TextView status;
 	private String flag;
+	private String from;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +62,7 @@ public class pingjiaActivity extends Activity {
 		last_intent = pingjiaActivity.this.getIntent();
 		user = (UserBean) last_intent.getSerializableExtra("user");
 		flag = last_intent.getStringExtra("flag");
+		from = last_intent.getStringExtra("from");
 
 		listView = (ListView) this.findViewById(R.id.hyxiangqingyeID);
 
@@ -77,7 +80,7 @@ public class pingjiaActivity extends Activity {
 				.findViewById(R.id.hyxqy_headpic6);
 
 		person = (UserBean) last_intent.getSerializableExtra("person");
-		if(person==null)
+		if (person == null)
 			person = new UserBean();
 		// 判断关注状态和数据来源
 		if ("mine".equals(flag)) {
@@ -111,10 +114,12 @@ public class pingjiaActivity extends Activity {
 					}
 				if (flag)
 					status.setText("取消关注");
-				mTextView6.setText(person.getName());
-				Picasso.with(pingjiaActivity.this).load(person.getPic()).centerCrop()
-						.fit().into(imageView2);
+
 			}
+			// 某人的姓名头像
+			mTextView6.setText(person.getName());
+			Picasso.with(pingjiaActivity.this).load(person.getPic())
+					.centerCrop().fit().into(imageView2);
 			// 得到某个人的所有评论
 			String evaluation_url = "evaluation/base";
 			ArrayList<BasicNameValuePair> params = new ArrayList<BasicNameValuePair>();
@@ -124,6 +129,8 @@ public class pingjiaActivity extends Activity {
 				String evaluation = NetTransfer.transfer(evaluation_url, "get",
 						params, true, user.getAccess_token(), null);
 				myAssess = new NetTransfer().handle_eb_list(evaluation);
+				if (myAssess == null)
+					myAssess = new ArrayList<EvaluationBean>();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -143,11 +150,18 @@ public class pingjiaActivity extends Activity {
 
 			@Override
 			public void onClick(View arg0) {
-				Intent intent = new Intent(pingjiaActivity.this,
-						MainActivity.class);
-				intent.putExtra("user", user);
-				pingjiaActivity.this.startActivity(intent);
+				if ("search".equals(from)) {
+					Intent intent = new Intent(pingjiaActivity.this,
+							search.class);
+					intent.putExtra("user", user);
+					pingjiaActivity.this.startActivity(intent);
+				} else {
+					Intent intent = new Intent(pingjiaActivity.this,
+							MainActivity.class);
+					intent.putExtra("user", user);
+					pingjiaActivity.this.startActivity(intent);
 
+				}
 			}
 		});
 

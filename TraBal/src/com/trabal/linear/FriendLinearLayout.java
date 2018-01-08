@@ -84,7 +84,6 @@ public class FriendLinearLayout extends LinearLayout{
 					// ά�ֵ�¼״̬
 					Intent intent = new Intent(FriendLinearLayout.this.context,pingjiaActivity.class);
 					intent.putExtra("user", user);
-//					intent.putExtra("hxb",follow.get(position).getEb());
 					intent.putExtra("flag", "following");
 					intent.putExtra("person", follow.get(position));
 					context.startActivity(intent);
