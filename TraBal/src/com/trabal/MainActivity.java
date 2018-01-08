@@ -201,12 +201,12 @@ public class MainActivity extends Activity implements OnButtonClickListener{
 		// 设置当前页面
 		if("more".equals(last_intent.getStringExtra("from"))){
 			indexTv.setTextColor(android.graphics.Color.BLACK);
-			moreTv.setTextColor(android.graphics.Color.CYAN);
+			moreTv.setTextColor(android.graphics.Color.argb(250, 53, 138, 115));
 			dynamicTv.setTextColor(android.graphics.Color.BLACK);
 			content.setCurrentItem(1);
 		}
 		else{
-			indexTv.setTextColor(android.graphics.Color.CYAN);
+			indexTv.setTextColor(android.graphics.Color.argb(250, 53, 138, 115));
 			moreTv.setTextColor(android.graphics.Color.BLACK);
 			dynamicTv.setTextColor(android.graphics.Color.BLACK);
 			content.setCurrentItem(0);
@@ -251,7 +251,7 @@ public class MainActivity extends Activity implements OnButtonClickListener{
 			@Override
 			public void onClick(View arg0) {
 				content.setCurrentItem(0);
-				indexTv.setTextColor(android.graphics.Color.CYAN);
+				indexTv.setTextColor(android.graphics.Color.argb(250, 53, 138, 115));
 				moreTv.setTextColor(android.graphics.Color.BLACK);
 				dynamicTv.setTextColor(android.graphics.Color.BLACK);
 			}
@@ -263,7 +263,7 @@ public class MainActivity extends Activity implements OnButtonClickListener{
 			public void onClick(View arg0) {
 				content.setCurrentItem(1);
 				indexTv.setTextColor(android.graphics.Color.BLACK);
-				moreTv.setTextColor(android.graphics.Color.CYAN);
+				moreTv.setTextColor(android.graphics.Color.argb(250, 53, 138, 115));
 				dynamicTv.setTextColor(android.graphics.Color.BLACK);
 
 			}
@@ -276,7 +276,7 @@ public class MainActivity extends Activity implements OnButtonClickListener{
 				content.setCurrentItem(2);
 				indexTv.setTextColor(android.graphics.Color.BLACK);
 				moreTv.setTextColor(android.graphics.Color.BLACK);
-				dynamicTv.setTextColor(android.graphics.Color.CYAN);
+				dynamicTv.setTextColor(android.graphics.Color.argb(250, 53, 138, 115));
 
 			}
 		});
@@ -566,18 +566,18 @@ public class MainActivity extends Activity implements OnButtonClickListener{
 		@Override
 		public void onPageSelected(int arg0) {
 			if (arg0 == 0) {
-				indexTv.setTextColor(android.graphics.Color.CYAN);
+				indexTv.setTextColor(android.graphics.Color.argb(250, 53, 138, 115));
 				moreTv.setTextColor(android.graphics.Color.BLACK);
 				dynamicTv.setTextColor(android.graphics.Color.BLACK);
 
 			} else if (arg0 == 1) {
 				indexTv.setTextColor(android.graphics.Color.BLACK);
-				moreTv.setTextColor(android.graphics.Color.CYAN);
+				moreTv.setTextColor(android.graphics.Color.argb(250, 53, 138, 115));
 				dynamicTv.setTextColor(android.graphics.Color.BLACK);
 			} else if (arg0 == 2) {
 				indexTv.setTextColor(android.graphics.Color.BLACK);
 				moreTv.setTextColor(android.graphics.Color.BLACK);
-				dynamicTv.setTextColor(android.graphics.Color.CYAN);
+				dynamicTv.setTextColor(android.graphics.Color.argb(250, 53, 138, 115));
 				
 			}
 		}
