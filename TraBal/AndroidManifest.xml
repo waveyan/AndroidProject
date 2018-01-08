@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.trabal"
     android:versionCode="1"
@@ -10,64 +9,110 @@
     <uses-sdk
         android:minSdkVersion="8"
         android:targetSdkVersion="18" />
-      <!-- 申明网络权限  -->
+    <!-- 申明网络权限 -->
     <uses-permission android:name="android.permission.INTERNET" />
-    <!-- 申明权限 操作SD卡 -->  
+    <!-- 申明权限 操作SD卡 -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+
+    <!-- 申明网络权限 -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!-- 申明权限 操作SD卡 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_CONFIGURATION" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/ic_launcher"
+        android:icon="@drawable/logo"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
+        <meta-data
+            android:name="com.amap.api.v2.apikey"
+            android:value="eb6563cb29785201af389941a4abf427" />
+
+        <activity android:name="com.trabal.route.mapmap.DriveRouteActivity" >
+        </activity>
+        <activity android:name="com.trabal.route.mapmap.DriveRouteDetailActivity" >
+        </activity>
         <activity android:name="com.trabal.RegisterActivity" >
         </activity>
-        <activity android:name="com.trabal.linear.collectActivity"></activity>
-        <activity android:name="com.trabal.linear.Hyxiangqingye"></activity>
-        <activity android:name="com.trabal.linear.Fansxiangqingye"></activity>
-        <activity android:name="com.trabal.linear.recommendationactivity"></activity>
-        <activity	android:name="com.trabal.linear.chosepositionactivity" ></activity>
-        <activity	android:name="com.trabal.linear.classifyactivity" ></activity>
-        <activity	android:name="com.trabal.linear.themeactivity" ></activity>
-        <activity	android:name="com.trabal.linear.timeactivity" ></activity>
-        <activity	android:name="com.trabal.linear.placeactivity" ></activity>
-        <activity	android:name="com.trabal.linear.introduceactivity" ></activity>
-        <activity	android:name="com.trabal.linear.priceactivity" ></activity>
-        <activity	android:name="com.trabal.linear.telephoneactivity" ></activity>
-        <activity	android:name="com.trabal.linear.officialactivity" ></activity>
-        <activity android:name="com.trabal.linear.addactivity"></activity>
-       
+        <activity android:name="com.trabal.linear.collectActivity" >
+        </activity>
+        <activity android:name="com.trabal.linear.Hyxiangqingye" >
+        </activity>
+        <activity android:name="com.trabal.linear.Fansxiangqingye" >
+        </activity>
+        <activity android:name="com.trabal.linear.recommendationactivity" >
+        </activity>
+        <activity android:name="com.trabal.linear.chosepositionactivity" >
+        </activity>
+        <activity android:name="com.trabal.linear.classifyactivity" >
+        </activity>
+        <activity android:name="com.trabal.linear.themeactivity" >
+        </activity>
+        <activity android:name="com.trabal.linear.timeactivity" >
+        </activity>
+        <activity android:name="com.trabal.linear.placeactivity" >
+        </activity>
+        <activity android:name="com.trabal.linear.introduceactivity" >
+        </activity>
+        <activity android:name="com.trabal.linear.priceactivity" >
+        </activity>
+        <activity android:name="com.trabal.linear.telephoneactivity" >
+        </activity>
+        <activity android:name="com.trabal.linear.officialactivity" >
+        </activity>
+        <activity android:name="com.trabal.linear.addactivity" >
+        </activity>
         <activity android:name="com.trabal.linear.LostInLA" >
         </activity>
         <activity android:name="com.trabal.linear.DIMUCUBE" >
         </activity>
         <activity android:name="com.trabal.linear.TakeMeToYourHome" >
         </activity>
-        <activity android:name="com.trabal.linear.Timesmuseum" >
-        </activity>
-        <activity android:name="com.trabal.MainActivity" >
-        </activity>
         <activity android:name="com.trabal.linear.RestaurantActivity" >
         </activity>
-        <activity android:name="com.trabal.linear.ExhibitionActivity" >
-        </activity>
-        <activity android:name="com.trabal.linear.ForeignfoodActivity" >
-        </activity>
-        <activity android:name="com.trabal.linear.CoffeeActivity" >
-        </activity>
         <activity android:name="com.trabal.linear.pingjiaActivity" >
-        </activity>
-        <activity android:name="com.trabal.linear.shoucangActivity" >
         </activity>
         <activity android:name="com.trabal.linear.luxianActivity" >
         </activity>
         <activity android:name="com.trabal.linear.huodongActivity" >
         </activity>
-        <activity android:name="com.trabal.linear.assessactivity"></activity>
         <activity android:name="com.trabal.linear.haoyouActivity" >
         </activity>
+        <activity android:name="com.trabal.linear.HdxiangqingActivity" >
+        </activity>
+        <activity android:name="com.trabal.linear.XiaoxiActivity" >
+        </activity>
+        <activity android:name="com.trabal.linear.SYxqyActivity" >
+        </activity>
+        <activity android:name="com.trabal.MainActivity" >
+        </activity>
+        <activity android:name="com.trabal.routeplan.RouteplanActivity1" >
+        </activity>
+        <activity android:name="com.trabal.routeplan.RouteplanActivity2" >
+        </activity>
+        <activity android:name="com.trabal.routeplan.RouteplanActivity3" >
+        </activity>
+        <activity android:name="com.trabal.routeplan.RouteplanActivity4" >
+        </activity>
+        <activity android:name="com.trabal.linear.assessactivity" >
+        </activity>
+        <activity android:name="com.trabal.search.search" >
+        </activity>
         <activity android:name="com.trabal.LoginActivity" >
+        </activity>
+        <activity android:name="com.trabal.linear.StartActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
