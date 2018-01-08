@@ -108,10 +108,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/pjxqy_pj3"
-                android:numColumns="3" 
                 android:horizontalSpacing="10dp"
-                android:verticalSpacing ="10dp"
-                >
+                android:numColumns="3"
+                android:verticalSpacing="10dp" >
             </GridView>
 
             <ImageView
@@ -145,9 +144,9 @@
                 android:layout_width="18dp"
                 android:layout_height="18dp"
                 android:layout_below="@id/gridview"
-                android:layout_marginRight="5dp"
+                android:layout_alignRight="@id/pjxqy_date3"
+                android:layout_marginRight="35dp"
                 android:layout_marginTop="8dp"
-                android:layout_toLeftOf="@id/pjxqy_date3"
                 android:background="@drawable/favour" />
 
             <ImageView
@@ -173,9 +172,9 @@
 
                 <GridView
                     android:id="@+id/gridview1"
-                    android:layout_below="@id/pjxqy_interval2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_below="@id/pjxqy_interval2"
                     android:numColumns="7" >
                 </GridView>
 
