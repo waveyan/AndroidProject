@@ -16,6 +16,7 @@ import com.trabal.hotspot.Bean.HotSpotBean;
 import com.trabal.route.mapmap.DriveRouteActivity;
 import com.trabal.routeplan.RouteplanActivity1.CustomAdapter;
 import com.trabal.user.Bean.UserBean;
+import com.trabal.util.SharePreferencesTool;
 import com.trabal.util.net.NetTransfer;
 
 import android.app.Activity;
@@ -174,9 +175,11 @@ public class RouteplanActivity2 extends Activity {
 	
 	private ArrayList<HotSpotBean> initListview1() {
 		// ÍøÂç´«Êä
-		ArrayList params = new ArrayList();
+		String city_name=last_intent.getStringExtra("city_name");
 
 		String url = "hotspot/base";
+		ArrayList<BasicNameValuePair> params=new ArrayList<BasicNameValuePair>();
+		params.add(new BasicNameValuePair("cityname", city_name));
 		NetTransfer nt = new NetTransfer();
 		try {
 

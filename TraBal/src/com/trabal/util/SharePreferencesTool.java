@@ -11,7 +11,7 @@ public class SharePreferencesTool {
 	private Context context;
 	private SharedPreferences sp;
 
-	public void SharePreferencesTools(Context context, String name, int mode) {
+	public SharePreferencesTool(Context context, int mode) {
 		this.context = context;
 		sp = context.getSharedPreferences("userData", mode);
 	}

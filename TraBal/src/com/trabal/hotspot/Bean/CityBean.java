@@ -1,6 +1,8 @@
 package com.trabal.hotspot.Bean;
 
-public class CityBean {
+import java.io.Serializable;
+
+public class CityBean implements Serializable{
 	private String name;
 	private String englishname;
 	private String pic;

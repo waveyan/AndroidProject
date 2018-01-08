@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.http.message.BasicNameValuePair;
+
 import com.squareup.picasso.Picasso;
 import com.trabal.MainActivity;
 import com.trabal.R;
@@ -11,8 +13,10 @@ import com.trabal.listviewAdapter;
 import com.trabal.activity.Bean.ActivityBean;
 import com.trabal.hotspot.Bean.DistrictBean;
 import com.trabal.user.Bean.UserBean;
+import com.trabal.util.SharePreferencesTool;
 import com.trabal.util.net.NetTransfer;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -52,12 +56,17 @@ public class IndexLinearLayout extends LinearLayout {
 		
 		mlistView = (ListView) findViewById(R.id.index_listview);
 		
+		
+		//获取城市
+		String city_name=((MainActivity)this.context).getCity_name();
 		//网络请求，获取首页数据
 		String url="hotspot/create_index";
+		ArrayList<BasicNameValuePair> params=new ArrayList<BasicNameValuePair>();
+		params.add(new BasicNameValuePair("cityname", city_name));
 		NetTransfer nt=new NetTransfer();
 		String data;
 		try {
-			data = NetTransfer.transfer(url, "get", null, true, user.getAccess_token(), null);
+			data = NetTransfer.transfer(url, "get", params, true, user.getAccess_token(), null);
 			db_list=nt.handle_db_list(data);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -85,7 +94,7 @@ public class IndexLinearLayout extends LinearLayout {
 			return position;
 		}
 
-		public View getView(final int position, View convertView, ViewGroup parent) {
+		@SuppressLint("NewApi") public View getView(final int position, View convertView, ViewGroup parent) {
 			View view = LayoutInflater.from(context).inflate(
 					R.layout.index_listview_item, null);
 			TextView mTextView1 = (TextView) view

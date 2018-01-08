@@ -94,37 +94,37 @@ public class MoreLinearLayout extends LinearLayout {
 
 			switch (id) {
 			case R.id.coffeeID:
-				intent.putExtra("what", "coffee");
+				intent.putExtra("what", "咖啡");
 				context.startActivity(intent);
 //				((Activity)context).finish();
 				break;
 			case R.id.restaurantID:
-				intent.putExtra("what", "restaurant");
+				intent.putExtra("what", "餐厅");
 				context.startActivity(intent);
 //				((Activity)context).finish();
 				break;
 			case R.id.cakeID:
-				intent.putExtra("what", "cake");
+				intent.putExtra("what", "糕点面包");
 				context.startActivity(intent);
 //				((Activity)context).finish();
 				break;
 			case R.id.showID:
-				intent.putExtra("what", "show");
+				intent.putExtra("what", "展览艺术");
 				context.startActivity(intent);
 //				((Activity)context).finish();
 				break;
 			case R.id.furnitureID:
-				intent.putExtra("what", "furniture");
+				intent.putExtra("what", "洋食");
 				context.startActivity(intent);
 //				((Activity)context).finish();
 				break;
 			case R.id.shoppingID:
-				intent.putExtra("what", "shopping");
+				intent.putExtra("what", "购物名所");
 				context.startActivity(intent);
 //				((Activity)context).finish();
 				break;
 			case R.id.teaID:
-				intent.putExtra("what", "tea");
+				intent.putExtra("what", "茗茶");
 				context.startActivity(intent);
 //				((Activity)context).finish();
 				break;
@@ -135,9 +135,12 @@ public class MoreLinearLayout extends LinearLayout {
 	}
 
 	private void init_act() {
+		//获取城市
+		String city_name=((MainActivity)this.context).getCity_name();
 		// 网络传输
 		ArrayList params = new ArrayList();
 		params.add(new BasicNameValuePair("num","4"));
+		params.add(new BasicNameValuePair("cityname", city_name));
 		String url = "activity/base";
 		NetTransfer nt = new NetTransfer();
 		String msg;

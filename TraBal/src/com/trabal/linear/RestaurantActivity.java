@@ -8,6 +8,7 @@ import com.trabal.R;
 import com.trabal.listviewAdapter;
 import com.trabal.hotspot.Bean.HotSpotBean;
 import com.trabal.user.Bean.UserBean;
+import com.trabal.util.SharePreferencesTool;
 import com.trabal.util.net.NetTransfer;
 
 import android.app.Activity;
@@ -42,9 +43,11 @@ public class RestaurantActivity extends Activity {
 
 	private ArrayList<HotSpotBean> initListview1() {
 		// 网络传输
+		String city_name=new SharePreferencesTool(RestaurantActivity.this,MODE_PRIVATE).popOut("city_name");
 		ArrayList params = new ArrayList();
 
 		params.add(new BasicNameValuePair("what", last_intent.getStringExtra("what")));     //上传数据对接属性 
+		params.add(new BasicNameValuePair("cityname", city_name));
 
 		String url = "hotspot/base";
 		NetTransfer nt = new NetTransfer();

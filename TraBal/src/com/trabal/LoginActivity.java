@@ -144,7 +144,10 @@ public class LoginActivity extends Activity {
 						// 保持该用户登录状态
 						intent.putExtra("user", user);
 						LoginActivity.this.startActivity(intent);
+						Toast.makeText(LoginActivity.this, nt.getMsg(),
+								Toast.LENGTH_SHORT).show();
 						LoginActivity.this.finish();
+						
 					} else {
 						Toast.makeText(LoginActivity.this, nt.getMsg(),
 								Toast.LENGTH_LONG).show();

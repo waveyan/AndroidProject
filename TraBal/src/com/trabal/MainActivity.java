@@ -13,6 +13,7 @@ import java.util.List;
 import com.squareup.picasso.Picasso;
 import com.trabal.ContentAdapter;
 import com.trabal.ContentModel;
+import com.trabal.hotspot.Bean.CityBean;
 import com.trabal.linear.DynamicLinearLayout;
 import com.trabal.linear.IndexLinearLayout;
 import com.trabal.linear.MoreLinearLayout;
@@ -28,6 +29,7 @@ import com.trabal.routeplan.RouteplanActivity1;
 import com.trabal.routeplan.RouteplanActivity2;
 import com.trabal.search.search;
 import com.trabal.user.Bean.UserBean;
+import com.trabal.util.SharePreferencesTool;
 import com.trabal.util.net.NetTransfer;
 import com.trabal.R;
 import org.apache.http.message.BasicNameValuePair;
@@ -101,6 +103,7 @@ public class MainActivity extends Activity implements OnButtonClickListener{
     public static final String IMAGE_UNSPECIFIED = "image/*";
     private String pathImage="headpic";
     private TextView district;
+    private String city_name;
     
 	@SuppressLint("NewApi")
 	@Override
@@ -110,8 +113,19 @@ public class MainActivity extends Activity implements OnButtonClickListener{
 
 		// 显示用户头像和昵称
 		last_intent = MainActivity.this.getIntent();
-		user = (UserBean) last_intent.getSerializableExtra("user");       
-
+		user = (UserBean) last_intent.getSerializableExtra("user"); 
+		//城市
+		SharePreferencesTool spt=new SharePreferencesTool(MainActivity.this,MODE_PRIVATE);
+		city_name=spt.popOut("city_name");
+		//首次登陆时没有城市跳转
+		if(city_name==null){
+			Intent intent=new Intent(MainActivity.this,RouteplanActivity1.class);
+			intent.putExtra("user", user);
+			intent.putExtra("from", "main");
+			MainActivity.this.startActivity(intent);
+			MainActivity.this.finish();
+		}
+	
 		linears = new ArrayList<LinearLayout>();
 		linears.add(new IndexLinearLayout(MainActivity.this));
 		linears.add(new MoreLinearLayout(MainActivity.this));
@@ -131,12 +145,14 @@ public class MainActivity extends Activity implements OnButtonClickListener{
 		dynamicTv = (TextView) this.findViewById(R.id.dynamicID);
 		//地域
 		district=(TextView)this.findViewById(R.id.district);
+		district.setText(city_name);
 		district.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View arg0) {
 				Intent intent=new Intent(MainActivity.this,RouteplanActivity1.class);
 				intent.putExtra("user", user);
+				intent.putExtra("from", "main");
 				MainActivity.this.startActivity(intent);
 			}
 		});
@@ -450,9 +466,6 @@ public class MainActivity extends Activity implements OnButtonClickListener{
 					} catch (FileNotFoundException e) {
 						e.printStackTrace();
 					}
-//	                    Uri uri = saveBitmap(photo, "temp");
-//		                           //启动图像裁剪
-//		                           startImageZoom(uri);
 		                       }
 		                   }
 		        if (resultCode == RESULT_OK && requestCode == IMAGE_OPEN) {           //系统相册打开且选择了照片
@@ -490,11 +503,7 @@ public class MainActivity extends Activity implements OnButtonClickListener{
 	            baos.reset();//重置baos即清空baos
 	            options -= 10;//每次都减少10
 	            bitmap.compress(Bitmap.CompressFormat.JPEG, options, baos);//这里压缩options%，把压缩后的数据存放到baos中
-	            long length = baos.toByteArray().length;
 	        }
-//	        SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHHmmss");
-//	        Date date = new Date(System.currentTimeMillis());
-//	        String filename = format.format(date);
 	        File file = new File(Environment.getExternalStorageDirectory(),filename+".png");
 	        try {
 	            FileOutputStream fos = new FileOutputStream(file);
@@ -510,13 +519,6 @@ public class MainActivity extends Activity implements OnButtonClickListener{
 	        }
 	        return file;
 	    }
-		
-
-	// @Override
-	// public boolean onCreateOptionsMenu(Menu menu) {
-	// getMenuInflater().inflate(R.menu.main, menu);
-	// return true;
-	// }
 
 	/**
 	 * 内容组件适配器
@@ -656,4 +658,13 @@ public class MainActivity extends Activity implements OnButtonClickListener{
 		}
 
 	}
+	public String getCity_name() {
+		return city_name;
+	}
+
+	public void setCity_name(String city_name) {
+		this.city_name = city_name;
+	}
+	
+	
 }
