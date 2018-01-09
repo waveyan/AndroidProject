@@ -89,7 +89,7 @@ public class RouteplanActivity2 extends Activity {
 		textview.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View arg0) {
-				if (hsb_plan.size() <= 2) {
+				if (hsb_plan.size() < 2) {
 					Toast.makeText(RouteplanActivity2.this, "地点至少选择2个或以上", Toast.LENGTH_SHORT).show();
 					return;
 				}
