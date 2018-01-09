@@ -4,12 +4,12 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical" >
-    
 
     <ListView
         android:id="@+id/syxqy_comment_listview"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent" >
+        android:layout_height="fill_parent"
+        android:divider="@null" >
     </ListView>
 
 </LinearLayout>
