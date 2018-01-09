@@ -166,7 +166,7 @@ public class NetTransfer {
 		});
 
 	}
-	
+
 	@SuppressLint("NewApi")
 	public static void upload_pic(String url, HashMap<String, String> data,
 			String access_token, HashMap<String, Object> files)
@@ -176,7 +176,7 @@ public class NetTransfer {
 				.permitAll().build();
 		StrictMode.setThreadPolicy(policy);
 
-		 url = perfix + url + "/";
+		url = perfix + url + "/";
 
 		AsyncHttpClient client = new AsyncHttpClient();
 		RequestParams p = new RequestParams();
@@ -289,8 +289,8 @@ public class NetTransfer {
 			return null;
 		}
 	}
-	
-	public CityBean handle_city_data(String data){
+
+	public CityBean handle_city_data(String data) {
 		JSONObject json;
 		try {
 			json = new JSONObject(data);
@@ -306,8 +306,8 @@ public class NetTransfer {
 			return null;
 		}
 	}
-	
-	public ArrayList<CityBean> handle_city_list(String data){
+
+	public ArrayList<CityBean> handle_city_list(String data) {
 		try {
 			ArrayList<CityBean> city_list = new ArrayList<CityBean>();
 			JSONObject json = new JSONObject(data);
@@ -340,7 +340,7 @@ public class NetTransfer {
 			return db;
 		} catch (JSONException e) {
 			Log.e("handle_db_data", e.getMessage());
-			
+
 			e.printStackTrace();
 			return null;
 		}
@@ -392,7 +392,7 @@ public class NetTransfer {
 
 	public ArrayList<UserBean> handle_usr_like_list(String data) {
 		try {
-			
+
 			ArrayList<UserBean> user_list = new ArrayList<UserBean>();
 			JSONObject json = new JSONObject(data);
 			JSONArray json_list = json.getJSONArray("usr_like");
@@ -410,10 +410,10 @@ public class NetTransfer {
 		}
 
 	}
-	
+
 	public ArrayList<Object> handle_usr_list(String data) {
 		try {
-			
+
 			ArrayList<Object> user_list = new ArrayList<Object>();
 			JSONObject json = new JSONObject(data);
 			JSONArray json_list = json.getJSONArray("user");
@@ -563,6 +563,7 @@ public class NetTransfer {
 			ab.setPic1(this.media_perfix + json.getString("pic1"));
 			ab.setPic2(this.media_perfix + json.getString("pic2"));
 			ab.setPic3(this.media_perfix + json.getString("pic3"));
+			ab.setPic4(this.media_perfix + json.getString("pic4"));
 			ab.setPrice(json.getString("price"));
 			ab.setSubject(json.getString("subject"));
 			ab.setTelephone(json.getString("telephone"));
@@ -597,28 +598,29 @@ public class NetTransfer {
 			return null;
 		}
 	}
-	
-	public RouteBean handle_rb_data(String data){
+
+	public RouteBean handle_rb_data(String data) {
 		try {
 			JSONObject json = new JSONObject(data);
-			RouteBean rb=new RouteBean();
+			RouteBean rb = new RouteBean();
 			rb.setId(json.getInt("id"));
 			rb.setIntroduce(json.getString("introduce"));
 			rb.setTime(json.getString("time"));
 			rb.setTitle(json.getString("title"));
 			rb.setUser(json.getString("user"));
-			try{
-			rb.setHsb_list(handle_hs_list(json.getString("hotspot")));
-			}catch( Exception e){}
+			try {
+				rb.setHsb_list(handle_hs_list(json.getString("hotspot")));
+			} catch (Exception e) {
+			}
 			return rb;
 		} catch (JSONException e) {
 			e.printStackTrace();
-			Log.e("handle_rb_data",e.getMessage());
+			Log.e("handle_rb_data", e.getMessage());
 			return null;
 		}
 	}
-	
-	public ArrayList<RouteBean> handle_rb_list(String data){
+
+	public ArrayList<RouteBean> handle_rb_list(String data) {
 		ArrayList<RouteBean> rb_list = new ArrayList<RouteBean>();
 		JSONArray json_list;
 		try {
@@ -659,6 +661,5 @@ public class NetTransfer {
 	public void setAccess_token(String access_token) {
 		this.access_token = access_token;
 	}
-
 
 }

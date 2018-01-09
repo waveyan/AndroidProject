@@ -165,7 +165,7 @@ public class HdxiangqingActivity extends Activity {
 							.load(ab.getHsb().getPic3()).centerCrop().fit()
 							.into(hs3);
 					Picasso.with(HdxiangqingActivity.this)
-							.load(ab.getHsb().getPic2()).centerCrop().fit()
+							.load(ab.getHsb().getPic1()).centerCrop().fit()
 							.into(hs4);
 					hotspot.setText(ab.getHsb().getName());
 					hs_name.setText(ab.getHsb().getName());
@@ -178,7 +178,7 @@ public class HdxiangqingActivity extends Activity {
 							.centerCrop().fit().into(hs2);
 					Picasso.with(HdxiangqingActivity.this).load(hsb.getPic3())
 							.centerCrop().fit().into(hs3);
-					Picasso.with(HdxiangqingActivity.this).load(hsb.getPic2())
+					Picasso.with(HdxiangqingActivity.this).load(hsb.getPic1())
 							.centerCrop().fit().into(hs4);
 					hotspot.setText(hsb.getName());
 					hs_name.setText(hsb.getName());
