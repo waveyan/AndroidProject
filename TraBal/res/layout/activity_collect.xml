@@ -21,15 +21,7 @@
         android:layout_toRightOf="@id/backButton"
         android:text="我的收藏"
         android:textColor="#000000"
-        android:textSize="16dp" />
-
-   
-     <Spinner  
-        android:id="@+id/spDwon"  
-        android:layout_width="220dp"  
-        android:layout_height="wrap_content"     
-        android:layout_marginLeft="255dp" 
-        android:layout_marginTop="1dp"/>  
+        android:textSize="16dp" />  
 
      
     <LinearLayout
@@ -57,15 +49,6 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="活动"
-            android:textColor="#000000" />
-
-        <TextView
-            android:id="@+id/lineID"
-            android:layout_width="fill_parent"
-            android:layout_height="30dp"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="线路"
             android:textColor="#000000" />
     </LinearLayout>
 

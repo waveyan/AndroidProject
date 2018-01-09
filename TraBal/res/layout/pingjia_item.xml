@@ -26,13 +26,13 @@
             android:layout_height="20dp"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="12dp"
-            android:background="@drawable/d001" />
+            android:background="@drawable/d003" />
 
             <TextView
                 android:id="@+id/status"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignBottom="@id/left3ID"
+                android:layout_marginTop="11dp"
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="10dp"
                 android:text="关注"

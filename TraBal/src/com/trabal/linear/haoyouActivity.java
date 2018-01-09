@@ -65,7 +65,7 @@ public class haoyouActivity extends Activity {
 		fansTv = (TextView) this.findViewById(R.id.fansID);
 		friendTv = (TextView) this.findViewById(R.id.friendID);
 
-		fansTv.setTextColor(android.graphics.Color.CYAN);
+		fansTv.setTextColor(android.graphics.Color.argb(250, 53, 138, 115));
 		friendTv.setTextColor(android.graphics.Color.BLACK);
 
 		// …Ë÷√  ≈‰∆˜
@@ -81,7 +81,7 @@ public class haoyouActivity extends Activity {
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
 				content2.setCurrentItem(0);
-				fansTv.setTextColor(android.graphics.Color.CYAN);
+				fansTv.setTextColor(android.graphics.Color.argb(250, 53, 138, 115));
 				friendTv.setTextColor(android.graphics.Color.BLACK);
 
 			}
@@ -94,7 +94,7 @@ public class haoyouActivity extends Activity {
 				// TODO Auto-generated method stub
 				content2.setCurrentItem(1);
 				fansTv.setTextColor(android.graphics.Color.BLACK);
-				friendTv.setTextColor(android.graphics.Color.CYAN);
+				friendTv.setTextColor(android.graphics.Color.argb(250, 53, 138, 115));
 
 			}
 		});
@@ -160,12 +160,12 @@ public class haoyouActivity extends Activity {
 		@Override
 		public void onPageSelected(int arg0) {
 			if (arg0 == 0) {
-				fansTv.setTextColor(android.graphics.Color.CYAN);
+				fansTv.setTextColor(android.graphics.Color.argb(250, 53, 138, 115));
 				friendTv.setTextColor(android.graphics.Color.BLACK);
 
 			} else if (arg0 == 1) {
 				fansTv.setTextColor(android.graphics.Color.BLACK);
-				friendTv.setTextColor(android.graphics.Color.CYAN);
+				friendTv.setTextColor(android.graphics.Color.argb(250, 53, 138, 115));
 
 			}
 		}

@@ -118,7 +118,7 @@ public class MainActivity extends Activity implements OnButtonClickListener{
 		SharePreferencesTool spt=new SharePreferencesTool(MainActivity.this,MODE_PRIVATE);
 		city_name=spt.popOut("city_name");
 		//首次登陆时没有城市跳转
-		if(city_name==null){
+		if(city_name==null||"".equals(city_name)){
 			Intent intent=new Intent(MainActivity.this,RouteplanActivity1.class);
 			intent.putExtra("user", user);
 			intent.putExtra("from", "main");
@@ -130,7 +130,7 @@ public class MainActivity extends Activity implements OnButtonClickListener{
 		linears.add(new IndexLinearLayout(MainActivity.this));
 		linears.add(new MoreLinearLayout(MainActivity.this));
 		linears.add(new DynamicLinearLayout(MainActivity.this));
-		getActionBar().hide();
+//		getActionBar().hide();
 
 		imageButton = (ImageButton) findViewById(R.id.personID);
 		drawerLayout = (DrawerLayout) findViewById(R.id.drawerlayout);

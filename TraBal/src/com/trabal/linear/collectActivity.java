@@ -30,13 +30,12 @@ import com.trabal.hotspot.Bean.HotSpotBean;
 import com.trabal.user.Bean.UserBean;
 import com.trabal.util.net.NetTransfer;
 
-public class collectActivity extends Activity implements OnItemSelectedListener {
+public class collectActivity extends Activity {
 
 	private ArrayList<LinearLayout> linears;
 	private android.support.v4.view.ViewPager content1;
-	private TextView siteTv, exerciseTv, lineTv;
+	private TextView siteTv, exerciseTv;
 	private TextView cityID;
-	private Spinner spDown;
 	private List<String> list;
 	private ArrayAdapter<String> adapter;
 	private UserBean user;
@@ -85,21 +84,18 @@ public class collectActivity extends Activity implements OnItemSelectedListener 
 				.findViewById(R.id.content1);
 		siteTv = (TextView) this.findViewById(R.id.siteID);
 		exerciseTv = (TextView) this.findViewById(R.id.exerciseID);
-		lineTv = (TextView) this.findViewById(R.id.lineID);
 
 		// 设置适配器
 		content1.setAdapter(new CustomPager());
 		// 设置当前页面-----活动详情返回
 		if("collect_exercise".equals(last_intent.getStringExtra("from"))){
 			siteTv.setTextColor(android.graphics.Color.BLACK);
-			exerciseTv.setTextColor(android.graphics.Color.CYAN);
-			lineTv.setTextColor(android.graphics.Color.BLACK);
+			exerciseTv.setTextColor(android.graphics.Color.argb(250, 53, 138, 115));
 			content1.setCurrentItem(1);
 		}
 		else{
-			siteTv.setTextColor(android.graphics.Color.CYAN);
+			siteTv.setTextColor(android.graphics.Color.argb(250, 53, 138, 115));
 			exerciseTv.setTextColor(android.graphics.Color.BLACK);
-			lineTv.setTextColor(android.graphics.Color.BLACK);
 			content1.setCurrentItem(0);
 		}
 		// 设置内容组件事件处理
@@ -110,9 +106,8 @@ public class collectActivity extends Activity implements OnItemSelectedListener 
 			@Override
 			public void onClick(View arg0) {
 				content1.setCurrentItem(0);
-				siteTv.setTextColor(android.graphics.Color.CYAN);
+				siteTv.setTextColor(android.graphics.Color.argb(250, 53, 138, 115));
 				exerciseTv.setTextColor(android.graphics.Color.BLACK);
-				lineTv.setTextColor(android.graphics.Color.BLACK);
 			}
 		});
 
@@ -122,23 +117,11 @@ public class collectActivity extends Activity implements OnItemSelectedListener 
 			public void onClick(View arg0) {
 				content1.setCurrentItem(1);
 				siteTv.setTextColor(android.graphics.Color.BLACK);
-				exerciseTv.setTextColor(android.graphics.Color.CYAN);
-				lineTv.setTextColor(android.graphics.Color.BLACK);
+				exerciseTv.setTextColor(android.graphics.Color.argb(250, 53, 138, 115));
 
 			}
 		});
 
-		lineTv.setOnClickListener(new View.OnClickListener() {
-
-			@Override
-			public void onClick(View arg0) {
-				content1.setCurrentItem(2);
-				siteTv.setTextColor(android.graphics.Color.BLACK);
-				exerciseTv.setTextColor(android.graphics.Color.BLACK);
-				lineTv.setTextColor(android.graphics.Color.CYAN);
-
-			}
-		});
 
 		// ======================================
 
@@ -157,47 +140,6 @@ public class collectActivity extends Activity implements OnItemSelectedListener 
 				finish();
 			}
 		});
-
-		spDown = (Spinner) findViewById(R.id.spDwon);
-
-		/* 设置数据源 */
-		list = new ArrayList<String>();
-		list.add("全部城市");
-		list.add("北京市");
-		list.add("上海市");
-		list.add("广州市");
-		list.add("深圳市");
-
-		/* 新建适配器 */
-		adapter = new ArrayAdapter<String>(this,
-				android.R.layout.simple_spinner_item, list);
-
-		/* adapter设置一个下拉列表样式，参数为系统子布局 */
-		adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
-
-		/* spDown加载适配器 */
-		spDown.setAdapter(adapter);
-
-		/* soDown的监听器 */
-		spDown.setOnItemSelectedListener(this);
-	}
-
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		getMenuInflater().inflate(R.menu.main, menu);
-		return true;
-	}
-
-	@Override
-	public void onItemSelected(AdapterView<?> parent, View view, int position,
-			long id) {
-		String cityName = adapter.getItem(position); // 获取选中的那一项
-
-	}
-
-	@Override
-	public void onNothingSelected(AdapterView<?> arg0) {
 	}
 
 	/**
@@ -248,18 +190,12 @@ public class collectActivity extends Activity implements OnItemSelectedListener 
 		@Override
 		public void onPageSelected(int arg0) {
 			if (arg0 == 0) {
-				siteTv.setTextColor(android.graphics.Color.CYAN);
+				siteTv.setTextColor(android.graphics.Color.argb(250, 53, 138, 115));
 				exerciseTv.setTextColor(android.graphics.Color.BLACK);
-				lineTv.setTextColor(android.graphics.Color.BLACK);
 
 			} else if (arg0 == 1) {
 				siteTv.setTextColor(android.graphics.Color.BLACK);
-				exerciseTv.setTextColor(android.graphics.Color.CYAN);
-				lineTv.setTextColor(android.graphics.Color.BLACK);
-			} else if (arg0 == 2) {
-				siteTv.setTextColor(android.graphics.Color.BLACK);
-				exerciseTv.setTextColor(android.graphics.Color.BLACK);
-				lineTv.setTextColor(android.graphics.Color.CYAN);
+				exerciseTv.setTextColor(android.graphics.Color.argb(250, 53, 138, 115));
 			}
 		}
 	}

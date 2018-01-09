@@ -15,9 +15,10 @@
             android:id="@+id/appname"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:paddingTop="5dp"
             android:gravity="center"
             android:text="Trabal"
-            android:textSize="20dp"
+            android:textSize="30sp"
             android:textStyle="bold" />
 
         <View
@@ -25,7 +26,7 @@
             android:layout_width="fill_parent"
             android:layout_height="1dp"
             android:layout_below="@id/appname"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:background="#F2F2F2" />
 
         <RelativeLayout
