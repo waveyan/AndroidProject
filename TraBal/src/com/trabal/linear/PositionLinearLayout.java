@@ -103,7 +103,7 @@ public class PositionLinearLayout extends LinearLayout {
 			Picasso.with(context).load(db.getHsb().get(position).getPic1()).centerCrop().fit().into(imageView1);
 			Picasso.with(context).load(db.getHsb().get(position).getPic2()).centerCrop().fit().into(imageView2);
 			Picasso.with(context).load(db.getHsb().get(position).getPic3()).centerCrop().fit().into(imageView3);
-			Picasso.with(context).load(db.getHsb().get(position).getPic2()).centerCrop().fit().into(imageView4);
+			Picasso.with(context).load(db.getHsb().get(position).getPic1()).centerCrop().fit().into(imageView4);
 			
 			view.setOnClickListener(new View.OnClickListener(){
 

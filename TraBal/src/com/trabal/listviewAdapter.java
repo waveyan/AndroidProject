@@ -66,7 +66,7 @@ public class listviewAdapter extends BaseAdapter {
 		Picasso.with(context).load(objects.get(position).getPic1()).centerCrop().fit().into(itemImage1);
 		Picasso.with(context).load(objects.get(position).getPic2()).centerCrop().fit().into(itemImage2);
 		Picasso.with(context).load(objects.get(position).getPic3()).centerCrop().fit().into(itemImage3);
-		Picasso.with(context).load(objects.get(position).getPic2()).centerCrop().fit().into(itemImage4);
+		Picasso.with(context).load(objects.get(position).getPic1()).centerCrop().fit().into(itemImage4);
 		item_textview1.setText(objects.get(position).getName());
 		item_textview2.setText(objects.get(position).getWord());
 		return view;

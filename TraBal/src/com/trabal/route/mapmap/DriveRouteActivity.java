@@ -54,9 +54,9 @@ public class DriveRouteActivity extends Activity implements OnMapClickListener,
 	private final int ROUTE_TYPE_DRIVE = 2;
 	private Intent last_intent;
 	private HotSpotBean start, end;
-	private ArrayList<HotSpotBean> hsb_plan,old_plan;
-	private String hs_ids="";
-	
+	private ArrayList<HotSpotBean> hsb_plan, old_plan;
+	private String hs_ids = "";
+
 	//
 	private Button backButton;
 	private TextView next;
@@ -71,7 +71,8 @@ public class DriveRouteActivity extends Activity implements OnMapClickListener,
 		setContentView(R.layout.route_activity);
 
 		last_intent = this.getIntent();
-		hsb_plan = (ArrayList<HotSpotBean>) last_intent.getSerializableExtra("hsb_plan");
+		hsb_plan = (ArrayList<HotSpotBean>) last_intent
+				.getSerializableExtra("hsb_plan");
 
 		mContext = this.getApplicationContext();
 		mapView = (MapView) findViewById(R.id.route_map);
@@ -80,18 +81,18 @@ public class DriveRouteActivity extends Activity implements OnMapClickListener,
 		point_list = InitPointList();
 
 		init();
-		setfromandtoMarker();
 		searchRouteResult(ROUTE_TYPE_DRIVE, RouteSearch.DrivingDefault);
 	}
 
 	private void setfromandtoMarker() {
-		aMap.addMarker(new MarkerOptions().position(
-				AMapUtil.convertToLatLng(mStartPoint)).title(start.getEnglishName()).snippet(start.getName()).icon(
-				BitmapDescriptorFactory.fromResource(R.drawable.start)));
-		aMap.addMarker(new MarkerOptions().position(
-				AMapUtil.convertToLatLng(mEndPoint)).title(end.getEnglishName()).snippet(end.getName()).icon(
-				BitmapDescriptorFactory.fromResource(R.drawable.end)));
-
+		aMap.addMarker(new MarkerOptions()
+				.position(AMapUtil.convertToLatLng(mStartPoint))
+				.title(start.getEnglishName()).snippet(start.getName())
+				.icon(BitmapDescriptorFactory.fromResource(R.drawable.start)));
+		aMap.addMarker(new MarkerOptions()
+				.position(AMapUtil.convertToLatLng(mEndPoint))
+				.title(end.getEnglishName()).snippet(end.getName())
+				.icon(BitmapDescriptorFactory.fromResource(R.drawable.end)));
 	}
 
 	/**
@@ -107,63 +108,66 @@ public class DriveRouteActivity extends Activity implements OnMapClickListener,
 		mHeadLayout = (RelativeLayout) findViewById(R.id.routemap_header);
 		mRotueTimeDes = (TextView) findViewById(R.id.firstline);
 		mRouteDetailDes = (TextView) findViewById(R.id.secondline);
-		backButton=(Button) this.findViewById(R.id.backButton);
-		next=(TextView) this.findViewById(R.id.next);
-		mHeadLayout.setVisibility(View.VISIBLE);
-		
-		//返回
-		backButton.setOnClickListener(new View.OnClickListener(){
+		backButton = (Button) this.findViewById(R.id.backButton);
+		next = (TextView) this.findViewById(R.id.next);
+		if ("mine".equals(last_intent.getStringExtra("from")))
+			mHeadLayout.setVisibility(View.GONE);
+		else
+			mHeadLayout.setVisibility(View.VISIBLE);
+
+		// 返回
+		backButton.setOnClickListener(new View.OnClickListener() {
 
 			@Override
 			public void onClick(View arg0) {
-				Intent intent = new Intent(DriveRouteActivity.this,RouteplanActivity2.class);
-				intent.putExtra("user", last_intent.getSerializableExtra("user"));
-				DriveRouteActivity.this.startActivity(intent);
+//				Intent intent = new Intent(DriveRouteActivity.this,
+//						RouteplanActivity2.class);
+//				intent.putExtra("user",
+//						last_intent.getSerializableExtra("user"));
+//				DriveRouteActivity.this.startActivity(intent);
+//				DriveRouteActivity.this.finish();
 				DriveRouteActivity.this.finish();
 			}
 		});
-		
-		//下一步
-		next.setOnClickListener(new OnClickListener() {		
+
+		// 下一步
+		next.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View arg0) {
-				Intent intent = new Intent(DriveRouteActivity.this,RouteplanActivity4.class);
-				intent.putExtra("user", last_intent.getSerializableExtra("user"));
+				Intent intent = new Intent(DriveRouteActivity.this,
+						RouteplanActivity4.class);
+				intent.putExtra("user",
+						last_intent.getSerializableExtra("user"));
 				intent.putExtra("hs_ids", hs_ids);
 				DriveRouteActivity.this.startActivity(intent);
 				DriveRouteActivity.this.finish();
 			}
 		});
-		
+
 	}
 
 	@Override
 	public View getInfoContents(Marker arg0) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public View getInfoWindow(Marker arg0) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public void onInfoWindowClick(Marker arg0) {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public boolean onMarkerClick(Marker arg0) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public void onMapClick(LatLng arg0) {
-		// TODO Auto-generated method stub
 
 	}
 
@@ -179,7 +183,7 @@ public class DriveRouteActivity extends Activity implements OnMapClickListener,
 			ToastUtil.show(mContext, "终点未设置！");
 		}
 		showProgressDialog();
-		final RouteSearch.FromAndTo fromAndTo = new RouteSearch.FromAndTo(
+		RouteSearch.FromAndTo fromAndTo = new RouteSearch.FromAndTo(
 				mStartPoint, mEndPoint);
 		if (routeType == ROUTE_TYPE_DRIVE) {// 驾车路径规划
 			DriveRouteQuery query = new DriveRouteQuery(fromAndTo, mode,
@@ -213,8 +217,9 @@ public class DriveRouteActivity extends Activity implements OnMapClickListener,
 					drivingRouteOverlay.addToMap();
 					drivingRouteOverlay.zoomToSpan();
 					mBottomLayout.setVisibility(View.VISIBLE);
-					//途径点信息
+					// 途径点信息
 					addMarkersToMap();
+					
 					int dis = (int) drivePath.getDistance();
 					int dur = (int) drivePath.getDuration();
 					String des = AMapUtil.getFriendlyTime(dur) + "("
@@ -318,25 +323,25 @@ public class DriveRouteActivity extends Activity implements OnMapClickListener,
 	private ArrayList<LatLonPoint> InitPointList() {
 		ArrayList<LatLonPoint> llp_list = new ArrayList<LatLonPoint>();
 		// 起点
-		old_plan=hsb_plan;
+		old_plan = hsb_plan;
 		start = hsb_plan.get(0);
-		//下步提交
-		hs_ids+=start.getId()+";";
+		// 下步提交
+		hs_ids += start.getId() + ";";
 		hsb_plan.remove(0);
-		mStartPoint = new LatLonPoint(Double.parseDouble(start.getLongitude()),
-				Double.parseDouble(start.getLatitude()));
+		mStartPoint = new LatLonPoint(Double.parseDouble(start.getLatitude()),
+				Double.parseDouble(start.getLongitude()));
 		// 终点
 		end = hsb_plan.get(hsb_plan.size() - 1);
 		hsb_plan.remove(hsb_plan.size() - 1);
-		mEndPoint = new LatLonPoint(Double.parseDouble(end.getLongitude()),
-				Double.parseDouble(end.getLatitude()));
+		mEndPoint = new LatLonPoint(Double.parseDouble(end.getLatitude()),
+				Double.parseDouble(end.getLongitude()));
 		for (HotSpotBean hsb : hsb_plan) {
 			LatLonPoint tmp = new LatLonPoint(Double.parseDouble(hsb
-					.getLongitude()), Double.parseDouble(hsb.getLatitude()));
-			hs_ids+=hsb.getId()+";";
+					.getLatitude()), Double.parseDouble(hsb.getLongitude()));
+			hs_ids += hsb.getId() + ";";
 			llp_list.add(tmp);
 		}
-		hs_ids+=end.getId();
+		hs_ids += end.getId();
 		return llp_list;
 	}
 
@@ -351,7 +356,8 @@ public class DriveRouteActivity extends Activity implements OnMapClickListener,
 					.icon(BitmapDescriptorFactory
 							.defaultMarker(BitmapDescriptorFactory.HUE_AZURE))
 					.position(AMapUtil.convertToLatLng(point_list.get(i)))
-					.title(hsb_plan.get(i).getEnglishName()).snippet(hsb_plan.get(i).getName());
+					.title(hsb_plan.get(i).getEnglishName())
+					.snippet(hsb_plan.get(i).getName());
 			aMap.addMarker(markerOption);
 		}
 	}
