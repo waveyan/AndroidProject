@@ -341,7 +341,6 @@ public class MainActivity extends Activity implements OnButtonClickListener {
 						XiaoxiActivity.class);
 				intent.putExtra("user", user);
 				MainActivity.this.startActivity(intent);
-				MainActivity.this.finish();
 
 			}
 		});

@@ -36,7 +36,6 @@ import com.amap.api.services.route.WalkRouteResult;
 import com.trabal.hotspot.Bean.HotSpotBean;
 import com.trabal.route.tools.ToastUtil;
 import com.trabal.route.tools.AMapUtil;
-import com.trabal.routeplan.RouteplanActivity2;
 import com.trabal.routeplan.RouteplanActivity4;
 import com.trabal.R;
 
