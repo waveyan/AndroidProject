@@ -44,7 +44,6 @@ public class LoginActivity extends Activity {
 		
 		initView(this.getIntent());
 
-		imageView = (ImageView) this.findViewById(R.id.back1ID);
 		box = (CheckBox) this.findViewById(R.id.box);
 		box.setOnClickListener(new OnclickListenerImp());
 		imageView.setOnTouchListener(new OnTouchListener() {

@@ -46,6 +46,7 @@
         android:layout_height="wrap_content"
         android:hint="输入你想修改的昵称"
         android:paddingLeft="30dp"
+        android:textColorHint="#ffffff"
         android:textColor="#FCFCFC"
         android:singleLine="true" />
 </LinearLayout>

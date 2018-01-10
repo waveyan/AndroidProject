@@ -8,14 +8,6 @@
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="30dp" >
-
-        <ImageView
-            android:id="@+id/back1ID"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
-            android:src="@drawable/a005" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -39,6 +31,7 @@
         android:hint="  用户名/邮箱"
         android:padding="10dp"
         android:textColorHint="@color/a2"
+        android:digits="qwertyuioplkjhgfdsazxcvbnm0123456789.@"
         android:textSize="15dp"
         android:drawableLeft="@drawable/a087"
         android:singleLine="true" 
@@ -55,6 +48,7 @@
         android:background="@color/a5"
         android:hint=" 密码 ..."
         android:textColorHint="@color/a2"
+        android:digits="qwertyuioplkjhgfdsazxcvbnm0123456789.@"
         android:textSize="15dp" 
         android:password="true"
         android:paddingLeft="10dp"

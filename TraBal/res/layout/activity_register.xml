@@ -33,6 +33,7 @@
         android:layout_height="40dp"
         android:layout_margin="15dp"
         android:background="@color/a5"
+        android:digits="qwertyuioplkjhgfdsazxcvbnm0123456789.@"
         android:drawableLeft="@drawable/a087"
         android:hint="  用户名/邮箱"
         android:padding="5dp"
@@ -51,13 +52,14 @@
             android:layout_height="40dp"
             android:layout_margin="15dp"
             android:background="@color/a5"
+            android:digits="qwertyuioplkjhgfdsazxcvbnm0123456789.@"
             android:drawableLeft="@drawable/a086"
             android:hint=" 密码  ..."
             android:padding="5dp"
             android:password="true"
+            android:singleLine="true"
             android:textColorHint="@color/a2"
-            android:textSize="15dp" 
-            android:singleLine="true" />
+            android:textSize="15dp" />
 
         <CheckBox
             android:id="@+id/box1"
@@ -79,13 +81,14 @@
             android:layout_height="40dp"
             android:layout_margin="15dp"
             android:background="@color/a5"
+            android:digits="qwertyuioplkjhgfdsazxcvbnm0123456789.@"
             android:drawableLeft="@drawable/a086"
             android:hint=" 确认密码  ..."
             android:padding="5dp"
             android:password="true"
+            android:singleLine="true"
             android:textColorHint="@color/a2"
-            android:textSize="15dp" 
-            android:singleLine="true" />
+            android:textSize="15dp" />
 
         <CheckBox
             android:id="@+id/box2"
@@ -111,9 +114,9 @@
             android:gravity="center"
             android:hint="输入验证码..."
             android:padding="5dp"
+            android:singleLine="true"
             android:textColorHint="@color/a2"
-            android:textSize="15dp" 
-            android:singleLine="true" />
+            android:textSize="15dp" />
 
         <ImageView
             android:id="@+id/code2"
