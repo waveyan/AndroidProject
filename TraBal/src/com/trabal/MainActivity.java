@@ -9,11 +9,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-
 import com.squareup.picasso.Picasso;
 import com.trabal.ContentAdapter;
 import com.trabal.ContentModel;
-import com.trabal.hotspot.Bean.CityBean;
 import com.trabal.linear.DynamicLinearLayout;
 import com.trabal.linear.IndexLinearLayout;
 import com.trabal.linear.MoreLinearLayout;
@@ -26,14 +24,11 @@ import com.trabal.linear.luxianActivity;
 import com.trabal.linear.pingjiaActivity;
 import com.trabal.linear.recommendationactivity;
 import com.trabal.routeplan.RouteplanActivity1;
-import com.trabal.routeplan.RouteplanActivity2;
 import com.trabal.search.search;
 import com.trabal.user.Bean.UserBean;
 import com.trabal.util.SharePreferencesTool;
 import com.trabal.util.net.NetTransfer;
 import com.trabal.R;
-import org.apache.http.message.BasicNameValuePair;
-
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
@@ -63,24 +58,10 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
 import com.trabal.MyDialog.OnButtonClickListener;
-import com.trabal.MyDialog;
-import com.trabal.linear.DynamicLinearLayout;
-import com.trabal.linear.IndexLinearLayout;
-import com.trabal.linear.MoreLinearLayout;
-import com.trabal.linear.addactivity;
 import com.trabal.linear.assessactivity;
-import com.trabal.linear.collectActivity;
-import com.trabal.linear.haoyouActivity;
-import com.trabal.linear.huodongActivity;
-import com.trabal.linear.luxianActivity;
-import com.trabal.linear.pingjiaActivity;
-import com.trabal.linear.recommendationactivity;
-import com.trabal.user.Bean.UserBean;
-import com.trabal.util.net.NetTransfer;
 
-public class MainActivity extends Activity implements OnButtonClickListener{
+public class MainActivity extends Activity implements OnButtonClickListener {
 
 	private ArrayList<LinearLayout> linears;
 	private android.support.v4.view.ViewPager content;
@@ -89,22 +70,22 @@ public class MainActivity extends Activity implements OnButtonClickListener{
 	private RelativeLayout rightLayout;
 	private List<ContentModel> list;
 	private ContentAdapter adapter;
-	private ImageButton imageButton,imageButton1,imageButton2;
+	private ImageButton imageButton, imageButton1, imageButton2;
 	private ListView listView;
 	private ImageView p_pic;
 	public UserBean user;
 	Intent last_intent;
-	private MyDialog myDialog;
-    private final int IMAGE_OPEN = 4;
+//	private MyDialog myDialog;
+	private final int IMAGE_OPEN = 4;
 	public static final int PHOTOHRAPH = 1;
 	public static final int NONE = 0;
-    public static final int PHOTOZOOM = 2; // 缩放
-    public static final int PHOTORESOULT = 3;// 结果
-    public static final String IMAGE_UNSPECIFIED = "image/*";
-    private String pathImage="headpic";
-    private TextView district;
-    private String city_name;
-    
+	public static final int PHOTOZOOM = 2; // 缩放
+	public static final int PHOTORESOULT = 3;// 结果
+	public static final String IMAGE_UNSPECIFIED = "image/*";
+	private String pathImage = "headpic";
+	private TextView district;
+	private String city_name;
+
 	@SuppressLint("NewApi")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -113,19 +94,21 @@ public class MainActivity extends Activity implements OnButtonClickListener{
 
 		// 显示用户头像和昵称
 		last_intent = MainActivity.this.getIntent();
-		user = (UserBean) last_intent.getSerializableExtra("user"); 
-		//城市
-		SharePreferencesTool spt=new SharePreferencesTool(MainActivity.this,MODE_PRIVATE);
-		city_name=spt.popOut("city_name");
-		//首次登陆时没有城市跳转
-		if(city_name==null||"".equals(city_name)){
-			Intent intent=new Intent(MainActivity.this,RouteplanActivity1.class);
+		user = (UserBean) last_intent.getSerializableExtra("user");
+		// 城市
+		SharePreferencesTool spt = new SharePreferencesTool(MainActivity.this,
+				MODE_PRIVATE);
+		city_name = spt.popOut("city_name");
+		// 首次登陆时没有城市跳转
+		if (city_name == null || "".equals(city_name)) {
+			Intent intent = new Intent(MainActivity.this,
+					RouteplanActivity1.class);
 			intent.putExtra("user", user);
 			intent.putExtra("from", "main");
 			MainActivity.this.startActivity(intent);
 			MainActivity.this.finish();
 		}
-	
+
 		linears = new ArrayList<LinearLayout>();
 		linears.add(new IndexLinearLayout(MainActivity.this));
 		linears.add(new MoreLinearLayout(MainActivity.this));
@@ -136,32 +119,31 @@ public class MainActivity extends Activity implements OnButtonClickListener{
 		drawerLayout = (DrawerLayout) findViewById(R.id.drawerlayout);
 		rightLayout = (RelativeLayout) findViewById(R.id.right);
 		listView = (ListView) findViewById(R.id.right_listview);
-		
+
 		// 获取内容组件
 		content = (android.support.v4.view.ViewPager) this
 				.findViewById(R.id.content);
 		indexTv = (TextView) this.findViewById(R.id.indexID);
 		moreTv = (TextView) this.findViewById(R.id.moreID);
 		dynamicTv = (TextView) this.findViewById(R.id.dynamicID);
-		//地域
-		district=(TextView)this.findViewById(R.id.district);
+		// 地域
+		district = (TextView) this.findViewById(R.id.district);
 		district.setText(city_name);
 		district.setOnClickListener(new View.OnClickListener() {
-			
+
 			@Override
 			public void onClick(View arg0) {
-				Intent intent=new Intent(MainActivity.this,RouteplanActivity1.class);
+				Intent intent = new Intent(MainActivity.this,
+						RouteplanActivity1.class);
 				intent.putExtra("user", user);
 				intent.putExtra("from", "main");
 				MainActivity.this.startActivity(intent);
 			}
 		});
-		
-		
-		myDialog = new MyDialog(this);
-		myDialog.setOnButtonClickListener(this);
-	
-   
+
+//		myDialog = new MyDialog(this);
+//		myDialog.setOnButtonClickListener(this);
+
 		// 卫星菜单动态实现
 
 		android.view.ext.SatelliteMenu menu = (android.view.ext.SatelliteMenu) this
@@ -174,7 +156,7 @@ public class MainActivity extends Activity implements OnButtonClickListener{
 		menu.setCloseItemsOnClick(true);
 		menu.setTotalSpacingDegree(90);
 		menu.setMainImage(R.drawable.a018);
-		
+
 		List<SatelliteMenuItem> items = new ArrayList<SatelliteMenuItem>();
 		items.add(new SatelliteMenuItem(1, R.drawable.a014));
 		items.add(new SatelliteMenuItem(2, R.drawable.a015));
@@ -191,15 +173,15 @@ public class MainActivity extends Activity implements OnButtonClickListener{
 				case 1:
 					new Thread(new JumpPageThread1()).start();
 					break;
-					
+
 				case 2:
 					new Thread(new JumpPageThread2()).start();
 					break;
-					
+
 				case 3:
 					new Thread(new JumpPageThread3()).start();
 					break;
-					
+
 				case 4:
 					new Thread(new JumpPageThread4()).start();
 					break;
@@ -217,7 +199,7 @@ public class MainActivity extends Activity implements OnButtonClickListener{
 		// 设置内容组件事件处理
 		content.setOnPageChangeListener(new CustomPagerChange());
 
-		//侧拉
+		// 侧拉
 		initData();
 		adapter = new ContentAdapter(this, list);
 		listView.setAdapter(adapter);
@@ -227,19 +209,19 @@ public class MainActivity extends Activity implements OnButtonClickListener{
 			public void onClick(View v) {
 				drawerLayout.openDrawer(Gravity.RIGHT);
 
-
 				// 网络传输获取用户头像和昵称
 				String url = "user/base";
 				NetTransfer nt = new NetTransfer();
 				String data;
 				try {
 					data = NetTransfer.transfer(url, "get", null, true,
-							user.getAccess_token(),null);
+							user.getAccess_token(), null);
 					user = nt.handle_user_data(data, user);
 					// 设置远程头像
 					p_pic = (ImageView) MainActivity.this
 							.findViewById(R.id.p_pic);
-					Picasso.with(MainActivity.this).load(user.getPic()).into(p_pic);
+					Picasso.with(MainActivity.this).load(user.getPic())
+							.into(p_pic);
 					// 设置昵称
 					rightname = (TextView) MainActivity.this
 							.findViewById(R.id.right_name);
@@ -255,7 +237,8 @@ public class MainActivity extends Activity implements OnButtonClickListener{
 			@Override
 			public void onClick(View arg0) {
 				content.setCurrentItem(0);
-				indexTv.setTextColor(android.graphics.Color.argb(250, 53, 138, 115));
+				indexTv.setTextColor(android.graphics.Color.argb(250, 53, 138,
+						115));
 				moreTv.setTextColor(android.graphics.Color.BLACK);
 				dynamicTv.setTextColor(android.graphics.Color.BLACK);
 			}
@@ -267,7 +250,8 @@ public class MainActivity extends Activity implements OnButtonClickListener{
 			public void onClick(View arg0) {
 				content.setCurrentItem(1);
 				indexTv.setTextColor(android.graphics.Color.BLACK);
-				moreTv.setTextColor(android.graphics.Color.argb(250, 53, 138, 115));
+				moreTv.setTextColor(android.graphics.Color.argb(250, 53, 138,
+						115));
 				dynamicTv.setTextColor(android.graphics.Color.BLACK);
 
 			}
@@ -280,21 +264,40 @@ public class MainActivity extends Activity implements OnButtonClickListener{
 				content.setCurrentItem(2);
 				indexTv.setTextColor(android.graphics.Color.BLACK);
 				moreTv.setTextColor(android.graphics.Color.BLACK);
-				dynamicTv.setTextColor(android.graphics.Color.argb(250, 53, 138, 115));
+				dynamicTv.setTextColor(android.graphics.Color.argb(250, 53,
+						138, 115));
 
 			}
 		});
-		
-		//侧拉菜单响应
+
+		// 侧拉菜单响应
 		listView.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
+				
 				switch ((int) id) {
-				case 0:
-					myDialog.show();
-					break;
+//				case 0:
+//					//头像和昵称
+//					ImageView headpic=(ImageView)view.findViewById(R.id.p_pic);
+//					TextView rightname = (TextView) view.findViewById(R.id.right_name);
+//					headpic.setOnClickListener(new View.OnClickListener() {
+//						@Override
+//						public void onClick(View arg0) {
+//							myDialog.show();
+//						}
+//					});
+//					rightname.setOnClickListener(new View.OnClickListener() {
+//						
+//						@Override
+//						public void onClick(View arg0) {
+//							Intent intent=new Intent(MainActivity.this,EditnameActivity.class);
+//							intent.putExtra("user", user);
+//							MainActivity.this.startActivity(intent);
+//						}
+//					});
+//					break;
 				case 1:
 					Intent intent = new Intent(MainActivity.this,
 							pingjiaActivity.class);
@@ -327,42 +330,43 @@ public class MainActivity extends Activity implements OnButtonClickListener{
 					intent4.putExtra("user", user);
 					MainActivity.this.startActivity(intent4);
 					break;
-				
+
 				default:
 					break;
 				}
 				drawerLayout.closeDrawer(Gravity.RIGHT);
 			}
 		});
-		
-		//MessageID
-		imageButton1=(ImageButton)findViewById(R.id.messageID);
+
+		// MessageID
+		imageButton1 = (ImageButton) findViewById(R.id.messageID);
 		imageButton1.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View arg0) {
-				Intent intent=new Intent(MainActivity.this,XiaoxiActivity.class);
+				Intent intent = new Intent(MainActivity.this,
+						XiaoxiActivity.class);
 				intent.putExtra("user", user);
 				MainActivity.this.startActivity(intent);
 				MainActivity.this.finish();
-				
+
 			}
 		});
-		
-		//searchID
-		imageButton2=(ImageButton)findViewById(R.id.searchID);
+
+		// searchID
+		imageButton2 = (ImageButton) findViewById(R.id.searchID);
 		imageButton2.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View arg0) {
-				Intent intent=new Intent(MainActivity.this,search.class);
+				Intent intent = new Intent(MainActivity.this, search.class);
 				intent.putExtra("user", user);
-				MainActivity.this.startActivity(intent);				
+				MainActivity.this.startActivity(intent);
 			}
 		});
 	}
 
-	//侧拉菜单
+	// 侧拉菜单
 	private void initData() {
 		list = new ArrayList<ContentModel>();
 		list.add(new ContentModel(R.drawable.pingjia, "修改头像", 0));
@@ -379,128 +383,127 @@ public class MainActivity extends Activity implements OnButtonClickListener{
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
-	
-	//跳转系统相机
-		@Override
-		    public void camera() {                                                
 
-		        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-		        intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(new File(
-		                Environment.getExternalStorageDirectory(), "temp.jpg")));
-		        startActivityForResult(intent, PHOTOHRAPH);
-		        myDialog.dismiss();
-		    }
-		//跳转系统相册
-		@Override
-		    public void gallery() {                                                
-		        Intent intent = new Intent(Intent.ACTION_PICK,
-		                android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-		        intent.setType("image/*");
-		        startActivityForResult(intent, IMAGE_OPEN);
-		        myDialog.dismiss();
+	// 跳转系统相机
+	@Override
+	public void camera() {
 
-		    }
-		@Override
-		    public void cancel() {
-		        myDialog.cancel();
-		    
-		    
-		    }
-		
-		@Override
-		protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+		intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(new File(
+				Environment.getExternalStorageDirectory(), "temp.jpg")));
+		startActivityForResult(intent, PHOTOHRAPH);
+		adapter.getMyDialog().dismiss();
+	}
 
+	// 跳转系统相册
+	@Override
+	public void gallery() {
+		Intent intent = new Intent(Intent.ACTION_PICK,
+				android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+		intent.setType("image/*");
+		startActivityForResult(intent, IMAGE_OPEN);
+		adapter.getMyDialog().dismiss();
 
+	}
 
-			  super.onActivityResult(requestCode, resultCode, data);
+	@Override
+	public void cancel() {
+		adapter.getMyDialog().cancel();
 
-		        //获取图片路径
-			  if (resultCode == NONE)
-		            return;
-		        // 拍照
-		        if (requestCode == PHOTOHRAPH) {                                     //拍照
-		            // 设置文件保存路径这里放在跟目录下
-		            File picture = new File(Environment.getExternalStorageDirectory()
-		                    + "/temp.jpg");
-		            startImageZoom(Uri.fromFile(picture));
-		          
-		        }
+	}
 
-		        if (data == null)
-		            return;
-		        
-		        
-		        if (requestCode == PHOTORESOULT) {                                  //返回结果
-		            Bundle extras = data.getExtras();                               //获得intent放回的值
-		            if (extras != null) {
-		                Bitmap photo = extras.getParcelable("data");
-		                ByteArrayOutputStream stream = new ByteArrayOutputStream(); //ByteArrayOutputStream 获取内存缓存区的数据
-		                photo.compress(Bitmap.CompressFormat.JPEG, 100, stream);  
-		                HashMap<String, Object> map = new HashMap<String, Object>();
-		                File f1 = MainActivity.compressImage(photo,pathImage);
-		                map.put("pic", f1);
-		                HashMap<String, String> data1 = new HashMap<String, String>();
-		                data1.put("action", "alter");
-		                ((ImageView)findViewById(R.id.p_pic)).setImageBitmap(photo);    //加载图片到头像
-		                String url = "user/base";
-		               try {
-						NetTransfer.upload_pic(url, data1, user.getAccess_token(), map);
-					} catch (FileNotFoundException e) {
-						e.printStackTrace();
-					}
-		                       }
-		                   }
-		        if (resultCode == RESULT_OK && requestCode == IMAGE_OPEN) {           //系统相册打开且选择了照片
-		            startImageZoom(data.getData());                                     
-		        }
-	      super.onActivityResult(requestCode, resultCode, data);   
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
+		super.onActivityResult(requestCode, resultCode, data);
+
+		// 获取图片路径
+		if (resultCode == NONE)
+			return;
+		// 拍照
+		if (requestCode == PHOTOHRAPH) { // 拍照
+			// 设置文件保存路径这里放在跟目录下
+			File picture = new File(Environment.getExternalStorageDirectory()
+					+ "/temp.jpg");
+			startImageZoom(Uri.fromFile(picture));
 
 		}
 
-		public void startImageZoom(Uri uri) {                                                //剪切图片
-	        Intent intent = new Intent("com.android.camera.action.CROP");
-	        intent.setDataAndType(uri, IMAGE_UNSPECIFIED);
-	        Log.e("uri",uri.getPath());
-	      
-	        intent.putExtra("crop", "true");
-	        // aspectX aspectY 是宽高的比例
-	        intent.putExtra("aspectX", 1);
-	        intent.putExtra("aspectY", 1);
-	        // outputX outputY 是裁剪图片宽高
-	        intent.putExtra("outputX", 480);
-	        intent.putExtra("outputY", 480);
-	        intent.putExtra("return-data", true);
-	        
-	        startActivityForResult(intent, PHOTORESOULT);
-	    }
-		
-		
-		 //bitmap转File
-	    public static File compressImage(Bitmap bitmap,String filename) { 
-	        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-	        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);//质量压缩方法，这里100表示不压缩，把压缩后的数据存放到baos中
-	        int options = 100;
-	        while (baos.toByteArray().length / 1024 > 500) {  //循环判断如果压缩后图片是否大于500kb,大于继续压缩
-	            baos.reset();//重置baos即清空baos
-	            options -= 10;//每次都减少10
-	            bitmap.compress(Bitmap.CompressFormat.JPEG, options, baos);//这里压缩options%，把压缩后的数据存放到baos中
-	        }
-	        File file = new File(Environment.getExternalStorageDirectory(),filename+".png");
-	        try {
-	            FileOutputStream fos = new FileOutputStream(file);
-	            try {
-	                fos.write(baos.toByteArray());
-	                fos.flush();
-	                fos.close();
-	            } catch (IOException e) {
-	                e.printStackTrace();
-	            }
-	        } catch (FileNotFoundException e) {
-	            e.printStackTrace();
-	        }
-	        return file;
-	    }
+		if (data == null)
+			return;
+
+		if (requestCode == PHOTORESOULT) { // 返回结果
+			Bundle extras = data.getExtras(); // 获得intent放回的值
+			if (extras != null) {
+				Bitmap photo = extras.getParcelable("data");
+				ByteArrayOutputStream stream = new ByteArrayOutputStream(); // ByteArrayOutputStream
+																			// 获取内存缓存区的数据
+				photo.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+				HashMap<String, Object> map = new HashMap<String, Object>();
+				File f1 = MainActivity.compressImage(photo, pathImage);
+				map.put("pic", f1);
+				HashMap<String, String> data1 = new HashMap<String, String>();
+				data1.put("action", "alter");
+				((ImageView) findViewById(R.id.p_pic)).setImageBitmap(photo); // 加载图片到头像
+				String url = "user/base";
+				try {
+					NetTransfer.upload_pic(url, data1, user.getAccess_token(),
+							map);
+				} catch (FileNotFoundException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		if (resultCode == RESULT_OK && requestCode == IMAGE_OPEN) { // 系统相册打开且选择了照片
+			startImageZoom(data.getData());
+		}
+		super.onActivityResult(requestCode, resultCode, data);
+
+	}
+
+	public void startImageZoom(Uri uri) { // 剪切图片
+		Intent intent = new Intent("com.android.camera.action.CROP");
+		intent.setDataAndType(uri, IMAGE_UNSPECIFIED);
+		Log.e("uri", uri.getPath());
+
+		intent.putExtra("crop", "true");
+		// aspectX aspectY 是宽高的比例
+		intent.putExtra("aspectX", 1);
+		intent.putExtra("aspectY", 1);
+		// outputX outputY 是裁剪图片宽高
+		intent.putExtra("outputX", 480);
+		intent.putExtra("outputY", 480);
+		intent.putExtra("return-data", true);
+
+		startActivityForResult(intent, PHOTORESOULT);
+	}
+
+	// bitmap转File
+	public static File compressImage(Bitmap bitmap, String filename) {
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);// 质量压缩方法，这里100表示不压缩，把压缩后的数据存放到baos中
+		int options = 100;
+		while (baos.toByteArray().length / 1024 > 500) { // 循环判断如果压缩后图片是否大于500kb,大于继续压缩
+			baos.reset();// 重置baos即清空baos
+			options -= 10;// 每次都减少10
+			bitmap.compress(Bitmap.CompressFormat.JPEG, options, baos);// 这里压缩options%，把压缩后的数据存放到baos中
+		}
+		File file = new File(Environment.getExternalStorageDirectory(),
+				filename + ".png");
+		try {
+			FileOutputStream fos = new FileOutputStream(file);
+			try {
+				fos.write(baos.toByteArray());
+				fos.flush();
+				fos.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		return file;
+	}
 
 	/**
 	 * 内容组件适配器
@@ -550,19 +553,22 @@ public class MainActivity extends Activity implements OnButtonClickListener{
 		@Override
 		public void onPageSelected(int arg0) {
 			if (arg0 == 0) {
-				indexTv.setTextColor(android.graphics.Color.argb(250, 53, 138, 115));
+				indexTv.setTextColor(android.graphics.Color.argb(250, 53, 138,
+						115));
 				moreTv.setTextColor(android.graphics.Color.BLACK);
 				dynamicTv.setTextColor(android.graphics.Color.BLACK);
 
 			} else if (arg0 == 1) {
 				indexTv.setTextColor(android.graphics.Color.BLACK);
-				moreTv.setTextColor(android.graphics.Color.argb(250, 53, 138, 115));
+				moreTv.setTextColor(android.graphics.Color.argb(250, 53, 138,
+						115));
 				dynamicTv.setTextColor(android.graphics.Color.BLACK);
 			} else if (arg0 == 2) {
 				indexTv.setTextColor(android.graphics.Color.BLACK);
 				moreTv.setTextColor(android.graphics.Color.BLACK);
-				dynamicTv.setTextColor(android.graphics.Color.argb(250, 53, 138, 115));
-				
+				dynamicTv.setTextColor(android.graphics.Color.argb(250, 53,
+						138, 115));
+
 			}
 		}
 
@@ -586,6 +592,7 @@ public class MainActivity extends Activity implements OnButtonClickListener{
 		}
 
 	}
+
 	// 卫星菜单2 延迟2秒后跳转
 	private class JumpPageThread2 implements Runnable {
 
@@ -597,14 +604,16 @@ public class MainActivity extends Activity implements OnButtonClickListener{
 				ex.printStackTrace();
 			}
 
-			Intent intent = new Intent(MainActivity.this, RouteplanActivity1.class);
+			Intent intent = new Intent(MainActivity.this,
+					RouteplanActivity1.class);
 			intent.putExtra("user", user);
-			
+
 			MainActivity.this.startActivity(intent);
 
 		}
 
 	}
+
 	// 卫星菜单3 延迟2秒后跳转
 	private class JumpPageThread3 implements Runnable {
 
@@ -616,13 +625,15 @@ public class MainActivity extends Activity implements OnButtonClickListener{
 				ex.printStackTrace();
 			}
 
-			Intent intent = new Intent(MainActivity.this, recommendationactivity.class);
+			Intent intent = new Intent(MainActivity.this,
+					recommendationactivity.class);
 			intent.putExtra("user", user);
 			MainActivity.this.startActivity(intent);
 
 		}
 
 	}
+
 	// 卫星菜单4 延迟2秒后跳转
 	private class JumpPageThread4 implements Runnable {
 
@@ -640,6 +651,7 @@ public class MainActivity extends Activity implements OnButtonClickListener{
 		}
 
 	}
+
 	public String getCity_name() {
 		return city_name;
 	}
@@ -647,6 +659,15 @@ public class MainActivity extends Activity implements OnButtonClickListener{
 	public void setCity_name(String city_name) {
 		this.city_name = city_name;
 	}
+
+	public DrawerLayout getDrawerLayout() {
+		return drawerLayout;
+	}
+
+	public void setDrawerLayout(DrawerLayout drawerLayout) {
+		this.drawerLayout = drawerLayout;
+	}
 	
 	
+
 }

@@ -15,6 +15,7 @@ import com.trabal.linear.huodongActivity.MyBaseAdapter;
 import com.trabal.search.search;
 import com.trabal.user.Bean.EvaluationBean;
 import com.trabal.user.Bean.UserBean;
+import com.trabal.util.SharePreferencesTool;
 import com.trabal.util.net.NetTransfer;
 
 import android.app.Activity;
@@ -66,6 +67,8 @@ public class TakeMeToYourHome extends Activity {
 		// 获取上一个页面传过来的用户
 		last_intent = TakeMeToYourHome.this.getIntent();
 		user = (UserBean) last_intent.getSerializableExtra("user");
+		TextView city=(TextView) this.findViewById(R.id.city);
+		city.setText(new SharePreferencesTool(TakeMeToYourHome.this, MODE_PRIVATE).popOut("city_name"));
 
 		backButton = (ImageButton) this.findViewById(R.id.backButton);
 		report = (ImageView) this.findViewById(R.id.report);
