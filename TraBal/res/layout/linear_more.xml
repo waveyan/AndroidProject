@@ -78,9 +78,9 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_alignParentRight="true"
+            android:layout_alignTop="@+id/restauant1ID"
             android:layout_below="@+id/teaID"
             android:layout_marginRight="34dp"
-            android:layout_alignTop="@+id/restauant1ID"
             android:text="茗茶"
             android:textColor="#000000"
             android:textSize="12dp" />
@@ -154,9 +154,9 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_alignParentRight="true"
+            android:layout_alignTop="@+id/shopping1ID"
             android:layout_below="@+id/moreID"
             android:layout_marginRight="33dp"
-            android:layout_alignTop="@+id/shopping1ID"
             android:text="更多"
             android:textColor="#000000"
             android:textSize="12dp" />
@@ -214,17 +214,20 @@
             <ImageView
                 android:id="@+id/caremaID"
                 android:layout_width="160dp"
-                android:layout_height="150dp"
-                android:layout_marginTop="21dp"
-                android:paddingLeft="21dp"
+                android:layout_height="110dp"
+                android:layout_marginTop="30dp"
+                android:paddingLeft="19dp"
+                android:scaleType="fitXY"
                 android:src="@drawable/c001" />
 
             <TextView
                 android:id="@+id/tv1"
                 android:layout_width="141dp"
                 android:layout_height="35dp"
+                android:layout_alignLeft="@+id/caremaID"
+                android:layout_below="@+id/caremaID"
                 android:layout_marginLeft="19dp"
-                android:layout_marginTop="155dp"
+                android:layout_marginTop="2dp"
                 android:background="#EBEBEB"
                 android:text="听说刘烨的妻子在崔各庄办了个摄影展，要不要…"
                 android:textColor="#000000"
@@ -233,18 +236,20 @@
             <ImageView
                 android:id="@+id/christmasID"
                 android:layout_width="145dp"
-                android:layout_height="150dp"
+                android:layout_height="110dp"
+                android:layout_alignTop="@+id/caremaID"
                 android:layout_marginLeft="26dp"
-                android:layout_marginTop="21dp"
                 android:layout_toRightOf="@+id/caremaID"
+                android:scaleType="fitXY"
                 android:src="@drawable/c003" />
 
             <TextView
                 android:id="@+id/tv2"
                 android:layout_width="145dp"
                 android:layout_height="35dp"
+                android:layout_below="@+id/christmasID"
                 android:layout_marginLeft="26dp"
-                android:layout_marginTop="155dp"
+                android:layout_marginTop="2dp"
                 android:layout_toRightOf="@id/tv1"
                 android:background="#EBEBEB"
                 android:text="听说刘烨的妻子在崔各庄办了个摄影展，要不要…"
@@ -254,17 +259,20 @@
             <ImageView
                 android:id="@+id/paintID"
                 android:layout_width="160dp"
-                android:layout_height="150dp"
-                android:layout_marginTop="190dp"
-                android:paddingLeft="21dp"
+                android:layout_height="110dp"
+                android:layout_below="@+id/tv1"
+                android:layout_marginTop="22dp"
+                android:paddingLeft="19dp"
+                android:scaleType="fitXY"
                 android:src="@drawable/c002" />
 
             <TextView
                 android:id="@+id/tv3"
                 android:layout_width="141dp"
                 android:layout_height="35dp"
+                android:layout_below="@+id/paintID"
                 android:layout_marginLeft="19dp"
-                android:layout_marginTop="320dp"
+                android:layout_marginTop="2dp"
                 android:background="#EBEBEB"
                 android:text="听说刘烨的妻子在崔各庄办了个摄影展，要不要…"
                 android:textColor="#000000"
@@ -273,18 +281,20 @@
             <ImageView
                 android:id="@+id/houseID"
                 android:layout_width="145dp"
-                android:layout_height="150dp"
+                android:layout_height="110dp"
+                android:layout_alignTop="@+id/paintID"
                 android:layout_marginLeft="26dp"
-                android:layout_marginTop="190dp"
                 android:layout_toRightOf="@+id/paintID"
+                android:scaleType="fitXY"
                 android:src="@drawable/c004" />
 
             <TextView
                 android:id="@+id/tv4"
                 android:layout_width="145dp"
                 android:layout_height="35dp"
+                android:layout_below="@+id/houseID"
                 android:layout_marginLeft="26dp"
-                android:layout_marginTop="320dp"
+                android:layout_marginTop="2dp"
                 android:layout_toRightOf="@id/tv3"
                 android:background="#EBEBEB"
                 android:text="听说刘烨的妻子在崔各庄办了个摄影展，要不要…"
