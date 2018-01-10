@@ -50,7 +50,7 @@ public class TakeMeToYourHome extends Activity {
 
 	private Intent last_intent;
 
-	private String from;
+//	private String from;
 
 	private ArrayList<ActivityBean> ab_list;
 
@@ -310,8 +310,8 @@ public class TakeMeToYourHome extends Activity {
 					intent.putExtra("ab", ab_list.get(position));
 					intent.putExtra("user", TakeMeToYourHome.this.user);
 					intent.putExtra("hsb", hsb);
-					intent.putExtra("from", "take");
-					intent.putExtra("last_from", from);
+//					intent.putExtra("from", "take");
+//					intent.putExtra("last_from", from);
 					TakeMeToYourHome.this.startActivity(intent);
 				}
 			});
@@ -396,10 +396,43 @@ public class TakeMeToYourHome extends Activity {
 					.findViewById(R.id.pjxqy_head9);
 			ImageView imageView9 = (ImageView) view
 					.findViewById(R.id.pjxqy_head10);
-
+			
+			//用户头像
 			Picasso.with(TakeMeToYourHome.this)
 					.load(eb_list.get(position).getUser().getPic())
 					.centerCrop().fit().into(imageView1);
+			//用户头像
+			imageView1.setOnClickListener(new View.OnClickListener() {
+				
+				@Override
+				public void onClick(View arg0) {
+					Intent intent=new Intent(TakeMeToYourHome.this,pingjiaActivity.class);
+//					intent.putExtra("from", "district");
+					if(eb_list.get(position).getUser().getTelephone().equals(user.getTelephone())){
+						intent.putExtra("flag", "mine");
+						String evaluation_url = "evaluation/base";
+						ArrayList<BasicNameValuePair> params1 = new ArrayList<BasicNameValuePair>();
+						params1.add(new BasicNameValuePair("action",
+								"person"));
+						try {
+							String evaluation = NetTransfer.transfer(
+									evaluation_url, "get", params1, true,
+									user.getAccess_token(), null);
+							ArrayList<EvaluationBean> myAssess = new NetTransfer()
+									.handle_eb_list(evaluation);
+							intent.putExtra("myAssess", myAssess);
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+					}
+					else{
+						intent.putExtra("person",eb_list.get(position).getUser());
+					}
+					intent.putExtra("user", user);
+					TakeMeToYourHome.this.startActivity(intent);
+					
+				}
+			});
 			
 			
 			// 动态图片

@@ -28,7 +28,9 @@
             android:layout_toRightOf="@id/leftarrow2ID"
             android:background="#FFFFFF"
             android:hint="搜索好去处"
-            android:textSize="15dp" />
+            android:textSize="15dp" 
+            android:imeOptions="actionSearch"
+            android:singleLine="true"/>
     </RelativeLayout>
 
     <ListView

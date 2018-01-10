@@ -56,11 +56,11 @@ public class listviewAdapter extends BaseAdapter {
 				Intent intent = new Intent(listviewAdapter.this.context, TakeMeToYourHome.class);
 				UserBean user = (UserBean) last_intent.getSerializableExtra("user");
 				intent.putExtra("user", user);
-				String what= last_intent.getStringExtra("what");
-				intent.putExtra("what", last_intent.getStringExtra("what"));
+//				String what= last_intent.getStringExtra("what");
+//				intent.putExtra("what", last_intent.getStringExtra("what"));
 				intent.putExtra("hsb",objects.get(position));
 				context.startActivity(intent);
-				((Activity)context).finish();
+//				((Activity)context).finish();
 			}
 		});
 		Picasso.with(context).load(objects.get(position).getPic1()).centerCrop().fit().into(itemImage1);

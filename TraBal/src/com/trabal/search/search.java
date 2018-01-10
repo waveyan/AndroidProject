@@ -106,7 +106,7 @@ public class search extends Activity {
 						params.add(new BasicNameValuePair("key", key));
 						try {
 							data = NetTransfer.transfer(url, "get", params, true,
-									"af17a6d2be6676b4cf53b3ae81796fa6", null);
+									user.getAccess_token(), null);
 							us_list=new NetTransfer().handle_usr_list(data);
 							ca.notifyDataSetChanged();
 						} catch (IOException e) {

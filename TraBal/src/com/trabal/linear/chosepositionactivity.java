@@ -3,16 +3,23 @@ package com.trabal.linear;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import org.apache.http.message.BasicNameValuePair;
+
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -24,6 +31,7 @@ import com.trabal.activity.Bean.ActivityBean;
 import com.trabal.hotspot.Bean.HotSpotBean;
 import com.trabal.linear.DynamicLinearLayout.MyBaseAdapter;
 import com.trabal.linear.FansLinearLayout.CustomAdapter;
+import com.trabal.search.search;
 import com.trabal.user.Bean.EvaluationBean;
 import com.trabal.user.Bean.UserBean;
 import com.trabal.util.net.NetTransfer;
@@ -36,6 +44,7 @@ public class chosepositionactivity extends Activity {
 	private UserBean user;
 	private  ArrayList<HotSpotBean> hs_list;
 	private BaseAdapter ba;
+	private EditText edit;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -62,11 +71,7 @@ public class chosepositionactivity extends Activity {
 
 			@Override
 			public void onClick(View arg0) {
-				
-				Intent intent = new Intent(chosepositionactivity.this,
-						assessactivity.class);
-				intent.putExtra("user", user);
-				startActivity(intent);
+				chosepositionactivity.this.finish();
 			}
 		});
 
@@ -74,6 +79,44 @@ public class chosepositionactivity extends Activity {
 
 		ba = new CustomAdapter();
 		listView.setAdapter(ba);
+		
+		//  ‰»ÎøÚ
+		edit = (EditText) this.findViewById(R.id.ed2ID);
+		edit.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+
+			@Override
+			public boolean onEditorAction(TextView arg0, int arg1, KeyEvent arg2) {
+				if ((arg1 == EditorInfo.IME_ACTION_SEARCH)) {
+					// œ»“˛≤ÿº¸≈Ã
+					((InputMethodManager) edit.getContext().getSystemService(
+							Context.INPUT_METHOD_SERVICE))
+							.hideSoftInputFromWindow(chosepositionactivity.this
+									.getCurrentFocus().getWindowToken(),
+									InputMethodManager.HIDE_NOT_ALWAYS);
+
+					String key = edit.getText().toString().trim();
+					String url;
+					ArrayList<BasicNameValuePair> params = new ArrayList<BasicNameValuePair>();
+					if("".equals(key)){
+						url="hotspot/base";
+						params=null;
+					}else{
+						url = "hotspot/search";
+						params.add(new BasicNameValuePair("key", key));
+					}
+						try {
+							String data = NetTransfer.transfer(url, "get", params, true,
+									user.getAccess_token(), null);
+							hs_list=new NetTransfer().handle_hs_list(data);
+							ba.notifyDataSetChanged();
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+					return true;
+				}
+				return false;
+			}
+		});
 
 	}
 

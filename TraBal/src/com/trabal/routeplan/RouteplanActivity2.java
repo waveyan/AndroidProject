@@ -8,6 +8,7 @@ import org.apache.http.message.BasicNameValuePair;
 import com.squareup.picasso.Picasso;
 import com.trabal.MainActivity;
 import com.trabal.R;
+import com.trabal.listviewAdapter;
 import com.trabal.activity.Bean.ActivityBean;
 import com.trabal.linear.IndexLinearLayout;
 import com.trabal.linear.SYxqyActivity;
@@ -178,6 +179,19 @@ public class RouteplanActivity2 extends Activity {
 			Picasso.with(RouteplanActivity2.this)
 					.load(hsb_list.get(position).getPic1()).centerCrop().fit()
 					.into(imageView);
+			//地点图像点击到takemetoyourhome
+			imageView.setOnClickListener(new View.OnClickListener() {
+				
+				@Override
+				public void onClick(View arg0) {
+					Intent last_intent = ((Activity)(RouteplanActivity2.this)).getIntent();
+					Intent intent = new Intent(RouteplanActivity2.this, TakeMeToYourHome.class);
+					UserBean user = (UserBean) last_intent.getSerializableExtra("user");
+					intent.putExtra("user", user);
+					intent.putExtra("hsb",hsb_list.get(position));
+					RouteplanActivity2.this.startActivity(intent);
+				}
+			});
 
 			final Button btn = (Button) view.findViewById(R.id.addButton);
 			// 防止滚动刷新

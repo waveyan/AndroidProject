@@ -134,18 +134,6 @@ public class assessactivity extends Activity implements OnButtonClickListener,
 		 TextView_result.setText(didian);
 		
 		
-		
-
-//		rate.setOnRatingBarChangeListener(new OnRatingBarChangeListener() {
-//			
-//			@Override
-//			public void onRatingChanged(RatingBar arg0, float arg1, boolean arg2) {
-//				// TODO Auto-generated method stub
-//				
-//			}
-//		})
-		
-		
 		//Ñ¡ÔñµØµã
 		button.setOnClickListener(new View.OnClickListener() {
 

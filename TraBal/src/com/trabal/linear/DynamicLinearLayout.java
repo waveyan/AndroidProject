@@ -61,6 +61,16 @@ public class DynamicLinearLayout extends LinearLayout {
 		// 获取上一个页面传过来的用户
 		last_intent = ((Activity) context).getIntent();
 		user = (UserBean) last_intent.getSerializableExtra("user");
+		// 获取数据
+		String url = "evaluation/get_evaluation_from_my_follow";
+		NetTransfer nt = new NetTransfer();
+		try {
+			String data = NetTransfer.transfer(url, "get", null, true,
+					user.getAccess_token(), null);
+			eb_list = nt.handle_eb_list(data);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 
 		mlistView = (ListView) view.findViewById(R.id.dynamic_listview);
 
@@ -74,16 +84,6 @@ public class DynamicLinearLayout extends LinearLayout {
 	class MyBaseAdapter extends BaseAdapter {
 
 		public MyBaseAdapter() {
-			// 获取数据
-			String url = "evaluation/get_evaluation_from_my_follow";
-			NetTransfer nt = new NetTransfer();
-			try {
-				String data = NetTransfer.transfer(url, "get", null, true,
-						user.getAccess_token(), null);
-				eb_list = nt.handle_eb_list(data);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
 
 		}
 
@@ -184,7 +184,7 @@ public class DynamicLinearLayout extends LinearLayout {
 					&& !("".equals(eb_list.get(position).getPic3())))
 				list.add(eb_list.get(position).getPic3());
 			if (list.size() == 0)
-				gv.setVisibility(View.INVISIBLE);
+				gv.setVisibility(View.GONE);
 			else if (list.size() == 1)
 				gv.setNumColumns(1);
 			else if (list.size() == 2)

@@ -28,7 +28,7 @@ public class MapOptionActivity extends FragmentActivity {
 		super.onCreate(savedInstanceState);
 		
 		db=(DistrictBean) this.getIntent().getSerializableExtra("db");
-		position= new CameraPosition(new LatLng(Float.parseFloat(db.getLatitude()),Float.parseFloat(db.getLongitude())),(float)14.0,(float)2.0,(float)2.0);
+		position= new CameraPosition(new LatLng(Float.parseFloat(db.getLatitude()),Float.parseFloat(db.getLongitude())),(float)15.0,(float)2.0,(float)2.0);
 		init();
 	}
 

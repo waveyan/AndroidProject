@@ -45,7 +45,7 @@ public class HdxiangqingActivity extends Activity {
 	private ImageButton favour;
 
 	private RelativeLayout hd_hotspot;
-	String from;
+//	String from;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +55,7 @@ public class HdxiangqingActivity extends Activity {
 		last_intent = HdxiangqingActivity.this.getIntent();
 		user = (UserBean) last_intent.getSerializableExtra("user");
 		ab = (ActivityBean) last_intent.getSerializableExtra("ab");
-		from = last_intent.getStringExtra("from");
+//		from = last_intent.getStringExtra("from");
 		// 填充数据
 		init_view();
 
@@ -148,11 +148,11 @@ public class HdxiangqingActivity extends Activity {
 		Picasso.with(HdxiangqingActivity.this).load(ab.getPic4()).centerCrop()
 				.fit().into(pic4);
 
-		if ("take".equals(from)) {
-			View hs = this.findViewById(R.id.hd_hotspot);
-			hs.setVisibility(View.GONE);
-		}
-		else {
+//		if ("take".equals(from)) {
+//			View hs = this.findViewById(R.id.hd_hotspot);
+//			hs.setVisibility(View.GONE);
+//		}
+//		else {
 
 			try {
 				if (ab.getHsb() != null) {
@@ -193,7 +193,7 @@ public class HdxiangqingActivity extends Activity {
 			} catch (Exception e) {
 				// Log.e("hdxiangqing",e.getMessage());
 			}
-		}
+//		}
 
 		// 想去的人
 		load_whowanttogo(ab.getWho_want_to_go());
@@ -213,7 +213,7 @@ public class HdxiangqingActivity extends Activity {
 						TakeMeToYourHome.class);
 				intent.putExtra("user", user);
 				intent.putExtra("from", "hdxiangqing");
-				intent.putExtra("last_from", from);
+//				intent.putExtra("last_from", from);
 				intent.putExtra("hsb", ab.getHsb());
 				intent.putExtra("ab", ab);
 				HdxiangqingActivity.this.startActivity(intent);
