@@ -139,9 +139,9 @@ public class search extends Activity {
 
 			@Override
 			public void onClick(View arg0) {
-				Intent intent = new Intent(search.this, MainActivity.class);
-				intent.putExtra("user", user);
-				search.this.startActivity(intent);
+//				Intent intent = new Intent(search.this, MainActivity.class);
+//				intent.putExtra("user", user);
+//				search.this.startActivity(intent);
 				finish();
 			}
 		});
@@ -187,7 +187,7 @@ public class search extends Activity {
 						Intent intent = new Intent(search.this, TakeMeToYourHome.class);
 						intent.putExtra("user", user);
 						intent.putExtra("hsb", (HotSpotBean)(us_list.get(position)));
-						intent.putExtra("from", "search");
+//						intent.putExtra("from", "search");
 						search.this.startActivity(intent);
 					}
 				});
@@ -233,7 +233,7 @@ public class search extends Activity {
 						else{
 							intent.putExtra("person",(UserBean)(us_list.get(position)));
 						}
-						intent.putExtra("from", "search");
+//						intent.putExtra("from", "search");
 						intent.putExtra("user", user);
 						search.this.startActivity(intent);
 					}

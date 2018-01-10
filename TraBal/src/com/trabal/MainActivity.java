@@ -215,18 +215,18 @@ public class MainActivity extends Activity implements OnButtonClickListener{
 		// 设置适配器
 		content.setAdapter(new CustomPager());
 		// 设置当前页面
-		if("more".equals(last_intent.getStringExtra("from"))){
-			indexTv.setTextColor(android.graphics.Color.BLACK);
-			moreTv.setTextColor(android.graphics.Color.argb(250, 53, 138, 115));
-			dynamicTv.setTextColor(android.graphics.Color.BLACK);
-			content.setCurrentItem(1);
-		}
-		else{
-			indexTv.setTextColor(android.graphics.Color.argb(250, 53, 138, 115));
-			moreTv.setTextColor(android.graphics.Color.BLACK);
-			dynamicTv.setTextColor(android.graphics.Color.BLACK);
-			content.setCurrentItem(0);
-		}
+//		if("more".equals(last_intent.getStringExtra("from"))){
+//			indexTv.setTextColor(android.graphics.Color.BLACK);
+//			moreTv.setTextColor(android.graphics.Color.argb(250, 53, 138, 115));
+//			dynamicTv.setTextColor(android.graphics.Color.BLACK);
+//			content.setCurrentItem(1);
+//		}
+//		else{
+//			indexTv.setTextColor(android.graphics.Color.argb(250, 53, 138, 115));
+//			moreTv.setTextColor(android.graphics.Color.BLACK);
+//			dynamicTv.setTextColor(android.graphics.Color.BLACK);
+//			content.setCurrentItem(0);
+//		}
 		// 设置内容组件事件处理
 		content.setOnPageChangeListener(new CustomPagerChange());
 
@@ -320,7 +320,7 @@ public class MainActivity extends Activity implements OnButtonClickListener{
 					Intent intent1 = new Intent(MainActivity.this,
 							collectActivity.class);
 					intent1.putExtra("user", user);
-					intent1.putExtra("from", "main");
+//					intent1.putExtra("from", "main");
 					MainActivity.this.startActivity(intent1);
 //					MainActivity.this.finish();
 					break;

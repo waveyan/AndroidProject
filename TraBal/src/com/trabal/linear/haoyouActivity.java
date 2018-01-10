@@ -104,9 +104,9 @@ public class haoyouActivity extends Activity {
 			
 			@Override
 			public void onClick(View arg0) {
-				Intent intent = new Intent(haoyouActivity.this,MainActivity.class);
-				intent.putExtra("user", user);
-				haoyouActivity.this.startActivity(intent);
+//				Intent intent = new Intent(haoyouActivity.this,MainActivity.class);
+//				intent.putExtra("user", user);
+//				haoyouActivity.this.startActivity(intent);
 				finish();
 			}
 		});

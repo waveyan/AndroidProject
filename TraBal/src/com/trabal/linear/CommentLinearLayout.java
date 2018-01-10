@@ -26,6 +26,7 @@ import com.trabal.R;
 import com.trabal.activity.Bean.ActivityBean;
 import com.trabal.hotspot.Bean.DistrictBean;
 import com.trabal.linear.PositionLinearLayout.MyBaseAdapter;
+import com.trabal.route.mapmap.MapOptionActivity;
 import com.trabal.user.Bean.EvaluationBean;
 import com.trabal.user.Bean.UserBean;
 import com.trabal.util.net.NetTransfer;
@@ -90,6 +91,17 @@ public class CommentLinearLayout extends LinearLayout {
 		TextView syxqy_text=(TextView) headerView.findViewById(R.id.syxqy_text1);
 		Picasso.with(context).load(db.getPic()).centerCrop().fit().into(pic);
 		syxqy_text.setText(db.getIntroduction());
+		//…Ã»¶µÿÕº
+		TextView map=(TextView) headerView.findViewById(R.id.syxqy_maptext);
+		map.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				Intent intent=new Intent(CommentLinearLayout.this.context,MapOptionActivity.class);
+				intent.putExtra("db", db);
+				CommentLinearLayout.this.context.startActivity(intent);
+			}
+		});
 		return headerView;
 		
 	}
@@ -151,6 +163,7 @@ public class CommentLinearLayout extends LinearLayout {
 				@Override
 				public void onClick(View arg0) {
 					Intent intent=new Intent(CommentLinearLayout.this.context,pingjiaActivity.class);
+//					intent.putExtra("from", "district");
 					if(eb_list.get(position).getUser().getTelephone().equals(user.getTelephone())){
 						intent.putExtra("flag", "mine");
 						String evaluation_url = "evaluation/base";

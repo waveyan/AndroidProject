@@ -66,7 +66,7 @@ public class TakeMeToYourHome extends Activity {
 		// 获取上一个页面传过来的用户
 		last_intent = TakeMeToYourHome.this.getIntent();
 		user = (UserBean) last_intent.getSerializableExtra("user");
-		from = last_intent.getStringExtra("from");
+//		from = last_intent.getStringExtra("from");
 
 		backButton = (ImageButton) this.findViewById(R.id.backButton);
 		report = (ImageView) this.findViewById(R.id.report);
@@ -93,40 +93,40 @@ public class TakeMeToYourHome extends Activity {
 
 			@Override
 			public void onClick(View arg0) {
-				Intent intent;
-				if ("collect".equals(from)) {
-					intent = new Intent(TakeMeToYourHome.this,
-							collectActivity.class);
-				} else if ("hdxiangqing".equals(from)) {
-					intent = new Intent(TakeMeToYourHome.this,
-							HdxiangqingActivity.class);
-					intent.putExtra("ab",
-							last_intent.getSerializableExtra("ab"));
-					intent.putExtra("from",
-							last_intent.getSerializableExtra("last_from"));
-				} else if ("index".equals(from)) {
-					intent = new Intent(TakeMeToYourHome.this,
-							MainActivity.class);
-					intent.putExtra("from", "index");
-				} else if ("syxqy".equals(from)) {
-					intent = new Intent(TakeMeToYourHome.this,
-							SYxqyActivity.class);
-					intent.putExtra("from", "syxqy");
-					intent.putExtra("db",
-							last_intent.getSerializableExtra("db"));
-					intent.putExtra("user", user);
-				} else if("search".equals(from)){
-					intent = new Intent(TakeMeToYourHome.this,
-							search.class);
-				}
-				else {
-					intent = new Intent(TakeMeToYourHome.this,
-							RestaurantActivity.class);
-					String what = last_intent.getStringExtra("what");
-					intent.putExtra("what", last_intent.getStringExtra("what"));
-				}
-				intent.putExtra("user", user);
-				TakeMeToYourHome.this.startActivity(intent);
+//				Intent intent;
+//				if ("collect".equals(from)) {
+//					intent = new Intent(TakeMeToYourHome.this,
+//							collectActivity.class);
+//				} else if ("hdxiangqing".equals(from)) {
+//					intent = new Intent(TakeMeToYourHome.this,
+//							HdxiangqingActivity.class);
+//					intent.putExtra("ab",
+//							last_intent.getSerializableExtra("ab"));
+//					intent.putExtra("from",
+//							last_intent.getSerializableExtra("last_from"));
+//				} else if ("index".equals(from)) {
+//					intent = new Intent(TakeMeToYourHome.this,
+//							MainActivity.class);
+//					intent.putExtra("from", "index");
+//				} else if ("syxqy".equals(from)) {
+//					intent = new Intent(TakeMeToYourHome.this,
+//							SYxqyActivity.class);
+//					intent.putExtra("from", "syxqy");
+//					intent.putExtra("db",
+//							last_intent.getSerializableExtra("db"));
+//					intent.putExtra("user", user);
+//				} else if("search".equals(from)){
+//					intent = new Intent(TakeMeToYourHome.this,
+//							search.class);
+//				}
+//				else {
+//					intent = new Intent(TakeMeToYourHome.this,
+//							RestaurantActivity.class);
+//					String what = last_intent.getStringExtra("what");
+//					intent.putExtra("what", last_intent.getStringExtra("what"));
+//				}
+//				intent.putExtra("user", user);
+//				TakeMeToYourHome.this.startActivity(intent);
 				TakeMeToYourHome.this.finish();
 			}
 		});

@@ -89,9 +89,10 @@ public class SYxqyActivity extends Activity {
 			
 			@Override
 			public void onClick(View arg0) {
-				Intent intent = new Intent(SYxqyActivity.this,MainActivity.class);
-				intent.putExtra("user", user);
-				SYxqyActivity.this.startActivity(intent);
+//				Intent intent = new Intent(SYxqyActivity.this,MainActivity.class);
+//				intent.putExtra("user", user);
+//				SYxqyActivity.this.startActivity(intent);
+				SYxqyActivity.this.finish();
 			}
 		});
 

@@ -37,10 +37,10 @@ public class placeactivity extends Activity {
 
 			@Override
 			public void onClick(View arg0) {
-				Intent intent = new Intent(placeactivity.this,
-						addactivity.class);
-				intent.putExtra("user", user);
-				startActivity(intent);
+//				Intent intent = new Intent(placeactivity.this,
+//						addactivity.class);
+//				intent.putExtra("user", user);
+//				startActivity(intent);
 				finish();
 			}
 		});

@@ -116,12 +116,13 @@ public class assessactivity extends Activity implements OnButtonClickListener,
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Intent last_intent = assessactivity.this.getIntent();
-				user = (UserBean) last_intent.getSerializableExtra("user");
-				Intent intent = new Intent(assessactivity.this,
-						MainActivity.class);
-				intent.putExtra("user", user);
-				assessactivity.this.startActivity(intent);
+//				Intent last_intent = assessactivity.this.getIntent();
+//				user = (UserBean) last_intent.getSerializableExtra("user");
+//				Intent intent = new Intent(assessactivity.this,
+//						MainActivity.class);
+//				intent.putExtra("user", user);
+//				assessactivity.this.startActivity(intent);
+				assessactivity.this.finish();
 
 			}
 		});
@@ -478,7 +479,6 @@ public class assessactivity extends Activity implements OnButtonClickListener,
 				NetTransfer.upload_pic(url,assess, user.getAccess_token(), temp);
 			
 			} catch (Exception e) {
-				// TODO: handle exception
 				e.printStackTrace();
 			}
 			Intent intent = new Intent(assessactivity.this,MainActivity.class);

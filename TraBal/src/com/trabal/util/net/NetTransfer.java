@@ -333,6 +333,8 @@ public class NetTransfer {
 			db.setIntroduction(json.getString("introduction"));
 			db.setName(json.getString("name"));
 			db.setPic(this.media_perfix + json.getString("pic"));
+			db.setLongitude(json.getString("longitude"));
+			db.setLatitude(json.getString("latitude"));
 			try {
 				db.setHsb(handle_hs_list(json.getString("hotspot")));
 			} catch (Exception e) {

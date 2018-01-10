@@ -76,10 +76,10 @@ public class RouteplanActivity2 extends Activity {
 		button.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View arg0) {
-				Intent intent = new Intent(RouteplanActivity2.this,
-						RouteplanActivity1.class);
-				intent.putExtra("user", user);
-				RouteplanActivity2.this.startActivity(intent);
+//				Intent intent = new Intent(RouteplanActivity2.this,
+//						RouteplanActivity1.class);
+//				intent.putExtra("user", user);
+//				RouteplanActivity2.this.startActivity(intent);
 				finish();
 			}
 		});

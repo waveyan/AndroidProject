@@ -36,9 +36,9 @@ public class XiaoxiActivity extends Activity{
 
 			@Override
 			public void onClick(View arg0) {
-				Intent intent=new Intent(XiaoxiActivity.this,MainActivity.class);
-				intent.putExtra("user", user);
-				XiaoxiActivity.this.startActivity(intent);
+//				Intent intent=new Intent(XiaoxiActivity.this,MainActivity.class);
+//				intent.putExtra("user", user);
+//				XiaoxiActivity.this.startActivity(intent);
 				finish();
 			}
 		});

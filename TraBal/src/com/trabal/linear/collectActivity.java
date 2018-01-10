@@ -88,16 +88,16 @@ public class collectActivity extends Activity {
 		// 设置适配器
 		content1.setAdapter(new CustomPager());
 		// 设置当前页面-----活动详情返回
-		if("collect_exercise".equals(last_intent.getStringExtra("from"))){
-			siteTv.setTextColor(android.graphics.Color.BLACK);
-			exerciseTv.setTextColor(android.graphics.Color.argb(250, 53, 138, 115));
-			content1.setCurrentItem(1);
-		}
-		else{
-			siteTv.setTextColor(android.graphics.Color.argb(250, 53, 138, 115));
-			exerciseTv.setTextColor(android.graphics.Color.BLACK);
-			content1.setCurrentItem(0);
-		}
+//		if("collect_exercise".equals(last_intent.getStringExtra("from"))){
+//			siteTv.setTextColor(android.graphics.Color.BLACK);
+//			exerciseTv.setTextColor(android.graphics.Color.argb(250, 53, 138, 115));
+//			content1.setCurrentItem(1);
+//		}
+//		else{
+//			siteTv.setTextColor(android.graphics.Color.argb(250, 53, 138, 115));
+//			exerciseTv.setTextColor(android.graphics.Color.BLACK);
+//			content1.setCurrentItem(0);
+//		}
 		// 设置内容组件事件处理
 		content1.setOnPageChangeListener(new CustomPagerChange());
 
@@ -133,10 +133,10 @@ public class collectActivity extends Activity {
 			@Override
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
-				Intent intent = new Intent(collectActivity.this,
-						MainActivity.class);
-				intent.putExtra("user", user);
-				collectActivity.this.startActivity(intent);
+//				Intent intent = new Intent(collectActivity.this,
+//						MainActivity.class);
+//				intent.putExtra("user", user);
+//				collectActivity.this.startActivity(intent);
 				finish();
 			}
 		});

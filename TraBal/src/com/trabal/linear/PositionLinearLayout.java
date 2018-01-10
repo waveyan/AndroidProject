@@ -23,6 +23,7 @@ import com.trabal.R;
 import com.trabal.activity.Bean.ActivityBean;
 import com.trabal.hotspot.Bean.DistrictBean;
 import com.trabal.linear.SiteLinearLayout.MyBaseAdapter;
+import com.trabal.route.mapmap.MapOptionActivity;
 import com.trabal.user.Bean.UserBean;
 
 public class PositionLinearLayout extends LinearLayout {
@@ -70,6 +71,17 @@ public class PositionLinearLayout extends LinearLayout {
 		TextView syxqy_text=(TextView) headerView.findViewById(R.id.syxqy_text1);
 		Picasso.with(context).load(db.getPic()).centerCrop().fit().into(pic);
 		syxqy_text.setText(db.getIntroduction());
+		//…Ã»¶µÿÕº
+		TextView map=(TextView) headerView.findViewById(R.id.syxqy_maptext);
+		map.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				Intent intent=new Intent(PositionLinearLayout.this.context,MapOptionActivity.class);
+				intent.putExtra("db", db);
+				PositionLinearLayout.this.context.startActivity(intent);
+			}
+		});
 		return headerView;
 		
 	}

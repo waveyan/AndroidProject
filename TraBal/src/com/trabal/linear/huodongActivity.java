@@ -69,11 +69,10 @@ public class huodongActivity extends Activity {
 			
 			@Override
 			public void onClick(View arg0) {
-				// TODO Auto-generated method stub
-				Intent intent = new Intent(huodongActivity.this,
-						MainActivity.class);
-				intent.putExtra("user", user);
-				huodongActivity.this.startActivity(intent);
+//				Intent intent = new Intent(huodongActivity.this,
+//						MainActivity.class);
+//				intent.putExtra("user", user);
+//				huodongActivity.this.startActivity(intent);
 				finish();
 			}
 		});

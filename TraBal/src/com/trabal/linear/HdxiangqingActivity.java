@@ -65,44 +65,45 @@ public class HdxiangqingActivity extends Activity {
 
 			@Override
 			public void onClick(View arg0) {
-
-				if ("collect".equals(from)) {
-					Intent intent = new Intent(HdxiangqingActivity.this,
-							collectActivity.class);
-					intent.putExtra("from", "collect_exercise");
-					intent.putExtra("user", user);
-					HdxiangqingActivity.this.startActivity(intent);
-					HdxiangqingActivity.this.finish();
-				}
-
-				else if ("more".equals(from)) {
-					Intent intent = new Intent(HdxiangqingActivity.this,
-							MainActivity.class);
-					intent.putExtra("from", "more");
-					intent.putExtra("user", user);
-					HdxiangqingActivity.this.startActivity(intent);
-					HdxiangqingActivity.this.finish();
-				} else if ("myactivity".equals(from)) {
-					Intent intent = new Intent(HdxiangqingActivity.this,
-							huodongActivity.class);
-					intent.putExtra("user", user);
-					HdxiangqingActivity.this.startActivity(intent);
-					HdxiangqingActivity.this.finish();
-				} else if ("take".equals(from)) {
-					Intent intent = new Intent(HdxiangqingActivity.this,
-							TakeMeToYourHome.class);
-					intent.putExtra("user", user);
-					intent.putExtra("hsb",
-							last_intent.getSerializableExtra("hsb"));
-					intent.putExtra("from",
-							last_intent.getStringExtra("last_from"));
-					HdxiangqingActivity.this.startActivity(intent);
-					HdxiangqingActivity.this.finish();
-				}
+//
+//				if ("collect".equals(from)) {
+//					Intent intent = new Intent(HdxiangqingActivity.this,
+//							collectActivity.class);
+//					intent.putExtra("from", "collect_exercise");
+//					intent.putExtra("user", user);
+//					HdxiangqingActivity.this.startActivity(intent);
+//					HdxiangqingActivity.this.finish();
+//				}
+//
+//				else if ("more".equals(from)) {
+//					Intent intent = new Intent(HdxiangqingActivity.this,
+//							MainActivity.class);
+//					intent.putExtra("from", "more");
+//					intent.putExtra("user", user);
+//					HdxiangqingActivity.this.startActivity(intent);
+//					HdxiangqingActivity.this.finish();
+//				} else if ("myactivity".equals(from)) {
+//					Intent intent = new Intent(HdxiangqingActivity.this,
+//							huodongActivity.class);
+//					intent.putExtra("user", user);
+//					HdxiangqingActivity.this.startActivity(intent);
+//					HdxiangqingActivity.this.finish();
+//				} else if ("take".equals(from)) {
+//					Intent intent = new Intent(HdxiangqingActivity.this,
+//							TakeMeToYourHome.class);
+//					intent.putExtra("user", user);
+//					intent.putExtra("hsb",
+//							last_intent.getSerializableExtra("hsb"));
+//					intent.putExtra("from",
+//							last_intent.getStringExtra("last_from"));
+//					HdxiangqingActivity.this.startActivity(intent);
+//					HdxiangqingActivity.this.finish();
+//				}
 
 				// Intent intent=new
 				// Intent(HdxiangqingActivity.this,huodongActivity.class);
 				// HdxiangqingActivity.this.startActivity(intent);
+				HdxiangqingActivity.this.finish();
 			}
 		});
 	}

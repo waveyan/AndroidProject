@@ -51,9 +51,9 @@ public class luxianActivity extends Activity{
 
 			@Override
 			public void onClick(View arg0) {
-				Intent intent = new Intent(luxianActivity.this,MainActivity.class);
-				intent.putExtra("user", user);
-				luxianActivity.this.startActivity(intent);
+//				Intent intent = new Intent(luxianActivity.this,MainActivity.class);
+//				intent.putExtra("user", user);
+//				luxianActivity.this.startActivity(intent);
 				finish();
 			}
 		});

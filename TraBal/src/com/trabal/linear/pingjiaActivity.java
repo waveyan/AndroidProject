@@ -150,18 +150,19 @@ public class pingjiaActivity extends Activity {
 
 			@Override
 			public void onClick(View arg0) {
-				if ("search".equals(from)) {
-					Intent intent = new Intent(pingjiaActivity.this,
-							search.class);
-					intent.putExtra("user", user);
-					pingjiaActivity.this.startActivity(intent);
-				} else {
-					Intent intent = new Intent(pingjiaActivity.this,
-							MainActivity.class);
-					intent.putExtra("user", user);
-					pingjiaActivity.this.startActivity(intent);
-
-				}
+//				if ("search".equals(from)) {
+//					Intent intent = new Intent(pingjiaActivity.this,
+//							search.class);
+//					intent.putExtra("user", user);
+//					pingjiaActivity.this.startActivity(intent);
+//				} else {
+//					Intent intent = new Intent(pingjiaActivity.this,
+//							MainActivity.class);
+//					intent.putExtra("user", user);
+//					pingjiaActivity.this.startActivity(intent);
+//
+//				}
+				pingjiaActivity.this.finish();
 			}
 		});
 
