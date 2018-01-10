@@ -461,6 +461,24 @@ public class assessactivity extends Activity implements OnButtonClickListener,
 			assess.put("price", cost_text);
 			assess.put("rate", rate_text);
 			
+			if (feel_text.equals("")) {
+				Toast.makeText(assessactivity.this, "请分享你的心情~",
+						Toast.LENGTH_LONG).show();
+				return;
+			}
+			if (positionID==null) {
+				Toast.makeText(assessactivity.this, "地点不能为空！",
+						Toast.LENGTH_LONG).show();
+				return;
+			}
+			if (cost_text.equals("")) {
+				Toast.makeText(assessactivity.this, "消费不能为空！",
+						Toast.LENGTH_LONG).show();
+				return;
+			}
+
+			
+			
 			String url="evaluation/base";
 			NetTransfer nt = new NetTransfer();
 			try {
