@@ -84,17 +84,6 @@ public class DriveRouteActivity extends Activity implements OnMapClickListener,
 		searchRouteResult(ROUTE_TYPE_DRIVE, RouteSearch.DrivingDefault);
 	}
 
-	private void setfromandtoMarker() {
-		aMap.addMarker(new MarkerOptions()
-				.position(AMapUtil.convertToLatLng(mStartPoint))
-				.title(start.getEnglishName()).snippet(start.getName())
-				.icon(BitmapDescriptorFactory.fromResource(R.drawable.start)));
-		aMap.addMarker(new MarkerOptions()
-				.position(AMapUtil.convertToLatLng(mEndPoint))
-				.title(end.getEnglishName()).snippet(end.getName())
-				.icon(BitmapDescriptorFactory.fromResource(R.drawable.end)));
-	}
-
 	/**
 	 * 初始化AMap对象
 	 */
@@ -120,12 +109,6 @@ public class DriveRouteActivity extends Activity implements OnMapClickListener,
 
 			@Override
 			public void onClick(View arg0) {
-//				Intent intent = new Intent(DriveRouteActivity.this,
-//						RouteplanActivity2.class);
-//				intent.putExtra("user",
-//						last_intent.getSerializableExtra("user"));
-//				DriveRouteActivity.this.startActivity(intent);
-//				DriveRouteActivity.this.finish();
 				DriveRouteActivity.this.finish();
 			}
 		});
@@ -210,7 +193,7 @@ public class DriveRouteActivity extends Activity implements OnMapClickListener,
 					DrivingRouteOverLay drivingRouteOverlay = new DrivingRouteOverLay(
 							mContext, aMap, drivePath,
 							mDriveRouteResult.getStartPos(),
-							mDriveRouteResult.getTargetPos(), null);
+							mDriveRouteResult.getTargetPos(), null,start,end);
 					drivingRouteOverlay.setNodeIconVisibility(false);// 设置节点marker是否显示
 					drivingRouteOverlay.setIsColorfulline(true);// 是否用颜色展示交通拥堵情况，默认true
 					drivingRouteOverlay.removeFromMap();
@@ -316,7 +299,6 @@ public class DriveRouteActivity extends Activity implements OnMapClickListener,
 
 	@Override
 	public void onRideRouteSearched(RideRouteResult arg0, int arg1) {
-		// TODO Auto-generated method stub
 
 	}
 

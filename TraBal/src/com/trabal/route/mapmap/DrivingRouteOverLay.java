@@ -18,12 +18,13 @@ import com.amap.api.services.core.LatLonPoint;
 import com.amap.api.services.route.DrivePath;
 import com.amap.api.services.route.DriveStep;
 import com.amap.api.services.route.TMC;
+import com.trabal.hotspot.Bean.HotSpotBean;
 import com.trabal.route.tools.AMapUtil;
 import com.trabal.R;
 
 
 /**
- * 导航路线图层类�??
+ * 导航路线图层类�??
  */
 public class DrivingRouteOverLay extends RouteOverlay{
 
@@ -38,21 +39,26 @@ public class DrivingRouteOverLay extends RouteOverlay{
     private boolean isColorfulline = true;
     private float mWidth = 25;
     private List<LatLng> mLatLngsOfPath;
+    private HotSpotBean start_hsb, end_hsb;
 
 	public void setIsColorfulline(boolean iscolorfulline) {
 		this.isColorfulline = iscolorfulline;
 	}
 
 	/**
-     * 根据给定的参数，构�?�一个导航路线图层类对象�?
+     * 根据给定的参数，构�?�一个导航路线图层类对象�?
      *
-     * @param amap      地图对象�?
-     * @param path 导航路线规划方案�?
-     * @param context   当前的activity对象�?
+     * @param amap      地图对象�?
+     * @param path 导航路线规划方案�?
+     * @param context   当前的activity对象�?
      */
     public DrivingRouteOverLay(Context context, AMap amap, DrivePath path,
-            LatLonPoint start, LatLonPoint end, List<LatLonPoint> throughPointList) {
+            LatLonPoint start, LatLonPoint end, List<LatLonPoint> throughPointList,HotSpotBean start_hsb,HotSpotBean end_hsb) {
+    	
+    	//修改父类
     	super(context);
+    	this.start_hsb=start_hsb;
+    	this.end_hsb=end_hsb;
     	mContext = context; 
         mAMap = amap; 
         this.drivePath = path;
@@ -75,7 +81,7 @@ public class DrivingRouteOverLay extends RouteOverlay{
     }
 
     /**
-     * 添加驾车路线添加到地图上显示�?
+     * 添加驾车路线添加到地图上显示�?
      */
 	public void addToMap() {
 		initPolylineOptions();
@@ -110,7 +116,7 @@ public class DrivingRouteOverLay extends RouteOverlay{
                 endMarker.remove();
                 endMarker = null;
             }
-            addStartAndEndMarker();
+            addStartAndEndMarker(this.start_hsb,this.end_hsb);
             addThroughPointMarker();
             if (isColorfulline && tmcs.size()>0 ) {
             	colorWayUpdate(tmcs);
@@ -124,7 +130,7 @@ public class DrivingRouteOverLay extends RouteOverlay{
     }
 
 	/**
-     * 初始化线段属�?
+     * 初始化线段属�?
      */
     private void initPolylineOptions() {
 
@@ -160,7 +166,7 @@ public class DrivingRouteOverLay extends RouteOverlay{
         	segmentTrafficStatus = tmcSection.get(i);
         	List<LatLonPoint> mployline = segmentTrafficStatus.getPolyline();
         	if (status.equals(segmentTrafficStatus.getStatus())) {
-    			for (int j = 1; j < mployline.size(); j++) {//第一个点和上�?段最后一个点重复，这个不重复添加
+    			for (int j = 1; j < mployline.size(); j++) {//第一个点和上�?段最后一个点重复，这个不重复添加
     				mPolylineOptionscolor.add(AMapUtil.convertToLatLng(mployline.get(j)));
     			}
 			}else {
@@ -185,7 +191,7 @@ public class DrivingRouteOverLay extends RouteOverlay{
     
     private int getcolor(String status) {
 
-    	if (status.equals("畅�??")) {
+    	if (status.equals("畅�??")) {
     		return Color.GREEN;
 		} else if (status.equals("缓行")) {
 			 return Color.YELLOW;
@@ -270,7 +276,7 @@ public class DrivingRouteOverLay extends RouteOverlay{
     }
 
     /**
-     * 获取两点间距�?
+     * 获取两点间距�?
      *
      * @param start
      * @param end
@@ -308,14 +314,14 @@ public class DrivingRouteOverLay extends RouteOverlay{
     }
 
 
-    //获取指定两点之间固定距离�?
+    //获取指定两点之间固定距离�?
     public static LatLng getPointForDis(LatLng sPt, LatLng ePt, double dis) {
         double lSegLength = calculateDistance(sPt, ePt);
         double preResult = dis / lSegLength;
         return new LatLng((ePt.latitude - sPt.latitude) * preResult + sPt.latitude, (ePt.longitude - sPt.longitude) * preResult + sPt.longitude);
     }
     /**
-     * 去掉DriveLineOverlay上的线段和标记�??
+     * 去掉DriveLineOverlay上的线段和标记�??
      */
     @Override
     public void removeFromMap() {
