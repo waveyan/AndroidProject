@@ -50,14 +50,14 @@ public class TakeMeToYourHome extends Activity {
 
 	private Intent last_intent;
 
-//	private String from;
 
 	private ArrayList<ActivityBean> ab_list;
 
 	private ListView mListView, mlistView1;
 
 	private CustomAdapter ba;
-	
+	private ArrayList<EvaluationBean> eb_list;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -66,26 +66,25 @@ public class TakeMeToYourHome extends Activity {
 		// 获取上一个页面传过来的用户
 		last_intent = TakeMeToYourHome.this.getIntent();
 		user = (UserBean) last_intent.getSerializableExtra("user");
-//		from = last_intent.getStringExtra("from");
 
 		backButton = (ImageButton) this.findViewById(R.id.backButton);
 		report = (ImageView) this.findViewById(R.id.report);
 
 		hsb = (HotSpotBean) last_intent.getSerializableExtra("hsb");
 		initView();
-		
+
 		report.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View arg0) {
 				Intent intent;
-				intent = new Intent(TakeMeToYourHome.this,assessactivity.class);
+				intent = new Intent(TakeMeToYourHome.this, assessactivity.class);
 				intent.putExtra("user", user);
 				intent.putExtra("didian", hsb.getName());
-				intent.putExtra("hotspot_id",hsb.getId());
+				intent.putExtra("hotspot_id", hsb.getId());
 				TakeMeToYourHome.this.startActivity(intent);
 				TakeMeToYourHome.this.finish();
-				
+
 			}
 		});
 
@@ -93,81 +92,79 @@ public class TakeMeToYourHome extends Activity {
 
 			@Override
 			public void onClick(View arg0) {
-//				Intent intent;
-//				if ("collect".equals(from)) {
-//					intent = new Intent(TakeMeToYourHome.this,
-//							collectActivity.class);
-//				} else if ("hdxiangqing".equals(from)) {
-//					intent = new Intent(TakeMeToYourHome.this,
-//							HdxiangqingActivity.class);
-//					intent.putExtra("ab",
-//							last_intent.getSerializableExtra("ab"));
-//					intent.putExtra("from",
-//							last_intent.getSerializableExtra("last_from"));
-//				} else if ("index".equals(from)) {
-//					intent = new Intent(TakeMeToYourHome.this,
-//							MainActivity.class);
-//					intent.putExtra("from", "index");
-//				} else if ("syxqy".equals(from)) {
-//					intent = new Intent(TakeMeToYourHome.this,
-//							SYxqyActivity.class);
-//					intent.putExtra("from", "syxqy");
-//					intent.putExtra("db",
-//							last_intent.getSerializableExtra("db"));
-//					intent.putExtra("user", user);
-//				} else if("search".equals(from)){
-//					intent = new Intent(TakeMeToYourHome.this,
-//							search.class);
-//				}
-//				else {
-//					intent = new Intent(TakeMeToYourHome.this,
-//							RestaurantActivity.class);
-//					String what = last_intent.getStringExtra("what");
-//					intent.putExtra("what", last_intent.getStringExtra("what"));
-//				}
-//				intent.putExtra("user", user);
-//				TakeMeToYourHome.this.startActivity(intent);
 				TakeMeToYourHome.this.finish();
 			}
 		});
 		// 活动listview
 		ab_list = hsb.getAbs();
-		if(ab_list==null || ab_list.size()==0){
+		if (ab_list == null || ab_list.size() == 0) {
 			// 网络传输
 			ArrayList params = new ArrayList();
-			params.add(new BasicNameValuePair("action","hotspot"));     //上传数据对接属性 
-			params.add(new BasicNameValuePair("hotspot_id",hsb.getId()));     //上传数据对接属性 
+			params.add(new BasicNameValuePair("action", "hotspot")); // 上传数据对接属性
+			params.add(new BasicNameValuePair("hotspot_id", hsb.getId())); // 上传数据对接属性
 			String url = "activity/base";
 			NetTransfer nt = new NetTransfer();
 			try {
 
-				String data = NetTransfer.transfer(url, "get", params, true, user.getAccess_token(),null);
-				ab_list=nt.handle_ac_list(data);
-				if(ab_list==null)
-					ab_list=new ArrayList<ActivityBean>();
+				String data = NetTransfer.transfer(url, "get", params, true,
+						user.getAccess_token(), null);
+				ab_list = nt.handle_ac_list(data);
+				if (ab_list == null)
+					ab_list = new ArrayList<ActivityBean>();
 			} catch (IOException e) {
-				ab_list=new ArrayList<ActivityBean>();
+				ab_list = new ArrayList<ActivityBean>();
 				e.printStackTrace();
 			}
 		}
-		// 网络传输获得数据，一次性获取收藏的活动和地点
-		if (ab_list == null) {
-			ab_list = new ArrayList<ActivityBean>();
+		//若没有活动则隐藏活动栏
+		if (ab_list.size()==0) {
+			View r2 = this.findViewById(R.id.r2);
+			r2.setVisibility(View.GONE);
+		} else {
+
+			// 初始化ListView控件,活动列表
+			mListView = (ListView) findViewById(R.id.listview1);
+			// 创建一个Adapter的实例
+			MyBaseAdapter mAdapter = new MyBaseAdapter();
+			// 设置Adapter
+			mListView.setAdapter(mAdapter);
 		}
 
-		// 初始化ListView控件,活动列表
-		mListView = (ListView) findViewById(R.id.listview1);
-		// 创建一个Adapter的实例
-		MyBaseAdapter mAdapter = new MyBaseAdapter();
-		// 设置Adapter
-		mListView.setAdapter(mAdapter);
+		// 获取评价数据
+		eb_list = hsb.getEbs();
+		if (eb_list == null || eb_list.size() == 0) {
 
-		// 评价listviwe
-		mlistView1 = (ListView) findViewById(R.id.listview2);
+			// 网络传输
+			ArrayList params = new ArrayList();
+			params.add(new BasicNameValuePair("action", "hotspot")); // 上传数据对接属性
+			params.add(new BasicNameValuePair("hotspot_id", hsb.getId())); // 上传数据对接属性
+			String url = "evaluation/base";
+			NetTransfer nt = new NetTransfer();
+			try {
 
-		// 创建一个Adapter的实例
-		ba = new CustomAdapter();
-		mlistView1.setAdapter(ba);
+				String data = NetTransfer.transfer(url, "get", params,
+						true, user.getAccess_token(), null);
+				eb_list = nt.handle_eb_list(data);
+				if (eb_list == null)
+					eb_list = new ArrayList<EvaluationBean>();
+			} catch (IOException e) {
+				eb_list = new ArrayList<EvaluationBean>();
+				e.printStackTrace();
+			}
+
+		}
+		//若没有评价时候则隐藏活动栏
+		if (eb_list.size()==0) {
+			View r3 = this.findViewById(R.id.r3);
+			r3.setVisibility(View.GONE);
+		} else {
+			// 评价listviwe
+			mlistView1 = (ListView) findViewById(R.id.listview2);
+			ba = new CustomAdapter();
+			mlistView1.setAdapter(ba);
+		}
+		
+
 	}
 
 	private void initView() {
@@ -310,8 +307,6 @@ public class TakeMeToYourHome extends Activity {
 					intent.putExtra("ab", ab_list.get(position));
 					intent.putExtra("user", TakeMeToYourHome.this.user);
 					intent.putExtra("hsb", hsb);
-//					intent.putExtra("from", "take");
-//					intent.putExtra("last_from", from);
 					TakeMeToYourHome.this.startActivity(intent);
 				}
 			});
@@ -319,36 +314,14 @@ public class TakeMeToYourHome extends Activity {
 		}
 	}
 
-	//评价
+	// 评价
 	class CustomAdapter extends BaseAdapter {
 
-		private ArrayList<EvaluationBean> eb_list;
+		
 		private ImageView love;
 
 		public CustomAdapter() {
-			// 获取数据
-			eb_list = hsb.getEbs();
-			if(eb_list==null|| eb_list.size()==0){
-
-				// 网络传输
-				ArrayList params = new ArrayList();
-				params.add(new BasicNameValuePair("action","hotspot"));     //上传数据对接属性 
-				params.add(new BasicNameValuePair("hotspot_id",hsb.getId()));     //上传数据对接属性 
-				String url = "evaluation/base";
-				NetTransfer nt = new NetTransfer();
-				try {
-
-					String data = NetTransfer.transfer(url, "get", params, true, user.getAccess_token(),null);
-					eb_list=nt.handle_eb_list(data);
-					if(eb_list==null)
-						eb_list=new ArrayList<EvaluationBean>();
-				} catch (IOException e) {
-					eb_list=new ArrayList<EvaluationBean>();
-					e.printStackTrace();
-				}
-
-			}
-
+			
 		}
 
 		public int getCount() {
@@ -376,7 +349,7 @@ public class TakeMeToYourHome extends Activity {
 					.findViewById(R.id.pjxqy_site3);
 			TextView mTextView5 = (TextView) view
 					.findViewById(R.id.pjxqy_price3);
-			RatingBar rate =(RatingBar)view.findViewById(R.id.pjxqy_stars3);
+			RatingBar rate = (RatingBar) view.findViewById(R.id.pjxqy_stars3);
 			rate.setRating(Float.parseFloat(eb_list.get(position).getRate()));
 			mTextView1.setText(eb_list.get(position).getUser().getName());
 			mTextView2.setText(eb_list.get(position).getTime());
@@ -386,24 +359,25 @@ public class TakeMeToYourHome extends Activity {
 					.setText(String.valueOf(eb_list.get(position).getPrice()));
 			ImageView imageView1 = (ImageView) view
 					.findViewById(R.id.pjxqy_headpic3);
-			
-			//用户头像
+
+			// 用户头像
 			Picasso.with(TakeMeToYourHome.this)
 					.load(eb_list.get(position).getUser().getPic())
 					.centerCrop().fit().into(imageView1);
-			//用户头像
+			// 用户头像
 			imageView1.setOnClickListener(new View.OnClickListener() {
-				
+
 				@Override
 				public void onClick(View arg0) {
-					Intent intent=new Intent(TakeMeToYourHome.this,pingjiaActivity.class);
-//					intent.putExtra("from", "district");
-					if(eb_list.get(position).getUser().getTelephone().equals(user.getTelephone())){
+					Intent intent = new Intent(TakeMeToYourHome.this,
+							pingjiaActivity.class);
+					// intent.putExtra("from", "district");
+					if (eb_list.get(position).getUser().getTelephone()
+							.equals(user.getTelephone())) {
 						intent.putExtra("flag", "mine");
 						String evaluation_url = "evaluation/base";
 						ArrayList<BasicNameValuePair> params1 = new ArrayList<BasicNameValuePair>();
-						params1.add(new BasicNameValuePair("action",
-								"person"));
+						params1.add(new BasicNameValuePair("action", "person"));
 						try {
 							String evaluation = NetTransfer.transfer(
 									evaluation_url, "get", params1, true,
@@ -414,17 +388,16 @@ public class TakeMeToYourHome extends Activity {
 						} catch (IOException e) {
 							e.printStackTrace();
 						}
-					}
-					else{
-						intent.putExtra("person",eb_list.get(position).getUser());
+					} else {
+						intent.putExtra("person", eb_list.get(position)
+								.getUser());
 					}
 					intent.putExtra("user", user);
 					TakeMeToYourHome.this.startActivity(intent);
-					
+
 				}
 			});
-			
-			
+
 			// 动态图片
 			GridView gv = (GridView) view.findViewById(R.id.gridview);
 			// silly！！！！！
