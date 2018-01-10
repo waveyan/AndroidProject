@@ -52,7 +52,7 @@ public class SYxqyActivity extends Activity {
 		syxqy_positionTv = (TextView) this.findViewById(R.id.syxqy_position);
 		syxqy_commentTv = (TextView) this.findViewById(R.id.syxqy_comment);
 
-		syxqy_positionTv.setTextColor(android.graphics.Color.CYAN);
+		syxqy_positionTv.setTextColor(android.graphics.Color.argb(250, 53, 138, 115));
 		syxqy_commentTv.setTextColor(android.graphics.Color.BLACK);
 
 		// …Ë÷√  ≈‰∆˜
@@ -67,7 +67,7 @@ public class SYxqyActivity extends Activity {
 			@Override
 			public void onClick(View arg0) {
 				syxqy_content.setCurrentItem(0);
-				syxqy_positionTv.setTextColor(android.graphics.Color.CYAN);
+				syxqy_positionTv.setTextColor(android.graphics.Color.argb(250, 53, 138, 115));
 				syxqy_commentTv.setTextColor(android.graphics.Color.BLACK);
 			}
 		});
@@ -78,7 +78,7 @@ public class SYxqyActivity extends Activity {
 			public void onClick(View arg0) {
 				syxqy_content.setCurrentItem(1);
 				syxqy_positionTv.setTextColor(android.graphics.Color.BLACK);
-				syxqy_commentTv.setTextColor(android.graphics.Color.CYAN);
+				syxqy_commentTv.setTextColor(android.graphics.Color.argb(250, 53, 138, 115));
 
 			}
 		});
@@ -141,12 +141,12 @@ public class SYxqyActivity extends Activity {
 		@Override
 		public void onPageSelected(int arg0) {
 			if (arg0 == 0) {
-				syxqy_positionTv.setTextColor(android.graphics.Color.CYAN);
+				syxqy_positionTv.setTextColor(android.graphics.Color.argb(250, 53, 138, 115));
 				syxqy_commentTv.setTextColor(android.graphics.Color.BLACK);
 
 			} else if (arg0 == 1) {
 				syxqy_positionTv.setTextColor(android.graphics.Color.BLACK);
-				syxqy_commentTv.setTextColor(android.graphics.Color.CYAN);
+				syxqy_commentTv.setTextColor(android.graphics.Color.argb(250, 53, 138, 115));
 
 			}
 		}
