@@ -214,19 +214,6 @@ public class MainActivity extends Activity implements OnButtonClickListener{
 
 		// 设置适配器
 		content.setAdapter(new CustomPager());
-		// 设置当前页面
-//		if("more".equals(last_intent.getStringExtra("from"))){
-//			indexTv.setTextColor(android.graphics.Color.BLACK);
-//			moreTv.setTextColor(android.graphics.Color.argb(250, 53, 138, 115));
-//			dynamicTv.setTextColor(android.graphics.Color.BLACK);
-//			content.setCurrentItem(1);
-//		}
-//		else{
-//			indexTv.setTextColor(android.graphics.Color.argb(250, 53, 138, 115));
-//			moreTv.setTextColor(android.graphics.Color.BLACK);
-//			dynamicTv.setTextColor(android.graphics.Color.BLACK);
-//			content.setCurrentItem(0);
-//		}
 		// 设置内容组件事件处理
 		content.setOnPageChangeListener(new CustomPagerChange());
 
@@ -315,36 +302,30 @@ public class MainActivity extends Activity implements OnButtonClickListener{
 					intent.putExtra("myAssess", user.getEb());
 					intent.putExtra("flag", "mine");
 					MainActivity.this.startActivity(intent);
-//					MainActivity.this.finish();
 					break;
 				case 2:
 					Intent intent1 = new Intent(MainActivity.this,
 							collectActivity.class);
 					intent1.putExtra("user", user);
-//					intent1.putExtra("from", "main");
 					MainActivity.this.startActivity(intent1);
-//					MainActivity.this.finish();
 					break;
 				case 3:
 					Intent intent2 = new Intent(MainActivity.this,
 							luxianActivity.class);
 					intent2.putExtra("user", user);
 					MainActivity.this.startActivity(intent2);
-//					MainActivity.this.finish();
 					break;
 				case 4:
 					Intent intent3 = new Intent(MainActivity.this,
 							huodongActivity.class);
 					intent3.putExtra("user", user);
 					MainActivity.this.startActivity(intent3);
-//					MainActivity.this.finish();
 					break;
 				case 5:
 					Intent intent4 = new Intent(MainActivity.this,
 							haoyouActivity.class);
 					intent4.putExtra("user", user);
 					MainActivity.this.startActivity(intent4);
-//					MainActivity.this.finish();
 					break;
 				
 				default:
@@ -376,9 +357,7 @@ public class MainActivity extends Activity implements OnButtonClickListener{
 			public void onClick(View arg0) {
 				Intent intent=new Intent(MainActivity.this,search.class);
 				intent.putExtra("user", user);
-				MainActivity.this.startActivity(intent);
-				MainActivity.this.finish();
-				
+				MainActivity.this.startActivity(intent);				
 			}
 		});
 	}
