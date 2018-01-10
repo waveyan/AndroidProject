@@ -386,16 +386,6 @@ public class TakeMeToYourHome extends Activity {
 					.setText(String.valueOf(eb_list.get(position).getPrice()));
 			ImageView imageView1 = (ImageView) view
 					.findViewById(R.id.pjxqy_headpic3);
-			ImageView imageView5 = (ImageView) view
-					.findViewById(R.id.pjxqy_head6);
-			ImageView imageView6 = (ImageView) view
-					.findViewById(R.id.pjxqy_head7);
-			ImageView imageView7 = (ImageView) view
-					.findViewById(R.id.pjxqy_head8);
-			ImageView imageView8 = (ImageView) view
-					.findViewById(R.id.pjxqy_head9);
-			ImageView imageView9 = (ImageView) view
-					.findViewById(R.id.pjxqy_head10);
 			
 			//ÓÃ»§Í·Ïñ
 			Picasso.with(TakeMeToYourHome.this)
