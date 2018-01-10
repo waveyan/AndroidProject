@@ -57,6 +57,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.trabal.MyDialog.OnButtonClickListener;
 import com.trabal.linear.assessactivity;
@@ -75,7 +76,7 @@ public class MainActivity extends Activity implements OnButtonClickListener {
 	private ImageView p_pic;
 	public UserBean user;
 	Intent last_intent;
-//	private MyDialog myDialog;
+	// private MyDialog myDialog;
 	private final int IMAGE_OPEN = 4;
 	public static final int PHOTOHRAPH = 1;
 	public static final int NONE = 0;
@@ -113,7 +114,7 @@ public class MainActivity extends Activity implements OnButtonClickListener {
 		linears.add(new IndexLinearLayout(MainActivity.this));
 		linears.add(new MoreLinearLayout(MainActivity.this));
 		linears.add(new DynamicLinearLayout(MainActivity.this));
-//		getActionBar().hide();
+		// getActionBar().hide();
 
 		imageButton = (ImageButton) findViewById(R.id.personID);
 		drawerLayout = (DrawerLayout) findViewById(R.id.drawerlayout);
@@ -141,8 +142,8 @@ public class MainActivity extends Activity implements OnButtonClickListener {
 			}
 		});
 
-//		myDialog = new MyDialog(this);
-//		myDialog.setOnButtonClickListener(this);
+		// myDialog = new MyDialog(this);
+		// myDialog.setOnButtonClickListener(this);
 
 		// 卫星菜单动态实现
 
@@ -276,28 +277,8 @@ public class MainActivity extends Activity implements OnButtonClickListener {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
-				
+
 				switch ((int) id) {
-//				case 0:
-//					//头像和昵称
-//					ImageView headpic=(ImageView)view.findViewById(R.id.p_pic);
-//					TextView rightname = (TextView) view.findViewById(R.id.right_name);
-//					headpic.setOnClickListener(new View.OnClickListener() {
-//						@Override
-//						public void onClick(View arg0) {
-//							myDialog.show();
-//						}
-//					});
-//					rightname.setOnClickListener(new View.OnClickListener() {
-//						
-//						@Override
-//						public void onClick(View arg0) {
-//							Intent intent=new Intent(MainActivity.this,EditnameActivity.class);
-//							intent.putExtra("user", user);
-//							MainActivity.this.startActivity(intent);
-//						}
-//					});
-//					break;
 				case 1:
 					Intent intent = new Intent(MainActivity.this,
 							pingjiaActivity.class);
@@ -329,6 +310,18 @@ public class MainActivity extends Activity implements OnButtonClickListener {
 							haoyouActivity.class);
 					intent4.putExtra("user", user);
 					MainActivity.this.startActivity(intent4);
+					break;
+
+				case 6:
+					SharePreferencesTool spt = new SharePreferencesTool(
+							MainActivity.this, MODE_PRIVATE);
+					spt.remove("online");
+					Intent intent5 = new Intent(MainActivity.this,
+							LoginActivity.class);
+					MainActivity.this.startActivity(intent5);
+					Toast.makeText(MainActivity.this, "登出成功！",
+							Toast.LENGTH_SHORT).show();
+					MainActivity.this.finish();
 					break;
 
 				default:
@@ -667,7 +660,5 @@ public class MainActivity extends Activity implements OnButtonClickListener {
 	public void setDrawerLayout(DrawerLayout drawerLayout) {
 		this.drawerLayout = drawerLayout;
 	}
-	
-	
 
 }

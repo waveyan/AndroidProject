@@ -8,6 +8,7 @@ import org.apache.http.message.BasicNameValuePair;
 import com.trabal.user.Bean.UserBean;
 import com.trabal.user.Dao.UserDao;
 import com.trabal.util.Code;
+import com.trabal.util.SharePreferencesTool;
 import com.trabal.util.net.NetTransfer;
 
 import android.app.Activity;
@@ -134,11 +135,15 @@ public class LoginActivity extends Activity {
 						/**
 						 * 当前activity 本地数据库local 数据库版本为1
 						 */
-//						UserDao dao = new UserDao(LoginActivity.this, "local",
-//								1);
-//						UserBean old_user = dao.querryOne(user.getAccess_token());
-//						if (old_user == null)
-//							dao.insert(user);
+						UserDao dao = new UserDao(LoginActivity.this, "local",
+								1);
+						UserBean old_user = dao.querryOne(user.getAccess_token());
+						if (old_user == null)
+							dao.insert(user);
+						//保存登录状态
+						SharePreferencesTool spt=new SharePreferencesTool(LoginActivity.this,MODE_PRIVATE);
+						spt.putInto("online", user.getAccess_token());
+						//
 						Intent intent = new Intent(LoginActivity.this,
 								MainActivity.class);
 						// 保持该用户登录状态

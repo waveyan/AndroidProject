@@ -25,5 +25,11 @@ public class SharePreferencesTool {
 	public String popOut(String key) {
 		return sp.getString(key, "");
 	}
+	
+	public void remove(String key){
+		Editor editor = sp.edit();
+		editor.remove(key);
+		editor.commit();
+	}
 
 }
