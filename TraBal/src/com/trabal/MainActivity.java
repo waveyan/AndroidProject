@@ -230,6 +230,7 @@ public class MainActivity extends Activity implements OnButtonClickListener{
 		// 设置内容组件事件处理
 		content.setOnPageChangeListener(new CustomPagerChange());
 
+		//侧拉
 		initData();
 		adapter = new ContentAdapter(this, list);
 		listView.setAdapter(adapter);
@@ -297,7 +298,7 @@ public class MainActivity extends Activity implements OnButtonClickListener{
 			}
 		});
 		
-
+		//侧拉菜单响应
 		listView.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
@@ -382,6 +383,7 @@ public class MainActivity extends Activity implements OnButtonClickListener{
 		});
 	}
 
+	//侧拉菜单
 	private void initData() {
 		list = new ArrayList<ContentModel>();
 		list.add(new ContentModel(R.drawable.pingjia, "修改头像", 0));
@@ -390,6 +392,7 @@ public class MainActivity extends Activity implements OnButtonClickListener{
 		list.add(new ContentModel(R.drawable.luxian, "我的路线", 3));
 		list.add(new ContentModel(R.drawable.huodong, "历史活动", 4));
 		list.add(new ContentModel(R.drawable.haoyou, "我的好友", 5));
+		list.add(new ContentModel(R.drawable.exit, "退出登录", 6));
 	}
 
 	@Override
