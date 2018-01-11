@@ -55,7 +55,18 @@ public class HdxiangqingActivity extends Activity {
 		last_intent = HdxiangqingActivity.this.getIntent();
 		user = (UserBean) last_intent.getSerializableExtra("user");
 		ab = (ActivityBean) last_intent.getSerializableExtra("ab");
-//		from = last_intent.getStringExtra("from");
+		//Ë¢ÐÂ°¥
+		String url1="activity/base";
+		ArrayList<BasicNameValuePair> params1=new ArrayList<BasicNameValuePair>();
+		params1.add(new BasicNameValuePair("act_id", ab.getId()));
+		params1.add(new BasicNameValuePair("action", "detail"));
+		String data1;
+		try {
+			data1 = NetTransfer.transfer(url1, "get", params1, true, user.getAccess_token(), null);
+			ab=new NetTransfer().handle_ac_data(data1);
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
 		// Ìî³äÊý¾Ý
 		init_view();
 

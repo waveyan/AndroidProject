@@ -23,11 +23,12 @@ public class recommendationactivity extends Activity {
 			
 			@Override
 			public void onClick(View arg0) {
-				Intent last_intent = recommendationactivity.this.getIntent();
-				user = (UserBean)last_intent.getSerializableExtra("user");
-				Intent intent = new Intent(recommendationactivity.this,MainActivity.class);
-				intent.putExtra("user", user);
-				recommendationactivity.this.startActivity(intent);
+//				Intent last_intent = recommendationactivity.this.getIntent();
+//				user = (UserBean)last_intent.getSerializableExtra("user");
+//				Intent intent = new Intent(recommendationactivity.this,MainActivity.class);
+//				intent.putExtra("user", user);
+//				recommendationactivity.this.startActivity(intent);
+				finish();
 				
 			}
 		});

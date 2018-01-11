@@ -2,32 +2,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
-    <RelativeLayout
-        android:id="@+id/index1"
-        android:layout_width="fill_parent"
-        android:layout_height="40dp">
-
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="5dp"
-            android:background="@drawable/eye" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="50dp"
-            android:layout_marginTop="7dp"
-            android:text="隨便看看"
-            android:textSize="18sp" />
-    </RelativeLayout>
 
     <ListView
         android:id="@+id/index_listview"
         android:layout_width="fill_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/index1" >
+        android:layout_height="match_parent" >
     </ListView>
 
 </RelativeLayout>

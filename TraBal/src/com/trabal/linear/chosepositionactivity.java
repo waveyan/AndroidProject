@@ -34,6 +34,7 @@ import com.trabal.linear.FansLinearLayout.CustomAdapter;
 import com.trabal.search.search;
 import com.trabal.user.Bean.EvaluationBean;
 import com.trabal.user.Bean.UserBean;
+import com.trabal.util.SharePreferencesTool;
 import com.trabal.util.net.NetTransfer;
 
 public class chosepositionactivity extends Activity {
@@ -57,8 +58,10 @@ public class chosepositionactivity extends Activity {
 		
 		String url = "hotspot/base";
 		NetTransfer nt = new NetTransfer();
+		ArrayList<BasicNameValuePair> params1=new ArrayList<BasicNameValuePair>();
+		params1.add(new BasicNameValuePair("cityname", new SharePreferencesTool(chosepositionactivity.this, MODE_PRIVATE).popOut("city_name")));
 		try {
-			String data = NetTransfer.transfer(url, "get", null, true, user.getAccess_token(),null);
+			String data = NetTransfer.transfer(url, "get", params1, true, user.getAccess_token(),null);
 			hs_list=nt.handle_hs_list(data);	
 		
 		} catch (IOException e) {

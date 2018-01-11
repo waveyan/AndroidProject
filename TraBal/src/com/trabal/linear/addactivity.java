@@ -99,9 +99,9 @@ public class addactivity extends Activity implements OnButtonClickListener {
 
 			@Override
 			public void onClick(View arg0) {
-				Intent intent = new Intent(addactivity.this, MainActivity.class);
-				intent.putExtra("user", user);
-				addactivity.this.startActivity(intent);
+//				Intent intent = new Intent(addactivity.this, MainActivity.class);
+//				intent.putExtra("user", user);
+//				addactivity.this.startActivity(intent);
 				finish();
 
 			}

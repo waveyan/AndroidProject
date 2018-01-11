@@ -74,8 +74,20 @@ public class TakeMeToYourHome extends Activity {
 		report = (ImageView) this.findViewById(R.id.report);
 
 		hsb = (HotSpotBean) last_intent.getSerializableExtra("hsb");
+		//刷新哎
+		String url1="hotspot/base";
+		ArrayList<BasicNameValuePair> params1=new ArrayList<BasicNameValuePair>();
+		params1.add(new BasicNameValuePair("hotspot_id", hsb.getId()));
+		String data1;
+		try {
+			data1 = NetTransfer.transfer(url1, "get", params1, true, user.getAccess_token(), null);
+			hsb=new NetTransfer().handle_hs_data(data1);
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
 		initView();
-
+		
+		//发表评论
 		report.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -85,9 +97,10 @@ public class TakeMeToYourHome extends Activity {
 				intent.putExtra("user", user);
 				intent.putExtra("didian", hsb.getName());
 				intent.putExtra("hotspot_id", hsb.getId());
+				intent.putExtra("go", "take");
+				intent.putExtra("hsb", hsb);
 				TakeMeToYourHome.this.startActivity(intent);
 				TakeMeToYourHome.this.finish();
-
 			}
 		});
 
@@ -108,7 +121,6 @@ public class TakeMeToYourHome extends Activity {
 			String url = "activity/base";
 			NetTransfer nt = new NetTransfer();
 			try {
-
 				String data = NetTransfer.transfer(url, "get", params, true,
 						user.getAccess_token(), null);
 				ab_list = nt.handle_ac_list(data);
@@ -221,8 +233,7 @@ public class TakeMeToYourHome extends Activity {
 			public void onClick(View arg0) {
 				Intent shareIntent = new Intent();
 				shareIntent.setAction(Intent.ACTION_SEND);
-				shareIntent.putExtra(Intent.EXTRA_TEXT,
-						"This is my Share text.");
+				shareIntent.putExtra(Intent.EXTRA_TEXT,hsb.getName());
 				shareIntent.setType("text/plain");
 				// 设置分享列表的标题，并且每次都显示分享列表
 				TakeMeToYourHome.this.startActivity(Intent.createChooser(
@@ -249,10 +260,12 @@ public class TakeMeToYourHome extends Activity {
 				NetTransfer nt = new NetTransfer();
 				nt.return_data(data);
 				if ("success_favour".equals(nt.getStatus())) {
+					hsb.setIsfavour(1);
 					TakeMeToYourHome.this.favourButton
 							.setBackgroundResource(R.drawable.favour_clicked);
 
 				} else if ("success_unfavour".equals(nt.getStatus())) {
+					hsb.setIsfavour(0);
 					TakeMeToYourHome.this.favourButton
 							.setBackgroundResource(R.drawable.favour);
 				}

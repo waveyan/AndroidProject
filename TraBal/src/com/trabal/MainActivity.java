@@ -199,6 +199,13 @@ public class MainActivity extends Activity implements OnButtonClickListener {
 		content.setAdapter(new CustomPager());
 		// 设置内容组件事件处理
 		content.setOnPageChangeListener(new CustomPagerChange());
+		
+		if("dynamic".equals(last_intent.getStringExtra("go"))){
+			indexTv.setTextColor(android.graphics.Color.BLACK);
+			moreTv.setTextColor(android.graphics.Color.BLACK);
+			dynamicTv.setTextColor(android.graphics.Color.argb(250, 53, 138, 115));
+			content.setCurrentItem(2);
+		}
 
 		// 侧拉
 		initData();
@@ -579,6 +586,7 @@ public class MainActivity extends Activity implements OnButtonClickListener {
 
 			Intent intent = new Intent(MainActivity.this, assessactivity.class);
 			intent.putExtra("user", user);
+			intent.putExtra("from", "main");
 			MainActivity.this.startActivity(intent);
 
 		}
