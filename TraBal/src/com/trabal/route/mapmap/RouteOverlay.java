@@ -137,7 +137,7 @@ public class RouteOverlay {
 
 		endMarker = mAMap.addMarker((new MarkerOptions())
 				.position(endPoint)
-				.snippet(end_hsb.getEnglishName())
+				.snippet(end_hsb.getName())
 				.icon(BitmapDescriptorFactory
 						.defaultMarker(BitmapDescriptorFactory.HUE_RED))
 				.title(end_hsb.getEnglishName()));
