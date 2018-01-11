@@ -40,9 +40,6 @@ public class RouteplanActivity4 extends Activity {
 
 			@Override
 			public void onClick(View arg0) {
-				Intent intent = new Intent(RouteplanActivity4.this,RouteplanActivity2.class);
-				intent.putExtra("user", user);
-				RouteplanActivity4.this.startActivity(intent);
 				finish();
 			}
 		});
